@@ -6,16 +6,20 @@
     <link rel="stylesheet" href="Bootstrap/dist/css/bootstrap.css">
     <script src="Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="Bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="header_styling.css">
+    <link href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid pr-0">
+    <div class="row" id="header-row">
         <div class="col-3 pt-2">LOGO and Name</div>
         <div class="col-5">
             <div class="navbar" id="header-nav-bar">
                 <div class="nav-item">Home</div>
                 <div class="nav-item dropdown" >
-                    <a style="text-decoration: none;color: black" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Items </a>
+                    <a style="text-decoration: none;color: inherit" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Items </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-item">
                         Computer
@@ -28,10 +32,31 @@
                 <div class="nav-item">About us</div>
             </div>
         </div>
-        <div class="col-3 ">
-            <div class="row pt-2 justify-content-end">
-                <div class="col-7"><input id="nav-bar-input-box" type="text"></div>
-                <div class="col-4">Login/signup</div>
+        <div class="col-4">
+            <div class="row pt-2">
+                <div class="col-7 nav-item"><input placeholder="Search" id="nav-bar-input-box" type="text"><span><i class="fab fa-search"></i> </span></div>
+                <div class="col-4 nav-item"><i class="fab fa-user-circle"></i> </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="front-page-background">
+        <!--<img src="Images/ADGITM_building.jpg" width="100%" height="80%">-->
+    </div>
+</div>
+<div class="container-fluid" style="position: relative">
+    <div class="row">
+        <div class="col-12 section">
+            <div class="row">
+                <div class="col-4 section">
+                    <div class="section-item">
+                        <div class="section-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="section-text">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

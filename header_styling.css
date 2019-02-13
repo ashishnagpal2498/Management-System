@@ -1,0 +1,64 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+#header-row{
+    padding: 10px 0;
+    font-size: 18px;
+    color: #dddddd;
+    background-color: rgba(240,128,128,0.8);
+    position: fixed;
+    width: 100%;
+}
+#header-nav-bar{
+
+}
+#header-nav-bar .nav-item{
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    transition: all 0.4s;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+#header-nav-bar .nav-item:hover{
+    border-bottom-color: #bd2130 ;
+    color: #5D92B1
+
+}
+#front-page-background{
+    min-height: 650px;
+    /*width: 100%;*/
+    background-image: url("Images/ADGITM_building.jpg"),linear-gradient(rgba(240,128,128,0.5),rgba(240,128,128,0.8));
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+}
+#nav-bar-input-box{
+    width: 50%;
+    float: right;
+    background-color: #dddddd;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: all 1s;
+    padding: 4px 5px;
+
+}
+#nav-bar-input-box:focus{
+    width: 80%;
+    background-color: #dddddd;
+    /*border: 1px solid magenta;*/
+    outline: none;
+}
+.section{
+    width: 200px;
+    height: 200px;
+    transform: rotate(45deg);
+    background-color: #bd2130;
+
+}
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="form1.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+        <div class="container-heading" id="purchase-item-heading">
+            <h3>PURCHASE ORDER ITEM <i class="fas fa-desktop"></i></h3>
+        </div>
+
+            <div class="form-container">
+                <form action="" method="" id="purchase-item-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="PONumber">P/O NUMBER</label>
+                        <input type="number" class="form-control" id="PONumber" placeholder="123">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="itemName">ITEM NAME</label>
+                        <select class="form-control" id="itemName">
+                            <option>computer</option>
+                            <option>wifi</option>
+                            <option>cpu</option>
+                            <option>keyboard</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="supplier">SUPPLIER</label>
+                        <input type="text" class="form-control" id="supplier" placeholder="supplier">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="PODate">P/O DATE</label>
+                        <input type="date" class="form-control" id="PODate" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Manufacturer">MANUFACTURER</label>
+                        <input type="text" class="form-control" id="Manufacturer" placeholder="ACER">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ModelName">MODEL NAME</label>
+                        <input type="text" class="form-control" id="ModelName" placeholder="AC1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="InvoiceDetail">INVOICE DETAIL</label>
+                        <input type="text" class="form-control" id="InvoiceDetail" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="InvoiceNumber">INVOICE NUMBER</label>
+                        <input type="number" class="form-control" id="InvoiceNumber" >
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="Approval">APPROVAL</label>
+                        <select class="form-control" id="Approval">
+                            <option>YES</option>
+                            <option>NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Warranty">WARRANTY</label>
+                        <select class="form-control" id="Warranty">
+                            <option>YES</option>
+                            <option>NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="WarrantyPeriod">WARRANTY PERIOD</label>
+                        <select class="form-control" id="WarrantyPeriod">
+                            <option>6 MONTHS</option>
+                            <option>1 YEAR</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Quantity">QUANTITY</label>
+                        <input type="number" class="form-control" id="Quantity" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="UnitPrice">UNIT PRICE</label>
+                        <input type="number" class="form-control" id="UnitPrice" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Description">DESCRIPTION</label>
+                    <textarea class="form-control" rows="5" id="Description"></textarea>
+                </div>
+                <div class="submit-button">
+                    <button type="submit" class="btn">SUBMIT</button>
+                </div>
+
+            </form>
+        </div>
+        </div>
+
+
+</body>
+</html>
