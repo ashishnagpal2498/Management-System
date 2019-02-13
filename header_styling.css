@@ -53,12 +53,10 @@ body{
     /*border: 1px solid magenta;*/
     outline: none;
 }
-.section{
+.section-item{
     width: 200px;
     height: 200px;
-    transform: rotate(45deg);
-    background-color: #bd2130;
-
+    background-color: rgba(0,0,0,0.1);
 }
 
 
