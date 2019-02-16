@@ -30,11 +30,17 @@ body{
 #front-page-background{
     min-height: 650px;
     /*width: 100%;*/
-    background-image: url("Images/ADGITM_building.jpg"),linear-gradient(rgba(240,128,128,0.5),rgba(240,128,128,0.8));
+    background-image: linear-gradient(rgba(255,255,255,0.1),rgba(255,255,255,0.2)), url("Images/ADGITM_building.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
 
+}
+#search-header-btn{
+    float: right;
+    z-index: 2;
+    transform: translateX(-23px);
+    color: black;
+    padding: 2px 0;
 }
 #nav-bar-input-box{
     width: 50%;
@@ -52,11 +58,6 @@ body{
     background-color: #dddddd;
     /*border: 1px solid magenta;*/
     outline: none;
-}
-.section-item{
-    width: 200px;
-    height: 200px;
-    background-color: rgba(0,0,0,0.1);
 }
 
 
