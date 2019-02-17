@@ -23,10 +23,22 @@
 }
 .section-icon{
 
-    transform: rotate(-45deg);
+
     font-size: 3.5rem;
+    transform: translate(-5px,10px);
 
-
+}
+.section-description{
+    transition: visibility 0.1s;
+}
+.section .section-text>.section-description{
+    visibility: hidden;
+}
+.section:hover .section-text>.section-description{
+    visibility: visible;
+}
+.section-icon i{
+    transform: rotate(-45deg);
 }
 .section-item:hover{
     background-color: lightgrey;
@@ -46,5 +58,12 @@
 }
 .section-text-heading a{
     text-decoration: none;
+    color: inherit;
+}
+.a-config{
+    color: inherit;
+    text-decoration: none;
+}
+.a-config:hover{
     color: inherit;
 }
