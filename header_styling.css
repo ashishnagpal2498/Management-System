@@ -8,7 +8,7 @@ body{
     padding: 10px 0;
     font-size: 18px;
     color: #dddddd;
-    background-color: rgba(240,128,128,1);
+    background-color: black;
     position: fixed;
     width: 100%;
     z-index: 2;
@@ -109,5 +109,30 @@ body{
     }
     100%{
         transform: translate(0px,-300px);
+    }
+}
+.cross-button{
+    display: none;
+}
+.responsive-menu{
+    position: relative;
+}
+#responsive-menu-bar{
+    display: none;
+}
+@media screen and (max-width: 600px){
+    #responsive-menu-bar{
+        display: block;
+    }
+    .responsive-menu{
+        display: none;
+        position: absolute;
+        top: 0;
+    }
+    #header-nav-bar .nav-item{
+        width: 100%;
+    }
+    #header-nav-bar .cross-button{
+        display: block;
     }
 }
