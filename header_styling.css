@@ -120,7 +120,7 @@ body{
 #responsive-menu-bar{
     display: none;
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 760px){
     #responsive-menu-bar{
         display: block;
     }
@@ -129,10 +129,17 @@ body{
         position: absolute;
         top: 0;
     }
+    #header-nav-bar{
+        background-color: black;
+        z-index: 3;
+    }
     #header-nav-bar .nav-item{
         width: 100%;
+        font-size: 20px;
+        text-align: center;
     }
     #header-nav-bar .cross-button{
         display: block;
+        color: #dddddd;
     }
 }
