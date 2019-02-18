@@ -39,26 +39,33 @@
             </div>
         </div>
     </div>
-    <div class="row pt-5" style="min-height: 550px">
+    <div class="row" style="min-height: 550px;padding-top: 60px">
         <!--<img src="Images/ADGITM_building.jpg" width="100%" height="80%">-->
         <!--Create a Caraousel - Images with Scrolling text - -->
         <div class="bd-example col-12 p-0">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleCaptions" style="border-radius: 50%" data-slide-to="0" class="active"></li>
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <ol class="carousel-indicators" id="home-screen">
+                    <li data-target="#carouselExampleCaptions"  data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                     <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                 </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Images/transfer_BG.jpg" height="550px" class="d-block w-100" alt="...">
+                <div class="carousel-inner" >
+                    <div class="carousel-item active" >
+                        <img src="Images/purchase_computer_png.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block header-carousel-slide1" >
+                            <h1>Keep Track</h1>
+                            <p id="one">Add all the purchased Items to the data base</p>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Images/Transfer_computers.jpg" height="550px"  class="d-block w-100" alt="...">
-
+                        <img src="Images/Transfer_computers.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block header-carousel-slide2" >
+                            <h1>Transfer Systems</h1>
+                            <p id="two">Transfer systems within labs</p>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Images/How-Does-Banner-Advertising-Work-.png" height="550px"  class="d-block w-100" alt="...">
+                        <img src="Images/How-Does-Banner-Advertising-Work-.png" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">

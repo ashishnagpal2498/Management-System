@@ -8,9 +8,10 @@ body{
     padding: 10px 0;
     font-size: 18px;
     color: #dddddd;
-    background-color: rgba(240,128,128,0.8);
+    background-color: rgba(240,128,128,1);
     position: fixed;
     width: 100%;
+    z-index: 2;
 }
 #header-nav-bar{
 
@@ -59,5 +60,54 @@ body{
     /*border: 1px solid magenta;*/
     outline: none;
 }
+.carousel-indicators#home-screen li{
+   margin: 0 10px;
+    border-radius: 50%;width: 15px;height: 15px;
+}
+.carousel-item img{
+    height: 580px;
+}
+.header-carousel-slide1 h1,p#one{
+    color: #bd2130;
+    animation-name: visible-text;
+    animation-duration: 2s ;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    transform: translateY(-100px);
+}
+@keyframes visible-text {
+    0%{ transform: translateY(0);
+        opacity: 0;
+    }
+    50%{
 
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(-100px);
+    }
+}
 
+.header-carousel-slide2 h1,p#two{
+    color: black;
+    /*visibility: hidden;*/
+    /*transition-delay: 4s;*/
+    /*display: none;*/
+    /*transition: opacity 0.4s;*/
+    animation-name: moving-text;
+    animation-duration: 2s ;
+    animation-iteration-count: 1;
+    transform: translate(0,-300px);
+}
+@keyframes moving-text {
+    0%{ transform: translate(-100px,-300px);
+        opacity: 0;
+    }
+    50%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(0px,-300px);
+    }
+}
