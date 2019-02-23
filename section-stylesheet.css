@@ -1,5 +1,8 @@
+#carousel-row{
+   min-height: 550px;padding-top: 60px;
+}
 #section-container{
-    min-height: 500px;
+
     background-image: linear-gradient(rgba(61,64,91,1),rgba(61,64,91,0.5)), url("Images/cover_image_for_sections.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -67,4 +70,9 @@
 .a-config:hover{
     color: inherit;
 
+}
+@media screen and (max-width: 760px) {
+    #carousel-row{
+        min-height: 300px;
+    }
 }

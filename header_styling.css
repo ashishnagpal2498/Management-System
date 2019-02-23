@@ -142,4 +142,7 @@ body{
         display: block;
         color: #dddddd;
     }
+    .carousel-item img{
+        height: 300px;
+    }
 }
