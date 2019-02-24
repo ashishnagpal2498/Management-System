@@ -150,3 +150,23 @@ body{
         height: 300px;
     }
 }
+
+/*FOOTER*/
+#footer-container{
+    background-color: black ;
+    color: #dddddd;;
+}
+#footer-form textarea{
+    width: 100%;
+}
+#footer-form label{
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.footer-links a{
+    font-style: italic;
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+}
