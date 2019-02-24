@@ -99,6 +99,10 @@ body{
     animation-iteration-count: 1;
     transform: translate(0,-300px);
 }
+.nav-item a{
+    text-decoration: none;
+    color: inherit;
+}
 @keyframes moving-text {
     0%{ transform: translate(-100px,-300px);
         opacity: 0;
