@@ -157,6 +157,7 @@ body{
 .dropdown-menu.item-menu .dropdown-item a{
     border-bottom: 1px solid transparent;
     margin: 5px 0;
+    padding-right:  3px;
 
 }
 .dropdown-menu.item-menu .dropdown-item:hover a{
