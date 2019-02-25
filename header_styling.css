@@ -150,6 +150,19 @@ body{
         height: 300px;
     }
 }
+.dropdown-menu.item-menu{
+    background-color: black;
+    color: #dddddd ;
+}
+.dropdown-menu.item-menu .dropdown-item a{
+    border-bottom: 1px solid transparent;
+    margin: 5px 0;
+
+}
+.dropdown-menu.item-menu .dropdown-item:hover a{
+    color: #5D92B1 ;
+    border-bottom-color: #bd2130 ;
+}
 
 /*FOOTER*/
 #footer-container{
