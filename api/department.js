@@ -13,10 +13,12 @@ route.post('/',(req,res)=>{
     Department.create({
         dname: req.body.dname,
         hod: req.body.hod,
-        block:req.body.block
-    }).then((results)=> {   console.log(results)
+        block:req.body.block,
+
+    }).then((results)=> {   //console.log(results)
         res.redirect('.')})
         .catch((err)=> console.error(err))
 })
+
 
 exports.route=route;

@@ -32,29 +32,36 @@ const Depart = mgmtSystem.define(
         block:{
             type:dataTypes.STRING
         }
+    },
+    {
+        tableName:'department'
     }
 )
 
 const Labs = mgmtSystem.define(
-    'labs',
+    'lab',
     {
         labid:{
             type:dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
-        block: dataTypes.STRING,
+        labname:{
+            type:dataTypes.STRING
+        },
         technician:{
             type:dataTypes.STRING
         },
-        floor: dataTypes.INTEGER,
-        name:{
-            type:dataTypes.STRING
-        }
+        block: dataTypes.STRING,
+
+        floor: dataTypes.INTEGER
+    }, {
+        tableName: 'lab'
     }
 )
 
 Labs.belongsTo(Depart);
+
 Depart.hasMany(Labs);
 
 //sync the database

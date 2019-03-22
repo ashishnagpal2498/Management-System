@@ -4,7 +4,8 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 const routes = {
-    department: require('./api/department').route
+    department: require('./api/department').route,
+    labs: require('./api/labs').route
 }
 
 
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 
 app.use('/department',routes.department)
-
+app.use('/lab',routes.labs)
 
 app.listen(2121,()=>{
     console.log('Server has Strated At http://localhost:2121');
