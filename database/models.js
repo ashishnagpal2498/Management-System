@@ -26,13 +26,12 @@ const Depart = mgmtSystem.define(
           type:dataTypes.STRING,
           allowNull:false
         },
-        block:{
-            type:dataTypes.STRING
-        },
         hod:{
             type:dataTypes.STRING
+        },
+        block:{
+            type:dataTypes.STRING
         }
-
     }
 )
 
@@ -58,6 +57,9 @@ const Labs = mgmtSystem.define(
 Labs.belongsTo(Depart);
 Depart.hasMany(Labs);
 
+//sync the database
+mgmtSystem.sync({force:true}).then(()=> console.log('Database Configured'))
+    .catch((err)=> console.error(err))
 
 exports.model = {
     Depart , Labs
