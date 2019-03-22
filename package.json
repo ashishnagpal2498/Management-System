@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/ashishnagpal2498/Management-System#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.1.0"
   }
 }

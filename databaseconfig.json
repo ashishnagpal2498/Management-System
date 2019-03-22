@@ -1,0 +1,9 @@
+{
+  "DB": {
+    "host": "localhost",
+    "database": "managementsys",
+    "user" : "managementAdmin",
+    "password": "password",
+    "dialect": "mysql"
+  }
+}
