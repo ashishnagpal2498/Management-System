@@ -4,37 +4,34 @@ body{
     box-sizing: border-box;
 }
 
-#vendor-item-heading{
+#department-item-heading{
     text-align: center;
     margin: 20px;
 }
 
-#vendor-item-heading h3{
+#department-item-heading h3{
     font-weight: bold;
 }
 
-#vendor-item-form-container{
+#department-form-container{
     margin-bottom: 20px;
-
 }
 
-#vendor-form-container-id{
-    padding: 5px 20px 15px 20px;
-}
-
-#vendor-item-heading h3{
+#department-item-heading h3{
     color: midnightblue;
     font-size: 2em;
 }
 
-.vendor-form-container{
+.department-form-container{
     background-color: lightgray;
     padding: 5px 20px 15px 20px;
     box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+    margin-right: 30px;
+    margin-left: 30px;
 }
 
 
-#vendor-item-form input{
+#department-wise-form input{
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
@@ -42,33 +39,30 @@ body{
     border-radius: 3px;
 }
 
-#vendor-item-form input:focus{
+#department-wise-form input:focus{
     outline: none;
     border: none;
 }
 
-.vendor-form-container{
+.department-form-container{
     border: #BD2130;
 }
 
-#vendor-item-form .btn {
+
+#department-wise-form label{
+    color: #5D92B1 ;
+    font-weight: bold;
+}
+
+.department-button-class{
     background-color: midnightblue;
     color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
     opacity: 0.9;
 }
 
-#vendor-item-form .btn:hover {
-    opacity:1;
-    background-color: darkblue;
-    color: white;
-}
-
-#vendor-item-form label{
-    color: #5D92B1 ;
-    font-weight: bold;
+.dept-btn{
+    margin-left: 300px;
+    margin-right: 300px;
 }
