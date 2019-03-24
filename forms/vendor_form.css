@@ -18,6 +18,10 @@ body{
 
 }
 
+#vendor-form-container-id{
+    padding: 5px 20px 15px 20px;
+}
+
 #vendor-item-heading h3{
     color: midnightblue;
     font-size: 2em;
