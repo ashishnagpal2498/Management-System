@@ -28,7 +28,8 @@ const Vendor = mgmtSystem.define(
         },
         personalcontact:{
             type:dataTypes.INTEGER
-        }
+        },
+        companyemail: dataTypes.STRING
     }
 )
 
@@ -36,20 +37,28 @@ const Product = mgmtSystem.define(
     'product',
     {
         pid:{
-            type : dataTypes.NUMBER,
+            type : dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
+        qty: dataTypes.INTEGER,
         invoice_date: dataTypes.DATE,
-        invoice_no: dataTypes.NUMBER,
-        warranty_year: dataTypes.NUMBER,
+        invoice_no: dataTypes.INTEGER,
+        warranty_year: dataTypes.INTEGER,
         product_details: dataTypes.STRING,
         approval: dataTypes.STRING
     }
 )
+
+Product.belongsTo(Vendor);
+Vendor.hasMany(Product)
 
 mgmtSystem.sync({force:true})
     .then(()=>{
         console.log('Vendor and Product')
     })
     .catch((err)=> console.error(err))
+
+exports.model = {
+    Product,Vendor
+}
