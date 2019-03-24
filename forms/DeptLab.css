@@ -1,0 +1,68 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#departmentlab-item-heading{
+    text-align: center;
+    margin: 20px;
+}
+
+#departmentlab-item-heading h3{
+    font-weight: bold;
+}
+
+#departmentlab-form-container{
+    margin-bottom: 20px;
+}
+
+#departmentlab-item-heading h3{
+    color: midnightblue;
+    font-size: 2em;
+}
+
+.departmentlab-form-container{
+    background-color: lightgray;
+    padding: 5px 20px 15px 20px;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+
+#departmentlab-form input{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+#departmentlab-form input:focus{
+    outline: none;
+    border: none;
+}
+
+.departmentlab-form-container{
+    border: #BD2130;
+}
+
+
+#departmentlab-form label{
+    color: #5D92B1 ;
+    font-weight: bold;
+}
+
+.departmentlab-button-class{
+    background-color: midnightblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.deptlab-btn{
+    margin-left: 300px;
+    margin-right: 300px;
+}
