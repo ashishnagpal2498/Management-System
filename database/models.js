@@ -39,7 +39,7 @@ const Depart = mgmtSystem.define(
 )
 
 const Labs = mgmtSystem.define(
-    'lab',
+    'labs',
     {
         labid:{
             type:dataTypes.INTEGER,
@@ -56,9 +56,27 @@ const Labs = mgmtSystem.define(
 
         floor: dataTypes.INTEGER
     }, {
-        tableName: 'lab'
+        //tableName: 'lab'
+    }
+);
+
+const faculty = mgmtSystem.define(
+    'faculty',
+    {
+        fid:{
+            type :dataTypes.INTEGER,
+            autoIncrement:true,
+            primaryKey:true
+        },
+        fname : dataTypes.STRING,
+        designation: dataTypes.STRING,
+        responsibility: dataTypes.STRING,
+        block: dataTypes.STRING,
+        floor: dataTypes.INTEGER
     }
 )
+
+
 
 Labs.belongsTo(Depart);
 
