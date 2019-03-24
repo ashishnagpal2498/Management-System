@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dept Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" id="department-form-container">
+    <div class="container-heading" id="department-item-heading">
+        <h3>DEPARTMENT DETAILS <i class="fas fa-user"></i></h3>
+    </div>
+</div>
+<div class="department-form-container" id="department-form-container-id">
+    <form action="" method="" id="department-wise-form">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="DeptNumber">DEPT NUMBER</label>
+                <input type="number" class="form-control" id="DeptNumber">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="DeptName">DEPT NAME</label>
+                <select class="form-control" id="DeptName">
+                    <option>CSE</option>
+                    <option>IT</option>
+                    <option>ECE</option>
+                    <option>MECH</option>
+                    <option>EEE</option>
+                    <option>CIVIL</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="BlockNumber">BLOCK NUMBER</label>
+                <input type="number" class="form-control" id="BlockNumber">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="HODName">HOD NAME</label>
+                <input type="text" class="form-control" id="HODName">
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
