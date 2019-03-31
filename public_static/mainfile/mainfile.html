@@ -14,7 +14,7 @@
 <body>
 <div id="header-menu-container" class="container-fluid pt-2 pb-2">
     <div class="row justify-content-between">
-        <div class="col-4" id="menu-btn" onclick="closemenu()">Menu Btn</div>
+        <div class="col-4" id="menu-btn" onclick="menuoptions()">Menu Btn</div>
         <div class="col-4"><i class="fa fa-user-circle"></i> </div>
     </div>
 
@@ -22,9 +22,9 @@
 <div  class="container-fluid" id="main-screen-div">
    <!--Side menu Div -->
     <div class="row">
-       <div class="col-4" id="side-menu">
+       <div class="col-4 side-menu">
     <div class="row" id="side-menu-options">
-        <div class="col-12">User Img and username</div>
+        <div class="col-12"><i  class="fa fa-user-circle"></i> Img and username</div>
         <div class="col-8"><span id="user-form-menu"></span> Form Menu</div>
         <div class="col-12" onclick="show(this)" myval-div="vendor" >   Vendor </div>
     <div class="col-12" onclick="show(this)" myval-div="product">Items</div>
@@ -34,6 +34,16 @@
         <div class="col-12">Return</div>
     </div>
        </div>
+        <!--<div class="col-1 side-menu smallmenu" id="small-menu">-->
+            <!--<ul class="small-menu-list">-->
+                <!--<li><i  class="fa fa-user-circle"></i></li>-->
+                <!--<li><i class="fa fa-user-plus"></i> </li>-->
+                <!--<li><i class="fa fa-product-hunt"></i> </li>-->
+                <!--<li><i class="fa fa-list"></i> </li>-->
+                <!--<li><i class="fa fa-scribd"></i> </li>-->
+                <!--<li><i class="fa fa-arrows-alt"></i> </li>-->
+            <!--</ul>-->
+        <!--</div>-->
     <!--Middle form-->
         <!--List of all items-->
         <div class="col-3 ml-4 pb-3 pt-2" id="center-form" >

@@ -23,6 +23,14 @@ function Vendor(Obj){
     this.company = Obj.comapnyname;
     this.contact = Obj.personalcontact;
 }
+function menuoptions(){
+    //Menu Bar toggle  -  Create a class and toggle it
+
+    let smallmenu = $('#small-menu')[0]
+    let fullscreendiv = $('#main-screen-div')[0]
+    fullscreendiv.classList.toggle('slide-side-menu')
+    // smallmenu.classList.toggle('smallmenu')
+}
 $(()=>{
     //Prototype Classes - 
     Vendor.prototype.createElement = function (){
@@ -41,12 +49,7 @@ $(()=>{
         return li;
     }
 
-    //Menu Bar toggle  -  Create a class and toggle it
-    let menubtn = $('#menu-btn')
-    menubtn.click(function () {
-        let fullscreendiv = $('#main-screen-div')[0]
-        fullscreendiv.style.transform = "translateX(-300px)"
-    })
+
    
     //Menu Items Display
     window.show = function(ev) {

@@ -15,7 +15,7 @@
 #main-screen-div{
     transition: all 0.4s;
 }
-#side-menu{
+.side-menu{
    /*position: absolute;*/
     /*left: 0;*/
     /*top: 0;*/
@@ -24,16 +24,30 @@
     padding: 0 20px;
     background-color: black;
     color: #dddddd;
+    overflow-x: hidden;
 }
-#side-menu .col-12{
+.side-menu .col-12{
     padding: 20px;
     margin: 0;
     font-size: 20px;
 
 }
-#side-menu .col-12:hover{
+
+.side-menu .col-12:hover{
     background-color: rgba(97,97,97,0.6);
 
+}
+/*Menu Toggle*/
+.slide-side-menu{
+    transform: translateX(-250px);
+
+}
+.smallmenu{
+    display: none;
+}
+.small-menu-list{
+
+    list-style-type: none;
 }
 
 
