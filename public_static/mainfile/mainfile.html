@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="../Bootstrap/dist/css/bootstrap.css">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
+    <script src="../Bootstrap/dist/js/bootstrap.js"></script>
+    <link href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="main_file_ss.css">
+    <script src="mainfile.js"></script>
+</head>
+<body>
+<div id="header-menu-container" class="container-fluid pt-2 pb-2">
+    <div class="row justify-content-between">
+        <div class="col-4" id="menu-btn" onclick="closemenu()">Menu Btn</div>
+        <div class="col-4"><i class="fa fa-user-circle"></i> </div>
+    </div>
+
+</div>
+<div  class="container-fluid" id="main-screen-div">
+   <!--Side menu Div -->
+    <div class="row">
+       <div class="col-4" id="side-menu">
+    <div class="row" id="side-menu-options">
+        <div class="col-12">User Img and username</div>
+        <div class="col-8"><span id="user-form-menu"></span> Form Menu</div>
+        <div class="col-12" onclick="show(this)" myval-div="vendor" >   Vendor </div>
+    <div class="col-12" onclick="show(this)" myval-div="product">Items</div>
+    <div class="col-12">Department</div>
+    <div class="col-12">Faculty</div>
+        <div class="col-12">Transfer</div>
+        <div class="col-12">Return</div>
+    </div>
+       </div>
+    <!--Middle form-->
+        <!--List of all items-->
+        <div class="col-3 ml-4 pb-3 pt-2" id="center-form" >
+            <div class="row">
+            <div class="col-12 pt-2 pb-4"> <span><strong>Search :</strong></span> <input type="text" class="" ></div>
+            <div class="col-12" id="list-of-all">
+
+                <ul id="list-items">
+                    <li></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <!--Actual -->
+        <div class="col-5 pr-3 pl-3" id="center-item-display">
+            <div class="row">
+            <div class="col-12 pt-2 pb-4" id="main-form-item">
+                <h3 align="center">Vendor Details</h3>
+                <div class="row pt-3" id="detailed-div">
+                    <div class="col-5" id="vendor-id">Vendor Id:</div>
+                    <div class="col-5" id="vendor-name">Name</div>
+                    <div class="col-5" id="vendor-company-name">Company Name</div>
+                    <div class="col-5" id="vendor-contact-number">Contact Number</div>
+                    <div class="col-5">Website</div>
+                    <div class="col-5">Email</div>
+                    <button class="btn btn-info"><a href="../forms/vendor_form.html" style="color: white">Add </a> </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

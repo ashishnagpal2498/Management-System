@@ -53,7 +53,7 @@ const Product = mgmtSystem.define(
 Product.belongsTo(Vendor);
 Vendor.hasMany(Product)
 
-mgmtSystem.sync({force:true})
+mgmtSystem.sync({alter:true})
     .then(()=>{
         console.log('Vendor and Product')
     })

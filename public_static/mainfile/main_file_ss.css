@@ -1,0 +1,73 @@
+/*Header Div settings*/
+#header-menu-container{
+    background-color: black;
+    color: #dddddd;
+
+}
+#menu-btn{
+    transform: translateX(200px);
+    cursor: pointer;
+}
+/*End*/
+
+
+/*Side Menu Settings*/
+#main-screen-div{
+    transition: all 0.4s;
+}
+#side-menu{
+   /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    max-width: 300px;
+    min-height: 100%;
+    padding: 0 20px;
+    background-color: black;
+    color: #dddddd;
+}
+#side-menu .col-12{
+    padding: 20px;
+    margin: 0;
+    font-size: 20px;
+
+}
+#side-menu .col-12:hover{
+    background-color: rgba(97,97,97,0.6);
+
+}
+
+
+
+/*End*/
+
+/*Centre Form */
+#center-div{
+
+}
+
+#center-form{
+    margin-top: 100px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top: 3px solid black ;
+    box-shadow: 0 10px 10px 8px rgba(0,0,0,0.1);
+}
+
+#center-item-display{
+    margin-left: 50px;
+    margin-top: 100px;
+    box-shadow: 0 0 15px 18px rgba(0,0,0,0.1);
+
+}
+
+#list-items{
+    padding: 5px 10px;
+    background-color: rgba(97,97,97,0.3);
+    overflow-y: scroll;
+    list-style-type: none ;
+    min-height: 200px;
+}
+#list-items li{
+    z-index: 1;
+}
+
+/*End of centre Form*/
