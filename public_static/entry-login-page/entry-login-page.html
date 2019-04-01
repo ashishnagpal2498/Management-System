@@ -10,33 +10,33 @@
     <title>Title</title>
 </head>
 <body background="loginbackground.jpg" style="background-size: cover">
-    <div class="container">
-        <h1 style="text-align: center; color: white; margin-top: 70px; font-weight: bolder; text-decoration: underline; font-size: 3em;">COMPUTER MANAGEMENT SYSTEM</h1>
-        <div class="row">
+    <div class="container" id="login-page-container">
+        <h1 id="login-page-heading" style="text-align: center; color: white; margin-top: 70px; font-weight: bolder; text-decoration: underline; font-size: 3em;">COMPUTER MANAGEMENT SYSTEM</h1>
+        <div class="row" id="login-page-row">
             <div class="col-md-4">
 
             </div>
-            <div class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
+            <div id="login-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
                 <form action="" method="">
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="email" style="font-weight: bold">Email address:</label>
-                            <input type="email" class="form-control" id="email">
+                            <label for="loginpageemail" style="font-weight: bold">Email address:</label>
+                            <input type="email" class="form-control" id="loginpageemail">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="pwd" style="font-weight: bold">Password:</label>
-                            <input type="password" class="form-control" id="pwd">
+                            <label for="loginpagepass" style="font-weight: bold">Password:</label>
+                            <input type="password" class="form-control" id="loginpagepass">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="checkbox">
+                        <div class="checkbox" id="loginpagecheckbox">
                             <label><input type="checkbox"> Remember me</label>
                         </div>
                     </div>
-                    <div class="form-actions" style="text-align: center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-actions" style="text-align: center" id="loginpagebtndiv">
+                        <button id="loginpagebtn" type="submit" class="btn btn-primary">Submit</button>
                     </div>
 
                 </form>
