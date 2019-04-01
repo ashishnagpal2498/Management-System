@@ -17,12 +17,25 @@ function fun(el){
     }
 }
 let Vendors_List = []
+//Class Vendor
 function Vendor(Obj){
     this.id=Obj.vid;
     this.name = Obj.name;
     this.company = Obj.comapnyname;
     this.contact = Obj.personalcontact;
 }
+let Product_list = []
+//Class Products
+function Product(Obj) {
+    this.id = Obj.pid
+    this.qty = Obj.qty;
+    this.invoice_date= Obj.invoice_date
+        this.invoice_no = Obj.invoice_no
+        this.years =Obj.warranty_year
+        this.product_details= Obj.product_details
+        this.approval=Obj.approval
+}
+
 function menuoptions(){
     //Menu Bar toggle  -  Create a class and toggle it
 
@@ -61,10 +74,12 @@ $(()=>{
         let formrequest = $(ev).attr('myval-div')
         console.log(formrequest)
         
-        $.get(`http://localhost:2121/${formrequest}`,(data)=>{
-            //console.log(err)
+        $.get(`http://localhost:2121/${formrequest}`,
+            //Callback Function which Receives Data -
+            (data)=>{
             console.log(data)
             let list_items =[]
+
             //Converting Json data To JavaScript
             if(formrequest==='vendor') {
                 for (item of data) {
