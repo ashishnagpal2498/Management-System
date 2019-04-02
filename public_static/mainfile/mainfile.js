@@ -122,6 +122,8 @@ $(()=>{
             console.log(data)
 
             //Converting Json data To JavaScript
+            //stringify
+            //parse()
             if(formrequest==='vendor') {
                 vendor_List_Fun(data,list);
             }
