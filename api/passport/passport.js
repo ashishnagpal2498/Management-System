@@ -4,7 +4,8 @@ const databaselogin = require('../../database/signUp_login')
 
 //Serialize -
 passport.serializeUser(function (user,done) {
-    done(null,user.id)
+   console.log('serialize User')
+    return done(null,user.id)
 })
 
 
@@ -16,22 +17,23 @@ passport.deserializeUser(function (userID,done) {
         }
     ).then((user)=>{
         console.log('User deserialized')
-        done(user,false)
-    })
+       // User is returned as a 2nd Parameter
+       return done(false,user)
+    }).catch((err)=> console.error(err))
 })
 
 //Startergy
 passport.use(new LocalStratergy({
-    username: username,
-    password:password
+    username: 'username',
+    password: 'password'
 }, function (username,password,done) {
     //Local Stratergy
-    databaselogin.Login_username.findAll({
+    databaselogin.Login_username.findOne({
         where: {username:username}
     }).then((result)=>{
         //That user will be inthe result field
         console.log(result)
-        databaselogin.Passwords.findAll({
+        databaselogin.Passwords.findOne({
             where:{usernameId:result.id}
         }).then((result2)=>{
             if(!result2.password===password)
@@ -48,3 +50,7 @@ passport.use(new LocalStratergy({
         return done(err,false)
     })
 }))
+
+exports = module.exports = {
+    passport
+}

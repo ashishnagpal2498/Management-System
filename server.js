@@ -4,7 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-const passport = require('passport')
+const passport = require('./api/passport/passport').passport
 const session = require('express-session')
 
 const routes = {

@@ -1,7 +1,8 @@
 const route = require('express').Router()
-const passport = require('passport')
+const passport = require('../passport/passport').passport
 
 route.get('/',(req,res)=>{
+   // console.log(req);
     if(req.user)
     {
         return res.send({user:req.user,messgae:'Already Logged In'})
@@ -10,7 +11,7 @@ route.get('/',(req,res)=>{
 })
 
 route.post('/',passport.authenticate('local',{
-    successRedirect: '/pages',
+    successRedirect: '.',
     failureRedirect:'/login'
 }))
 

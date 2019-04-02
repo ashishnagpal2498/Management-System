@@ -11,7 +11,7 @@ const SignUp_login = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.pass
 const Login_username = SignUp_login.define( 'username',
     {
         id: {
-            type: dataTypes.INTEGER,
+            type: dataTypes.STRING,
             primaryKey:true,
         },
         username:{
@@ -42,7 +42,7 @@ Passwords.belongsTo(Login_username)
 Login_username.hasOne(Passwords);
 
 
-SignUp_login.sync().then(()=>{
+SignUp_login.sync({alter:true}).then(()=>{
     console.log('login/Signup database Configured')
 }).catch((err)=> console.error(err))
 
