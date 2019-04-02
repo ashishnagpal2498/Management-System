@@ -2,9 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title>Title</title>
 </head>
-<body>
+<body background="loginbackground.jpg" style="background-size: cover">
+<div class="container" id="signup-page-container">
+    <h1 id="signup-page-heading" style="text-align: center; color: white; margin-top: 70px; font-weight: bolder; text-decoration: underline; font-size: 3em;">CREATE ACCOUNT</h1>
+    <div class="row" id="signup-page-row">
+        <div class="col-md-4">
+
+        </div>
+        <div id="signup-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
+
+            <form action="" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="signupname" style="font-weight: bold">Name</label>
+                        <input type="text" class="form-control" name="signupname" id="signupname">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="signupemail" style="font-weight: bold">Email ID</label>
+                        <input type="email" class="form-control" name="signupemail" id="signupemail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="signupdept" style="font-weight: bold">Department</label>
+                        <select class="form-control" id="signupdept" name="signupdept">
+                            <option>CSE</option>
+                            <option>IT</option>
+                            <option>ECE</option>
+                            <option>EEE</option>
+                            <option>CIVIL</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="designation" style="font-weight: bold">Designation</label>
+                        <select class="form-control" id="designation" name="designation">
+                            <option>Director</option>
+                            <option>HOD</option>
+                            <option>Lab Assistant</option>
+                            <option>Faculty</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="signuppass" style="font-weight: bold">Set Password</label>
+                        <input type="password" class="form-control" name="signuppass" id="signuppass">
+                    </div>
+                </div>
+
+                <div class="form-actions" style="text-align: center; margin-bottom: 20px" id="signuppagebtndiv">
+                    <button id="signuppagebtn" type="submit" class="btn btn-primary" style="width: 250px">CREATE ACCOUNT</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
