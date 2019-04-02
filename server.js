@@ -33,7 +33,10 @@ app.use('/department',routes.department)
 app.use('/lab',routes.labs)
 app.use('/vendor',routes.vendor)
 app.use('/product',routes.product)
-
+//All routes are check and request doesn't match any of the Route -
+app.use((req,res)=>{
+    res.send({message:'Error, Cannot find path you are looking for'})
+})
 
 app.listen(2121,()=>{
     console.log('Server has Strated At http://localhost:2121');

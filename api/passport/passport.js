@@ -42,7 +42,7 @@ passport.use(new LocalStratergy({
             }
             return done(null,result)
         }).catch((err)=>{
-            console.log(err);
+            console.error(err);
             return done(err,false)
         })
     }).catch((err)=>{
