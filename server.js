@@ -1,6 +1,6 @@
 const express = require('express')
-    , app = express();
-const path = require('path')
+    , app = express()
+    , path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
@@ -14,7 +14,7 @@ const routes = {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors())
+//app.use(cors())
 app.use('/',express.static(path.join(__dirname,'public_static')))
 
 app.use('/department',routes.department)

@@ -66,6 +66,8 @@ $(()=>{
             console.log(data)
             let list_items =[]
             //Converting Json data To JavaScript
+            //stringify
+            //parse()
             if(formrequest==='vendor') {
                 for (item of data) {
                     let vendor = new Vendor(item)
