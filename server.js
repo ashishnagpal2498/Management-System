@@ -3,12 +3,17 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
+const passport = require('passport')
+const session = require('express-session')
 
 const routes = {
     department: require('./api/department').route,
     labs: require('./api/labs').route,
     vendor: require('./api/vendor').route,
-    product: require('./api/product').route
+    product: require('./api/product').route,
+    login :require('./api/login/login').route,
+    signup: require('./api/login/signup').route
 }
 
 
@@ -16,7 +21,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors())
 app.use('/',express.static(path.join(__dirname,'public_static')))
+app.use(session({secret: 'Passport Login'}))
 
+app.use(cookieParser())
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/login',routes.login)
+app.use('/signup',routes.signup)
 app.use('/department',routes.department)
 app.use('/lab',routes.labs)
 app.use('/vendor',routes.vendor)

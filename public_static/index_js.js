@@ -1,3 +1,16 @@
+//Check if the user is logged In then go to mainpage else -
+function mainpage() {
+    $.get('http://localhost:2121/login',(data)=>{
+    //    If the user is logged in then
+        if(data.user)
+        {
+        return    window.location = './mainfile/mainfile.html'
+        }
+        return window.location = './entry-login-page/entry-login-page.html'
+    })
+}
+
+
 function closemenu()
 {
     let responsivemenu = document.getElementsByClassName('responsive-menu')[0]

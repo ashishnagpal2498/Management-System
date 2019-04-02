@@ -42,7 +42,7 @@ Passwords.belongsTo(Login_username)
 Login_username.hasOne(Passwords);
 
 
-db.sync().then(()=>{
+SignUp_login.sync().then(()=>{
     console.log('login/Signup database Configured')
 }).catch((err)=> console.error(err))
 
