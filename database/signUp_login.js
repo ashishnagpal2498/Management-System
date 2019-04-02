@@ -8,7 +8,7 @@ const SignUp_login = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.pass
         host: dbConfig.host,
         dialect:dbConfig.dialect
     })
-const Login_username = SignUp_login.define(
+const Login_username = SignUp_login.define( 'username',
     {
         id: {
             type: dataTypes.INTEGER,
@@ -28,7 +28,8 @@ const Login_username = SignUp_login.define(
 
     }
 )
-const Passwords = SignUp_login.define({
+const Passwords = SignUp_login.define('password',
+    {
     id:{
         type:dataTypes.INTEGER,
         autoIncrement:true,
@@ -44,3 +45,7 @@ Login_username.hasOne(Passwords);
 db.sync().then(()=>{
     console.log('login/Signup database Configured')
 }).catch((err)=> console.error(err))
+
+exports = module.exports= {
+    Login_username , Passwords
+}
