@@ -2,8 +2,8 @@
 function mainpage() {
     $.get('http://localhost:2121/login',(data)=>{
     //    If the user is logged in then
-        if(data.user)
-        {   console.log(data.message)
+        if(data)
+        {   console.log(data)
         return    window.location = './mainfile/mainfile.html'
         }
         return window.location = './entry-login-page/entry-login-page.html'
