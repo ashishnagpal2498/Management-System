@@ -13,8 +13,8 @@
     <link href="section-stylesheet.css" rel="stylesheet">
     <script src="index_js.js"></script>
 </head>
-<body>
-<div class="container-fluid pr-0">
+<body style="margin-right: -20px">
+<div class="container-fluid">
     <div class="row" id="header-row">
         <div class="col-5 col-md-3 pt-2">LOGO and Name</div>
         <div class="col-12 p-0 p-md-2  col-md-5 responsive-menu">
@@ -23,7 +23,7 @@
                 <div class="nav-item"> <a href=""> Home</a></div>
                 <div class="nav-item dropdown" >
                     <a style="text-decoration: none;color: inherit" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Items </a>
-                <div class="dropdown-menu item-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-menu item-menu dropdown-menu-right" style="background-color: white;color: black" aria-labelledby="dropdownMenuLink">
                     <div class="dropdown-item">
                         <a href="">  Computer </a>
                     </div>
@@ -53,7 +53,7 @@
         <div class="col-6 col-md-4">
             <div class="row pt-2">
                 <div class="col-9 col-md-7 nav-item"><span id="search-header-btn"><i class="fas fa-search"></i> </span><input placeholder="Search" id="nav-bar-input-box" type="text"></div>
-                <div class="col-2 col-md-4 nav-item"><i class="fa fa-user-circle"></i> </div>
+                <div class="col-2 col-md-4 nav-item" id="login-user"><i class="fa fa-user-circle"></i> </div>
             </div>
         </div>
         <div class="col-1 pt-2"  onclick="openmenu()" id="responsive-menu-bar"><i class="fas fa-bars"></i></div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
-                    <a href="forms/vendor_form.html" class="a-config">
+                    <a onclick="mainpage()" class="a-config">
                     <div class="section-item">
                         <div class="section-icon">
                             <i class="fa fa-user"></i>
@@ -126,13 +126,13 @@
                     </div>
                     </a>
                     <div class="section-text">
-                        <div class="section-heading"><h3 class="section-text-heading"><a href="forms/vendor_form.html">Vendor</a></h3></div>
+                        <div class="section-heading"><h3 class="section-text-heading"><a onclick="mainpage()">Vendor</a></h3></div>
                         <div class="section-description"><p>Enter the details of the vendor and add it to the database</p></div>
                     </div>
                 </div>
                 <!--Issue The Product-->
                 <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
-                    <a href="" class="a-config">
+                    <a onclick="mainpage()" class="a-config">
                     <div class="section-item">
                         <div class="section-icon">
                             <i class="fas fa-desktop"></i>
@@ -140,13 +140,13 @@
                     </div>
                     </a>
                     <div class="section-text">
-                        <div class="section-heading"><h3 class="section-text-heading"><a href="">Issue</a></h3></div>
+                        <div class="section-heading"><h3 class="section-text-heading"><a onclick="mainpage()">Issue</a></h3></div>
                         <div class="section-description"><p>Enter the Product to department or to the faculty</p></div>
                     </div>
                 </div>
                 <!--Transfer-->
                 <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
-                    <a href="" class="a-config">
+                    <a onclick="mainpage()" class="a-config">
                         <div class="section-item">
                             <div class="section-icon">
                                 <i class="fas fa-exchange-alt"></i>
@@ -154,7 +154,7 @@
                         </div>
                     </a>
                     <div class="section-text">
-                        <div class="section-heading"><h3 class="section-text-heading"><a href="">Transfer</a></h3></div>
+                        <div class="section-heading"><h3 class="section-text-heading"><a onclick="mainpage()">Transfer</a></h3></div>
                         <div class="section-description"><p>Transfer the product to different lab</p></div>
                     </div>
                 </div>

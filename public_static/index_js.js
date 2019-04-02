@@ -17,7 +17,19 @@ function closemenu()
     console.log(responsivemenu)
     responsivemenu.style.display ="none"
 }
-window.onload = function () {
+$(function () {
+    $.get('/login',(data)=>{
+        console.log('inside Get')
+        console.log(data);
+
+        if(data){
+            let name = data[0].name;
+           let userIcon = $('#login-user')
+            userIcon.empty();
+           userIcon[0].innerText = `Hey , ${name} `
+            console.log(name);
+        }
+    })
     let crossbtn = document.getElementsByClassName('cross-button')
     console.log(crossbtn)
 
@@ -31,4 +43,4 @@ window.onload = function () {
     // crossbtn.addEventListener('click',function () {
     //     responsivemenu.style.display ="block"
     // })
-}
+})

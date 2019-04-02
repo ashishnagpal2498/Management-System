@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 #carousel-row{
    min-height: 550px;padding-top: 60px;
 }
@@ -69,7 +74,7 @@
 }
 .a-config:hover{
     color: inherit;
-
+    cursor: pointer;
 }
 @media screen and (max-width: 760px) {
     #carousel-row{
