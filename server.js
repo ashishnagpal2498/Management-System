@@ -13,7 +13,8 @@ const routes = {
     vendor: require('./api/vendor').route,
     product: require('./api/product').route,
     login :require('./api/login/login').route,
-    signup: require('./api/login/signup').route
+    signup: require('./api/login/signup').route,
+    logout: require('./api/logout').route
 }
 
 
@@ -27,12 +28,20 @@ app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
 
+// app.use((req,res,next)=>{
+//     if(req.user)
+//     {
+//         res.send({user:req.user})
+//     }
+//     next();
+// })
 app.use('/login',routes.login)
 app.use('/signup',routes.signup)
 app.use('/department',routes.department)
 app.use('/lab',routes.labs)
 app.use('/vendor',routes.vendor)
 app.use('/product',routes.product)
+app.use('/logout',routes.logout);
 //All routes are check and request doesn't match any of the Route -
 app.use((req,res)=>{
     res.send({message:'Error, Cannot find path you are looking for'})

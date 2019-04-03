@@ -5,7 +5,7 @@ route.get('/',(req,res)=>{
    // console.log(req);
     if(req.user)
     {
-        return res.send(req.user)
+        return res.send({user:req.user})
     }
     return res.send({user:undefined,messgae: 'user Not found'})
 })
