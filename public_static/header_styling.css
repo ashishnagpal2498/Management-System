@@ -61,16 +61,21 @@ body{
    margin: 0 10px;
     border-radius: 50%;width: 15px;height: 15px;
 }
+.carousel-item{
+    position: relative;
+}
 .carousel-item img{
     height: 580px;
 }
-.header-carousel-slide1 h1,p#one{
+.header-carousel-slide1{
+    position: absolute;
+    bottom: 10px;
     color: #bd2130;
     animation-name: visible-text;
     animation-duration: 2s ;
     animation-iteration-count: 1;
     animation-timing-function: ease;
-    transform: translateY(-100px);
+    transform: translateY(-50%);
 }
 @keyframes visible-text {
     0%{ transform: translateY(0);
@@ -81,7 +86,7 @@ body{
         opacity: 1;
     }
     100%{
-        transform: translateY(-100px);
+        transform: translateY(-50%);
     }
 }
 
