@@ -9,7 +9,7 @@ function mainpage() {
         {   console.log(data)
         return    window.location = './mainfile/mainfile.html'
         }
-        return window.location = './entry-login-page/entry-login-page.html'
+        return window.location = 'Login/login.html'
     })
 }
 

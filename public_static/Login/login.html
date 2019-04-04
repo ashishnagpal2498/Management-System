@@ -7,7 +7,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <script src="entry-login-page.js"></script>
+    <script src="login.js"></script>
     <title>Title</title>
 </head>
 <body background="loginbackground.jpg" style="background-size: cover">
@@ -22,14 +22,14 @@
                 <form action="http://localhost:2121/login" method="post"name="myform" onsubmit="return(validate())";>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="loginpageemail" style="font-weight: bold">Email address:</label>
-                            <input type="text" class="form-control" name="loginpageemail" id="loginpageemail">
+                            <label for="email" style="font-weight: bold">Email address:</label>
+                            <input type="text" class="form-control" name="email" id="email">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="loginpagepass" style="font-weight: bold">Password:</label>
-                            <input type="password" class="form-control" name="loginpagepass" id="loginpagepass">
+                            <label for="pwd" style="font-weight: bold">Password:</label>
+                            <input type="password" class="form-control" name="pwd" id="pwd">
                         </div>
                     </div>
                     <div class="form-row">
