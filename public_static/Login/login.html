@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="login.js"></script>
     <title>Title</title>
+    <style>
+        .form-control:focus {
+            border-color: black;
+            box-shadow: none;
+        }
+    </style>
+
 </head>
 <body background="loginbackground.jpg" style="background-size: cover">
     <div class="container" id="login-page-container">
@@ -19,7 +26,7 @@
             </div>
             <div id="login-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
 
-                <form action="http://localhost:2121/login" method="post"name="myform" onsubmit="return(validate())";>
+                <form action="http://localhost:2121/login" method="post" name="myloginform" onsubmit="return(loginvalidate())";>
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="email" style="font-weight: bold">Email address:</label>
@@ -33,18 +40,19 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="checkbox" id="loginpagecheckbox">
+                        <div class="form-group col-md-6 checkbox" id="loginpagecheckbox">
                             <label><input type="checkbox" name="remember"> Remember me</label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <a href="#" style="color: red">Forget Password?</a>
                         </div>
                     </div>
                     <div class="form-actions" style="text-align: center; margin-bottom: 20px" id="loginpagebtndiv">
                         <button id="loginpagebtn" type="submit" class="btn btn-primary" style="width: 250px">Login</button>
                     </div>
-                    <div class="form-actions">
-                        <p>New User: Create Account</p>
-                    </div>
+
                     <div class="form-actions" style="text-align: center" id="signuppagebtndiv">
-                        <button id="signuppagebtn" type="button" class="btn btn-primary" style="width: 150px">Create Account</button>
+                        <a href="signup.html"><i>New user? CREATE ACCOUNT</i></a>
                     </div>
 
                 </form>
