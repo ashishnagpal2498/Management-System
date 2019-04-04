@@ -1,7 +1,4 @@
 body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     overflow-x: hidden;
 }
 #header-row{
@@ -14,7 +11,7 @@ body{
     z-index: 2;
 }
 #header-nav-bar{
-
+    transition: all 0.4s;
 }
 #header-nav-bar .nav-item{
     background-color: transparent;

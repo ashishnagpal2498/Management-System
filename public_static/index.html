@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <!--Minimum Scale an dmaximum Scale -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1">
     <title>Management System</title>
     <link rel="stylesheet" href="Bootstrap/dist/css/bootstrap.css">
     <script src="Bootstrap/dist/js/jquery-3.2.1.js"></script>
@@ -13,7 +14,7 @@
     <link href="section-stylesheet.css" rel="stylesheet">
     <script src="index_js.js"></script>
 </head>
-<body style="margin-right: -20px">
+<body>
 <div class="container-fluid">
     <div class="row" id="header-row">
         <div class="col-5 col-md-3 pt-2">LOGO and Name</div>
@@ -99,17 +100,16 @@
         </div>
     </div>
 </div>
-<div class="container-fluid w-100 pt-4 pb-4 pr-0" id="section-container">
-    <div class="row pt-5 pb-5 mr-3 ml-3 justify-content-center" >
+
+<!--Middle Section-->
+<div class="container-fluid w-100 pt-4 pb-4 " id="section-container">
+    <div class="row pt-5 pb-5 mr-3 ml-3 justify-content-center middlesection-container" id="middle-section-row" >
         <div class="col-12">
-            <div class="row justify-content-center pl-5 mt-5" style="margin-left: 50px">
-                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
+            <div class="row justify-content-center pl-5 pr-5 mt-5" >
+                <div class="col-12 col-md-6 col-lg-4 pr-2 pl-2 section" align="center">
                     <a class="a-config"  onclick="mainpage()">
                     <div class="section-item">
-
-                        <div class="section-icon">
-                          <i class="fas fa-shopping-cart"></i>
-                        </div>
+                          <i class="fas fa-shopping-cart section-icon"></i>
                     </div>
                     </a>
                     <div class="section-text">
@@ -117,12 +117,11 @@
                         <div class="section-description"><p>Enter the details of the item purchased from the vendor and add it to the database</p></div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
+                <!--Div 2 - Icon Vendor-->
+                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2" align="center">
                     <a onclick="mainpage()" class="a-config">
                     <div class="section-item">
-                        <div class="section-icon">
-                            <i class="fa fa-user"></i>
-                        </div>
+                        <i class="fa fa-user section-icon"></i>
                     </div>
                     </a>
                     <div class="section-text">
@@ -131,12 +130,10 @@
                     </div>
                 </div>
                 <!--Issue The Product-->
-                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
+                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2" align="center">
                     <a onclick="mainpage()" class="a-config">
                     <div class="section-item">
-                        <div class="section-icon">
-                            <i class="fas fa-desktop"></i>
-                        </div>
+                            <i class="fas fa-desktop section-icon"></i>
                     </div>
                     </a>
                     <div class="section-text">
@@ -145,12 +142,11 @@
                     </div>
                 </div>
                 <!--Transfer-->
-                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2">
+
+                <div class="col-12 col-md-6 col-lg-4 section pr-2 pl-2" align="center">
                     <a onclick="mainpage()" class="a-config">
                         <div class="section-item">
-                            <div class="section-icon">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
+                                <i class="fas fa-exchange-alt section-icon"></i>
                         </div>
                     </a>
                     <div class="section-text">

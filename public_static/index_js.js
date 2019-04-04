@@ -12,6 +12,24 @@ function mainpage() {
         return window.location = './entry-login-page/entry-login-page.html'
     })
 }
+function displaycontent() {
+
+    let middlesectionRow = $('#middle-section-row')
+    if(window.pageYOffset>middlesectionRow[0].height)
+    middlesectionRow[0].classList.toggle('middlesection-container')
+}
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    let middlesectionRow = $('#middle-section-row')
+
+    let heightval = middlesectionRow[0].offsetTop - 400
+    if (document.body.scrollTop > heightval|| document.documentElement.scrollTop > heightval) {
+        middlesectionRow[0].classList.add('midd-section-slide');
+    } else {
+        middlesectionRow[0].classList.remove('midd-section-slide');
+    }
+}
  function openmenu() {
 
          let responsivemenu = document.getElementsByClassName('responsive-menu')[0]
