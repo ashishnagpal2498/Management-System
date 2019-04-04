@@ -28,6 +28,8 @@ passport.use(new LocalStratergy({
     password: 'password'
 }, function (username,password,done) {
     //Local Stratergy
+    username = username.split('@')[0];
+    console.log(username)
     databaselogin.Login_username.findOne({
         where: {username:username}
     }).then((result)=>{

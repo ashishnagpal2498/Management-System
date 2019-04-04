@@ -14,9 +14,11 @@ route.get('/',(req,res)=>{
 
 route.post('/',(req,res)=>{
     let uniqueId = uid(10)
+    let uName = req.body.username
+    uName = uName.split('@')[0]
     LoginDatabase.Login_username.create({
         id: uniqueId,
-        username: req.body.username,
+        username: uName,
         name: req.body.name,
         age: req.body.age
     }).then(()=>{
