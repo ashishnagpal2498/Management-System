@@ -4,9 +4,38 @@
     color: #dddddd;
 
 }
+
+#main-form-item li{
+    margin-bottom: 30px;
+}
+
+
 #menu-btn{
-    transform: translateX(200px);
+    transform: translateX(0px);
     cursor: pointer;
+}
+
+#user-btn{
+    padding: 0px;
+    margin: 0px;
+    transform: translateX(300px);
+    transition: all 0.4s;
+}
+
+
+
+#user-btn a{
+    color: white;
+    text-decoration: none;
+}
+
+#user-btn:hover{
+    background-color: rgba(97,97,97,0.6);
+}
+
+#heading-btn{
+    transform: translateX(60px);
+    color: #9fcdff;
 }
 /*End*/
 
@@ -62,7 +91,7 @@
 }
 
 #center-form{
-    margin-top: 100px;
+    margin-top: 40px;
     border: 1px solid rgba(0,0,0,0.2);
     border-top: 3px solid black ;
     box-shadow: 0 10px 10px 8px rgba(0,0,0,0.1);
@@ -70,7 +99,7 @@
 
 #center-item-display{
     margin-left: 50px;
-    margin-top: 100px;
+    margin-top: 40px;
     box-shadow: 0 0 15px 18px rgba(0,0,0,0.1);
 
 }
@@ -82,13 +111,13 @@
     overflow-y: scroll;
     margin: auto 0;
     list-style-type: none ;
-    min-height: 200px;
+    min-height: 400px;
 }
 #list-items li{
     z-index: 1;
     background-color: rgba(255,255,255,0.7);
-    padding: 10px 15px;
 
+    padding: 10px 15px;
     border-bottom: 1px solid grey;
 
 }
@@ -96,5 +125,51 @@
     background-color: lightgray;
 
 }
+
+/*Username dropdown*/
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: grey;
+}
+
+.dropbtn:focus {
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
 
 /*End of centre Form*/

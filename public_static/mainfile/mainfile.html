@@ -14,8 +14,44 @@
 <body>
 <div id="header-menu-container" class="container-fluid pt-2 pb-2">
     <div class="row justify-content-between">
-        <div class="col-4" id="menu-btn" onclick="menuoptions()">Menu Btn</div>
-        <div class="col-4"><i class="fa fa-user-circle"></i> </div>
+        <div class="col-4" id="menu-btn" onclick="menuoptions()"><i class="fas fa-bars"></i></div>
+        <div class="col-4" id="heading-btn"><h5>COMPUTER MANAGEMENT SYSTEM</h5></div>
+        <div class="col-4 dropdown">
+            <button onclick="myFunction()" class="dropbtn" style="background-color: black; transform: translateX(300px);height: 20px; padding-bottom: 15px"><i class="fas fa-user"> Username</i></button>
+            <div class="dropdown-content" id="myDropdown" style="transform: translateX(277px)">
+                <a href="#">View Profile</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+
+        <script>
+            /* When the user clicks on the button,
+            toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <!--<div class="col-4" id="user-btn">-->
+            <!--<select>-->
+                <!--<option>My Profile</option>-->
+                <!--<option>Logout</option>-->
+            <!--</select>-->
+        <!--</div>-->
     </div>
 
 </div>
@@ -24,7 +60,7 @@
     <div class="row">
        <div class="col-4 side-menu">
     <div class="row" id="side-menu-options">
-        <div class="col-12"><i  class="fa fa-user-circle"></i> Img and username</div>
+        <div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>
         <div class="col-8"><span id="user-form-menu"></span> Form Menu</div>
         <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="vendor" > Vendor </div>
     <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="product">Items</div>
@@ -46,32 +82,59 @@
         <!--</div>-->
     <!--Middle form-->
         <!--List of all items-->
-        <div class="col-3 ml-4 pb-3 pt-2" id="center-form" >
+        <div class="col-3 ml-4 pb-3 pt-2 mb-5" id="center-form" >
             <div class="row">
-            <div class="col-12 pt-2 pb-4"> <span><strong>Search :</strong></span> <input type="text" class="" ></div>
+            <div class="col-12 pt-2 pb-4"> <span style="color: firebrick"><strong>SEARCH :</strong></span> <input type="text" class=""></div>
             <div class="col-12" id="list-of-all">
 
                 <ul id="list-items">
                     <li>A</li>
+                    <li></li>
+                    <li></li>
                 </ul>
             </div>
             </div>
         </div>
         <!--Actual -->
-        <div class="col-5 pr-3 pl-3" id="center-item-display">
-            <div class="row">
-            <div class="col-12 pt-2 pb-4" id="main-form-item">
-                <h3 align="center">Vendor Details</h3>
-                <div class="row pt-3" id="detailed-div">
-                    <div class="col-5" id="vendor-id">Vendor Id:</div>
-                    <div class="col-5" id="vendor-name">Name</div>
-                    <div class="col-5" id="vendor-company-name">Company Name</div>
-                    <div class="col-5" id="vendor-contact-number">Contact Number</div>
-                    <div class="col-5">Website</div>
-                    <div class="col-5">Email</div>
-                    <button class="btn btn-info"><a href="../forms/vendor_form.html" style="color: white">Add </a> </button>
+        <div class="col-5 pr-3 pl-3 mb-5" id="center-item-display">
+            <div class="container-fluid" id="main-form-item">
+                <div class="row">
+                    <div class="col-12 pt-4 pb-4" >
+                        <h3 align="center" style="color: firebrick; border-bottom: 1px solid firebrick">VENDOR DETAILS</h3>
+                    </div>
                 </div>
+                <ul style="list-style-type: none; padding: 5px">
+                    <li id="vendor-id">
+                        <b>VENDOR ID:</b>
+                    </li>
+                    <li  id="vendor-name">
+                        <b>NAME:</b>
+                    </li>
+                    <li id="vendor-company-name">
+                        <b>COMPANY NAME:</b>
+                    </li>
+                    <li id="vendor-contact-number">
+                        <b>CONTACT NUMBER:</b>
+                    </li>
+                    <li>
+                        <b>WEBSITE</b>
+                    </li>
+                    <li>
+                        <b>EMAIL:</b>
+                    </li>
+                </ul>
             </div>
+
+                <!--<div class="row pt-3" id="detailed-div">-->
+                    <!--<div class="col-5" id="vendor-id">Vendor Id:</div>-->
+                    <!--<div class="col-5" id="vendor-name">Name</div>-->
+                    <!--<div class="col-5" id="vendor-company-name">Company Name</div>-->
+                    <!--<div class="col-5" id="vendor-contact-number">Contact Number</div>-->
+                    <!--<div class="col-5">Website</div>-->
+                    <!--<div class="col-5">Email</div>-->
+                    <!--<button class="btn btn-info"><a href="../forms/vendor_form.html" style="color: white">Add </a> </button>-->
+                <!--</div>-->
+
         </div>
         </div>
     </div>
