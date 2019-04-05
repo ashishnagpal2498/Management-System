@@ -62,8 +62,12 @@
     <div class="row" id="side-menu-options">
         <div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>
         <div class="col-8"><span id="user-form-menu"></span> Form Menu</div>
-        <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="vendor" > Vendor </div>
-    <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="product">Items</div>
+        <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="vendor" > Vendor
+        <i class="fa fa-user slide-menu-icons" title="vendor"></i>
+        </div>
+    <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="product">Items
+        <i class="fa fa-shopping-bag slide-menu-icons" title="product" ></i>
+    </div>
     <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="department">Department</div>
     <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="faculty">Faculty</div>
         <div class="col-12">Transfer</div>
@@ -103,7 +107,7 @@
                         <h3 align="center" style="color: firebrick; border-bottom: 1px solid firebrick">VENDOR DETAILS</h3>
                     </div>
                 </div>
-                <ul style="list-style-type: none; padding: 5px">
+                <ul style="list-style-type: none; padding: 5px" id="detailed-div">
                     <li id="vendor-id">
                         <b>VENDOR ID:</b>
                     </li>

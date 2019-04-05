@@ -70,7 +70,17 @@
 /*Menu Toggle*/
 .slide-side-menu{
     transform: translateX(-250px);
-
+    position: relative;
+}
+.slide-menu-icons{
+    position: absolute;
+    right: 12px;
+    font-size: 1.5rem;
+    visibility: hidden;
+    transition: visibility 0.1s;
+}
+.slide-menu-icons-display{
+    visibility: visible;
 }
 
 .smallmenu{
@@ -123,7 +133,7 @@
 }
 #list-items li:hover{
     background-color: lightgray;
-
+    cursor: pointer;
 }
 
 /*Username dropdown*/

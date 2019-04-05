@@ -42,6 +42,12 @@ function menuoptions(){
     let smallmenu = $('#small-menu')[0]
     let fullscreendiv = $('#main-screen-div')[0]
     fullscreendiv.classList.toggle('slide-side-menu')
+    let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
+    console.log(slideMenuIcons);
+    for(i of slideMenuIcons)
+    {
+        i.classList.toggle('slide-menu-icons-display')
+    }
     // smallmenu.classList.toggle('smallmenu')
 }
 
@@ -83,13 +89,20 @@ function product_List_Fun(data,list)
 $(()=>{
     //Prototype Classes - 
     Vendor.prototype.createElement = function (){
-        let vendorItem = $(`<div class="col-5" id="vendor-id">Vendor Id: ${this.id}</div>
-        <div class="col-5" id="vendor-name">Name</div>
-            <div class="col-5" id="vendor-company-name">Company Name ${this.company}</div>
-        <div class="col-5" id="vendor-contact-number">Contact Number</div>
-        <div class="col-5">Website</div>
-            <div class="col-5">Email</div>
-        <button class="btn btn-info"><a href="/public_static/forms/vendor_form.html">ADD</a> </button>`)
+        // let vendorItem = $(`<div class="col-5" id="vendor-id">Vendor Id: ${this.id}</div>
+        // <div class="col-5" id="vendor-name">Name</div>
+        //     <div class="col-5" id="vendor-company-name">Company Name ${this.company}</div>
+        // <div class="col-5" id="vendor-contact-number">Contact Number</div>
+        // <div class="col-5">Website</div>
+        //     <div class="col-5">Email</div>
+        // <button class="btn btn-info"><a href="/public_static/forms/vendor_form.html">ADD</a> </button>`)
+        let vendorItem = $(`
+          <li id="vendor-id"> <b>VENDOR ID:</b>  ${this.id} </li>
+                    <li  id="vendor-name"><b>NAME:</b></li>
+                    <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${this.company}</li>
+                    <li id="vendor-contact-number"><b>CONTACT NUMBER:</b></li>
+                    <li><b>WEBSITE</b></li>
+                    <li><b>EMAIL:</b></li>`)
         return vendorItem;
     }
     Vendor.prototype.createLi = function() {
