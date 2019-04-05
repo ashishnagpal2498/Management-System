@@ -3,10 +3,11 @@ const route = express.Router();
 const databaseProduct = require('../../database/models2');
 const IssueDatabase = require('../../database/model_issue');
 
+
 route.get('/',(req,res)=>{
 //    Show all the Products which are not issued yet -
         databaseProduct.Product.findAll({
-            where:{
+            where: {
                 issued:false
             }
         }).then((results)=>{
@@ -17,21 +18,26 @@ route.get('/',(req,res)=>{
 })
 
 //The post request used to find the Remaining quantity of the Product - Selected -'
-route.post('/:id',(req,res)=>{
+route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
-    IssueDatabase.IssuedLab.findAll({
+    IssueDatabase.IssuedLab.findOne({
         where: {
             productPid : req.params.id
-        }
-    }).then((results)=>{
-        IssueDatabase.IssuedDepartment.findAll({
+        },
+        include: [{
+            model: databaseProduct.Product
+        }]
+    }).then((result)=>{
+        console.log(result.product)
+        IssueDatabase.IssuedDepartment.findOne({
             where:{
                productPid: req.params.id
             },
-            include: [Product]
-        }).then((results2)=>{
+        }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
-            let remaining_quantity = Product.qty - results2.qty - results.qty
+            console.log('Results Of 1st Query - ')
+            console.log(result2)
+            let remaining_quantity = result.product.qty - result2.qty - result.qty
             res.send({remaining_qty:remaining_quantity})
 
         }).catch((err)=>{
@@ -69,7 +75,7 @@ route.post('/',(req,res)=>{
             // productPid: req.body.id,
 
             //Foreign key Attributes
-            labsLabid:req.body.departmentDno,
+            labLabid:req.body.labLabid,
             productPid: req.body.productPid
 
         }).then(()=>{

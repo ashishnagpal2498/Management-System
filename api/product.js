@@ -9,6 +9,15 @@ route.get('/',(req,res)=>{
     }).then((products)=> res.send(products))
         .catch((err)=> console.error(err))
 })
+route.get('/:id',(req,res)=>{
+    Product.findOne({
+        where:{
+            pid: req.params.id
+        }
+    }).then((result)=> res.send(result))
+        .catch((err)=> console.error(err))
+})
+
 
 route.post('/',(req,res)=>{
     Product.create({
