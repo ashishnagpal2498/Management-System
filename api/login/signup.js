@@ -35,3 +35,12 @@ route.post('/',(req,res)=>{
 exports = module.exports = {
     route
 }
+
+/*
+Data Input
+username:admin
+name:abc
+age:21
+password:password
+
+ */

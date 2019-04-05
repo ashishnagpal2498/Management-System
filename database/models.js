@@ -83,9 +83,9 @@ Labs.belongsTo(Depart);
 Depart.hasMany(Labs);
 
 //sync the database
-mgmtSystem.sync({force:true}).then(()=> console.log('Database Configured'))
+mgmtSystem.sync({alter:true}).then(()=> console.log('Database Configured'))
     .catch((err)=> console.error(err))
 
-exports.model = {
+exports = module.exports = {
     Depart , Labs
 }

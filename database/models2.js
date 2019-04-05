@@ -70,6 +70,6 @@ mgmtSystem.sync({alter:true})
     })
     .catch((err)=> console.error(err))
 
-exports.model = {
+exports = module.exports = {
     Product,Vendor
 }

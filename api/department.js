@@ -1,6 +1,6 @@
 const route = require('express').Router();
 //Database -
-const Department = require('../database/models').model.Depart;
+const Department = require('../database/models').Depart;
 
 route.get('/',(req,res)=>{
     Department.findAll({
@@ -22,3 +22,11 @@ route.post('/',(req,res)=>{
 
 
 exports.route=route;
+
+/*
+
+dname:CSE
+hod:Sourabh
+block:4
+
+ */

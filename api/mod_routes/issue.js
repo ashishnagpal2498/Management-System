@@ -1,7 +1,7 @@
 const express = require('express')
 const route = express.Router();
-const databaseProduct = require('../../database/models2').model
-const IssueDatabase = require('../../database/model_issue').model
+const databaseProduct = require('../../database/models2');
+const IssueDatabase = require('../../database/model_issue');
 
 route.get('/',(req,res)=>{
 //    Show all the Products which are not issued yet -
@@ -51,7 +51,9 @@ route.post('/',(req,res)=>{
     {
         IssueDatabase.IssuedDepartment.create({
             qty: req.body.qty,
-            productPid: req.body.id
+        //    Addition of Foreign Key
+            departmentDno:req.body.departmentDno,
+            productPid: req.body.productPid
         }).then(()=>{
             console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
             res.redirect('.')
@@ -64,7 +66,12 @@ route.post('/',(req,res)=>{
     {
         IssueDatabase.IssuedLab.create({
             qty: req.body.qty,
-            productPid: req.body.id
+            // productPid: req.body.id,
+
+            //Foreign key Attributes
+            labsLabid:req.body.departmentDno,
+            productPid: req.body.productPid
+
         }).then(()=>{
             console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
             res.redirect('.')
@@ -79,3 +86,22 @@ route.post('/',(req,res)=>{
 exports = module.exports = {
     route
 }
+
+/*
+
+Issue Department;
+qty:8
+productPid:1
+department:Cse
+departmentDno:1
+
+
+
+Issue Labs
+qty:8
+productPid:1
+lab:Cse
+labsLabid:1
+
+
+ */

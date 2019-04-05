@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 const dbconfig = require('../databaseconfig').DB
-const databaseModel1 = require('models').model
-const databaseModel2 = require('models2').model
+
+const databaseModel1 = require('./models')
+const databaseModel2 = require('./models2')
 
 
 //Datatypes -
@@ -60,6 +61,6 @@ mgmtSystem.sync({
 }).then(() => console.log('Issue Model'))
 .catch((err)=>console.error(err))
 
-exports.model ={
+exports = module.exports = {
     IssuedDepartment, IssuedLab
 }

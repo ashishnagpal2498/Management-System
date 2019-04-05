@@ -1,7 +1,7 @@
 const route = require('express').Router();
 //Database -
-const Vendor = require('../database/models2').model.Vendor;
-const Product = require('../database/models2').model.Product;
+const Vendor = require('../database/models2').Vendor;
+const Product = require('../database/models2').Product;
 
 route.get('/',(req,res)=>{
     Product.findAll({
@@ -29,3 +29,14 @@ route.post('/',(req,res)=>{
 
 
 exports.route = route;
+
+/*
+Values
+
+qty:20
+invoice_no:547294529
+warranty_year:3
+product_details:It is a good prudct.
+approval:Sourabh
+
+ */
