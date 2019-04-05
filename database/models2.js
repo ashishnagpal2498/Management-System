@@ -46,12 +46,23 @@ const Product = mgmtSystem.define(
         invoice_no: dataTypes.INTEGER,
         warranty_year: dataTypes.INTEGER,
         product_details: dataTypes.STRING,
-        approval: dataTypes.STRING
+        approval: dataTypes.STRING,
+        issued :{
+            type: dataTypes.BOOLEAN,
+            defaultValue: false
+        }
     }
 )
 
+
+
+
+
 Product.belongsTo(Vendor);
 Vendor.hasMany(Product)
+
+
+
 
 mgmtSystem.sync({alter:true})
     .then(()=>{
