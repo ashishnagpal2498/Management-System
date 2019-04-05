@@ -46,7 +46,33 @@ route.post('/:id',(req,res)=>{
 
 //Post Request , Then issue the Product To lab or Department -
 route.post('/',(req,res)=>{
-
+    //Check if the field is NULL-
+    if(req.body.department)
+    {
+        IssueDatabase.IssuedDepartment.create({
+            qty: req.body.qty,
+            productPid: req.body.id
+        }).then(()=>{
+            console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
+            res.redirect('.')
+        }).catch((err)=>{
+            console.log('Product cannot be issued In Department');
+            console.error(err);
+        })
+    }
+    else if(req.body.lab)
+    {
+        IssueDatabase.IssuedLab.create({
+            qty: req.body.qty,
+            productPid: req.body.id
+        }).then(()=>{
+            console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
+            res.redirect('.')
+        }).catch((err)=>{
+            console.log('Product cannot be issued In Lab ');
+            console.error(err);
+        })
+    }
 })
 
 
