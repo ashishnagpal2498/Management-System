@@ -5,10 +5,10 @@ function showform(val)
     console.log(category)
     $.get(`http://localhost:2121/${category}`,function (data) {
         console.log(data);
-        deparmentElement(data)
+        deparmentElement(data,category)
     })
 }
-function deparmentElement(data)
+function deparmentElement(data,category)
 {
     let selectOption = $('#departmentorlab')
     selectOption.empty();
@@ -16,7 +16,7 @@ function deparmentElement(data)
     for(dpOrLab of data)
     {
         let op = $('<option></option>')
-        op[0].innerText= dpOrLab.labname
+      category ==='lab' ? op[0].innerText= dpOrLab.labname : op[0].innerText= dpOrLab.dname
         options_list.push(op)
     }
     selectOption.append(options_list);
