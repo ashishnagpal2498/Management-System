@@ -188,4 +188,8 @@
 
 .show {display: block;}
 
+.display-btns{
+    display: none;
+}
+
 /*End of centre Form*/

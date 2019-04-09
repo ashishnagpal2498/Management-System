@@ -1,3 +1,5 @@
+let adminLogin = false;
+
 let Vendors_List = []
 //Class Vendor
 function Vendor(Obj){
@@ -65,6 +67,28 @@ function createElement (Obj,category) {
             `)
         return productItem;
     }
+    else if(category==='department')
+    {
+        let departmentItem = $(`
+          <li id="vendor-id"> <b>Department ID:</b>  ${Obj.id} </li>
+                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
+                    <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
+                   <li id="hod"><b>HOD :</b> ${Obj.hod}</li>
+            `)
+        return departmentItem;
+
+    }
+    else if(category==='lab')
+    {
+        let labItem = $(`
+          <li id="vendor-id"> <b>Department ID:</b>  ${Obj.id} </li>
+                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
+                    <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
+                   <li id="hod"><b>Floor:</b> ${Obj.floor}</li>
+            `)
+        return labItem;
+
+    }
 }
 
 
@@ -72,6 +96,8 @@ function createElement (Obj,category) {
 //Listing of selected Div - In the centre menu -
 function funSelectedItem(el){
     //Event-
+    let CenterDivHeading = $('#center-div-heading')
+    CenterDivHeading.empty();
     console.log(el)
     let list_item = $(el).attr('list-val')
     console.log('list item  ' + list_item)
@@ -80,6 +106,7 @@ function funSelectedItem(el){
     let detailDiv = $('#detailed-div')
     detailDiv.empty()
     console.log(detailDiv)
+    CenterDivHeading.append(category+'  Details')
     console.log(typeof list_item)
     if(category==='vendor') {
         for (it of Vendors_List) {
@@ -87,6 +114,7 @@ function funSelectedItem(el){
             //List item is of type string hence Type Cas to number value
             if (+list_item === it.id) {   //console.log('abc')
                 detailDiv.append(createElement(it,category))
+                break;
             }
         }
     }
@@ -97,8 +125,32 @@ function funSelectedItem(el){
             //List item is of type string hence Type Cas to number value
             if (+list_item === it.id) {   //console.log('abc')
                 detailDiv.append(createElement(it,category))
+                break;
             }
         }
+    }
+    else if(category==='department')
+    {
+        for (it of Department_list) {
+            console.log(typeof it.id)
+            //List item is of type string hence Type Cas to number value
+            if (+list_item === it.id) {   //console.log('abc')
+                detailDiv.append(createElement(it,category))
+                break;
+            }
+        }
+    }
+    else if(category==='lab')
+    {
+        for (it of Labs_list) {
+            console.log(typeof it.id)
+            //List item is of type string hence Type Cas to number value
+            if (+list_item === it.id) {   //console.log('abc')
+                detailDiv.append(createElement(it,category))
+                break;
+            }
+        }
+
     }
 }
 
@@ -117,24 +169,6 @@ function menuoptions(){
     }
 }
 
-function vendor_List_Fun(data,list){
-    //Creating a generic function to create class object -
-    // let requestname = menu_Item[0].toUpperCase();
-    // requestname+= menu_Item.substr(1);
-    // console.log((()=> requestname)());
-    // console.log('Request name   '+requestname+ "menu item " + menu_Item[0])
-    let list_items =[]
-    for (item of data) {
-        let vendor = new Vendor(item)
-        console.log(item.comapnyname)
-        let li = createLi(vendor,'vendor');
-        list_items.push(li)
-        Vendors_List.push(vendor);
-    }
-    console.log(list_items)
-    list.append(list_items)
-    console.log(Vendors_List);
-}
 
 //Generic Function to create Li
 function createLi (Obj,category){
@@ -150,28 +184,22 @@ function createLi (Obj,category){
         case 'vendor' :  li.attr('category','vendor')
                          li[0].textContent = Obj.company;
                             break;
+
+        case 'department' : li.attr('category','department')
+                             li[0].textContent = Obj.name;
+                              break;
+        case 'lab' :    li.attr('category','lab')
+                         li[0].textContent = Obj.name;
+                         break;
     }
+
 
     return li;
 }
 
-// function product_List_Fun(data,list)
-// {
-//     let list_items =[]
-//     for (item of data) {
-//         let product_ob = new Product(item)
-//         console.log(item.pid)
-//         let li = createLi(product_ob,'product');
-//         list_items.push(li)
-//         console.log(li)
-//         Product_list.push(product_ob);
-//     }
-//     console.log(list_items)
-//     list.append(...list_items)
-//     console.log(Product_list);
-//
-// }
 
+//Generic Function to Create Left Centre Div -
+//Function call onclick from the Side Menu - $ request
 function list_Fun(data,list,category) {
     let list_items =[]
     //If the category is Vendor - List all the Vendors , Inside - left center Div
@@ -196,6 +224,27 @@ function list_Fun(data,list,category) {
             Product_list.push(product_ob);
         }
     }
+    else if(category==='department'){
+        for (item of data) {
+            let product_ob = new Department(item)
+            console.log(item.id)
+            let li = createLi(product_ob,'department');
+            list_items.push(li)
+            console.log(li)
+            Department_list.push(product_ob);
+        }
+    }
+    else if(category==='lab')
+    {    for (item of data) {
+        let product_ob = new Lab(item)
+        console.log(item.id)
+        let li = createLi(product_ob,'lab');
+        list_items.push(li)
+        console.log(li)
+        Labs_list.push(product_ob);
+    }
+
+    }
 
     console.log(list_items)
     list.append(...list_items)
@@ -218,19 +267,15 @@ function show(ev) {
         (data)=>{
             console.log(data)
 
-            if(formrequest==='vendor') {
-               Vendors_List =[]
-                list_Fun(data,list,formrequest);
-            }
-            if(formrequest==='product')
-            {   Product_list = [];
-                list_Fun(data,list,formrequest)
-                console.log(formrequest)
-            }
-            if(formrequest==='department')
-            {
-                console.log(formrequest)
-            }
+            Product_list = [];
+            Vendors_List =[]
+            Department_list = []
+            Labs_list = [];
+            $('#add-btn').attr('href','../forms/'+formrequest+'.html')
+            list_Fun(data,list,formrequest);
+
+
+
     })
 }
 
@@ -240,5 +285,16 @@ function show(ev) {
 
 $(()=>{
     //Prototype Classes -
+    $.get('http://localhost:2121/login',(data)=>{
+        if(data.user[0].username==='admin')
+        {   //Admin login - Set the user Value-
 
+            adminLogin = true;
+            $('#add-btn').css('display','block')
+            $('#edit-btn')[0].classList.remove('display-btns')
+            $('#delete-btn')[0].classList.remove('display-btns')
+
+            console.log(data.user[0].username);
+        }
+    })
 })
