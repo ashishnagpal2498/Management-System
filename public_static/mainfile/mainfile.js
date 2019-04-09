@@ -42,6 +42,20 @@ function Lab(Obj) {
     this.floor = Obj.floor
 }
 
+let Issue_list = []
+function Issue(Obj) {
+    this.id = Obj.pid
+    this.qty = Obj.qty
+}
+
+function issuefun(id,cb) {
+    $.post(`http://localhost:2121/issue/${id}`,(data)=>{
+        console.log(data);
+        cb(data);
+    })
+}
+
+
 //Create Element Function
 function createElement (Obj,category) {
     if (category === 'vendor') {
@@ -88,6 +102,15 @@ function createElement (Obj,category) {
             `)
         return labItem;
 
+    }
+    else if(category==='issue')
+    {
+        let productItemIssue = $(`
+          <li id="vendor-id"> <b>Issue ID:</b>  ${Obj.id} </li>
+                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
+                    <li id="vendor-company-name"><b>Total quantity</b>  ${Obj.qty}</li>
+            `)
+        return productItemIssue
     }
 }
 
@@ -152,6 +175,44 @@ function funSelectedItem(el){
         }
 
     }
+    else if(category==='issue')
+    {   let issued_labs = []
+        let issued_dept = []
+        issuefun(+list_item,(list_ofdept_labs)=>{
+             let product_Details_Val = list_ofdept_labs.product
+            let issueItemProduct = $(`<div class="col-5 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.pid}</div>
+
+            <div class="col-5 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
+            <div class="col-5 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
+                <div class="col-5 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
+               `)
+            let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
+            let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
+            for(lab of list_ofdept_labs.labs)
+            {
+                let issueItemLabs = $(`
+                <div class= "col-5">Lab Id: ${lab.id}</div>
+                <div class="col-5">Quantity Issued: ${lab.qty}</div>
+                `)
+                issued_labs.push(issueItemLabs)
+            }
+            for(dept of list_ofdept_labs.department)
+            {
+                let issueItemDept = $(`
+                <div class= "col-5">Department Id: ${dept.id}</div>
+                <div class="col-5">Quantity Issued: ${dept.qty}</div>
+                `)
+                issued_dept.push(issueItemDept)
+            }
+
+            detailDiv.append(issueItemProduct)
+            detailDiv.append(labsHeading)
+            detailDiv.append(issued_labs)
+            detailDiv.append(DeptHeading)
+            detailDiv.append(issued_dept)
+
+        })
+    }
 }
 
 //Display the Side menu as ICONS or whole div-
@@ -190,6 +251,9 @@ function createLi (Obj,category){
                               break;
         case 'lab' :    li.attr('category','lab')
                          li[0].textContent = Obj.name;
+                         break;
+        case 'issue' :  li.attr('category','issue')
+                        li[0].textContent = Obj.id+ '  QTY  '+ Obj.qty;
                          break;
     }
 
@@ -242,10 +306,20 @@ function list_Fun(data,list,category) {
         list_items.push(li)
         console.log(li)
         Labs_list.push(product_ob);
-    }
+        }
 
     }
-
+    else if(category==='issue')
+    {
+        for (item of data) {
+            let product_ob = new Issue(item)
+            console.log(item.pid)
+            let li = createLi(product_ob,'issue');
+            list_items.push(li)
+            console.log(li)
+            Issue_list.push(product_ob);
+        }
+    }
     console.log(list_items)
     list.append(...list_items)
 
@@ -293,7 +367,7 @@ $(()=>{
             $('#add-btn').css('display','block')
             $('#edit-btn')[0].classList.remove('display-btns')
             $('#delete-btn')[0].classList.remove('display-btns')
-
+            $('#issue').css('display','block')
             console.log(data.user[0].username);
         }
     })

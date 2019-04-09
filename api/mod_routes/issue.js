@@ -87,6 +87,42 @@ route.post('/',(req,res)=>{
         })
     }
 })
+route.post('/:id',(req,res)=>{
+    //Need to return the product Details and the all the labs and department
+    //To which this product is issued
+    IssueDatabase.IssuedLab.findAll({
+        where: {
+            productPid : req.params.id
+        },
+        include: [{
+            model: databaseProduct.Product
+        }]
+    }).then((results)=>{
+        console.log(results[0].product)
+        IssueDatabase.IssuedDepartment.findAll({
+            where:{
+                productPid: req.params.id
+            },
+        }).then((results2)=>{
+            //Both the results are Configured - Return the remaining Quanty of the product
+            console.log('Results Of 1st Query - ')
+            console.log(results2)
+            let issuedItem = {
+                labs : results,
+                department: results2,
+                product: results[0].product
+            }
+            res.send(issuedItem)
+
+        }).catch((err)=>{
+            console.log('Error in Finding Product Issued in Department')
+            console.error(err)
+        }).catch((err)=>{
+            console.log('Error in Finding Product Issued in Lab')
+            console.error(err)
+        })
+    })
+})
 
 
 exports = module.exports = {
