@@ -29,21 +29,22 @@ $(()=>{
     //Local storage se Value Le lenge -
     //Id ki - so from that - We can find the Item - Name
     //And also remaining quantity
-    let productId;
-    $.get('http://localhost:2121/issue/1',(data)=>{
+    let productId= localStorage.getItem('id');
+    console.log(productId);
+    productIdElement.attr('value',productId)
+    $.get(`http://localhost:2121/issue/${productId}`,(data)=>{
         remQuantity.empty();
         console.log(data);
         // console.log(remQuantity)
-        remQuantity.append(data.remaining_qty);
+        remQuantity.attr('value',data.remaining_qty);
 
     })
     // Get Request With params - Used - LocalStorage
-    $.get('http://localhost:2121/product/1',(data)=>{
+    $.get(`http://localhost:2121/product/${productId}`,(data)=>{
         console.log(data);
         productIdElement.empty()
         product_name.empty();
-        product_quantity.empty();
-        product_quantity.append(data.qty)
+        product_quantity.attr('value',data.qty)
         productIdElement.append(data.pid);
 
     })

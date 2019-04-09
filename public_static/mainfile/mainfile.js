@@ -1,4 +1,6 @@
+
 let adminLogin = false;
+let active_Tab = undefined;
 
 let Vendors_List = []
 //Class Vendor
@@ -180,27 +182,27 @@ function funSelectedItem(el){
         let issued_dept = []
         issuefun(+list_item,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.product
-            let issueItemProduct = $(`<div class="col-5 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.pid}</div>
+            let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.pid}</div>
 
-            <div class="col-5 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
-            <div class="col-5 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
-                <div class="col-5 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
+            <div class="col-10 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
+            <div class="col-10 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
+                <div class="col-10 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
                `)
             let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
             let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
             for(lab of list_ofdept_labs.labs)
             {
                 let issueItemLabs = $(`
-                <div class= "col-5">Lab Id: ${lab.id}</div>
-                <div class="col-5">Quantity Issued: ${lab.qty}</div>
+                <div class= "col-10">Lab Id: ${lab.id}</div>
+                <div class="col-10">Quantity Issued: ${lab.qty}</div>
                 `)
                 issued_labs.push(issueItemLabs)
             }
             for(dept of list_ofdept_labs.department)
             {
                 let issueItemDept = $(`
-                <div class= "col-5">Department Id: ${dept.id}</div>
-                <div class="col-5">Quantity Issued: ${dept.qty}</div>
+                <div class= "col-10">Department Id: ${dept.id}</div>
+                <div class="col-10">Quantity Issued: ${dept.qty}</div>
                 `)
                 issued_dept.push(issueItemDept)
             }
@@ -210,7 +212,8 @@ function funSelectedItem(el){
             detailDiv.append(issued_labs)
             detailDiv.append(DeptHeading)
             detailDiv.append(issued_dept)
-
+         //Product Id is there- set on localstorage
+         localStorage.setItem('id',product_Details_Val.pid)
         })
     }
 }
@@ -319,6 +322,9 @@ function list_Fun(data,list,category) {
             console.log(li)
             Issue_list.push(product_ob);
         }
+        $('#delete-btn')[0].classList.add('display-btns')
+        $('#add-btn')[0].classList.add('display-btns')
+        $('#edit-btn').attr('href','../forms/'+category+'.html')
     }
     console.log(list_items)
     list.append(...list_items)
@@ -345,7 +351,9 @@ function show(ev) {
             Vendors_List =[]
             Department_list = []
             Labs_list = [];
+            active_Tab = formrequest;
             $('#add-btn').attr('href','../forms/'+formrequest+'.html')
+
             list_Fun(data,list,formrequest);
 
 
@@ -360,15 +368,16 @@ function show(ev) {
 $(()=>{
     //Prototype Classes -
     $.get('http://localhost:2121/login',(data)=>{
-        if(data.user[0].username==='admin')
+
+        if(data!==undefined && data.user[0].username==='admin')
         {   //Admin login - Set the user Value-
 
             adminLogin = true;
-            $('#add-btn').css('display','block')
+            $('#add-btn')[0].classList.remove('display-btns')
             $('#edit-btn')[0].classList.remove('display-btns')
             $('#delete-btn')[0].classList.remove('display-btns')
-            $('#issue').css('display','block')
-            console.log(data.user[0].username);
+
+            console.log(data.user[0].name);
         }
     })
 })

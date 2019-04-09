@@ -17,6 +17,18 @@
         font-weight: bold;
         text-transform: uppercase;
     }
+    #department-wise-form input{
+        width: 50%;
+        margin: 0 10px;
+        padding: 5px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+
+    }
+    #department-wise-form input:focus{
+        /*outline: n;*/
+        border: 1px solid transparent;
+    }
 </style>
 
 </head>
@@ -31,11 +43,11 @@
     <form action="" method="" id="department-wise-form">
         <div class="form-row mt-3 pt-2 pb-2">
             <div class="col-6 product-details form-group">
-                Product Name <span id="product-name"></span>
+                Product Name <input readonly name="product-name" id="product-name">
             </div>
-            <div class="col-6 product-details">Product Id <input name="productPid" id="product-id"> </div>
-            <div class="col-6 product-details form-group">Quantity <span id="quantity"></span> </div>
-            <div class="col-6 product-details form-group">Remaining Quantity <span id="rem-quantity"></span> </div>
+            <div class="col-6 product-details">Product Id <input readonly name="productPid" id="product-id"> </div>
+            <div class="col-6 product-details form-group">Quantity <input readonly name="quantity" id="quantity"> </div>
+            <div class="col-6 product-details form-group">Remaining Quantity <input readonly name="rem-quantity" id="rem-quantity"> </div>
 
         </div>
         <div class="form-row">

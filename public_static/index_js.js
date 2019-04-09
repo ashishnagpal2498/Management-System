@@ -1,5 +1,6 @@
 let LoggedIn = undefined;
 //Check if the user is logged In then go to mainpage else -
+
 function mainpage() {
     console.log('Logged in value inside Mainpage')
     console.log(LoggedIn)
