@@ -1,14 +1,14 @@
 .middlesection-container{
-    visibility: hidden;
+    opacity: 0;
 
 }
 .midd-section-slide{
-    visibility: visible;
+    opacity: 1;
     animation: slide 1s;
 }
 @keyframes slide {
     0%{ opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(-20px);
 
     }
     100%{

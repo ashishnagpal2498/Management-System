@@ -67,6 +67,12 @@
     background-color: rgba(97,97,97,0.6);
 
 }
+.side-menu .col-12 a{
+    width: 100%;
+}
+.side-menu .col-12 a:visited{
+    background-color: #0b2e13;
+}
 /*Menu Toggle*/
 .slide-side-menu{
     transform: translateX(-250px);
