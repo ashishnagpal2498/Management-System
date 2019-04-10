@@ -5,7 +5,7 @@ const IssueDatabase = require('../../database/model_issue');
 
 
 route.get('/',(req,res)=>{
-//    Show all the Products which are not issued yet -
+//    Show all the Products listed -
         databaseProduct.Product.findAll({
             where: {
 
@@ -16,6 +16,21 @@ route.get('/',(req,res)=>{
             res.send(results);
         }).catch((err)=> console.error(err))
 })
+
+route.get('/unissued',(req,res)=>{
+    //    Show all the Products which are not issued yet -
+    databaseProduct.Product.findAll({
+        where: {
+            issued: false
+        }
+    }).then((results)=>{
+        //    We will get all the Products whose issued value is false -
+        //
+       return res.send(results);
+    }).catch((err)=> console.error(err))
+})
+
+
 
 //The post request used to find the Remaining quantity of the Product - Selected -'
 route.get('/:id',(req,res)=>{
@@ -49,6 +64,7 @@ route.get('/:id',(req,res)=>{
         })
     })
 })
+
 
 //Post Request , Then issue the Product To lab or Department -
 route.post('/',(req,res)=>{

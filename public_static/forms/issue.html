@@ -25,6 +25,14 @@
         border-radius: 3px;
 
     }
+    #department-wise-form select{
+        width: 50%;
+        margin: 0 10px;
+        padding: 5px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+
+    }
     #department-wise-form input:focus{
         /*outline: n;*/
         border: 1px solid transparent;
@@ -42,23 +50,58 @@
 
     <form action="" method="" id="department-wise-form">
         <div class="form-row mt-3 pt-2 pb-2">
+            <h4 align="center" style="width: 100%">Select Product</h4>
+            <div class="col-12 row justify-content-center mt-1 mb-3">
+            <select class="col-3 product-details" name="product-list-item" id="product-list" onchange="displayPDetails(this.value)">
+                <option></option>
+            </select>
+            </div>
             <div class="col-6 product-details form-group">
                 Product Name <input readonly name="product-name" id="product-name">
             </div>
-            <div class="col-6 product-details">Product Id <input readonly name="productPid" id="product-id"> </div>
+            <div class="col-6 product-details form-group">Product Id <input readonly name="productPid" id="product-id"> </div>
             <div class="col-6 product-details form-group">Quantity <input readonly name="quantity" id="quantity"> </div>
             <div class="col-6 product-details form-group">Remaining Quantity <input readonly name="rem-quantity" id="rem-quantity"> </div>
 
         </div>
-        <div class="form-row">
+        <div class="form-row ">
             <div class="col-md-12">
+                <h5 align="center">PREVIOUSLY PRODUCT ADDED TO LAB/DEPARTMENT</h5><br>
+                <div class="col-12 row">
+                    <div class="col-6">
+                        <label>LABS</label>
+                        <!--Dynamically fill Previously Addition of Product to Labs-->
+                        <ul id="lab-details">
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <label>DEPARTMENT</label>
+                        <ul id="dept-details">
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+               <!--Finally Choose in Which Lab/Department - ADD-->
                 <label>ADD PRODUCT TO LAB/DEPARTMENT</label><br>
-               <label>Department</label> <input onchange="showform(this)" style="width: 10%;" type="radio" class=" " name="category" value="department" >
+
+                <label>Department</label> <input onchange="showform(this)" style="width: 10%;" type="radio" class=" " name="category" value="department" >
                <label>Lab</label> <input onchange="showform(this)" style="width: 10%" type="radio" class="" name="category" value="lab" >
+                <!--<select id="product-options" name="productPid">-->
+                    <!--<option></option>-->
+                <!--</select>-->
             </div>
             <div class="form-group col-md-6">
                 <label for="departmentorlab"> Select </label>
-                <select class="form-control" style="margin-top: 10px;margin-left: 15px;display: inline-block;height: 40px; width: 200px" id="departmentorlab">
+                <select class="form-control" style="margin-top: 10px;margin-left: 15px;display: inline-block;height: 40px; width: 200px" name="deptorlab" id="departmentorlab">
+                    <option></option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="qty">Quantity</label>
+                <select required id="qty" name="qty">
                     <option></option>
                 </select>
             </div>

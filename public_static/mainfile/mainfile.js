@@ -323,7 +323,7 @@ function list_Fun(data,list,category) {
             Issue_list.push(product_ob);
         }
         $('#delete-btn')[0].classList.add('display-btns')
-        $('#edit-btn').attr('href','../forms/'+category+'.html')
+        $('#edit-btn').attr('href','../forms/issue_edit.html')
     }
     console.log(list_items)
     list.append(...list_items)

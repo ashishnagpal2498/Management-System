@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="deptform.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Bootstrap/dist/css/bootstrap.css">
+    <script src="issue_product.js"></script>
+    <style>
+        .product-details{
+            color: #5D92B1 ;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        #department-wise-form input{
+            width: 50%;
+            margin: 0 10px;
+            padding: 5px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+
+        }
+        #department-wise-form input:focus{
+            /*outline: n;*/
+            border: 1px solid transparent;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container" id="department-form-container">
+    <div class="container-heading" id="department-item-heading">
+        <h3>ISSUE A PRODUCT <i class="fas fa-user"></i></h3>
+    </div>
+</div>
+<div class="department-form-container" id="department-form-container-id">
+
+    <form action="" method="" id="department-wise-form">
+        <div class="form-row mt-3 pt-2 pb-2">
+            <div class="col-6 product-details form-group">
+                Product Name <input readonly name="product-name" id="product-name">
+            </div>
+            <div class="col-6 product-details">Product Id <input readonly name="productPid" id="product-id"> </div>
+            <div class="col-6 product-details form-group">Quantity <input readonly name="quantity" id="quantity"> </div>
+            <div class="col-6 product-details form-group">Remaining Quantity <input readonly name="rem-quantity" id="rem-quantity"> </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <label>EDIT PRODUCT TO LAB/DEPARTMENT</label><br>
+                <div>Department</div>
+                <input style="width: 10%;" type="" class=" " name="department" value="department-name" >
+                <input style="width: 10%" name="qty" value="">
+                <label>Lab</label> <input onchange="showform(this)" style="width: 10%" type="radio" class="" name="category" value="lab" >
+            </div>
+            <div class="form-group col-md-6">
+                <label for="departmentorlab"> Select </label>
+                <select class="form-control" style="margin-top: 10px;margin-left: 15px;display: inline-block;height: 40px; width: 200px" id="departmentorlab">
+                    <option></option>
+                </select>
+            </div>
+            <div class="dept-btn">
+                <input style="width: 100%" type="submit" value="Submit" class="department-button-class">
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+
+<!-- <div class="form-group col-md-6">
+                <label for="DeptName">DEPT NAME</label>
+                <select class="form-control" id="DeptName">
+                    <option>CSE</option>
+                    <option>IT</option>
+                    <option>ECE</option>
+                    <option>MECH</option>
+                    <option>EEE</option>
+                    <option>CIVIL</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="BlockNumber">BLOCK NUMBER</label>
+                <input type="number" class="form-control" id="BlockNumber">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="HODName">HOD NAME</label>
+                <input type="text" class="form-control" id="HODName">
+            </div>
+        </div>-->
