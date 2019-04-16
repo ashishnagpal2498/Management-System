@@ -6,6 +6,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const passport = require('./api/passport/passport').passport
 const session = require('express-session')
+// const models = require('./database/model_index')
 
 const routes = {
     department: require('./api/department').route,
@@ -15,7 +16,7 @@ const routes = {
     login :require('./api/login/login').route,
     signup: require('./api/login/signup').route,
     logout: require('./api/logout').route,
-    issue: require('./api/mod_routes/issue').route
+   // issue: require('./api/mod_routes/issue').route
 }
 
 
@@ -42,7 +43,7 @@ app.use('/department',routes.department)
 app.use('/lab',routes.labs)
 app.use('/vendor',routes.vendor)
 app.use('/product',routes.product)
-app.use('/issue',routes.issue)
+// app.use('/issue',routes.issue)
 app.use('/logout',routes.logout);
 //All routes are check and request doesn't match any of the Route -
 app.use((req,res)=>{

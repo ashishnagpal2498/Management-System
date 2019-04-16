@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendor_form.css">
+    <link rel="stylesheet" href="vendor.css">
     <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
@@ -21,7 +21,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="VendorID">VENDOR ID</label>
-                    <input type="number" class="form-control" id="VendorID" placeholder="123">
+                    <input type="number" class="form-control" name="vendorid" id="VendorID" placeholder="123">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="companyname">COMPANY NAME</label>
@@ -29,65 +29,50 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="AccountNumber">ACCOUNT NUMBER</label>
-                    <input type="number" class="form-control" id="AccountNumber" placeholder="102232">
+                    <input type="number" class="form-control" name="accountNo" id="AccountNumber" placeholder="102232">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="contactName">CONTACT NAME</label>
-                    <input type="text" class="form-control" id="contactName">
+                    <input type="text" class="form-control" name="name" id="contactName">
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="contactType">TYPE</label>
-                    <input type="text" class="form-control" id="contactType" placeholder="Computer Distribution">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="contactTitle">CONTACT TITLE</label>
-                    <input type="text" class="form-control" id="contactTitle" placeholder="Administrative Staff">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="personalcontact">CONTACT NUMBER</label>
-                    <input type="number" class="form-control" name="personalcontact" id="personalcontact" placeholder="(120)477-425678">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="vendorWebsite">WEBSITE</label>
-                    <input type="email" class="form-control" id="vendorWebsite" placeholder="abcdesign.com">
-                </div>
+               <!---->
                 <div class="form-group col-md-6">
                     <label for="companyemail">Email</label>
                     <input type="email" class="form-control" name="companyemail" id="companyemail" placeholder="parak_kumar@abcdesign">
                 </div>
             </div>
             <div class="form-row">
+
                 <div class="form-group col-md-6">
-                    <label for="companycontact">COMPANY CONTACT</label>
-                    <input type="number" class="form-control" name="companycontact" id="companycontact" placeholder="11421">
+                    <label for="personalcontact">CONTACT NUMBER</label>
+                    <input type="number" class="form-control" name="personalcontact" id="personalcontact" placeholder="9383485025">
                 </div>
                 <div class="form-group col-md-6">
+                    <label for="companycontact">COMPANY CONTACT</label>
+                    <input type="number" class="form-control" name="companycontact" id="companycontact" placeholder="987XXXXXXX87">
+                </div>
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-md-12">
                     <label for="vendorAddress">ADDRESS</label>
-                    <input type="text" class="form-control" id="vendorAddress">
+                    <input type="text" class="form-control" name="add" id="vendorAddress">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="vendorPostalCode">POSTAL CODE</label>
-                    <input type="number" class="form-control" id="vendorPostalCode" placeholder="11421">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="vendorCity">CITY</label>
-                    <input type="text" class="form-control" id="vendorCity" placeholder="Delhi">
+                    <input type="number" class="form-control" name="postal" id="vendorPostalCode" placeholder="11421">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="vendorState">STATE</label>
-                    <input type="text" class="form-control" id="vendorState" placeholder="New Delhi">
+                    <input type="text" class="form-control" id="vendorState" name="state" placeholder="New Delhi">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="vendorCountry">COUNTRY</label>
-                    <input type="text" class="form-control" id="vendorCountry" placeholder="India">
+                    <input type="text" class="form-control" id="vendorCountry" name="country" placeholder="India">
                 </div>
             </div>
 

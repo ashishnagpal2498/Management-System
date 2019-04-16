@@ -21,12 +21,20 @@ route.get('/:id',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Product.create({
+        pOrderNo:req.body.pOrderNo,
+        name:req.body.name,
         qty: req.body.qty,
+        manufacturer:req.body.manufacturer,
+        modelName:req.body.modelName,
         invoice_date:   req.body.invoice_date,
         invoice_no:req.body.invoice_no,
         warranty_year: req.body.warranty_year,
         product_details: req.body.product_details,
-        approval: req.body.approval
+        price: req.body.price,
+
+        //Vendor Id
+        vendorId:req.body.vendorId
+
     })
         .then((result)=>{
             console.log(result)

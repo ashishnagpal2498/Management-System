@@ -17,12 +17,13 @@ const mgmtSystem = new Sequelize(dbconfig.database,
 const Depart = mgmtSystem.define(
     'department',
     {
-        dno:{
+        id:{
             type:dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
-        dname:{
+        dno: dataTypes.INTEGER,
+        name:{
           type:dataTypes.STRING,
           allowNull:false
         },
@@ -41,12 +42,15 @@ const Depart = mgmtSystem.define(
 const Labs = mgmtSystem.define(
     'labs',
     {
-        labid:{
-            type:dataTypes.INTEGER,
+        id:{
+          type: dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
-        labname:{
+        labno:{
+            type:dataTypes.INTEGER,
+        },
+        name:{
             type:dataTypes.STRING
         },
         technician:{
@@ -83,7 +87,7 @@ Labs.belongsTo(Depart);
 Depart.hasMany(Labs);
 
 //sync the database
-mgmtSystem.sync({alter:true}).then(()=> console.log('Database Configured'))
+mgmtSystem.sync({force:true}).then(()=> console.log('Database Configured'))
     .catch((err)=> console.error(err))
 
 exports = module.exports = {

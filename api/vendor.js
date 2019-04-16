@@ -12,10 +12,14 @@ route.get('/',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Vendor.create({
-        comapnyname: req.body.companyname,
+        vdorid:req.body.vendorid,
+        name:req.body.name,
+        accountNo:req.body.accountNo,
+        companyname: req.body.companyname,
         companycontact:req.body.companycontact,
         personalcontact:req.body.personalcontact,
-        companyemail: req.body.companyemail
+        companyemail: req.body.companyemail,
+        address:[req.body.add,req.body.postal,req.body.state,req.body.country]
     })
         .then((result)=> {
             console.log(result)

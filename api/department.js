@@ -11,7 +11,8 @@ route.get('/',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Department.create({
-        dname: req.body.dname,
+        dno:req.body.dno,
+        name: req.body.name,
         hod: req.body.hod,
         block:req.body.block,
 

@@ -5,9 +5,9 @@ let active_Tab = undefined;
 let Vendors_List = []
 //Class Vendor
 function Vendor(Obj){
-    this.id=Obj.vid;
+    this.id=Obj.id;
     this.name = Obj.name;
-    this.company = Obj.comapnyname;
+    this.company = Obj.companyname;
     this.contact = Obj.personalcontact;
 }
 let Product_list = []

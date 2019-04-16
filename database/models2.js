@@ -11,15 +11,23 @@ const mgmtSystem = new Sequelize(dbconfig.database,
         dialect:dbconfig.dialect
     }
 )
+
+
 const Vendor = mgmtSystem.define(
     'vendor',
     {
-        vid:{
+        id:{
             type: dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
-        comapnyname:{
+        vdorid:{
+          type:dataTypes.INTEGER
+        },
+        accountNo : dataTypes.INTEGER,
+        name: dataTypes.STRING,
+
+        companyname:{
             type: dataTypes.STRING
         },
         companycontact:{
@@ -29,24 +37,39 @@ const Vendor = mgmtSystem.define(
         personalcontact:{
             type:dataTypes.INTEGER
         },
-        companyemail: dataTypes.STRING
+        companyemail: dataTypes.STRING,
+        address:{
+            type:dataTypes.STRING,
+            get(){
+               return this.getDataValue('address').split(';')
+            },
+            set(add)
+            {
+                this.setDataValue('address',add.join(';'))
+            }
+        }
     }
 )
+
 
 const Product = mgmtSystem.define(
     'product',
     {
-        pid:{
+        id:{
             type : dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
+        pOrderNo:dataTypes.INTEGER,
+        name: dataTypes.STRING,
         qty: dataTypes.INTEGER,
+        manufacturer: dataTypes.STRING,
+        modelName: dataTypes.STRING,
         invoice_date: dataTypes.DATE,
         invoice_no: dataTypes.INTEGER,
         warranty_year: dataTypes.INTEGER,
         product_details: dataTypes.STRING,
-        approval: dataTypes.STRING,
+        price: dataTypes.INTEGER,
         issued :{
             type: dataTypes.BOOLEAN,
             defaultValue: false
@@ -57,14 +80,20 @@ const Product = mgmtSystem.define(
 
 
 
-
-Product.belongsTo(Vendor);
+Product.belongsTo(Vendor,{
+    foreignKeyConstraint: 'none'
+});
 Vendor.hasMany(Product)
 
 
+// mgmtSystem
+//     .sequelize
+//     .query('SET FOREIGN_KEY_CHECKS = 0', {raw: true})
+//     .then(function(results) {
+//         mgmtSystem.sequelize.sync({force: true});
+//     }).catch();
 
-
-mgmtSystem.sync({alter:true})
+mgmtSystem.sync({force:true})
     .then(()=>{
         console.log('Vendor and Product')
     })

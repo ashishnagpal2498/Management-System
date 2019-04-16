@@ -12,12 +12,13 @@ route.get('/',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Labs.create({
-        labname: req.body.labname,
+        labno:req.body.labno,
+        name: req.body.name,
         technician: req.body.technician,
         block:req.body.block,
         floor:req.body.floor,
         //Foreign Key -
-        departmentDno :req.body.departmentDno
+        departmentId :req.body.departmentId
     }).then((results)=> {   //console.log(results)
         res.redirect('.')})
         .catch((err)=> console.error(err))

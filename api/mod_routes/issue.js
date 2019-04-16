@@ -37,7 +37,7 @@ route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
     IssueDatabase.IssuedLab.findOne({
         where: {
-            productPid : req.params.id
+            productId : req.params.id
         },
         include: [{
             model: databaseProduct.Product
@@ -46,7 +46,7 @@ route.get('/:id',(req,res)=>{
         console.log(result.product)
         IssueDatabase.IssuedDepartment.findOne({
             where:{
-               productPid: req.params.id
+               productId: req.params.id
             },
         }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
@@ -70,7 +70,7 @@ function updateProduct(id,remaining_qty,cb)
     databaseProduct.Product.update({
         issued : true,
         where:{
-            pid:id
+            id:id
         }
     }).then((result)=> { cb(); console.log('Product with  '+id+' Issued Successfully')})
         .catch((err) => console.error(err))
@@ -83,8 +83,8 @@ route.post('/',(req,res)=>{
         IssueDatabase.IssuedDepartment.create({
             qty: req.body.qty,
         //    Addition of Foreign Key
-            departmentDno:req.body.departmentDno,
-            productPid: req.body.productPid
+            departmentId:req.body.departmentDno,
+            productId: req.body.productPid
         }).then(()=>{
             console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
             //Check - if the Product rem quantity goes to Zero - set the value of
@@ -106,8 +106,8 @@ route.post('/',(req,res)=>{
             // productPid: req.body.id,
 
             //Foreign key Attributes
-            labLabid:req.body.labLabid,
-            productPid: req.body.productPid
+            labId:req.body.labLabid,
+            productId: req.body.productPid
 
         }).then(()=>{
             console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
@@ -127,7 +127,7 @@ route.post('/:id',(req,res)=>{
     //To which this product is issued
     IssueDatabase.IssuedLab.findAll({
         where: {
-            productPid : req.params.id
+            productId : req.params.id
         },
         include: [{
             model: databaseProduct.Product
@@ -136,7 +136,7 @@ route.post('/:id',(req,res)=>{
         console.log(results[0].product)
         IssueDatabase.IssuedDepartment.findAll({
             where:{
-                productPid: req.params.id
+                productId: req.params.id
             },
         }).then((results2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product

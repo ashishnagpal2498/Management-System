@@ -43,21 +43,32 @@ const IssuedLab = mgmtSystem.define(
 )
 
 
-IssuedDepartment.belongsTo(databaseModel1.Depart)
+IssuedDepartment.belongsTo(databaseModel1.Depart,{
+    foreignKeyConstraint:null
+})
 databaseModel1.Depart.hasOne(IssuedDepartment);
 
-IssuedLab.belongsTo(databaseModel1.Labs)
+IssuedLab.belongsTo(databaseModel1.Labs,{
+    foreignKeyConstraint:null
+})
 databaseModel1.Labs.hasOne(IssuedLab)
 
-IssuedLab.belongsTo(databaseModel2.Product)
+IssuedLab.belongsTo(databaseModel2.Product,
+    {
+        foreignKeyConstraint:null
+    })
 databaseModel2.Product.hasMany(IssuedLab)
 
-IssuedDepartment.belongsTo(databaseModel2.Product)
+IssuedDepartment.belongsTo(databaseModel2.Product,
+    {
+        foreignKeyConstraint:null
+    })
 databaseModel2.Product.hasMany(IssuedDepartment)
 
 
 mgmtSystem.sync({
-    alter:true
+    alter:true,
+
 }).then(() => console.log('Issue Model'))
 .catch((err)=>console.error(err))
 

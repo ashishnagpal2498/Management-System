@@ -14,16 +14,17 @@ route.get('/',(req,res)=>{
 
 route.post('/',(req,res)=>{
     let uniqueId = uid(10)
-    let uName = req.body.username
+    let uName = req.body.signupemail
     uName = uName.split('@')[0]
     LoginDatabase.Login_username.create({
         id: uniqueId,
         username: uName,
-        name: req.body.name,
-        age: req.body.age
+        name: req.body.signupname,
+        designation:req.body.designation,
+        department: req.body.signupdept
     }).then(()=>{
         LoginDatabase.Passwords.create({
-            password:req.body.password,
+            password:req.body.signuppass,
             usernameId: uniqueId
         }).then(()=> {console.log('User Added')
             res.redirect('/login')})

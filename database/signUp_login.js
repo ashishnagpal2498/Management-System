@@ -21,10 +21,12 @@ const Login_username = SignUp_login.define( 'username',
         name:{
             type:dataTypes.STRING
         },
-        age:{
-            type:dataTypes.INTEGER
+        designation:{
+            type:dataTypes.STRING
+        },
+        department:{
+            type: dataTypes.STRING
         }
-
 
     }
 )
