@@ -65,11 +65,20 @@ route.get('/:id',(req,res)=>{
     })
 })
 
-
+function updateProduct(id,remaining_qty,cb)
+{
+    databaseProduct.Product.update({
+        issued : true,
+        where:{
+            pid:id
+        }
+    }).then((result)=> { cb(); console.log('Product with  '+id+' Issued Successfully')})
+        .catch((err) => console.error(err))
+}
 //Post Request , Then issue the Product To lab or Department -
 route.post('/',(req,res)=>{
     //Check if the field is NULL-
-    if(req.body.department)
+    if(req.body.category==='department')
     {
         IssueDatabase.IssuedDepartment.create({
             qty: req.body.qty,
@@ -78,13 +87,19 @@ route.post('/',(req,res)=>{
             productPid: req.body.productPid
         }).then(()=>{
             console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
-            res.redirect('.')
+            //Check - if the Product rem quantity goes to Zero - set the value of
+            //issued in product to 1
+            if(req.body.remquantity==0)
+            updateProduct(req.body.productPid,req.body.remquantity,()=>{
+                res.redirect('.')
+            })
+
         }).catch((err)=>{
             console.log('Product cannot be issued In Department');
             console.error(err);
         })
     }
-    else if(req.body.lab)
+    else if(req.body.category==='lab')
     {
         IssueDatabase.IssuedLab.create({
             qty: req.body.qty,
@@ -96,7 +111,11 @@ route.post('/',(req,res)=>{
 
         }).then(()=>{
             console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
-            res.redirect('.')
+            if(req.body.remquantity==0)
+                updateProduct(req.body.productPid,req.body.remquantity,()=>{
+                    res.redirect('.')
+                })
+
         }).catch((err)=>{
             console.log('Product cannot be issued In Lab ');
             console.error(err);

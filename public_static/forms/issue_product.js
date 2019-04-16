@@ -28,7 +28,7 @@ function displayPDetails(elementID) {
     let product_name = $('#product-name')
     let product_quantity = $('#quantity')
     let productIdElement = $('#product-id')
-    let remQuantity = $('#rem-quantity')
+    let remQuantity = $('#remquantity')
 
 
     //Finding Product From Product ID
