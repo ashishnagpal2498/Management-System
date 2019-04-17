@@ -93,12 +93,12 @@ Vendor.hasMany(Product)
 //         mgmtSystem.sequelize.sync({force: true});
 //     }).catch();
 
-mgmtSystem.sync({force:true})
+mgmtSystem.sync({alter:true})
     .then(()=>{
         console.log('Vendor and Product')
     })
-    .catch((err)=> console.error(err))
+    .catch((err)=> console.error('model error Product  '+err))
 
-exports = module.exports = {
+exports.model= {
     Product,Vendor
 }

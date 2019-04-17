@@ -1,7 +1,7 @@
 const route = require('express').Router();
 //Database -
-const Vendor = require('../database/models2').Vendor;
-const Product = require('../database/models2').Product;
+// const Vendor = require('../database/models2').model.Vendor;
+const Product = require('../database/models2').model.Product;
 
 route.get('/',(req,res)=>{
     Product.findAll({
@@ -12,7 +12,7 @@ route.get('/',(req,res)=>{
 route.get('/:id',(req,res)=>{
     Product.findOne({
         where:{
-            pid: req.params.id
+            id: req.params.id
         }
     }).then((result)=> res.send(result))
         .catch((err)=> console.error(err))
@@ -38,6 +38,7 @@ route.post('/',(req,res)=>{
     })
         .then((result)=>{
             console.log(result)
+            res.redirect('.')
         })
         .catch((err)=> console.error(err));
 })

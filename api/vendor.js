@@ -1,7 +1,7 @@
 const route = require('express').Router();
 //Database -
-const Vendor = require('../database/models2').Vendor;
-const Product = require('../database/models2').Product;
+const Vendor = require('../database/models2').model.Vendor;
+//const Product = require('../database/models2').model.Product;
 
 route.get('/',(req,res)=>{
     Vendor.findAll({

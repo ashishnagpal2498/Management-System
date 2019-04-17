@@ -10,8 +10,8 @@ function showproducts() {
         //console.log(data)
         for(op of data)
         {   //console.log(op.pid)
-            let ocreated = $(`<option name = "productPid" value = ${op.pid} ></option>`)
-            ocreated[0].innerText = op.pid;
+            let ocreated = $(`<option name = "productPid" value = ${op.id} ></option>`)
+            ocreated[0].innerText = op.id;
             options_list.push(ocreated)
         }
         //console.log(options_list)
@@ -39,7 +39,7 @@ function displayPDetails(elementID) {
         productIdElement.empty()
         product_name.empty();
         product_quantity.attr('value',data.qty)
-        productIdElement.append(data.pid);
+        productIdElement.append(data.id);
 
 
     })

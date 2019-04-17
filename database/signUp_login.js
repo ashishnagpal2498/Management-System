@@ -46,7 +46,7 @@ Login_username.hasOne(Passwords);
 
 SignUp_login.sync({alter:true}).then(()=>{
     console.log('login/Signup database Configured')
-}).catch((err)=> console.error(err))
+}).catch((err)=> console.error('login,signup'+err))
 
 exports = module.exports= {
     Login_username , Passwords

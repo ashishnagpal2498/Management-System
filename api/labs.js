@@ -1,7 +1,8 @@
 const route = require('express').Router();
 //Database -
-const Labs = require('../database/models').Labs;
-const Department = require('../database/models').Depart;
+const Department = require('../database/models').model.Depart;
+const Labs = require('../database/models').model.Labs;
+
 
 route.get('/',(req,res)=>{
     Labs.findAll({

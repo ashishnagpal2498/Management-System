@@ -64,15 +64,16 @@ const Labs = mgmtSystem.define(
     }
 );
 
-const faculty = mgmtSystem.define(
+const Faculty = mgmtSystem.define(
     'faculty',
     {
-        fid:{
+        id:{
             type :dataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true
         },
-        fname : dataTypes.STRING,
+        fid: dataTypes.INTEGER,
+        name : dataTypes.STRING,
         designation: dataTypes.STRING,
         responsibility: dataTypes.STRING,
         block: dataTypes.STRING,
@@ -83,13 +84,12 @@ const faculty = mgmtSystem.define(
 
 
 Labs.belongsTo(Depart);
-
 Depart.hasMany(Labs);
 
 //sync the database
-mgmtSystem.sync({force:true}).then(()=> console.log('Database Configured'))
-    .catch((err)=> console.error(err))
+mgmtSystem.sync({alter:true}).then(()=> console.log('Database Configured'))
+    .catch((err)=> console.error('labs and depart'+err))
 
-exports = module.exports = {
-    Depart , Labs
+exports.model= {
+    Depart , Labs , Faculty
 }

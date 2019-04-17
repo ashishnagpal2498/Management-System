@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const dbconfig = require('../databaseconfig').DB
 
-const databaseModel1 = require('./models')
-const databaseModel2 = require('./models2')
+const databaseModel1 = require('./models').model
+const databaseModel2 = require('./models2').model
 
 
 //Datatypes -
@@ -66,12 +66,9 @@ IssuedDepartment.belongsTo(databaseModel2.Product,
 databaseModel2.Product.hasMany(IssuedDepartment)
 
 
-mgmtSystem.sync({
-    alter:true,
+mgmtSystem.sync({alter:true,}).then(() => console.log('Issue Model'))
+.catch((err)=>console.error('issue model'+err))
 
-}).then(() => console.log('Issue Model'))
-.catch((err)=>console.error(err))
-
-exports = module.exports = {
+exports.model={
     IssuedDepartment, IssuedLab
 }

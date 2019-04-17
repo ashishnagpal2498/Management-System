@@ -1,7 +1,7 @@
 const express = require('express')
 const route = express.Router();
-const databaseProduct = require('../../database/models2');
-const IssueDatabase = require('../../database/model_issue');
+const databaseProduct = require('../../database/models2').model;
+const IssueDatabase = require('../../database/model_issue').model;
 
 
 route.get('/',(req,res)=>{
@@ -43,7 +43,7 @@ route.get('/:id',(req,res)=>{
             model: databaseProduct.Product
         }]
     }).then((result)=>{
-        console.log(result.product)
+        //console.log(result.product)
         IssueDatabase.IssuedDepartment.findOne({
             where:{
                productId: req.params.id
@@ -52,7 +52,8 @@ route.get('/:id',(req,res)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
             console.log('Results Of 1st Query - ')
             console.log(result2)
-            let remaining_quantity = result.product.qty - result2.qty - result.qty
+            // let productqty = result.product.qty
+            let remaining_quantity =  result2.qty - result.qty //also subtract Result product -
             res.send({remaining_qty:remaining_quantity})
 
         }).catch((err)=>{
@@ -84,13 +85,13 @@ route.post('/',(req,res)=>{
             qty: req.body.qty,
         //    Addition of Foreign Key
             departmentId:req.body.departmentDno,
-            productId: req.body.productPid
+            productId: req.body.productId
         }).then(()=>{
             console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
             //Check - if the Product rem quantity goes to Zero - set the value of
             //issued in product to 1
             if(req.body.remquantity==0)
-            updateProduct(req.body.productPid,req.body.remquantity,()=>{
+            updateProduct(req.body.productId,req.body.remquantity,()=>{
                 res.redirect('.')
             })
 
@@ -106,8 +107,8 @@ route.post('/',(req,res)=>{
             // productPid: req.body.id,
 
             //Foreign key Attributes
-            labId:req.body.labLabid,
-            productId: req.body.productPid
+            labId:req.body.labId,
+            productId: req.body.productId
 
         }).then(()=>{
             console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
@@ -133,7 +134,7 @@ route.post('/:id',(req,res)=>{
             model: databaseProduct.Product
         }]
     }).then((results)=>{
-        console.log(results[0].product)
+        //console.log(results[0].product)
         IssueDatabase.IssuedDepartment.findAll({
             where:{
                 productId: req.params.id
@@ -145,7 +146,7 @@ route.post('/:id',(req,res)=>{
             let issuedItem = {
                 labs : results,
                 department: results2,
-                product: results[0].product
+              //  product: results[0].product
             }
             res.send(issuedItem)
 

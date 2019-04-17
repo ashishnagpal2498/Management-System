@@ -8,13 +8,19 @@ function Vendor(Obj){
     this.id=Obj.id;
     this.name = Obj.name;
     this.company = Obj.companyname;
+    this.companycontact = Obj.companycontact
+    this.companyemail= Obj.companyemail
+    this.address= Obj.address
     this.contact = Obj.personalcontact;
 }
 let Product_list = []
 //Class Products
 function Product(Obj) {
-    this.id = Obj.pid
+    this.id = Obj.id
+    this.name = Obj.name
     this.qty = Obj.qty;
+    this.manufacturer = Obj.manufacturer,
+        this.modelName = Obj.modelName,
     this.invoice_date= Obj.invoice_date
     this.invoice_no = Obj.invoice_no
     this.years =Obj.warranty_year
@@ -26,8 +32,8 @@ function Product(Obj) {
 let Department_list = [];
 function Department(Obj)
 {
-    this.id = Obj.dno
-    this.name = Obj.dname
+    this.id = Obj.id
+    this.name = Obj.name
     this.hod= Obj.hod
     this.block= Obj.block
 }
@@ -37,8 +43,8 @@ function Department(Obj)
 
 let Labs_list =[]
 function Lab(Obj) {
-    this.id = Obj.labid
-    this.name= Obj.labname
+    this.id = Obj.id
+    this.name= Obj.name
     this.technician= Obj.technician
     this.block= Obj.block
     this.floor = Obj.floor
@@ -46,11 +52,12 @@ function Lab(Obj) {
 
 let Issue_list = []
 function Issue(Obj) {
-    this.id = Obj.pid
+    this.id = Obj.id
     this.qty = Obj.qty
 }
 
 function issuefun(id,cb) {
+    console.log(typeof id)
     $.post(`http://localhost:2121/issue/${id}`,(data)=>{
         console.log(data);
         cb(data);
@@ -63,20 +70,22 @@ function createElement (Obj,category) {
     if (category === 'vendor') {
         let vendorItem = $(`
              <li id="vendor-id"> <b>VENDOR ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b></li>
+                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b></li>
                     <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.company}</li>
-                    <li id="vendor-contact-number"><b>CONTACT NUMBER:</b></li>
-                    <li><b>WEBSITE</b></li>
-                    <li><b>EMAIL:</b></li>`)
+                    <li id="vendor-contact-number"><b>Company NUMBER: ${Obj.companycontact}</b></li>
+                    <li><b>Personal Contact : ${Obj.personalcontact}</b></li>
+                    <li><b>EMAIL: ${Obj.companyemail}</b></li>
+                        <li><b>Address: ${Obj.address}</b></li>`)
         return vendorItem;
     }
     else if(category==='product')
     {
         let productItem = $(`
           <li id="vendor-id"> <b>PRODUCT ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b> </li>
+                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b> </li>
                     <li id="vendor-company-name"><b>QUANTITY:</b>  ${Obj.qty}</li>
                     <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${Obj.invoice_no}</li>
+                    <li><b>Manufacturer</b> ${Obj.manufacturer}</li>
                     <li><b>INNVOICE DATE</b> ${Obj.invoice_date}</li>
                     <li><b>YEAR</b> ${Obj.years}</li>
                     <li><b>DETAILS</b> ${Obj.product_details}</li>
@@ -97,9 +106,10 @@ function createElement (Obj,category) {
     else if(category==='lab')
     {
         let labItem = $(`
-          <li id="vendor-id"> <b>Department ID:</b>  ${Obj.id} </li>
+          <li id="vendor-id"> <b>Lab ID:</b>  ${Obj.id} </li>
                     <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
                     <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
+                    <li><b>Technician: ${Obj.technician}</b></li>
                    <li id="hod"><b>Floor:</b> ${Obj.floor}</li>
             `)
         return labItem;
@@ -316,7 +326,7 @@ function list_Fun(data,list,category) {
     {
         for (item of data) {
             let product_ob = new Issue(item)
-            console.log(item.pid)
+            console.log(item.id)
             let li = createLi(product_ob,'issue');
             list_items.push(li)
             console.log(li)
@@ -352,7 +362,7 @@ function show(ev) {
             Labs_list = [];
             active_Tab = formrequest;
             $('#add-btn').attr('href','../forms/'+formrequest+'.html')
-
+            //To display all the lists of Items when clicked Side menu Option
             list_Fun(data,list,formrequest);
 
 
