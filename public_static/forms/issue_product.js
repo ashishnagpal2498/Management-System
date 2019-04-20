@@ -3,6 +3,7 @@ function showproducts() {
     let showunissuedoptions = $('#product-list')
 
     console.log('Show Products')
+    //This shows all the products which are unissued
     $.get('http://localhost:2121/issue/unissued',(data)=>{
         //Append - name Wise - Id
         showunissuedoptions.empty();
@@ -32,68 +33,92 @@ function displayPDetails(elementID) {
 
 
     //Finding Product From Product ID
-
+    let ProductQuantity ;
     productIdElement.attr('value',proDuctID)
     $.get(`http://localhost:2121/product/${proDuctID}`,(data)=>{
         console.log(data);
         productIdElement.empty()
         product_name.empty();
+        product_name.attr('value',data.name)
         product_quantity.attr('value',data.qty)
+        ProductQuantity = data.qty;
         productIdElement.append(data.id);
 
 
     })
-    //Remaining Quantity
+    //Remaining Quantity and Previously Issued Product Details
     $.get(`http://localhost:2121/issue/${proDuctID}`,(data)=>{
         remQuantity.empty();
         console.log(data);
         // console.log(remQuantity)
-        remQuantity.attr('value',data.remaining_qty);
-
-        //Call the function for the quantity to be issued
-        assignqty(data.remaining_qty);
+        if(data.notfound===false) {
+            remQuantity.attr('value', data.remaining_qty);
+            //Call the function for the quantity to be issued
+            //This fun sets the quantity selection options -
+            assignqty(data.remaining_qty);
+        }
+        else
+        {
+            remQuantity.attr('value',ProductQuantity)
+            assignqty(ProductQuantity)
+        }
+        displayDeptsLabs(data,()=>{
+            console.log('Everythings Done - ')
+        });
     })
-    displayDeptsLabs(proDuctID);
+
 
 }
-function displayDeptsLabs(productId) {
-    issuefun(productId,(list_ofdept_labs)=>{
+function displayDeptsLabs(previousIssuedData,cb) {
+    // issuefun(productId,(list_ofdept_labs)=>{
         //data in the form labs
         //departments
         //product
-        let lab_details = $('#lab-details')
-        let dept_details = $('#dept-details')
-        let issued_labs =[]
-        let issued_dept = []
-        lab_details.empty()
-        dept_details.empty()
-        for(lab of list_ofdept_labs.labs)
-        {
-            let issueItemLabs = $(`    <li>
+        if(previousIssuedData.notfound===false) {
+            console.log(previousIssuedData);
+            let list_ofdept_labs = previousIssuedData.issuedItem
+            let lab_details = $('#lab-details')
+            let dept_details = $('#dept-details')
+            let issued_labs = []
+            let issued_dept = []
+            lab_details.empty()
+            dept_details.empty()
+            if(previousIssuedData.issuedItem.labs!==null) {
+                for (lab of list_ofdept_labs.labs) {
+                    let issueItemLabs = $(`    <li>
                 <div class= "col-10">Lab Id: ${lab.id}</div>
                 <div class="col-10">Quantity Issued: ${lab.qty}</div>
                 </li>`)
-            issued_labs.push(issueItemLabs)
-        }
-        for(dept of list_ofdept_labs.department)
-        {
-            let issueItemDept = $(` <li>
+                    issued_labs.push(issueItemLabs)
+                }
+                lab_details.append(issued_labs);
+            }
+
+            if(previousIssuedData.issuedItem.department!==null) {
+                for (dept of list_ofdept_labs.department) {
+                    let issueItemDept = $(` <li>
                 <div class= "col-10">Department Id: ${dept.id}</div>
                 <div class="col-10">Quantity Issued: ${dept.qty}</div>
                 </li>`)
-            issued_dept.push(issueItemDept)
-        }
-        lab_details.append(issued_labs);
-        dept_details.append(issued_dept)
+                    issued_dept.push(issueItemDept)
+                }
+                dept_details.append(issued_dept)
+            }
 
-    })
+
+            cb();
+        }
+        else{
+            console.log(previousIssuedData.message)
+        }
 }
-function issuefun(id,cb) {
-    $.post(`http://localhost:2121/issue/${id}`,(data)=>{
-        console.log(data);
-        cb(data);
-    })
-}
+// function issuefun(id,cb) {
+//     //No post request Exist now
+//     $.post(`http://localhost:2121/issue/${id}`,(data)=>{
+//         console.log(data);
+//         cb(data);
+//     })
+// }
 function assignqty(rem_qty) {
 
     let selectqty = $('#qty')

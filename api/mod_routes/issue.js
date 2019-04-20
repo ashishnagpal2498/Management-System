@@ -44,17 +44,55 @@ route.get('/:id',(req,res)=>{
         }]
     }).then((result)=>{
         //console.log(result.product)
+        //If the result is empty then - there is no issued in lab previously -
+
         IssueDatabase.IssuedDepartment.findOne({
             where:{
                productId: req.params.id
             },
+            include:[{
+                model:databaseProduct.Product
+            }]
         }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
             console.log('Results Of 1st Query - ')
             console.log(result2)
-            // let productqty = result.product.qty
-            let remaining_quantity =  result2.qty - result.qty //also subtract Result product -
-            res.send({remaining_qty:remaining_quantity})
+            //If the result2 are undefined
+
+            let issuedItem = {
+                labs : null,
+                department: null,
+                  product: null
+            }
+            let remaining_quantity;
+            if((result===undefined||result===null)&&(result2===undefined||result2===null))
+            {
+                //Both are empty -
+                res.send({message:"nothing issued before",notfound:true})
+            }
+            else if((result===undefined||result===null)&&result2!==undefined)
+            {
+                //result 2 exits - That means Product is issued to Department Before -
+                    issuedItem.department = result2;
+                    issuedItem.product = result2.product
+                 remaining_quantity = result2.product.qty- result2.qty;
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+
+            }
+            else if(result!==undefined&&(result2===undefined||result2===null))
+            {   issuedItem.labs = result
+                issuedItem.product = result.product
+                remaining_quantity = result.product.qty - result2.qty;
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+            }
+            else {
+                issuedItem.product = result.product
+                issuedItem.labs = result
+                issuedItem.department = result2
+              remaining_quantity = result.product.qty - result2.qty - result.qty //also subtract Result product -
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+            }
+
 
         }).catch((err)=>{
             console.log('Error in Finding Product Issued in Department')
@@ -123,42 +161,42 @@ route.post('/',(req,res)=>{
         })
     }
 })
-route.post('/:id',(req,res)=>{
-    //Need to return the product Details and the all the labs and department
-    //To which this product is issued
-    IssueDatabase.IssuedLab.findAll({
-        where: {
-            productId : req.params.id
-        },
-        include: [{
-            model: databaseProduct.Product
-        }]
-    }).then((results)=>{
-        //console.log(results[0].product)
-        IssueDatabase.IssuedDepartment.findAll({
-            where:{
-                productId: req.params.id
-            },
-        }).then((results2)=>{
-            //Both the results are Configured - Return the remaining Quanty of the product
-            console.log('Results Of 1st Query - ')
-            console.log(results2)
-            let issuedItem = {
-                labs : results,
-                department: results2,
-              //  product: results[0].product
-            }
-            res.send(issuedItem)
-
-        }).catch((err)=>{
-            console.log('Error in Finding Product Issued in Department')
-            console.error(err)
-        }).catch((err)=>{
-            console.log('Error in Finding Product Issued in Lab')
-            console.error(err)
-        })
-    })
-})
+// route.post('/:id',(req,res)=>{
+//     //Need to return the product Details and the all the labs and department
+//     //To which this product is issued
+//     IssueDatabase.IssuedLab.findAll({
+//         where: {
+//             productId : req.params.id
+//         },
+//         include: [{
+//             model: databaseProduct.Product
+//         }]
+//     }).then((results)=>{
+//         //console.log(results[0].product)
+//         IssueDatabase.IssuedDepartment.findAll({
+//             where:{
+//                 productId: req.params.id
+//             },
+//         }).then((results2)=>{
+//             //Both the results are Configured - Return the remaining Quanty of the product
+//             console.log('Results Of 1st Query - ')
+//             console.log(results2)
+//             let issuedItem = {
+//                 labs : results,
+//                 department: results2,
+//               //  product: results[0].product
+//             }
+//             res.send(issuedItem)
+//
+//         }).catch((err)=>{
+//             console.log('Error in Finding Product Issued in Department')
+//             console.error(err)
+//         }).catch((err)=>{
+//             console.log('Error in Finding Product Issued in Lab')
+//             console.error(err)
+//         })
+//     })
+// })
 
 
 exports = module.exports = {
