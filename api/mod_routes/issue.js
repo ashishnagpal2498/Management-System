@@ -35,7 +35,7 @@ route.get('/unissued',(req,res)=>{
 //The post request used to find the Remaining quantity of the Product - Selected -'
 route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
-    IssueDatabase.IssuedLab.findOne({
+    IssueDatabase.IssuedLab.findAll({
         where: {
             productId : req.params.id
         },
@@ -46,7 +46,7 @@ route.get('/:id',(req,res)=>{
         //console.log(result.product)
         //If the result is empty then - there is no issued in lab previously -
 
-        IssueDatabase.IssuedDepartment.findOne({
+        IssueDatabase.IssuedDepartment.findAll({
             where:{
                productId: req.params.id
             },
@@ -56,6 +56,8 @@ route.get('/:id',(req,res)=>{
         }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
             console.log('Results Of 1st Query - ')
+            console.log(result)
+            console.log('Result Of 2nd Query')
             console.log(result2)
             //If the result2 are undefined
 
@@ -65,31 +67,31 @@ route.get('/:id',(req,res)=>{
                   product: null
             }
             let remaining_quantity;
-            if((result===undefined||result===null)&&(result2===undefined||result2===null))
+            if((result===undefined||!result)&&(result2===undefined||!result2))
             {
                 //Both are empty -
                 res.send({message:"nothing issued before",notfound:true})
             }
-            else if((result===undefined||result===null)&&result2!==undefined)
+            else if((result===undefined||!result)&&result2!==undefined)
             {
                 //result 2 exits - That means Product is issued to Department Before -
                     issuedItem.department = result2;
-                    issuedItem.product = result2.product
-                 remaining_quantity = result2.product.qty- result2.qty;
+                    issuedItem.product = result2[0].product
+                 remaining_quantity = result2[0].product.qty- result2[0].qty;
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
 
             }
-            else if(result!==undefined&&(result2===undefined||result2===null))
+            else if(result!==undefined&&(result2===undefined||!result2))
             {   issuedItem.labs = result
-                issuedItem.product = result.product
-                remaining_quantity = result.product.qty - result2.qty;
+                issuedItem.product = result[0].product
+                remaining_quantity = result[0].product.qty - result[0].qty;
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
             else {
-                issuedItem.product = result.product
+                issuedItem.product = result[0].product
                 issuedItem.labs = result
                 issuedItem.department = result2
-              remaining_quantity = result.product.qty - result2.qty - result.qty //also subtract Result product -
+              remaining_quantity = result[0].product.qty - result2[0].qty - result[0].qty //also subtract Result product -
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
 
@@ -128,10 +130,13 @@ route.post('/',(req,res)=>{
             console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
             //Check - if the Product rem quantity goes to Zero - set the value of
             //issued in product to 1
-            if(req.body.remquantity==0)
+            if(req.body.remquantity===0)
             updateProduct(req.body.productId,req.body.remquantity,()=>{
                 res.redirect('.')
             })
+            else{
+                res.redirect('.')
+            }
 
         }).catch((err)=>{
             console.log('Product cannot be issued In Department');
@@ -154,6 +159,9 @@ route.post('/',(req,res)=>{
                 updateProduct(req.body.productPid,req.body.remquantity,()=>{
                     res.redirect('.')
                 })
+            else{
+                res.redirect('.')
+            }
 
         }).catch((err)=>{
             console.log('Product cannot be issued In Lab ');

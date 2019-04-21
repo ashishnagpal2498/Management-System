@@ -11,7 +11,7 @@ function showproducts() {
         //console.log(data)
         for(op of data)
         {   //console.log(op.pid)
-            let ocreated = $(`<option name = "productPid" value = ${op.id} ></option>`)
+            let ocreated = $(`<option name = "productId" value = ${op.id} ></option>`)
             ocreated[0].innerText = op.id;
             options_list.push(ocreated)
         }
@@ -29,7 +29,7 @@ function displayPDetails(elementID) {
     let product_name = $('#product-name')
     let product_quantity = $('#quantity')
     let productIdElement = $('#product-id')
-    let remQuantity = $('#remquantity')
+    let remQuantity = $('#rem-quantity')
 
 
     //Finding Product From Product ID
@@ -46,6 +46,8 @@ function displayPDetails(elementID) {
 
 
     })
+    //********************************************
+
     //Remaining Quantity and Previously Issued Product Details
     $.get(`http://localhost:2121/issue/${proDuctID}`,(data)=>{
         remQuantity.empty();
@@ -58,7 +60,7 @@ function displayPDetails(elementID) {
             assignqty(data.remaining_qty);
         }
         else
-        {
+        {   console.log(ProductQuantity)
             remQuantity.attr('value',ProductQuantity)
             assignqty(ProductQuantity)
         }
@@ -152,19 +154,19 @@ function deparmentElement(data,category)
 {
     let selectOption = $('#departmentorlab')
     selectOption.empty();
-    category==='lab' ? selectOption.attr('name','labLabid') : selectOption.attr('name','departmentDno')
+    category==='lab' ? selectOption.attr('name','labId') : selectOption.attr('name','departmentId')
     let options_list = [];
     for(dpOrLab of data)
     {   console.log(dpOrLab)
         let op = $('<option></option>')
         if(category==='lab')
         {   //console.log(op.labid)
-            op[0].innerText= dpOrLab.labname
-            op.attr('value',dpOrLab.labid)
+            op[0].innerText= dpOrLab.name
+            op.attr('value',dpOrLab.id)
         }
         else
-            {   op[0].innerText= dpOrLab.dname
-                op.attr('value',dpOrLab.dno);
+            {   op[0].innerText= dpOrLab.name
+                op.attr('value',dpOrLab.id);
             }
         options_list.push(op)
     }
