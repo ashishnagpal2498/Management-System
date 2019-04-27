@@ -91,7 +91,7 @@ route.get('/:id',(req,res)=>{
                 issuedItem.product = result[0].product
                 issuedItem.labs = result
                 issuedItem.department = result2
-              remaining_quantity = result[0].product.qty - result2[0].qty - result[0].qty //also subtract Result product -
+              remaining_quantity = result[0].product.qty - 0 - result[0].qty||0 //also subtract Result product -
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
 
