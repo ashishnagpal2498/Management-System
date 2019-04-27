@@ -1,7 +1,7 @@
 {
   "DB": {
     "host": "localhost",
-    "database": "msystem",
+    "database": "managementsys",
     "user" : "managementAdmin",
     "password": "password",
     "dialect": "mysql"
