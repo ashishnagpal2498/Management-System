@@ -22,7 +22,7 @@ const routes = {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors())
+app.use(cors()) //Cross side Scripting
 app.use('/',express.static(path.join(__dirname,'public_static')))
 app.use(session({secret: 'Passport Login'}))
 
