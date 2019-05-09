@@ -67,27 +67,16 @@ route.get('/:id',(req,res)=>{
                   product: null
             }
             let remaining_quantity;
-            if((result===undefined||result===[])&&(result2===undefined||result2===[]))
+            // if((result===undefined||result===[])&&(result2===undefined||result2===[]))
+            // {
+            //     //Both are empty -
+            //     res.send({message:"nothing issued before",notfound:true})
+            // }
+            console.log('before IF')
+            console.log(result[0])
+            console.log(result2[0])
+            if(result[0]===undefined&&result2[0]===undefined)
             {
-                //Both are empty -
-                res.send({message:"nothing issued before",notfound:true})
-            }
-            else if((result===undefined||result===[])&&result2!==undefined)
-            {
-                //result 2 exits - That means Product is issued to Department Before -
-                    issuedItem.department = result2;
-                    issuedItem.product = result2[0].product
-                 remaining_quantity = result2[0].product.qty- result2[0].qty;
-                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
-
-            }
-            else if(result!==undefined&&(result2===undefined||result2===[]))
-            {   issuedItem.labs = result
-                issuedItem.product = result[0].product
-                remaining_quantity = result[0].product.qty - result[0].qty;
-                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
-            }
-            else {
                 //Here see that [] ka product nhi aayega - so -
                 //send that product only -
                 databaseProduct.Product.findOne({
@@ -102,11 +91,32 @@ route.get('/:id',(req,res)=>{
                 }).catch((err)=> {
                     console.error(err);
                 })
-              //   issuedItem.product = result[0].product
-              //   issuedItem.labs = result
-              //   issuedItem.department = result2
-              // remaining_quantity = result[0].product.qty - 0 - result[0].qty||0 //also subtract Result product -
-              //   res.send()
+            }
+
+
+        else if(result[0]===undefined)
+            {   console.log('Inside elseif 1')
+                //result 2 exits - That means Product is issued to Department Before -
+                    issuedItem.department = result2;
+                    issuedItem.product = result2[0].product
+                 remaining_quantity = result2[0].product.qty- result2[0].qty;
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+
+            }
+            else if(result2[0]===undefined)
+            {   console.log('Inside elseif 1')
+                issuedItem.labs = result
+                issuedItem.product = result[0].product
+                remaining_quantity = result[0].product.qty - result[0].qty;
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+            }
+            else {
+
+                issuedItem.product = result[0].product
+                issuedItem.labs = result
+                issuedItem.department = result2
+              remaining_quantity = result[0].product.qty - 0 - result[0].qty - result2[0].qty //also subtract Result product -
+                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
 
 

@@ -58,6 +58,7 @@ function Issue(Obj) {
 
 function issuefun(id,cb) {
     console.log(typeof id)
+    console.log('To Hit the Issue request')
     $.get(`http://localhost:2121/issue/${id}`,(data)=>{
         console.log(data);
         cb(data);
@@ -201,7 +202,7 @@ function funSelectedItem(el){
                `)
             let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
             let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
-            if(issueItemProduct.labs!==null)
+             if(list_ofdept_labs.issuedItem.labs!==null)
             {   for(lab of list_ofdept_labs.issuedItem.labs)
                 {
                     let issueItemLabs = $(`
@@ -211,7 +212,8 @@ function funSelectedItem(el){
                     issued_labs.push(issueItemLabs)
                 }
             }
-            if(issueItemProduct.department!==null) {
+            if(list_ofdept_labs.issuedItem.department!==null)
+            {
                 for (dept of list_ofdept_labs.issuedItem.department) {
                     let issueItemDept = $(`
                 <div class= "col-10">Department Id: ${dept.id}</div>
