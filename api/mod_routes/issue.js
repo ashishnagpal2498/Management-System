@@ -67,12 +67,12 @@ route.get('/:id',(req,res)=>{
                   product: null
             }
             let remaining_quantity;
-            if((result===undefined||!result)&&(result2===undefined||!result2))
+            if((result===undefined||result===[])&&(result2===undefined||result2===[]))
             {
                 //Both are empty -
                 res.send({message:"nothing issued before",notfound:true})
             }
-            else if((result===undefined||!result)&&result2!==undefined)
+            else if((result===undefined||result===[])&&result2!==undefined)
             {
                 //result 2 exits - That means Product is issued to Department Before -
                     issuedItem.department = result2;
@@ -81,18 +81,32 @@ route.get('/:id',(req,res)=>{
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
 
             }
-            else if(result!==undefined&&(result2===undefined||!result2))
+            else if(result!==undefined&&(result2===undefined||result2===[]))
             {   issuedItem.labs = result
                 issuedItem.product = result[0].product
                 remaining_quantity = result[0].product.qty - result[0].qty;
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
             else {
-                issuedItem.product = result[0].product
-                issuedItem.labs = result
-                issuedItem.department = result2
-              remaining_quantity = result[0].product.qty - 0 - result[0].qty||0 //also subtract Result product -
-                res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+                //Here see that [] ka product nhi aayega - so -
+                //send that product only -
+                databaseProduct.Product.findOne({
+                    where:{
+                        id: req.params.id
+                    }
+                }).then((product_result)=>{
+                    //result
+                    issuedItem.product= product_result;
+                    remaining_quantity = product_result.qty
+                    res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
+                }).catch((err)=> {
+                    console.error(err);
+                })
+              //   issuedItem.product = result[0].product
+              //   issuedItem.labs = result
+              //   issuedItem.department = result2
+              // remaining_quantity = result[0].product.qty - 0 - result[0].qty||0 //also subtract Result product -
+              //   res.send()
             }
 
 

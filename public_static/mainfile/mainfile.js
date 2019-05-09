@@ -58,7 +58,7 @@ function Issue(Obj) {
 
 function issuefun(id,cb) {
     console.log(typeof id)
-    $.post(`http://localhost:2121/issue/${id}`,(data)=>{
+    $.get(`http://localhost:2121/issue/${id}`,(data)=>{
         console.log(data);
         cb(data);
     })
@@ -190,9 +190,10 @@ function funSelectedItem(el){
     else if(category==='issue')
     {   let issued_labs = []
         let issued_dept = []
+        console.log('Issue category')
         issuefun(+list_item,(list_ofdept_labs)=>{
-             let product_Details_Val = list_ofdept_labs.product
-            let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.pid}</div>
+             let product_Details_Val = list_ofdept_labs.issuedItem.product
+            let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.id}</div>
 
             <div class="col-10 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
             <div class="col-10 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
@@ -200,30 +201,32 @@ function funSelectedItem(el){
                `)
             let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
             let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
-            for(lab of list_ofdept_labs.labs)
-            {
-                let issueItemLabs = $(`
-                <div class= "col-10">Lab Id: ${lab.id}</div>
-                <div class="col-10">Quantity Issued: ${lab.qty}</div>
-                `)
-                issued_labs.push(issueItemLabs)
+            if(issueItemProduct.labs!==null)
+            {   for(lab of list_ofdept_labs.issuedItem.labs)
+                {
+                    let issueItemLabs = $(`
+                    <div class= "col-10">Lab Id: ${lab.id}</div>
+                    <div class="col-10">Quantity Issued: ${lab.qty}</div>
+                    `)
+                    issued_labs.push(issueItemLabs)
+                }
             }
-            for(dept of list_ofdept_labs.department)
-            {
-                let issueItemDept = $(`
+            if(issueItemProduct.department!==null) {
+                for (dept of list_ofdept_labs.issuedItem.department) {
+                    let issueItemDept = $(`
                 <div class= "col-10">Department Id: ${dept.id}</div>
                 <div class="col-10">Quantity Issued: ${dept.qty}</div>
                 `)
-                issued_dept.push(issueItemDept)
+                    issued_dept.push(issueItemDept)
+                }
             }
-
             detailDiv.append(issueItemProduct)
             detailDiv.append(labsHeading)
             detailDiv.append(issued_labs)
             detailDiv.append(DeptHeading)
             detailDiv.append(issued_dept)
          //Product Id is there- set on localstorage
-         localStorage.setItem('id',product_Details_Val.pid)
+         localStorage.setItem('id',product_Details_Val.id)
         })
     }
 }
