@@ -2,6 +2,10 @@
 let adminLogin = false;
 let active_Tab = undefined;
 
+let Transfer_list = [
+
+]
+
 let Vendors_List = []
 //Class Vendor
 function Vendor(Obj){
@@ -231,6 +235,10 @@ function funSelectedItem(el){
          localStorage.setItem('id',product_Details_Val.id)
         })
     }
+    else if (category==='transfer')
+    {
+
+    }
 }
 
 //Display the Side menu as ICONS or whole div-
@@ -273,6 +281,8 @@ function createLi (Obj,category){
         case 'issue' :  li.attr('category','issue')
                         li[0].textContent = Obj.id+ '  QTY  '+ Obj.qty;
                          break;
+        case 'transfer' : li.attr('category','transfer')
+                            li[0].textContent = Obj.id;
     }
 
 
@@ -340,6 +350,30 @@ function list_Fun(data,list,category) {
         $('#delete-btn')[0].classList.add('display-btns')
         $('#edit-btn').attr('href','../forms/issue_edit.html')
     }
+    else if(category==='transfer')
+    {   if(data.labs!==null)
+        for (item of data.labs)
+        {
+            let product_ob = new Lab(item)
+            console.log(item.id)
+            let li = createLi(product_ob,'transfer');
+            list_items.push(li)
+            console.log(li)
+            Transfer_list.push(product_ob);
+        }
+        if(data.department!==null)
+        {
+            for (item of data.department) {
+                let product_ob = new Department(item)
+                console.log(item.id)
+                let li = createLi(product_ob,'transfer');
+                list_items.push(li)
+                console.log(li)
+                Transfer_list.push(product_ob);
+            }
+        }
+
+    }
     console.log(list_items)
     list.append(...list_items)
 
@@ -365,6 +399,7 @@ function show(ev) {
             Vendors_List =[]
             Department_list = []
             Labs_list = [];
+            Transfer_list =[];
             active_Tab = formrequest;
             $('#add-btn').attr('href','../forms/'+formrequest+'.html')
             //To display all the lists of Items when clicked Side menu Option
