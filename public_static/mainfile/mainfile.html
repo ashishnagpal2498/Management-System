@@ -10,41 +10,42 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="main_file_ss.css">
     <script src="mainfile.js"></script>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        // window.onclick = function(event) {
+        //     if (event.target.matches('.dropbtn')) {
+        //         var dropdowns = document.getElementsByClassName("dropdown-content");
+        //         var i;
+        //         for (i = 0; i < dropdowns.length; i++) {
+        //             var openDropdown = dropdowns[i];
+        //             if (openDropdown.classList.contains('show')) {
+        //                 openDropdown.classList.remove('show');
+        //             }
+        //         }
+        //     }
+        // }
+    </script>
 </head>
 <body>
 <div id="header-menu-container" class="container-fluid pt-2 pb-2">
     <div class="row justify-content-between">
         <div class="col-4" id="menu-btn" onclick="menuoptions()"><i class="fas fa-bars"></i></div>
         <div class="col-4" id="heading-btn"><h5>COMPUTER MANAGEMENT SYSTEM</h5></div>
-        <div class="col-4 dropdown">
-            <button onclick="myFunction()" class="dropbtn" style="background-color: black;height: 20px; padding-bottom: 15px"><i class="fas fa-user"> Username</i></button>
+        <div class="col-4 dropdown-menu-own"  align="right">
+            <div class="dropbtn" onclick="myFunction()" ><i class="fas fa-user" > </i> <span > Username</span></div>
             <div class="dropdown-content" id="myDropdown" >
                 <a href="#">View Profile</a>
-                <a href="#">Logout</a>
+                <a href="/logout">Logout</a>
             </div>
         </div>
 
-        <script>
-            /* When the user clicks on the button,
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
 
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
-                    var i;
-                    for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-                }
-            }
-        </script>
 
         <!--<div class="col-4" id="user-btn">-->
             <!--<select>-->
@@ -60,8 +61,8 @@
     <div class="row">
        <div class="col-4 side-menu">
     <div class="row" id="side-menu-options">
-        <div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>
-        <div class="col-8"><span id="user-form-menu"></span> Form Menu</div>
+        <!--<div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>-->
+        <!--<div class="col-8"><span id="user-form-menu"></span> Form Menu</div>-->
         <div class="col-12 side-menu-fields" onclick="show(this)" myval-div="vendor" > Vendor
         <i class="fa fa-user slide-menu-icons" title="vendor"></i>
         </div>
@@ -108,13 +109,13 @@
             <div class="container-fluid" id="main-form-item">
                 <div class="row justify-content-center">
                     <div class="col-12 pt-4 pb-4" >
-                        <h3 align="center" id="center-div-heading" style="text-transform: uppercase;word-spacing: 2px;color: firebrick; border-bottom: 1px solid firebrick">VENDOR DETAILS</h3>
+                        <h3 align="center" id="center-div-heading" style="text-transform: uppercase;word-spacing: 2px;color: firebrick; border-bottom: 1px solid firebrick">DETAILS</h3>
                     </div>
 
                     <!--List -->
                     <ul class="col-12 pl-4" style="list-style-type: none;" id="detailed-div">
                         <li id="vendor-id">
-                            <b>VENDOR ID:</b>
+                            <b>ID:</b>
                         </li>
                         <li  id="vendor-name">
                             <b>NAME:</b>

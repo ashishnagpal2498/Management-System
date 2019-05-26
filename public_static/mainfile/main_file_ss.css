@@ -147,13 +147,14 @@
 .dropbtn {
     background-color: black;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
+    width: 25%;
     border: none;
     cursor: pointer;
     margin-top: 0px;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:focus {
     background-color: grey;
 }
 
@@ -161,16 +162,17 @@
     border: none;
 }
 
-.dropdown {
+.dropdown-menu-own {
     position: relative;
-    display: inline-block;
+
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: black;
-
+    right: 0;
+    top: 30px;
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

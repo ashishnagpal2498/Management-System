@@ -35,7 +35,7 @@ function Product(Obj) {
 
 let Department_list = [];
 function Department(Obj)
-{
+{   this.sub_cat = "department"
     this.id = Obj.id
     this.name = Obj.name
     this.hod= Obj.hod
@@ -47,6 +47,7 @@ function Department(Obj)
 
 let Labs_list =[]
 function Lab(Obj) {
+    this.sub_cat = "lab"
     this.id = Obj.id
     this.name= Obj.name
     this.technician= Obj.technician
@@ -236,12 +237,22 @@ function funSelectedItem(el){
         })
     }
     else if (category==='transfer')
-    {
+    {   let sub_category =  $(el).attr("sub-cat")
+        //search the element in the list
+        for (it of Transfer_list) {
+            console.log(typeof it.id)
+            //List item is of type string hence Type Cas to number value
+            if (+list_item === it.id) {   //console.log('abc')
+                detailDiv.append(createElement(it,category))
+                break;
+            }
+        }
+
 
     }
 }
 
-//Display the Side menu as ICONS or whole div-
+//Display the Side menu as ICONS or whole div -
 function menuoptions(){
     //Menu Bar toggle  -  Create a class and toggle it
 
@@ -282,6 +293,7 @@ function createLi (Obj,category){
                         li[0].textContent = Obj.id+ '  QTY  '+ Obj.qty;
                          break;
         case 'transfer' : li.attr('category','transfer')
+                            li.attr('sub-cat',Obj.sub_cat)
                             li[0].textContent = Obj.id;
     }
 
