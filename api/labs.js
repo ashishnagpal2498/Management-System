@@ -11,6 +11,19 @@ route.get('/',(req,res)=>{
         .catch((err)=> console.error(err))
 })
 
+route.get('/:id',(req,res)=>{
+    Labs.findOne(
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    ).then((result)=>{
+        //Lab to be send requested by transfer menu for now
+        res.send(result)
+    }).catch(err => console.error(err))
+})
+
 route.post('/',(req,res)=>{
     Labs.create({
         labno:req.body.labno,

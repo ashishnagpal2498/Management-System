@@ -1,5 +1,6 @@
 const route = require('express').Router()
 const IssuedDatabase = require('../../database/model_issue').model
+const DeptorLabs = require('../../database/models').model
 
 route.get('/',(req,res)=>{
 //    Show all the items which are issued to be transfered -
@@ -12,7 +13,11 @@ route.get('/',(req,res)=>{
     }).then((resultLabs)=>{
     //    Getting all the labs which are issued computers -
         IssuedDatabase.IssuedDepartment.findAll(
-
+            {
+                include: [{
+                    model: DeptorLabs.Depart || DeptorLabs.Labs
+                }]
+            }
         )
             .then((resultDept)=>{
                 if(resultLabs[0]!==undefined)

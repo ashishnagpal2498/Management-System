@@ -1,154 +1,60 @@
 
-let adminLogin = false;
-let active_Tab = undefined;
-
-let Transfer_list = [
-
-]
-
-let Vendors_List = []
-//Class Vendor
-function Vendor(Obj){
-    this.id=Obj.id;
-    this.name = Obj.name;
-    this.company = Obj.companyname;
-    this.companycontact = Obj.companycontact
-    this.companyemail= Obj.companyemail
-    this.address= Obj.address
-    this.contact = Obj.personalcontact;
-}
-let Product_list = []
-//Class Products
-function Product(Obj) {
-    this.id = Obj.id
-    this.name = Obj.name
-    this.qty = Obj.qty;
-    this.manufacturer = Obj.manufacturer,
-        this.modelName = Obj.modelName,
-    this.invoice_date= Obj.invoice_date
-    this.invoice_no = Obj.invoice_no
-    this.years =Obj.warranty_year
-    this.product_details= Obj.product_details
-    this.approval=Obj.approval
-
-}
-
-let Department_list = [];
-function Department(Obj)
-{   this.sub_cat = "department"
-    this.id = Obj.id
-    this.name = Obj.name
-    this.hod= Obj.hod
-    this.block= Obj.block
-}
-
-
-
-
-let Labs_list =[]
-function Lab(Obj) {
-    this.sub_cat = "lab"
-    this.id = Obj.id
-    this.name= Obj.name
-    this.technician= Obj.technician
-    this.block= Obj.block
-    this.floor = Obj.floor
-}
-
-let Issue_list = []
-function Issue(Obj) {
-    this.id = Obj.id
-    this.qty = Obj.qty
-}
-
 function issuefun(id,cb) {
     console.log(typeof id)
     console.log('To Hit the Issue request')
-    $.get(`http://localhost:2121/issue/${id}`,(data)=>{
-        console.log(data);
-        cb(data);
-    })
+
 }
 
 
-//Create Element Function
-function createElement (Obj,category) {
-    if (category === 'vendor') {
-        let vendorItem = $(`
-             <li id="vendor-id"> <b>VENDOR ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b></li>
-                    <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.company}</li>
-                    <li id="vendor-contact-number"><b>Company NUMBER: ${Obj.companycontact}</b></li>
-                    <li><b>Personal Contact : ${Obj.personalcontact}</b></li>
-                    <li><b>EMAIL: ${Obj.companyemail}</b></li>
-                        <li><b>Address: ${Obj.address}</b></li>`)
-        return vendorItem;
-    }
-    else if(category==='product')
-    {
-        let productItem = $(`
-          <li id="vendor-id"> <b>PRODUCT ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b> </li>
-                    <li id="vendor-company-name"><b>QUANTITY:</b>  ${Obj.qty}</li>
-                    <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${Obj.invoice_no}</li>
-                    <li><b>Manufacturer</b> ${Obj.manufacturer}</li>
-                    <li><b>INNVOICE DATE</b> ${Obj.invoice_date}</li>
-                    <li><b>YEAR</b> ${Obj.years}</li>
-                    <li><b>DETAILS</b> ${Obj.product_details}</li>
-            `)
-        return productItem;
-    }
-    else if(category==='department')
-    {
-        let departmentItem = $(`
-          <li id="vendor-id"> <b>Department ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
-                    <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
-                   <li id="hod"><b>HOD :</b> ${Obj.hod}</li>
-            `)
-        return departmentItem;
+function createTransferObj(sub_cat,data,data2) {
+    //Data2 is product data and data 1 is LabOrDepartment Data
+    let detailDiv = $('#detailed-div')
 
-    }
-    else if(category==='lab')
-    {
-        let labItem = $(`
-          <li id="vendor-id"> <b>Lab ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
-                    <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
-                    <li><b>Technician: ${Obj.technician}</b></li>
-                   <li id="hod"><b>Floor:</b> ${Obj.floor}</li>
+    let labItem = $(`
+          <li id="vendor-id"> <b>Lab ID:</b>  ${data.id} </li>
+                    <li  id="vendor-name"><b>NAME:</b> ${data.name} </li>
+                    <li id="vendor-company-name"><b>BLOCK</b>  ${data.block}</li>
+                    <li><b>Technician: ${data.technician}</b></li>
+                   <li id="hod"><b>Floor:</b> ${data.floor}</li>
             `)
-        return labItem;
+    detailDiv.append(labItem)
 
-    }
-    else if(category==='issue')
-    {
-        let productItemIssue = $(`
-          <li id="vendor-id"> <b>Issue ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
-                    <li id="vendor-company-name"><b>Total quantity</b>  ${Obj.qty}</li>
+    let productItem = $(`
+          <li id="vendor-id"> <b>PRODUCT ID:</b>  ${data2.id} </li>
+                    <li  id="vendor-name"><b>NAME: ${data2.name}</b> </li>
+                    <!--<li id="vendor-company-name"><b>QUANTITY:</b>  </li>-->
+                    <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${data2.invoice_no}</li>
+                    <li><b>Manufacturer</b> ${data2.manufacturer}</li>
+                    <li><b>INNVOICE DATE</b> ${data2.invoice_date}</li>
+                    <li><b>YEAR OF WARRANTY</b> ${data.years}</li>
+                    <li><b>DETAILS</b> ${data2.product_details}</li>
             `)
-        return productItemIssue
-    }
+    detailDiv.append(productItem)
 }
-
-
 
 //Listing of selected Div - In the centre menu -
+//when a user clicks on the item - details to be displayed next to it -
 function funSelectedItem(el){
     //Event-
     let CenterDivHeading = $('#center-div-heading')
     CenterDivHeading.empty();
+    //This gives the 'this' value of the item selected that is - li in this case
     console.log(el)
     let list_item = $(el).attr('list-val')
+
     console.log('list item  ' + list_item)
+    //Converted to string
+    let id = +list_item;
     let category = $(el).attr('category')
     console.log(category)
     let detailDiv = $('#detailed-div')
     detailDiv.empty()
-    console.log(detailDiv)
+    //console.log(detailDiv)
     CenterDivHeading.append(category+'  Details')
     console.log(typeof list_item)
+
+    //Need to request database everytime whenever the item is clicked
+    //cannot store the Temp data on files as request coming from which path not decided
     if(category==='vendor') {
         for (it of Vendors_List) {
             console.log(it)
@@ -197,14 +103,16 @@ function funSelectedItem(el){
     {   let issued_labs = []
         let issued_dept = []
         console.log('Issue category')
-        issuefun(+list_item,(list_ofdept_labs)=>{
-             let product_Details_Val = list_ofdept_labs.issuedItem.product
-            let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.id}</div>
 
-            <div class="col-10 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
-            <div class="col-10 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
-                <div class="col-10 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
-               `)
+        $.get(`http://localhost:2121/issue/${id}`,(list_ofdept_labs)=>{
+             let product_Details_Val = list_ofdept_labs.issuedItem.product
+            // let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.id}</div>
+            //
+            // <div class="col-10 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
+            // <div class="col-10 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
+            //     <div class="col-10 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
+            //    `)
+            let issueItemProduct = createElement(product_Details_Val,'product')
             let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
             let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
              if(list_ofdept_labs.issuedItem.labs!==null)
@@ -239,31 +147,23 @@ function funSelectedItem(el){
     else if (category==='transfer')
     {   let sub_category =  $(el).attr("sub-cat")
         //search the element in the list
-        for (it of Transfer_list) {
-            console.log(typeof it.id)
-            //List item is of type string hence Type Cas to number value
-            if (+list_item === it.id) {   //console.log('abc')
-                detailDiv.append(createElement(it,category))
-                break;
-            }
+
+        //Sub cat Id will be given by -
+        let sub_cat_Id = $(el).attr("cat-id")
+
+        //Subcat - Product Id
+        let sub_Cat_ProductID = $(el).attr("product-id")
+
+        if(sub_category==="lab")
+        {
+            //Request on lab and bring the data of that lab - and also the product Issued details
+            $.get(`http://localhost:2121/${sub_category}/${sub_cat_Id}`,(data)=>{
+                //callback function of get
+                $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
+                    createTransferObj(sub_category,data,data2)
+                })
+            })
         }
-
-
-    }
-}
-
-//Display the Side menu as ICONS or whole div -
-function menuoptions(){
-    //Menu Bar toggle  -  Create a class and toggle it
-
-    let smallmenu = $('#small-menu')[0]
-    let fullscreendiv = $('#main-screen-div')[0]
-    fullscreendiv.classList.toggle('slide-side-menu')
-    let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
-    console.log(slideMenuIcons);
-    for(i of slideMenuIcons)
-    {
-        i.classList.toggle('slide-menu-icons-display')
     }
 }
 
@@ -272,8 +172,11 @@ function menuoptions(){
 function createLi (Obj,category){
 
     let li = $('<li onclick="funSelectedItem(this);"></li>')
+    // Global user Defined Attribute for all the list items -
     li.attr('list-val',`${Obj.id}`)
+
     console.log('CreateLi function '+ category)
+
     switch (category) {
         case 'product' : li[0].textContent = Obj.invoice_no;
                          li.attr('category','product')
@@ -293,7 +196,9 @@ function createLi (Obj,category){
                         li[0].textContent = Obj.id+ '  QTY  '+ Obj.qty;
                          break;
         case 'transfer' : li.attr('category','transfer')
-                            li.attr('sub-cat',Obj.sub_cat)
+                            li.attr('sub-cat',Obj.deptorlab)
+                         li.attr('cat-id',Obj.deptorlabId)
+                        li.attr('product-id',Obj.productId)
                             li[0].textContent = Obj.id;
     }
 
@@ -363,20 +268,22 @@ function list_Fun(data,list,category) {
         $('#edit-btn').attr('href','../forms/issue_edit.html')
     }
     else if(category==='transfer')
-    {   if(data.labs!==null)
+    {   console.log('Testing data of transfer')
+        console.log(data.labs)
+        if(data.labs!==null)
         for (item of data.labs)
         {
-            let product_ob = new Lab(item)
+            let object_Transfer = new Transfer(item,"lab")
             console.log(item.id)
-            let li = createLi(product_ob,'transfer');
+            let li = createLi(object_Transfer,'transfer');
             list_items.push(li)
             console.log(li)
-            Transfer_list.push(product_ob);
+            Transfer_list.push(object_Transfer);
         }
         if(data.department!==null)
         {
             for (item of data.department) {
-                let product_ob = new Department(item)
+                let product_ob = new Transfer(item,"department")
                 console.log(item.id)
                 let li = createLi(product_ob,'transfer');
                 list_items.push(li)
@@ -423,6 +330,20 @@ function show(ev) {
 }
 
 
+//Display the Side menu as ICONS or whole div -
+function menuoptions(){
+    //Menu Bar toggle  -  Create a class and toggle it
+
+    let smallmenu = $('#small-menu')[0]
+    let fullscreendiv = $('#main-screen-div')[0]
+    fullscreendiv.classList.toggle('slide-side-menu')
+    let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
+    console.log(slideMenuIcons);
+    for(i of slideMenuIcons)
+    {
+        i.classList.toggle('slide-menu-icons-display')
+    }
+}
 
 
 
