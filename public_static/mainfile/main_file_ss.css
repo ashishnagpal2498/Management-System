@@ -195,3 +195,33 @@
 }
 
 /*End of centre Form*/
+
+/*POP UP window*/
+.pop-up{
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    display: none;
+}
+.popup-content{
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    margin: 15% auto;
+    width: 80%;
+    height: 30%;
+    padding: 20px;
+
+}
+.close-btn{
+    font-size: 18px;
+
+}
+.close-btn:hover{
+    color: grey;
+    cursor: pointer;
+}

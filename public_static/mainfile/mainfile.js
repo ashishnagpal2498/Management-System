@@ -1,4 +1,46 @@
+function reviewmenufunc() {
+    let popup_menu = $('#popup')
+    let popup_content = $('#popup-content')
+    popup_content.empty()
+    let pop_up_menu_heading = $(` <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
+        <!--Display the content here-->
+        <h4> Transfer Review </h4>`)
+    popup_content.append(pop_up_menu_heading)
+    popup_menu.css('display','block')
 
+    //Display this which item was selected and
+    let productId = localStorage.getItem('productId')
+    let transferItemLab = localStorage.getItem('deptorlab')
+    let dept_or_lab = localStorage.getItem('sub_cat')
+
+
+
+    console.log('ProductId - '+productId)
+
+    popup_content.append(`<div class="col-6" > Product ID : ${productId} </div>`)
+    //Display this to which - the item is going -
+    //Quantity and lab - details -
+    let selected_qty = $('#selected-qty')
+    popup_content.append(`<div class="col-6">Selected Quantity ${selected_qty.val()}</div>`)
+    let selected_lab_val = $('#labId').val()
+    // console.log( selected_lab.children("option:selected").val())
+    popup_content.append(`<div class="col-6">Selected Lab ${selected_lab_val}</div>`)
+
+    $.get(`http://localhost:2121/lab/${selected_lab_val}`,(data)=>{
+        console.log(data)
+
+    })
+
+}
+function closepopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+window.onclick = function(event) {
+    let popup_menu = $('#popup')[0]
+    if (event.target === popup_menu ) {
+        popup_menu.style.display = "none";
+    }
+}
 function issuefun(id,cb) {
     console.log(typeof id)
     console.log('To Hit the Issue request')
@@ -6,7 +48,7 @@ function issuefun(id,cb) {
 }
 
 
-function createTransferObj(sub_cat,data,data2) {
+function createTransferObj(sub_cat,data,data2,labs_data) {
     //Data2 is product data and data 1 is LabOrDepartment Data
     let detailDiv = $('#detailed-div')
 
@@ -20,16 +62,61 @@ function createTransferObj(sub_cat,data,data2) {
     detailDiv.append(labItem)
 
     let productItem = $(`
-          <li id="vendor-id"> <b>PRODUCT ID:</b>  ${data2.id} </li>
-                    <li  id="vendor-name"><b>NAME: ${data2.name}</b> </li>
+          <li id="product-id"> <b>PRODUCT ID:</b>  ${data2.id} </li>
+                    <li  id="product-name"><b>NAME: ${data2.name}</b> </li>
                     <!--<li id="vendor-company-name"><b>QUANTITY:</b>  </li>-->
-                    <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${data2.invoice_no}</li>
+                    <li id="invoice-number"><b>INVOICE NUMBER:</b> ${data2.invoice_no}</li>
                     <li><b>Manufacturer</b> ${data2.manufacturer}</li>
                     <li><b>INNVOICE DATE</b> ${data2.invoice_date}</li>
-                    <li><b>YEAR OF WARRANTY</b> ${data.years}</li>
+                    <li><b>YEAR OF WARRANTY</b> ${data2.years}</li>
                     <li><b>DETAILS</b> ${data2.product_details}</li>
             `)
     detailDiv.append(productItem)
+    console.log('line 33')
+    console.log(labs_data)
+    let labs_list ;
+    $.get('http://localhost:2121/lab',(data)=>{
+        labs_list = data;
+        console.log(data)
+        console.log(labs_list)
+        console.log(labs_data)
+
+        let select_div = $('<div class="col-12"></div>')
+            select_div.append(`<h6>Select Lab</h6>`)
+        let labs_list_Li = [];
+        for(lab of data)
+        {   console.log(lab)
+            let item = $(`<option  value = ${lab.id} >${lab.name} </option>`)
+            labs_list_Li.push(item)
+        }
+        let labs_select = $('<select class="col-8 p-2" id="labId" name="labId"></select>')
+        labs_select.append(labs_list_Li)
+        let qty_list = []
+        for(i=1 ; i<=labs_data.qty;i++)
+        {
+            let item = $(`<option>${i} </option>`)
+            qty_list.push(item)
+        }
+        let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
+        qty_select.append(qty_list)
+
+        //Append the main div
+        select_div.append(labs_select)
+        //Select Div is appended in the main center div
+        detailDiv.append(select_div)
+
+        select_div.append(`<h6>Select Quantity</h6>`)
+        select_div.append(qty_select)
+        detailDiv.append(select_div)
+
+       detailDiv.append('<button class= "mt-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:green; margin: 0 20px">Accept</button>')
+        detailDiv.append('<button class= " mt-3 btn btn-danger">Reject</button>')
+    })
+
+
+    // let transfer_Item = $(`
+    //    <h3>Select the quantity and Lab</h3>
+    // `)
 }
 
 //Listing of selected Div - In the centre menu -
@@ -147,12 +234,17 @@ function funSelectedItem(el){
     else if (category==='transfer')
     {   let sub_category =  $(el).attr("sub-cat")
         //search the element in the list
-
+        localStorage.setItem('sub_cat',sub_category)
         //Sub cat Id will be given by -
         let sub_cat_Id = $(el).attr("cat-id")
 
+        //Setting the labOrDepartment ID to LOCAL STORAGE
+        localStorage.setItem('deptorlab',sub_cat_Id)
+
         //Subcat - Product Id
         let sub_Cat_ProductID = $(el).attr("product-id")
+
+        localStorage.setItem('productId',sub_Cat_ProductID)
 
         if(sub_category==="lab")
         {
@@ -160,7 +252,12 @@ function funSelectedItem(el){
             $.get(`http://localhost:2121/${sub_category}/${sub_cat_Id}`,(data)=>{
                 //callback function of get
                 $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
-                    createTransferObj(sub_category,data,data2)
+                   //We need remaining quantity and so - 1 request issue wale par bhi jayegi -
+                    $.get(`http://localhost:2121/issue/${id}`,(data3)=>{
+                        console.log(data3)
+                        //This can be reduced extra calls to - backend
+                        createTransferObj(sub_category,data,data2,data3.issuedItem.labs[0])
+                    })
                 })
             })
         }
