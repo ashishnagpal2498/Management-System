@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="32e4b329-2923-410f-ad81-4baa26547768" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms/form1.html" beforeDir="false" afterPath="$PROJECT_DIR$/forms/purchased_item_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/section-stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/section-stylesheet.css" afterDir="false" />
     </list>
-=======
     <list default="true" id="32e4b329-2923-410f-ad81-4baa26547768" name="Default" comment="" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -45,19 +42,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-<<<<<<< HEAD
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
-=======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-77">
               <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
               <folding>
                 <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -65,7 +59,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="section-stylesheet.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/section-stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -80,8 +73,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="157">
               <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="39" selection-end-column="15" />
-=======
-      <file pinned="false" current-in-tab="false">
+        <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/header_styling.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="328">
@@ -100,8 +92,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
-            </state>
+  </state>
           </provider>
         </entry>
       </file>
@@ -152,7 +143,6 @@
               <item name="MANAGEMENT SYSTEM" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-<<<<<<< HEAD
               <item name="project1_frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="project1_frontend" type="462c0819:PsiDirectoryNode" />
               <item name="Bootstrap" type="462c0819:PsiDirectoryNode" />
@@ -186,11 +176,9 @@
               <item name="project1_frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="project1_frontend" type="462c0819:PsiDirectoryNode" />
               <item name="Images" type="462c0819:PsiDirectoryNode" />
-=======
               <item name="MANAGEMENT SYSTEM" type="b2602c69:ProjectViewProjectNode" />
               <item name="MANAGEMENT SYSTEM" type="462c0819:PsiDirectoryNode" />
               <item name="forms" type="462c0819:PsiDirectoryNode" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
             </path>
           </expand>
           <select />
@@ -241,28 +229,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550075232082</updated>
-<<<<<<< HEAD
       <workItem from="1550075235983" duration="12405000" />
       <workItem from="1550167920895" duration="8889000" />
-=======
       <workItem from="1550075235983" duration="8473000" />
       <workItem from="1550137553560" duration="396000" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
     <option name="totallyTimeSpent" value="21294000" />
-=======
     <option name="totallyTimeSpent" value="8869000" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17038691" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -280,7 +261,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-=======
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1592262" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -298,7 +278,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,13 +289,10 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="952">
           <caret line="56" column="96" selection-start-line="56" selection-start-column="96" selection-end-line="56" selection-end-column="96" />
-=======
         <state relative-caret-position="-77">
           <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
           <folding>
             <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -325,7 +301,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/header_styling.css">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="714">
           <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
         </state>
@@ -369,7 +344,6 @@
           <folding>
             <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-=======
         <state relative-caret-position="328">
           <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
         </state>
@@ -382,7 +356,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
->>>>>>> 6ded6489068a634d45bc585a08cd2f5fd895f6bc
+
         </state>
       </provider>
     </entry>
