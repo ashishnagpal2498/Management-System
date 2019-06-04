@@ -1,4 +1,5 @@
 function reviewmenufunc() {
+    //Displaying the popup menu
     let popup_menu = $('#popup')
     let popup_content = $('#popup-content')
     popup_content.empty()
@@ -10,7 +11,7 @@ function reviewmenufunc() {
 
     //Display this which item was selected and
     let productId = localStorage.getItem('productId')
-    let transferItemLab = localStorage.getItem('deptorlab')
+    let transferableItemLd = localStorage.getItem('deptorlab')
     let dept_or_lab = localStorage.getItem('sub_cat')
 
 
@@ -20,17 +21,60 @@ function reviewmenufunc() {
     popup_content.append(`<div class="col-6" > Product ID : ${productId} </div>`)
     //Display this to which - the item is going -
     //Quantity and lab - details -
-    let selected_qty = $('#selected-qty')
-    popup_content.append(`<div class="col-6">Selected Quantity ${selected_qty.val()}</div>`)
+    let outerform = $(`<form class="row" method = "post" action = "/transfer"></form>`)
+    //This is the table which show the details of product to be transfered from that lab
+    let itemDiv_1 = $(`    
+                            <div class = "col-6" id ="item-send">Sender</div>`)
+    //This table shows the details of lab in which item is transfered
+    let itemDiv_2 = $(`    
+                            <div class="col-6" id = "item-receive">Receiver</div> `)
+
+
+    $.get(`http://localhost:2121/${dept_or_lab}/${transferableItemLd}`,(data)=>{
+        if(dept_or_lab==='lab')
+        {
+            let table_content = $(`
+        <div class="row">
+        <div class="col-6">Lab Id <input value=" ${data.id}" readonly ></div>
+        <div class="col-6">Lab name <input value=" ${data.name}" readonly></div>
+    </div>
+       `)
+            itemDiv_1.append(table_content)
+        }
+        else
+        {
+
+        }
+    })
+
+
+
+
     let selected_lab_val = $('#labId').val()
     // console.log( selected_lab.children("option:selected").val())
-    popup_content.append(`<div class="col-6">Selected Lab ${selected_lab_val}</div>`)
+
 
     $.get(`http://localhost:2121/lab/${selected_lab_val}`,(data)=>{
         console.log(data)
+        let table_content = $(`  <div class="row">
+        <div class="col-6">Lab Id <input value=" ${data.id}" readonly ></div>
+        <div class="col-6">Lab name <input value=" ${data.name}" readonly></div>
+    </div> `)
+        itemDiv_2.append(table_content);
 
+        //Append both the tables into the form
+
+        outerform.append(itemDiv_1)
+        outerform.append(itemDiv_2)
+        //Now show the quantity to be transfered in th middle
+        let selected_qty = $('#selected-qty')
+        outerform.append(`<div class="col-12"> <h6 align="center">Selected Quantity   <input value=" ${selected_qty.val()}" readonly> </h6></div>`)
+        let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
+        outerform.append(transfer_btn)
     })
 
+
+    popup_content.append(outerform);
 }
 function closepopup() {
     document.getElementById('popup').style.display = 'none';
@@ -58,6 +102,7 @@ function createTransferObj(sub_cat,data,data2,labs_data) {
                     <li id="vendor-company-name"><b>BLOCK</b>  ${data.block}</li>
                     <li><b>Technician: ${data.technician}</b></li>
                    <li id="hod"><b>Floor:</b> ${data.floor}</li>
+                   <li id="qty-issued"><b>Quantity Issued: </b>${labs_data.qty}</li>
             `)
     detailDiv.append(labItem)
 
