@@ -18,16 +18,47 @@ function reviewmenufunc() {
 
     console.log('ProductId - '+productId)
 
-    popup_content.append(`<div class="col-6" > Product ID : ${productId} </div>`)
+    popup_content.append(`<div class="col-6" > Product ID : <input value=" ${productId}" readonly> </div>`)
+    $.get(`http://localhost:2121/product/${productId}`,(data)=>{
+        console.log('Productsssssss')
+        console.log(data)
+        //    Display data of product here
+        let prod_details = $(`<div class = "row mt-2 mb-2 p-2">
+<div class="col-6">Product Name : ${data.name}</div>
+<div class="col-6">Total Quantity : ${data.qty}</div>
+<div class="col-6">Year: ${data.warranty_year}</div>
+<div class="col-6">Description : ${data.product_details}</div>
+</div>`)
+
+        popup_content.append(prod_details)
+
+
+
+        let outerform = reviewFormFunc(dept_or_lab,transferableItemLd);
+
+
+        popup_content.append(outerform);
+
+
+    })
+
+
+
+}
+function transferSuccessful() {
+    let trans_Succ = $('#transfer_Succ')
+    trans_Succ.css('transform','translateY(50px)')
+}
+function reviewFormFunc(dept_or_lab,transferableItemLd) {
     //Display this to which - the item is going -
     //Quantity and lab - details -
     let outerform = $(`<form class="row" method = "post" action = "/transfer"></form>`)
     //This is the table which show the details of product to be transfered from that lab
     let itemDiv_1 = $(`    
-                            <div class = "col-6" id ="item-send">Sender</div>`)
+                            <div class = "col-6 pl-3 pb-2" id ="item-send"><h5>Sender</h5></div>`)
     //This table shows the details of lab in which item is transfered
     let itemDiv_2 = $(`    
-                            <div class="col-6" id = "item-receive">Receiver</div> `)
+                            <div class="col-6 pl-3 pb-2" id = "item-receive"><h5>Receiver</h5></div> `)
 
 
     $.get(`http://localhost:2121/${dept_or_lab}/${transferableItemLd}`,(data)=>{
@@ -35,8 +66,8 @@ function reviewmenufunc() {
         {
             let table_content = $(`
         <div class="row">
-        <div class="col-6">Lab Id <input value=" ${data.id}" readonly ></div>
-        <div class="col-6">Lab name <input value=" ${data.name}" readonly></div>
+        <div class="col-6 p-2">Lab Id <input name="senderLabId" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">Lab name <input name="senderName" value=" ${data.name}" readonly></div>
     </div>
        `)
             itemDiv_1.append(table_content)
@@ -57,8 +88,8 @@ function reviewmenufunc() {
     $.get(`http://localhost:2121/lab/${selected_lab_val}`,(data)=>{
         console.log(data)
         let table_content = $(`  <div class="row">
-        <div class="col-6">Lab Id <input value=" ${data.id}" readonly ></div>
-        <div class="col-6">Lab name <input value=" ${data.name}" readonly></div>
+        <div class="col-6 p-2">Lab Id <input name="receiverLabId" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">Lab name <input name="receiverName" value=" ${data.name}" readonly></div>
     </div> `)
         itemDiv_2.append(table_content);
 
@@ -67,15 +98,17 @@ function reviewmenufunc() {
         outerform.append(itemDiv_1)
         outerform.append(itemDiv_2)
         //Now show the quantity to be transfered in th middle
+        let productId = localStorage.getItem('productId')
         let selected_qty = $('#selected-qty')
-        outerform.append(`<div class="col-12"> <h6 align="center">Selected Quantity   <input value=" ${selected_qty.val()}" readonly> </h6></div>`)
-        let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
+        outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity   <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
+        <input value="${productId}" name="productId" style="display: none">    `)
+        let transfer_btn = $(`<div class="col-12" align="center"> <input onsubmit="transferSuccessful()" class = "btn btn-info" type="submit" value="Submit" ></div>`)
         outerform.append(transfer_btn)
     })
-
-
-    popup_content.append(outerform);
+    return outerform
 }
+
+
 function closepopup() {
     document.getElementById('popup').style.display = 'none';
 }

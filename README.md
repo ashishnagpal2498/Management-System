@@ -17,7 +17,7 @@ Files and their explanation
    (ii) Delete an Item from database
    (iii) View all issued Items 
    (iv) Display name of products , vendors , faculty , Deparment
-    Labs 
+    Lab 
     (v) Transfer the systems from one lab to another 
      
 2) Forms - Different forms are used to enter values of products

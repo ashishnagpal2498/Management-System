@@ -1,18 +1,18 @@
 const route = require('express').Router();
 //Database -
 const Department = require('../database/models').model.Depart;
-const Labs = require('../database/models').model.Labs;
+const Lab = require('../database/models').model.Labs;
 
 
 route.get('/',(req,res)=>{
-    Labs.findAll({
+    Lab.findAll({
 
     }).then((labs)=> res.send(labs))
         .catch((err)=> console.error(err))
 })
 
 route.get('/:id',(req,res)=>{
-    Labs.findOne(
+    Lab.findOne(
         {
             where: {
                 id: req.params.id
@@ -25,7 +25,7 @@ route.get('/:id',(req,res)=>{
 })
 
 route.post('/',(req,res)=>{
-    Labs.create({
+    Lab.create({
         labno:req.body.labno,
         name: req.body.name,
         technician: req.body.technician,
@@ -44,7 +44,7 @@ route.post('/:depart',(req,res)=>{
         where:{
             dname:departmentname
         },
-        include: [Labs]
+        include: [Lab]
     }).then((results)=>{ res.send(results.labname)})
         .catch((err)=> console.error(err))
 })
@@ -77,4 +77,15 @@ block:4
 floor:1
 departmentDno:1
 
+ */
+
+//New Addition
+
+/*
+labno:90
+name:Cse WE
+technician:Rohan
+block:4
+floor:2
+departmentId:1
  */

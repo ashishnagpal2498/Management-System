@@ -12,7 +12,7 @@ const routes = {
     login :require('./api/login/login').route,
     signup: require('./api/login/signup').route,
     department: require('./api/department').route,
-    labs: require('./api/labs').route,
+    lab: require('./api/lab').route,
     vendor: require('./api/vendor').route,
     product: require('./api/product').route,
     logout: require('./api/logout').route,
@@ -41,7 +41,7 @@ app.use(passport.session())
 app.use('/login',routes.login)
 app.use('/signup',routes.signup)
 app.use('/department',routes.department)
-app.use('/lab',routes.labs)
+app.use('/lab',routes.lab)
 app.use('/vendor',routes.vendor)
 app.use('/product',routes.product)
  app.use('/issue',routes.issue)
