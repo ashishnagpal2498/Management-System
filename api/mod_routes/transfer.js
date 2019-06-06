@@ -70,7 +70,7 @@ route.post('/',(req,res)=>{
                     }
                 }
             ).then((resultReceiver)=>{
-                if(resultReceiver===[])
+                if(resultReceiver[0]===undefined)
                 {
                     //Empty insert the row 
                     IssuedDatabase.IssuedLab.create(

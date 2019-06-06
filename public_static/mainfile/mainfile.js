@@ -284,7 +284,7 @@ function funSelectedItem(el){
             {   for(lab of list_ofdept_labs.issuedItem.labs)
                 {
                     let issueItemLabs = $(`
-                    <div class= "col-10">Lab Id: ${lab.id}</div>
+                    <div class= "col-10">Lab Id: ${lab.labId}</div>
                     <div class="col-10">Quantity Issued: ${lab.qty}</div>
                     `)
                     issued_labs.push(issueItemLabs)
