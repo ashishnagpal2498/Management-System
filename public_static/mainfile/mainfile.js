@@ -46,6 +46,7 @@ function reviewmenufunc() {
 
 }
 function transferSuccessful() {
+    //Not working Right Now -
     let trans_Succ = $('#transfer_Succ')
     trans_Succ.css('transform','translateY(50px)')
 }
