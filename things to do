@@ -1,0 +1,12 @@
+#-----------
+1) Transfer - check why second item is not clickable ,
+
+2) Remove the dependency of storing on local file - and hit the request everytime
+
+3) Instead of Department - Faculty - and both labs and faculty are related to department
+
+4) Return - Issued items - which needs to be return to store
+
+5) Store - shows all the unissued items of the product -
+
+6)Make the names and Items presentable - as in - instead of ID take names

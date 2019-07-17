@@ -268,8 +268,8 @@ function funSelectedItem(el){
     else if(category==='issue')
     {   let issued_labs = []
         let issued_dept = []
-        console.log('Issue category')
-
+        console.log('Issue category--------------------->>')
+        console.log(id)
         $.get(`http://localhost:2121/issue/${id}`,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.issuedItem.product
             // let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.id}</div>
@@ -319,7 +319,7 @@ function funSelectedItem(el){
 
         //Setting the labOrDepartment ID to LOCAL STORAGE
         localStorage.setItem('deptorlab',sub_cat_Id)
-
+        
         //Subcat - Product Id
         let sub_Cat_ProductID = $(el).attr("product-id")
 
@@ -332,9 +332,13 @@ function funSelectedItem(el){
                 //callback function of get
                 $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
                    //We need remaining quantity and so - 1 request issue wale par bhi jayegi -
+                    //PROBLEM HERE CHECK - ID is not ID
+
+                    console.log('Object ID     ------'+id)
                     $.get(`http://localhost:2121/issue/${id}`,(data3)=>{
+                        console.log("DATA 3 VALUE-------------")
                         console.log(data3)
-                        //This can be reduced extra calls to - backend
+                        //This can be reduced extra calls to - backend  -------
                         createTransferObj(sub_category,data,data2,data3.issuedItem.labs[0])
                     })
                 })
@@ -373,9 +377,11 @@ function createLi (Obj,category){
                          break;
         case 'transfer' : li.attr('category','transfer')
                             li.attr('sub-cat',Obj.deptorlab)
+                         //FOR THE TIME BEING - LETS SAY _ ITS ONLY FOR LABS
                          li.attr('cat-id',Obj.deptorlabId)
                         li.attr('product-id',Obj.productId)
-                            li[0].textContent = Obj.id;
+                        
+                            li[0].textContent = Obj.name;
     }
 
 
@@ -402,7 +408,7 @@ function list_Fun(data,list,category) {
     {
         for (item of data) {
             let product_ob = new Product(item)
-            console.log(item.pid)
+            console.log(item.id)
             let li = createLi(product_ob,'product');
             list_items.push(li)
             console.log(li)
@@ -446,6 +452,8 @@ function list_Fun(data,list,category) {
     else if(category==='transfer')
     {   console.log('Testing data of transfer')
         console.log(data.labs)
+        console.log('------------------------------------>>>>>>>>>>>>>>>>>>>>>>')
+        console.log(data);
         if(data.labs!==null)
         for (item of data.labs)
         {

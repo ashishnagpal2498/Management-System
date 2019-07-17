@@ -53,5 +53,5 @@ app.use((req,res)=>{
 })
 
 app.listen(2121,()=>{
-    console.log('Server has Strated At http://localhost:2121');
+    console.log('Server has Started At http://localhost:2121');
 })

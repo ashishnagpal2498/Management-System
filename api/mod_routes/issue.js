@@ -6,6 +6,7 @@ const IssueDatabase = require('../../database/model_issue').model;
 
 route.get('/',(req,res)=>{
 //    Show all the Products listed -
+
         databaseProduct.Product.findAll({
             where: {
 
@@ -37,7 +38,7 @@ route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
     IssueDatabase.IssuedLab.findAll({
         where: {
-            productId : req.params.id
+            labId : req.params.id
         },
         include: [{
             model: databaseProduct.Product
