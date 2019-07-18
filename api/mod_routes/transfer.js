@@ -1,7 +1,7 @@
 const route = require('express').Router()
 const IssuedDatabase = require('../../database/model_issue').model
 const DeptorLabs = require('../../database/models').model
-
+const ProductModel = require('../../database/models2').model
 route.get('/',(req,res)=>{
 //    Show all the items which are issued to be transfered -
     let issuedItems = {
@@ -9,14 +9,14 @@ route.get('/',(req,res)=>{
         department:null
     }
     IssuedDatabase.IssuedLab.findAll({
-
+        include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
     }).then((resultLabs)=>{
     //    Getting all the labs which are issued computers -
         IssuedDatabase.IssuedDepartment.findAll(
             {
                 include: [{
-                    model: DeptorLabs.Depart || DeptorLabs.Labs
-                }]
+                    model: DeptorLabs.Depart
+                }, {model:ProductModel.Product}]
             }
         )
             .then((resultDept)=>{
@@ -32,6 +32,28 @@ route.get('/',(req,res)=>{
             })
             .catch((err)=>{console.log("err in Department"); console.error(err)})
     }).catch((err2)=>{ console.log("err in labs"); console.error(err2)})
+})
+
+//
+route.get('/:id:deptOrlab',(req,res)=>{
+    //This will get an Id -
+    //Issue
+    //Configure This that if it is possible
+    console.log(req.params.id)
+    console.log(req.params.deptOrlab)
+    if(req.params.deptOrlab==='lab')
+    {
+        // Call the issue Lab Database -
+        IssuedDatabase.IssuedLab.findOne(
+            {
+            where: {
+                id: req.params.id
+            }
+            ,include: [{model:DeptorLabs.Labs},{model:ProductModel.Product}]
+        })
+            .then((result)=>{ res.send(result)})
+            .catch((err)=> console.error('Error In finding Issued Product at Transfer '+err))
+    }
 })
 
 //Post request comes from the Form of submit -

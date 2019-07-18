@@ -6,8 +6,15 @@ const IssueDatabase = require('../../database/model_issue').model;
 
 route.get('/',(req,res)=>{
 //    Show all the Products listed -
-
-        databaseProduct.Product.findAll({
+    //Changes - hERE
+    // IssueDatabase.IssuedLab.findAll({})
+    //     .then((result)=>{
+    //         IssueDatabase.IssuedDepartment.findAll((result2)=>{
+    //             res.send(result+result2)
+    //         }).catch((err)=>{console.error('Error in finding Issue depts'+err)})
+    //     }).catch((err2)=> console.error('Error in finding Issue Labs'+err2))
+    //    Issue Basically shows all the list of products and Previously Issued
+    databaseProduct.Product.findAll({
             where: {
 
             }
@@ -36,9 +43,16 @@ route.get('/unissued',(req,res)=>{
 //The post request used to find the Remaining quantity of the Product - Selected -'
 route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
+    // databaseProduct.Product.findOne({
+    //     where: {
+    //         id: req.params.id
+    //     }
+    // }).then((result)=>{
+    //
+    // })
     IssueDatabase.IssuedLab.findAll({
         where: {
-            labId : req.params.id
+            productId : req.params.id
         },
         include: [{
             model: databaseProduct.Product

@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="lab.css">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -16,7 +17,7 @@
     </div>
     <div class="departmentlab-form-container" id="departmentlab-form-container-id">
         <form action="/lab" method="post" id="departmentlab-form">
-            <div class="form-row">
+            <div class="form-row justify-content-center">
                 <div class="form-group col-md-6">
                     <label for="labNumber">LAB NUMBER</label>
                     <input name="labno" type="number" class="form-control" id="labNumber">
@@ -31,17 +32,19 @@
                     <label for="labtechName">LAB TECHNICIAN NAME</label>
                     <input name="technician" type="text" class="form-control" id="labtechName">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="departmentId">DEPARTMENT </label>
+                    <select type="number" class="form-control" onchange="Autofill_details(this.value)" name="departmentId" id="departmentId">
+                    <!--Filled By Jquery-->
+                    </select>
+                </div>
                 <div class="form-group col-md-4">
                     <label for="BlockNumber">BLOCK NUMBER</label>
-                    <input name="block" type="number" class="form-control" id="BlockNumber">
+                    <input name="block" type="number" class="form-control" readonly id="BlockNumber">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="labfloor">FLOOR</label>
                     <input name="floor" type="number" class="form-control" id="labfloor">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="departmentId">DEPARTMENT NO</label>
-                    <input type="number" name="departmentId" id="departmentId">
                 </div>
             </div>
             <div class="deptlab-btn">
@@ -52,5 +55,29 @@
     </div>
 
 </div>
+<script>
+    //Need All the Department - Need To append the name but the value will be of ID
+    function Autofill_details(value)
+    {   console.log(value);
+        // console.log(ev.value);
+        $.get(`http://localhost:2121/department/${value}`,(data)=>{
+            let block = $('#BlockNumber')
+            block.attr('value',data.block)
+        })
+    }
+    let departmentSelect = $('#departmentId')
+    departmentSelect.empty();
+    let departmentList =[];
+    $.get('http://localhost:2121/department',(data)=>{
+        //Data will be of the form Array
+        for(i of data)
+        {
+            let option_val = $(`<option value="${i.id}">${i.name}</option>`)
+            departmentList.push(option_val);
+        }
+        departmentSelect.append(departmentList);
+        Autofill_details(data[0].id);
+    })
+</script>
 </body>
 </html>

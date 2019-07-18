@@ -62,8 +62,9 @@ function Issue(Obj) {
 }
 
 
-function Transfer(Obj,deptOrLab) {
+function Transfer(Obj,laborDept,product,deptOrLab) {
     this.id = Obj.id
+    this.name =product.name + product.manufacturer;
     this.qty = Obj.qty
     this.deptorlab = deptOrLab
     this.productId = Obj.productId
@@ -94,11 +95,20 @@ function createElement (Obj,category) {
                     <li id="vendor-company-name"><b>QUANTITY:</b>  ${Obj.qty}</li>
                     <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${Obj.invoice_no}</li>
                     <li><b>Manufacturer</b> ${Obj.manufacturer}</li>
-                    <li><b>INNVOICE DATE</b> ${Obj.invoice_date}</li>
-                    <li><b>YEAR</b> ${Obj.years}</li>
+                    <li><b>INNVOICE DATE</b> ${Obj.invoice_date.split('T')[0]}</li>
+                    <li><b>YEAR OF WARRANTY</b> ${Obj.warranty_year}</li>
                     <li><b>DETAILS</b> ${Obj.product_details}</li>
             `)
         return productItem;
+    }
+    else if(category==='faculty')
+    {
+        return $(`<li id="faculty-id"> <b>Faculty ID:</b>  ${Obj.id} </li>
+                    <li  id="faculty-name"><b>NAME: ${Obj.name}</b> </li>
+                    <li ><b>Designation</b> ${Obj.designation}</li>
+                    <li><b>Responsibility</b> ${Obj.responsibility}</li>
+                    <li><b>Block</b> ${Obj.block}</li>
+                    <li><b>Staffroom Floor</b> ${Obj.floor}</li>`)
     }
     else if(category==='department')
     {

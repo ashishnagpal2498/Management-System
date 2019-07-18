@@ -72,7 +72,7 @@ const Faculty = mgmtSystem.define(
             autoIncrement:true,
             primaryKey:true
         },
-        fid: dataTypes.INTEGER,
+        fid: dataTypes.STRING,
         name : dataTypes.STRING,
         designation: dataTypes.STRING,
         responsibility: dataTypes.STRING,

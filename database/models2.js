@@ -24,18 +24,18 @@ const Vendor = mgmtSystem.define(
         vdorid:{
           type:dataTypes.INTEGER
         },
-        accountNo : dataTypes.INTEGER,
+        accountNo : dataTypes.STRING,
         name: dataTypes.STRING,
 
         companyname:{
             type: dataTypes.STRING
         },
         companycontact:{
-            type : dataTypes.INTEGER,
+            type : dataTypes.STRING,
             allowNull:false
         },
         personalcontact:{
-            type:dataTypes.INTEGER
+            type:dataTypes.STRING
         },
         companyemail: dataTypes.STRING,
         address:{

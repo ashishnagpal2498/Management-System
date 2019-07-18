@@ -9,6 +9,18 @@ route.get('/',(req,res)=>{
         .catch((err)=> console.error(err))
 })
 
+route.get('/:id',(req,res)=>{
+    Department.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((result)=>{
+        res.send(result)
+    }).catch((err)=>{
+        console.error('Department Not Found  '+err);
+    })
+})
+
 route.post('/',(req,res)=>{
     Department.create({
         dno:req.body.dno,

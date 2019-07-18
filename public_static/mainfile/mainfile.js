@@ -242,6 +242,12 @@ function funSelectedItem(el){
             }
         }
     }
+    else if(category==='faculty')
+    {
+        $.get(`http://localhost:2121/faculty/${id}`,(data)=>{
+            detailDiv.append(createElement(data,category))
+        })
+    }
     else if(category==='department')
     {
         for (it of Department_list) {
@@ -270,17 +276,17 @@ function funSelectedItem(el){
         let issued_dept = []
         console.log('Issue category--------------------->>')
         console.log(id)
-        $.get(`http://localhost:2121/issue/${id}`,(list_ofdept_labs)=>{
+        //Append the EDIT BUTTON -
+
+       //id and Product Id are same in this case -
+        let productId = +($(el).attr('productId'));
+        // let editbtn = $('#edit-btn')
+        // editbtn.attr('href',`../forms/issue.html?productId=${productId}`)
+        $.get(`http://localhost:2121/issue/${productId}`,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.issuedItem.product
-            // let issueItemProduct = $(`<div class="col-10 issue-item-style" id="issue-id">Product Id: ${product_Details_Val.id}</div>
-            //
-            // <div class="col-10 issue-item-style" >Total Quantity: ${product_Details_Val.qty}</div>
-            // <div class="col-10 issue-item-style">Invoice Number: ${product_Details_Val.invoice_no}</div>
-            //     <div class="col-10 issue-item-style">Invoice Date : ${product_Details_Val.invoice_date}</div>
-            //    `)
             let issueItemProduct = createElement(product_Details_Val,'product')
             let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
-            let DeptHeading = $('<h4 style="margin: 10px" align="center">Department</h4>')
+            let DeptHeading = $('<h4 style="margin: 10px" align="center">Faculty</h4>')
              if(list_ofdept_labs.issuedItem.labs!==null)
             {   for(lab of list_ofdept_labs.issuedItem.labs)
                 {
@@ -327,22 +333,32 @@ function funSelectedItem(el){
 
         if(sub_category==="lab")
         {
-            //Request on lab and bring the data of that lab - and also the product Issued details
-            $.get(`http://localhost:2121/${sub_category}/${sub_cat_Id}`,(data)=>{
-                //callback function of get
-                $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
-                   //We need remaining quantity and so - 1 request issue wale par bhi jayegi -
-                    //PROBLEM HERE CHECK - ID is not ID
+            $.get(`http://localhost:2121/transfer/${id}${sub_category}`,(data)=>{
+                // MULTIPLE PARAMS -
+                console.log('INSIDE TRANSFER -----')
+                console.log(data);
+               createTransferObj(sub_category,data.lab,data.product,data)
 
-                    console.log('Object ID     ------'+id)
-                    $.get(`http://localhost:2121/issue/${id}`,(data3)=>{
-                        console.log("DATA 3 VALUE-------------")
-                        console.log(data3)
-                        //This can be reduced extra calls to - backend  -------
-                        createTransferObj(sub_category,data,data2,data3.issuedItem.labs[0])
-                    })
-                })
             })
+            //Request on lab and bring the data of that lab - and also the product Issued details
+            // $.get(`http://localhost:2121/${sub_category}/${sub_cat_Id}`,(data)=>{
+            //     //callback function of get
+            //     console.log('LETS SEE WHAT IS DATA   ')
+            //     console.log(data);
+            //     $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
+            //        //We need remaining quantity and so - 1 request issue wale par bhi jayegi -
+            //         //PROBLEM HERE CHECK - ID is not ID
+            //         console.log('LETS SEE WHAT IS DATA 2    ')
+            //         console.log(data2)
+            //         console.log('Object ID     ------'+id)
+            //         $.get(`http://localhost:2121/issue/${id}`,(data3)=>{
+            //             console.log("DATA 3 VALUE-------------")
+            //             console.log(data3)
+            //             //This can be reduced extra calls to - backend  -------
+            //             createTransferObj(sub_category,data,data2,data3.issuedItem.labs[0])
+            //         })
+            //     })
+            // })
         }
     }
 }
@@ -373,15 +389,19 @@ function createLi (Obj,category){
                          li[0].textContent = Obj.name;
                          break;
         case 'issue' :  li.attr('category','issue')
-                        li[0].textContent = Obj.id+ '  QTY  '+ Obj.qty;
+                        li[0].textContent = Obj.name+" "+Obj.manufacturer+" "+Obj.modelName;
+                        li.attr('productId',Obj.id);
                          break;
         case 'transfer' : li.attr('category','transfer')
                             li.attr('sub-cat',Obj.deptorlab)
                          //FOR THE TIME BEING - LETS SAY _ ITS ONLY FOR LABS
                          li.attr('cat-id',Obj.deptorlabId)
                         li.attr('product-id',Obj.productId)
-                        
                             li[0].textContent = Obj.name;
+        
+                            break;
+        case 'faculty' : li.attr('category','faculty')
+                         li[0].textContent = Obj.name;
     }
 
 
@@ -415,6 +435,14 @@ function list_Fun(data,list,category) {
             Product_list.push(product_ob);
         }
     }
+    else if(category==='faculty')
+    {
+        for(item of data)
+        {
+            let li = createLi(item,'faculty')
+            list_items.push(li);
+        }
+    }
     else if(category==='department'){
         for (item of data) {
             let product_ob = new Department(item)
@@ -439,15 +467,17 @@ function list_Fun(data,list,category) {
     else if(category==='issue')
     {
         for (item of data) {
-            let product_ob = new Issue(item)
-            console.log(item.id)
-            let li = createLi(product_ob,'issue');
+
+            let li = createLi(item,'issue');
             list_items.push(li)
-            console.log(li)
-            Issue_list.push(product_ob);
+            // console.log(li)
+            // Issue_list.push(product_ob);
         }
         $('#delete-btn')[0].classList.add('display-btns')
-        $('#edit-btn').attr('href','../forms/issue_edit.html')
+         $('#edit-btn')[0].classList.add('display-btns')
+        let addbtn = $('#add-btn')
+            // editbtn.attr('href','../forms/issue.html')
+            addbtn[0].textContent = "Issue Product"
     }
     else if(category==='transfer')
     {   console.log('Testing data of transfer')
@@ -457,7 +487,7 @@ function list_Fun(data,list,category) {
         if(data.labs!==null)
         for (item of data.labs)
         {
-            let object_Transfer = new Transfer(item,"lab")
+            let object_Transfer = new Transfer(item,item.lab,item.product,"lab")
             console.log(item.id)
             let li = createLi(object_Transfer,'transfer');
             list_items.push(li)
@@ -496,6 +526,7 @@ function show(ev) {
     $.get(`http://localhost:2121/${formrequest}`,
         //Callback Function which Receives Data -
         (data)=>{
+        console.log('FORM REQ --------->>>>>>>>>.')
             console.log(data)
 
             Product_list = [];

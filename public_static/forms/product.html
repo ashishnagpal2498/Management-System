@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="form1.css">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -34,8 +35,9 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="VendorId">MANUFACTURER</label>
-                        <input name="vendorId" type="text" class="form-control" id="VendorId" placeholder="vendorId">
+                        <label for="VendorId">Vendor</label>
+                        <select name="vendorId" type="text" class="form-control" id="VendorId">
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="Manufacturer">MANUFACTURER</label>
@@ -80,9 +82,22 @@
                 </div>
 
             </form>
-        </div>
+            </div>
         </div>
 
-
+<script>
+    let vendorSelect = $('#VendorId')
+    vendorSelect.empty();
+    $.get('http://localhost:2121/vendor',(data)=>{
+        //All the Vendors -
+        let vendor_list = [];
+        for(i of data)
+        {
+            let options = $(`<option value = ${i.id}>${i.name}</option>`)
+            vendor_list.push(options);
+        }
+        vendorSelect.append(vendor_list);
+    })
+</script>
 </body>
 </html>
