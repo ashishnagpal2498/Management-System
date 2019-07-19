@@ -45,15 +45,43 @@ function reviewmenufunc() {
 
 
 }
-function transferSuccessful() {
+function transferSuccessful(ev) {
     //Not working Right Now -
-    let trans_Succ = $('#transfer_Succ')
-    trans_Succ.css('transform','translateY(50px)')
+    ev.preventDefault();
+    let senderId = $('input[name="senderLabId"]')
+    let receiverId = $('input[name = "receiverLabId"]')
+    let transferQty = $('input[name="transferQty"]')
+    let productId = $('input[name="productId"]')
+
+    let transferForm = $('#transferForm')
+
+    $.post('http://localhost:2121/transfer',{
+        senderLabId: senderId.val(),
+        receiverLabId:receiverId.val(),
+        transferQty: transferQty.val(),
+        productId: productId.val()
+    },(data)=>{
+        if(data.transfer)
+        {
+        //    Transfer Successfull
+            let trans_Succ = $('#transfer_Succ')
+            closepopup();
+            trans_Succ.css('transform','translateY(50px)')
+            setTimeout(()=>{
+                trans_Succ.css('transform','translateY(-50px)')
+            },2000)
+        }
+        else
+        {
+            alert('Transfer Failed')
+        }
+    })
+
 }
 function reviewFormFunc(dept_or_lab,transferableItemLd) {
     //Display this to which - the item is going -
     //Quantity and lab - details -
-    let outerform = $(`<form class="row" method = "post" action = "/transfer"></form>`)
+    let outerform = $(`<form class="row" id="transferForm" onsubmit="transferSuccessful(event)" method = "post" action = "/transfer"></form>`)
     //This is the table which show the details of product to be transfered from that lab
     let itemDiv_1 = $(`    
                             <div class = "col-6 pl-3 pb-2" id ="item-send"><h5>Sender</h5></div>`)
@@ -81,7 +109,7 @@ function reviewFormFunc(dept_or_lab,transferableItemLd) {
 
 
 
-
+    //Select - Created --------------------
     let selected_lab_val = $('#labId').val()
     // console.log( selected_lab.children("option:selected").val())
 
@@ -94,16 +122,18 @@ function reviewFormFunc(dept_or_lab,transferableItemLd) {
     </div> `)
         itemDiv_2.append(table_content);
 
+
         //Append both the tables into the form
 
         outerform.append(itemDiv_1)
         outerform.append(itemDiv_2)
+
         //Now show the quantity to be transfered in th middle
         let productId = localStorage.getItem('productId')
         let selected_qty = $('#selected-qty')
-        outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity   <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
+        outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity  <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
         <input value="${productId}" name="productId" style="display: none">    `)
-        let transfer_btn = $(`<div class="col-12" align="center"> <input onsubmit="transferSuccessful()" class = "btn btn-info" type="submit" value="Submit" ></div>`)
+        let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
         outerform.append(transfer_btn)
     })
     return outerform
@@ -153,24 +183,22 @@ function createTransferObj(sub_cat,data,data2,labs_data) {
     detailDiv.append(productItem)
     console.log('line 33')
     console.log(labs_data)
-    let labs_list ;
-    $.get('http://localhost:2121/lab',(data)=>{
-        labs_list = data;
-        console.log(data)
-        console.log(labs_list)
-        console.log(labs_data)
+    //let labs_list ;
+    $.get('http://localhost:2121/lab',(labs_list)=>{
 
         let select_div = $('<div class="col-12"></div>')
             select_div.append(`<h6>Select Lab</h6>`)
         let labs_list_Li = [];
-        for(lab of data)
+        for(lab of labs_list)
         {   console.log(lab)
             let item = $(`<option  value = ${lab.id} >${lab.name} </option>`)
             labs_list_Li.push(item)
         }
+        //Creating A Select - having name as LabId
         let labs_select = $('<select class="col-8 p-2" id="labId" name="labId"></select>')
         labs_select.append(labs_list_Li)
         let qty_list = []
+        //Quantity available - Select
         for(i=1 ; i<=labs_data.qty;i++)
         {
             let item = $(`<option>${i} </option>`)
@@ -333,7 +361,7 @@ function funSelectedItem(el){
 
         if(sub_category==="lab")
         {
-            $.get(`http://localhost:2121/transfer/${id}${sub_category}`,(data)=>{
+            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
@@ -398,7 +426,6 @@ function createLi (Obj,category){
                          li.attr('cat-id',Obj.deptorlabId)
                         li.attr('product-id',Obj.productId)
                             li[0].textContent = Obj.name;
-        
                             break;
         case 'faculty' : li.attr('category','faculty')
                          li[0].textContent = Obj.name;

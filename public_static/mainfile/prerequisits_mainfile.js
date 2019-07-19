@@ -64,7 +64,7 @@ function Issue(Obj) {
 
 function Transfer(Obj,laborDept,product,deptOrLab) {
     this.id = Obj.id
-    this.name =product.name + product.manufacturer;
+    this.name =product.name + " " + product.manufacturer + " " + product.modelName;
     this.qty = Obj.qty
     this.deptorlab = deptOrLab
     this.productId = Obj.productId
