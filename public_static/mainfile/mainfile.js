@@ -66,10 +66,22 @@ function transferSuccessful(ev) {
         //    Transfer Successfull
             let trans_Succ = $('#transfer_Succ')
             closepopup();
-            trans_Succ.css('transform','translateY(50px)')
+
+            //REFRESHING THE LIST -
+            $.get('http://localhost:2121/transfer',(data)=>{
+                let list = $('#list-items')
+                list.empty();
+                list_Fun(data,list,'transfer');
+            })
+
+
+
+            trans_Succ.css('transform','translateY(200px)')
+            window.scrollTo(0,0)
             setTimeout(()=>{
-                trans_Succ.css('transform','translateY(-50px)')
-            },2000)
+                trans_Succ.css('transform','translateY(-200px)')
+            },3000)
+
         }
         else
         {
@@ -216,8 +228,8 @@ function createTransferObj(sub_cat,data,data2,labs_data) {
         select_div.append(qty_select)
         detailDiv.append(select_div)
 
-       detailDiv.append('<button class= "mt-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:green; margin: 0 20px">Accept</button>')
-        detailDiv.append('<button class= " mt-3 btn btn-danger">Reject</button>')
+       detailDiv.append('<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>')
+        // detailDiv.append('<button class= " mt-3 btn btn-danger">Reject</button>')
     })
 
 
