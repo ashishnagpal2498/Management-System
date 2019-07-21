@@ -2,14 +2,15 @@ const express = require('express')
 const route = express.Router();
 const databaseProduct = require('../../database/models2').model;
 const IssueDatabase = require('../../database/model_issue').model;
-
+const DatabaseLabs = require('../../database/models').model;
+const sequelize = require('sequelize')
 
 route.get('/',(req,res)=>{
 //    Show all the Products listed -
     //Changes - hERE
-    // IssueDatabase.IssuedLab.findAll({})
+    // IssueDatabase.IssuedLab.ffaculty
     //     .then((result)=>{
-    //         IssueDatabase.IssuedDepartment.findAll((result2)=>{
+    //         IssueDatabase.IssueFaculty.findAll((result2)=>{
     //             res.send(result+result2)
     //         }).catch((err)=>{console.error('Error in finding Issue depts'+err)})
     //     }).catch((err2)=> console.error('Error in finding Issue Labs'+err2))
@@ -56,18 +57,18 @@ route.get('/:id',(req,res)=>{
         },
         include: [{
             model: databaseProduct.Product
-        }]
+        },{model: DatabaseLabs.Labs}]
     }).then((result)=>{
         //console.log(result.product)
         //If the result is empty then - there is no issued in lab previously -
 
-        IssueDatabase.IssuedDepartment.findAll({
+        IssueDatabase.IssueFaculty.findAll({
             where:{
                productId: req.params.id
             },
             include:[{
                 model:databaseProduct.Product
-            }]
+            },{model:DatabaseLabs.Faculty}]
         }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
             console.log('Results Of 1st Query - ')
@@ -114,23 +115,45 @@ route.get('/:id',(req,res)=>{
                 //result 2 exits - That means Product is issued to Department Before -
                     issuedItem.department = result2;
                     issuedItem.product = result2[0].product
-                 remaining_quantity = result2[0].product.qty- result2[0].qty;
+                    let issuedQty = 0;
+                    for(let i=0;i<result2.length;i++)
+                    {
+                        issuedQty+=result2[i].qty;
+                    }
+                 remaining_quantity = result2[0].product.qty- issuedQty;
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
 
             }
             else if(result2[0]===undefined)
-            {   console.log('Inside elseif 1')
+            {   console.log('Inside elseif 2')
                 issuedItem.labs = result
                 issuedItem.product = result[0].product
-                remaining_quantity = result[0].product.qty - result[0].qty;
+
+                let issuedQty = 0;
+                //Issued Qty to Labs
+                for(let i=0;i<result.length;i++)
+                {
+                    issuedQty+=result[i].qty;
+                }
+                remaining_quantity = result[0].product.qty - issuedQty;
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
             else {
-
+                console.log('Inside else part of Req ')
                 issuedItem.product = result[0].product
                 issuedItem.labs = result
                 issuedItem.department = result2
-              remaining_quantity = result[0].product.qty - 0 - result[0].qty - result2[0].qty //also subtract Result product -
+                let issuedQty = 0;
+                for(let i=0;i<result.length;i++)
+                {
+                    issuedQty+=result[i].qty;
+                }
+                //Issued Qty to Department
+                for(let i=0;i<result2.length;i++)
+                {
+                    issuedQty+=result2[i].qty;
+                }
+                remaining_quantity = result[0].product.qty - 0 - issuedQty //also subtract Result product -
                 res.send({remaining_qty:remaining_quantity,notfound:false,issuedItem})
             }
 
@@ -145,67 +168,152 @@ route.get('/:id',(req,res)=>{
     })
 })
 
-function updateProduct(id,remaining_qty,cb)
+function updateProduct(id,cb)
 {
     databaseProduct.Product.update({
-        issued : true,
+        issued : true},
+        {
         where:{
             id:id
         }
-    }).then((result)=> { cb(); console.log('Product with  '+id+' Issued Successfully')})
+    }).then((result)=> { console.log('Product with  '+id+' Issued Successfully') ; cb();})
         .catch((err) => console.error(err))
+}
+function checkProduct(actual_rem_qty,productId,cPcb)
+{
+    if(actual_rem_qty ===0) {
+    console.log('QUANTITY FULL ------------------->>>>')
+        updateProduct(productId, () => {
+            cPcb();
+        })
+    }
+    else{
+        console.log('Else part of rem Quantity')
+        cPcb();
+        //res.redirect('.')
+    }
+
 }
 //Post Request , Then issue the Product To lab or Department -
 route.post('/',(req,res)=>{
     //Check if the field is NULL-
-    if(req.body.category==='department')
+    let actual_rem_qty = +(req.body.remaining_qty) - +(req.body.qty);
+    // console.log("ACTUAL REMAINING QUANTITY -----")
+    console.log(actual_rem_qty);
+    if(req.body.category==='faculty')
     {
-        IssueDatabase.IssuedDepartment.create({
-            qty: req.body.qty,
-        //    Addition of Foreign Key
-            departmentId:req.body.departmentDno,
-            productId: req.body.productId
-        }).then(()=>{
-            console.log('Product Issued in Department Successfully with qty - '+ req.body.qty)
-            //Check - if the Product rem quantity goes to Zero - set the value of
-            //issued in product to 1
-            if(req.body.remquantity===0)
-            updateProduct(req.body.productId,req.body.remquantity,()=>{
-                res.redirect('.')
-            })
-            else{
-                res.redirect('.')
+        //1st check that if the Product is previously issued to the Faculty or not -
+        IssueDatabase.IssueFaculty.findOne({
+            where: {
+                facultyId:req.body.facultyId,
+                productId: req.body.productId
             }
+        }).then((result)=>{
+            //If the Result is Found that means - The Faculty already has the existing product
+            if(result == undefined)
+            {
+                //Create
+                IssueDatabase.IssueFaculty.create({
+                    qty: req.body.qty,
+                    //    Addition of Foreign Key
+                    facultyId:req.body.facultyId,
+                    productId: req.body.productId
+                }).then(()=>{
+                    console.log('Product Issued to Faculty Successfully AND NEW ROW CREATED with qty - '+ req.body.qty)
+                    //Check - if the Product rem quantity goes to Zero - set the value of
+                    //issued in product to 1
 
-        }).catch((err)=>{
-            console.log('Product cannot be issued In Department');
-            console.error(err);
-        })
+                   checkProduct(actual_rem_qty,req.body.productId,()=>{
+                       res.redirect('.')
+                    })
+                }).catch((err)=>{
+                    console.log('Product cannot be issued TO FACULTY NEW ROW');
+                    console.error(err);
+                })
+            }
+            else
+            {
+                IssueDatabase.IssueFaculty.update({
+                    qty: sequelize.literal(`qty + ${req.body.qty}`)
+                    //    Addition of Foreign Key
+                },{
+                   where: {
+                       facultyId: req.body.facultyId,
+                       productId: req.body.productId
+                   }
+                }).then(()=>{
+                    console.log('Product Issued to Faculty Successfully AND PREVIOUS ROW CREATED with qty - '+ req.body.qty)
+                    //Check - if the Product rem quantity goes to Zero - set the value of
+                    //issued in product to 1
+
+                    checkProduct(actual_rem_qty,req.body.productId,()=>{
+                        res.redirect('.')
+                    })
+
+                }).catch((err)=>{
+                    console.log('Product cannot be issued TO FACULTY PREVIOUS ROW');
+                    console.error(err);
+                })
+            }
+        }).catch((err4)=> console.error('Error In finding - Issue Faculty'+err4))
     }
     else if(req.body.category==='lab')
     {
-        IssueDatabase.IssuedLab.create({
-            qty: req.body.qty,
-            // productPid: req.body.id,
-
-            //Foreign key Attributes
-            labId:req.body.labId,
-            productId: req.body.productId
-
-        }).then(()=>{
-            console.log('Product Issued in LAB  Successfully with qty - '+ req.body.qty)
-            if(req.body.remquantity==0)
-                updateProduct(req.body.productPid,req.body.remquantity,()=>{
-                    res.redirect('.')
-                })
-            else{
-                res.redirect('.')
+        IssueDatabase.IssuedLab.findOne({
+            where:{
+                labId:req.body.labId,
+                productId: req.body.productId
             }
+        }).then((result)=>{
 
-        }).catch((err)=>{
-            console.log('Product cannot be issued In Lab ');
-            console.error(err);
+            if(result == undefined)
+            {
+                IssueDatabase.IssuedLab.create({
+                    qty: req.body.qty,
+                    // productPid: req.body.id,
+                    labId:req.body.labId,
+                    productId: req.body.productId
+                }).then(()=>{
+                    console.log('Product Issued in LAB NEW ROW Successfully with qty - '+ req.body.qty)
+
+                    checkProduct(actual_rem_qty,req.body.productId,()=>{
+                        res.redirect('.')
+                    })
+
+                }).catch((err)=>{
+                    console.log('Product cannot be issued In Lab ');
+                    console.error(err);
+                })
+
+            }
+            else
+            {
+                IssueDatabase.IssuedLab.update({
+                    qty: sequelize.literal(`qty + ${req.body.qty}`),
+                    // productPid: req.body.id,
+
+                },{
+                    where: {
+                        labId:req.body.labId,
+                        productId: req.body.productId
+                    }
+                }).then(()=>{
+                    console.log('Product Issued in PREVIOUS  LAB  Successfully with qty - '+ req.body.qty)
+
+                    checkProduct(actual_rem_qty,req.body.productId,()=>{
+                        res.redirect('.')
+                    })
+
+                }).catch((err)=>{
+                    console.log('Product cannot be issued In Lab ');
+                    console.error(err);
+                })
+
+
+            }
         })
+
+
     }
 })
 // route.post('/:id',(req,res)=>{
@@ -220,7 +328,7 @@ route.post('/',(req,res)=>{
 //         }]
 //     }).then((results)=>{
 //         //console.log(results[0].product)
-//         IssueDatabase.IssuedDepartment.findAll({
+//         IssueDatabase.IssueFaculty.findAll({
 //             where:{
 //                 productId: req.params.id
 //             },

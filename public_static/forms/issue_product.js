@@ -12,7 +12,7 @@ function showproducts() {
         for(op of data)
         {   //console.log(op.pid)
             let ocreated = $(`<option name = "productId" value = ${op.id} ></option>`)
-            ocreated[0].innerText = op.id;
+            ocreated[0].innerText = op.name+op.modelName;
             options_list.push(ocreated)
         }
         //console.log(options_list)
@@ -89,6 +89,7 @@ function displayDeptsLabs(previousIssuedData,cb) {
                 for (lab of list_ofdept_labs.labs) {
                     let issueItemLabs = $(`    <li>
                 <div class= "col-10">Lab Id: ${lab.id}</div>
+                  <div class= "col-10">Lab Name: ${lab.lab.name}</div>
                 <div class="col-10">Quantity Issued: ${lab.qty}</div>
                 </li>`)
                     issued_labs.push(issueItemLabs)
@@ -99,7 +100,8 @@ function displayDeptsLabs(previousIssuedData,cb) {
             if(previousIssuedData.issuedItem.department!==null) {
                 for (dept of list_ofdept_labs.department) {
                     let issueItemDept = $(` <li>
-                <div class= "col-10">Department Id: ${dept.id}</div>
+                <div class= "col-10">Faculty Id: ${dept.id}</div>
+                <div class="col-10">Faculty Name : ${dept.faculty.name}</div>
                 <div class="col-10">Quantity Issued: ${dept.qty}</div>
                 </li>`)
                     issued_dept.push(issueItemDept)
@@ -140,7 +142,7 @@ function assignqty(rem_qty) {
     }
     selectqty.append(ops_list);
 }
-function showform(val)
+function showSelectOptions(val)
 {
     console.log(val)
     let category = $(val).attr('value')
@@ -154,19 +156,19 @@ function deparmentElement(data,category)
 {
     let selectOption = $('#departmentorlab')
     selectOption.empty();
-    category==='lab' ? selectOption.attr('name','labId') : selectOption.attr('name','departmentId')
+    category==='lab' ? selectOption.attr('name','labId') : selectOption.attr('name','facultyId')
     let options_list = [];
-    for(dpOrLab of data)
-    {   console.log(dpOrLab)
+    for(facOrLab of data)
+    {   console.log(facOrLab)
         let op = $('<option></option>')
         if(category==='lab')
         {   //console.log(op.labid)
-            op[0].innerText= dpOrLab.name
-            op.attr('value',dpOrLab.id)
+            op[0].innerText= facOrLab.name
+            op.attr('value',facOrLab.id)
         }
         else
-            {   op[0].innerText= dpOrLab.name
-                op.attr('value',dpOrLab.id);
+            {   op[0].innerText= facOrLab.name
+                op.attr('value',facOrLab.id);
             }
         options_list.push(op)
     }

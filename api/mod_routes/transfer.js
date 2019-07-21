@@ -12,22 +12,21 @@ route.get('/',(req,res)=>{
     IssuedDatabase.IssuedLab.findAll({
         include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
     }).then((resultLabs)=>{
-    //    Getting all the labs which are issued computers -
-        IssuedDatabase.IssuedDepartment.findAll(
-            {
+    //    Getting all the Faculty which are issued computers -
+        IssuedDatabase.IssueFaculty.findAll({
                 include: [{
-                    model: DeptorLabs.Depart
+                    model: DeptorLabs.Faculty
                 }, {model:ProductModel.Product}]
             }
         )
-            .then((resultDept)=>{
+            .then((resultFaculty)=>{
                 if(resultLabs[0]!==undefined)
                 {
                     issuedItems.labs = resultLabs
                 }
-                if(resultDept[0]!==undefined)
+                if(resultFaculty[0]!==undefined)
                 {
-                    issuedItems.department = resultDept
+                    issuedItems.department = resultFaculty
                 }
                 res.send(issuedItems)
             })
@@ -52,6 +51,18 @@ route.get('/:id;:deptOrlab',(req,res)=>{
             }
             ,include: [{model:DeptorLabs.Labs},{model:ProductModel.Product}]
         })
+            .then((result)=>{ res.send(result)})
+            .catch((err)=> console.error('Error In finding Issued Product at Transfer '+err))
+    }
+    //Faculty -
+    else {
+        IssuedDatabase.IssueFaculty.findOne(
+            {
+                where: {
+                    id: req.params.id
+                }
+                ,include: [{model:DeptorLabs.Faculty},{model:ProductModel.Product}]
+            })
             .then((result)=>{ res.send(result)})
             .catch((err)=> console.error('Error In finding Issued Product at Transfer '+err))
     }

@@ -155,66 +155,91 @@ function reviewFormFunc(dept_or_lab,transferableItemLd) {
 function closepopup() {
     document.getElementById('popup').style.display = 'none';
 }
-window.onclick = function(event) {
-    let popup_menu = $('#popup')[0]
-    if (event.target === popup_menu ) {
-        popup_menu.style.display = "none";
+
+
+function showSelectOptions(val,total_qty)
+{   let OptionsDiv = $('#options-div')
+    OptionsDiv.empty();
+    console.log(val)
+    let category = $(val).attr('value')
+    console.log(category)
+
+    //Quantity Select -
+    let qty_list = []
+    //Quantity available - Select
+    for(i=1 ; i<=total_qty;i++)
+    {
+        let item = $(`<option>${i} </option>`)
+        qty_list.push(item)
     }
-}
-function issuefun(id,cb) {
-    console.log(typeof id)
-    console.log('To Hit the Issue request')
+    let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
+    qty_select.append(qty_list)
+    let select_div = $('<div class="col-12"></div>')
+    $.get(`http://localhost:2121/${category}`,function (data) {
+        console.log(data);
 
-}
+        //deparmentElement(data,category)
 
-
-function createTransferObj(sub_cat,data,data2,labs_data) {
-    //Data2 is product data and data 1 is LabOrDepartment Data
-    let detailDiv = $('#detailed-div')
-
-    let labItem = createElement(data,"lab")
-    labItem.append(` <li id="qty-issued"><b>Quantity Issued: </b>${labs_data.qty}</li>`)
-    detailDiv.append(labItem)
-
-    let productItem = createElement(data2,"product")
-    detailDiv.append(productItem)
-    console.log('line 33')
-    console.log(labs_data)
-    //let labs_list ;
-    $.get('http://localhost:2121/lab',(labs_list)=>{
-
-        let select_div = $('<div class="col-12"></div>')
-            select_div.append(`<h6>Select Lab</h6>`)
+        select_div.append(`<h6>Select ${category}</h6>`)
         let labs_list_Li = [];
-        for(lab of labs_list)
-        {   console.log(lab)
-            let item = $(`<option  value = ${lab.id} >${lab.name} </option>`)
+        for(i of data)
+        {   console.log(i)
+            let item = $(`<option  value = ${i.id} >${i.name} </option>`)
             labs_list_Li.push(item)
         }
         //Creating A Select - having name as LabId
         let labs_select = $('<select class="col-8 p-2" id="labId" name="labId"></select>')
         labs_select.append(labs_list_Li)
-        let qty_list = []
-        //Quantity available - Select
-        for(i=1 ; i<=labs_data.qty;i++)
+
+        if(category==='lab')
         {
-            let item = $(`<option>${i} </option>`)
-            qty_list.push(item)
+
         }
-        let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
-        qty_select.append(qty_list)
-
-        //Append the main div
+        else
+        {
+            labs_select.attr('name','facultyId')
+        }
         select_div.append(labs_select)
-        //Select Div is appended in the main center div
-        detailDiv.append(select_div)
-
         select_div.append(`<h6>Select Quantity</h6>`)
-        select_div.append(qty_select)
-        detailDiv.append(select_div)
-
-       detailDiv.append('<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>')
+        select_div.append(qty_select);
+        OptionsDiv.append(select_div);
     })
+}
+
+function createTransferObj(sub_cat,data,data2,total_Data) {
+    //Data2 is product data and data 1 is LabOrDepartment Data
+    let detailDiv = $('#detailed-div')
+    if(sub_cat==='lab') {
+        let labItem = createElement(data, "lab")
+        detailDiv.append(labItem)
+        detailDiv.append(` <li id="qty-issued"><b>Quantity Issued: </b>${total_Data.qty}</li>`)
+
+    }
+    else
+    {
+        let FacultyItem = createElement(data, "faculty")
+        detailDiv.append(FacultyItem)
+        detailDiv.append(` <li id="qty-issued"><b>Quantity Issued: </b>${total_Data.qty}</li>`)
+
+    }
+    let productItem = createElement(data2,"product")
+    detailDiv.append(productItem)
+
+    // console.log(total_Data)
+    //let labs_list ;
+    let options_div =$(`<div id="options-div"></div>`)
+    let select_Option = $(`<h4>Select Option</h4>
+       <label>Faculty</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%;" type="radio" class=" " name="category" value="faculty" >
+       <label>Lab</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%" type="radio" class="" name="category" value="lab" >
+        `)
+
+
+        // let select_div = $(`<div class = col-10></div>`)
+        detailDiv.append(select_Option);
+        //Select Div is appended in the main center div
+        detailDiv.append(options_div)
+       detailDiv.append('<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>')
+
 }
 
 //Listing of selected Div - In the centre menu -
@@ -379,6 +404,19 @@ function funSelectedItem(el){
             //     })
             // })
         }
+
+        //It will be faculty-----
+        else
+        {
+            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+                // MULTIPLE PARAMS -
+                console.log('INSIDE TRANSFER -----')
+                console.log(data);
+                createTransferObj(sub_category,data.faculty,data.product,data)
+
+            })
+        }
+
     }
 }
 
@@ -510,17 +548,17 @@ function list_Fun(data,list,category) {
             let li = createLi(object_Transfer,'transfer');
             list_items.push(li)
             console.log(li)
-            Transfer_list.push(object_Transfer);
+            // Transfer_list.push(object_Transfer);
         }
         if(data.department!==null)
         {
             for (item of data.department) {
-                let product_ob = new Transfer(item,"department")
+                let product_ob = new Transfer(item,item.faculty,item.product,"faculty")
                 console.log(item.id)
                 let li = createLi(product_ob,'transfer');
                 list_items.push(li)
                 console.log(li)
-                Transfer_list.push(product_ob);
+                // Transfer_list.push(product_ob);
             }
         }
 
@@ -575,6 +613,13 @@ function menuoptions(){
     for(i of slideMenuIcons)
     {
         i.classList.toggle('slide-menu-icons-display')
+    }
+}
+
+window.onclick = function(event) {
+    let popup_menu = $('#popup')[0]
+    if (event.target === popup_menu ) {
+        popup_menu.style.display = "none";
     }
 }
 

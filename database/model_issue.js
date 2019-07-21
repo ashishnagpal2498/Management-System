@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const dbconfig = require('../databaseconfig').DB
 
-const databaseModel1 = require('./models').model
+const databaseModel1 = require('./models').model;
 const databaseModel2 = require('./models2').model
 
 
@@ -17,8 +17,8 @@ const mgmtSystem = new Sequelize(dbconfig.database,
 )
 
 //Issue database - which will keep the record of which Product is issued to Whom or which LAB-
-const IssuedDepartment = mgmtSystem.define(
-    'issue_dept',
+const IssueFaculty = mgmtSystem.define(
+    'issue_faculty',
     {
         id: {
             type: dataTypes.INTEGER,
@@ -43,10 +43,10 @@ const IssuedLab = mgmtSystem.define(
 )
 
 
-IssuedDepartment.belongsTo(databaseModel1.Depart,{
+IssueFaculty.belongsTo(databaseModel1.Faculty,{
     foreignKeyConstraint:null
 })
-databaseModel1.Depart.hasOne(IssuedDepartment);
+databaseModel1.Faculty.hasOne(IssueFaculty);
 
 IssuedLab.belongsTo(databaseModel1.Labs,{
     foreignKeyConstraint:null
@@ -59,16 +59,16 @@ IssuedLab.belongsTo(databaseModel2.Product,
     })
 databaseModel2.Product.hasMany(IssuedLab)
 
-IssuedDepartment.belongsTo(databaseModel2.Product,
+IssueFaculty.belongsTo(databaseModel2.Product,
     {
         foreignKeyConstraint:null
     })
-databaseModel2.Product.hasMany(IssuedDepartment)
+databaseModel2.Product.hasMany(IssueFaculty)
 
 
 mgmtSystem.sync({alter:true,}).then(() => console.log('Issue Model'))
 .catch((err)=>console.error('issue model'+err))
 
 exports.model={
-    IssuedDepartment, IssuedLab
+    IssueFaculty, IssuedLab
 }
