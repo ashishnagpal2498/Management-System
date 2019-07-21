@@ -172,26 +172,11 @@ function createTransferObj(sub_cat,data,data2,labs_data) {
     //Data2 is product data and data 1 is LabOrDepartment Data
     let detailDiv = $('#detailed-div')
 
-    let labItem = $(`
-          <li id="vendor-id"> <b>Lab ID:</b>  ${data.id} </li>
-                    <li  id="vendor-name"><b>NAME:</b> ${data.name} </li>
-                    <li id="vendor-company-name"><b>BLOCK</b>  ${data.block}</li>
-                    <li><b>Technician: ${data.technician}</b></li>
-                   <li id="hod"><b>Floor:</b> ${data.floor}</li>
-                   <li id="qty-issued"><b>Quantity Issued: </b>${labs_data.qty}</li>
-            `)
+    let labItem = createElement(data,"lab")
+    labItem.append(` <li id="qty-issued"><b>Quantity Issued: </b>${labs_data.qty}</li>`)
     detailDiv.append(labItem)
 
-    let productItem = $(`
-          <li id="product-id"> <b>PRODUCT ID:</b>  ${data2.id} </li>
-                    <li  id="product-name"><b>NAME: ${data2.name}</b> </li>
-                    <!--<li id="vendor-company-name"><b>QUANTITY:</b>  </li>-->
-                    <li id="invoice-number"><b>INVOICE NUMBER:</b> ${data2.invoice_no}</li>
-                    <li><b>Manufacturer</b> ${data2.manufacturer}</li>
-                    <li><b>INNVOICE DATE</b> ${data2.invoice_date}</li>
-                    <li><b>YEAR OF WARRANTY</b> ${data2.years}</li>
-                    <li><b>DETAILS</b> ${data2.product_details}</li>
-            `)
+    let productItem = createElement(data2,"product")
     detailDiv.append(productItem)
     console.log('line 33')
     console.log(labs_data)
@@ -229,13 +214,7 @@ function createTransferObj(sub_cat,data,data2,labs_data) {
         detailDiv.append(select_div)
 
        detailDiv.append('<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>')
-        // detailDiv.append('<button class= " mt-3 btn btn-danger">Reject</button>')
     })
-
-
-    // let transfer_Item = $(`
-    //    <h3>Select the quantity and Lab</h3>
-    // `)
 }
 
 //Listing of selected Div - In the centre menu -
