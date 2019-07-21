@@ -72,6 +72,20 @@ route.get('/:id;:deptOrlab',(req,res)=>{
 //Once Submit there will be two
 route.post('/',(req,res)=>{
     //Find the product in the lab which is to be updated -
+   //Category -
+    if(req.body.senderCategory==='lab')
+    {
+
+    }
+    else
+    {
+
+    }
+    if(req.body.receiverCategory==='lab')
+    {
+        //-----> To be transfered To lab -
+
+    }
     console.log(req.body)
     IssuedDatabase.IssuedLab.update({
         qty: sequelize.literal(`qty - ${req.body.transferQty}`)

@@ -90,7 +90,7 @@ function transferSuccessful(ev) {
     })
 
 }
-function reviewFormFunc(dept_or_lab,transferableItemLd) {
+function reviewFormFunc(faculty_or_lab,transferableItemLd) {
     //Display this to which - the item is going -
     //Quantity and lab - details -
     let outerform = $(`<form class="row" id="transferForm" onsubmit="transferSuccessful(event)" method = "post" action = "/transfer"></form>`)
@@ -102,52 +102,62 @@ function reviewFormFunc(dept_or_lab,transferableItemLd) {
                             <div class="col-6 pl-3 pb-2" id = "item-receive"><h5>Receiver</h5></div> `)
 
 
-    $.get(`http://localhost:2121/${dept_or_lab}/${transferableItemLd}`,(data)=>{
-        if(dept_or_lab==='lab')
+    $.get(`http://localhost:2121/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
+        let table_content;
+        if(faculty_or_lab==='lab')
         {
-            let table_content = $(`
+            table_content = $(`
         <div class="row">
         <div class="col-6 p-2">Lab Id <input name="senderLabId" value=" ${data.id}" readonly ></div>
         <div class="col-6 p-2">Lab name <input name="senderName" value=" ${data.name}" readonly></div>
     </div>
        `)
-            itemDiv_1.append(table_content)
         }
         else
         {
-
+            table_content = $(`
+        <div class="row">
+        <div class="col-6 p-2">Faculty Id <input name="senderFacultyId" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">Faculty name <input name="senderFacultyName" value=" ${data.name}" readonly></div>
+    </div>
+       `)
         }
+        itemDiv_1.append(`<input type="text" style="display: none" value="${faculty_or_lab}" name="senderCategory">`)
+        itemDiv_1.append(table_content)
     })
 
 
 
     //Select - Created --------------------
-    let selected_lab_val = $('#labId').val()
+    let selected_transfer_val = $('#TransferId').val()
     // console.log( selected_lab.children("option:selected").val())
+    let facultyOrLab = selected_transfer_val.attr('name').split('Id')[0];
 
 
-    $.get(`http://localhost:2121/lab/${selected_lab_val}`,(data)=>{
-        console.log(data)
-        let table_content = $(`  <div class="row">
-        <div class="col-6 p-2">Lab Id <input name="receiverLabId" value=" ${data.id}" readonly ></div>
-        <div class="col-6 p-2">Lab name <input name="receiverName" value=" ${data.name}" readonly></div>
+        $.get(`http://localhost:2121/${facultyOrLab}/${selected_transfer_val}`,(data)=>{
+            console.log(data)
+            let table_content = $(`  <div class="row">
+        <div class="col-6 p-2">${facultyOrLab} Id <input name="receiver${facultyOrLab}Id" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">${facultyOrLab} name <input name="receiver${facultyOrLab}Name" value=" ${data.name}" readonly></div>
     </div> `)
-        itemDiv_2.append(table_content);
+            itemDiv_2.append(table_content);
 
 
-        //Append both the tables into the form
+            //Append both the tables into the form
 
-        outerform.append(itemDiv_1)
-        outerform.append(itemDiv_2)
+            outerform.append(itemDiv_1)
+            outerform.append(itemDiv_2)
 
-        //Now show the quantity to be transfered in th middle
-        let productId = localStorage.getItem('productId')
-        let selected_qty = $('#selected-qty')
-        outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity  <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
-        <input value="${productId}" name="productId" style="display: none">    `)
-        let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
-        outerform.append(transfer_btn)
-    })
+            //Now show the quantity to be transfered in th middle
+            let productId = localStorage.getItem('productId')
+            let selected_qty = $('#selected-qty')
+            outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity  <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
+        <input value="${productId}" name="productId" style="display: none"> 
+        <input value="${facultyOrLab}" name="receiverCategory" type="text" style="display: none">    `)
+            let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
+            outerform.append(transfer_btn)
+        })
+
     return outerform
 }
 
@@ -188,7 +198,7 @@ function showSelectOptions(val,total_qty)
             labs_list_Li.push(item)
         }
         //Creating A Select - having name as LabId
-        let labs_select = $('<select class="col-8 p-2" id="labId" name="labId"></select>')
+        let labs_select = $('<select class="col-8 p-2" id="TransferId" name="labId"></select>')
         labs_select.append(labs_list_Li)
 
         if(category==='lab')
