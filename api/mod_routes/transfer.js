@@ -73,45 +73,73 @@ route.get('/:id;:deptOrlab',(req,res)=>{
 route.post('/',(req,res)=>{
     //Find the product in the lab which is to be updated -
    //Category -
+    console.log(req.body)
     if(req.body.senderCategory==='lab')
     {
+    //Workin here - SENDER IS FROM THE LAB
+        IssuedDatabase.IssuedLab.update({
+                qty: sequelize.literal(`qty - ${req.body.transferQty}`)
+            },
+            {
+                where:{
+                    labId: req.body.senderLabId,
+                    productId : req.body.productId
+                },
+            }).then(()=> {
+            console.log('Senders Result------------------>>')
+            IssuedDatabase.IssuedLab.destroy({
+                where: {
+                    qty: 0,
+                    labId: req.body.senderLabId,
+                    productId : req.body.productId
+                }
+            }).then(()=>{ console.log('Value Destroyed')}).catch((err3)=> console.error('Cannot Destroy '+err3))
+            console.log('SENDER UPDATED SUCCESSFULLY - LAB - ')
+
+            // console.log(senderResult)
+        }).catch((err_sender_lab)=>{
+            console.error('Error in Updating Lab - Sender '+err_sender_lab)
+        })
+
 
     }
+    //If the sender is Faculty -
     else
     {
+        //SENDER- FACULTY -
+        IssuedDatabase.IssueFaculty.update({
+                qty: sequelize.literal(`qty - ${req.body.transferQty}`)
+            },
+            {
+                where:{
+                    facultyId: req.body.senderFacultyId,
+                    productId : req.body.productId
+                },
+            }).then((senderResult)=> {
+            console.log('Senders Result------------------>>')
+            IssuedDatabase.IssueFaculty.destroy({
+                where: {
+                    qty: 0,
+                    facultyId: req.body.senderFacultyId,
+                    productId : req.body.productId
+                }
+            }).then(()=>{ console.log('Value Destroyed')}).catch((err3)=> console.error('Cannot Destroy '+err3))
+            console.log('SENDER UPDATED SUCCESSFULLY - FACULTY ')
+
+            // console.log(senderResult)
+        }).catch((err_sender_lab)=>{
+            console.error('Error in Updating Lab - Sender '+err_sender_lab)
+        })
+
 
     }
     if(req.body.receiverCategory==='lab')
     {
         //-----> To be transfered To lab -
-
-    }
-    console.log(req.body)
-    IssuedDatabase.IssuedLab.update({
-        qty: sequelize.literal(`qty - ${req.body.transferQty}`)
-    },
-        {
-            where:{
-                labId: req.body.senderLabId,
-                productId : req.body.productId
-            },
-            returning : true,
-            plain: true
-        }).then((senderResult)=>{
-            console.log('Senders Result------------------>>')
-            // console.log(senderResult)
-                IssuedDatabase.IssuedLab.destroy({
-                    where: {
-                        qty: 0,
-                        labId: req.body.senderLabId,
-                        productId : req.body.productId
-                    }
-                }).then(()=>{ console.log('Value Destroyed')}).catch((err3)=> console.error('Cannot Destroy '+err3))
-        console.log('SENDER UPDATED SUCCESSFULLY')
         IssuedDatabase.IssuedLab.findOne({
             where: {
                 productId : req.body.productId,
-                labId: req.body.receiverLabId
+                labId: req.body.receiver_labId
             }
         }).then((result2)=>{
             //If the result is found
@@ -121,10 +149,12 @@ route.post('/',(req,res)=>{
                 IssuedDatabase.IssuedLab.create({
                     qty: req.body.transferQty,
                     productId: req.body.productId,
-                    labId: req.body.receiverLabId
+                    labId: req.body.receiver_labId
                 }).then(()=>{
-                    console.log('RECEIVER CREATED SUCCESSFULLY')
+                    console.log('RECEIVER CREATED NEW ROW OF LAB -  SUCCESSFULLY')
+
                     res.send({message:"Transfer Successful",transfer:true})
+
                 }).catch((err_r)=>{
                     console.error('CANNOT ADD -' +err_r)
                 })
@@ -136,10 +166,58 @@ route.post('/',(req,res)=>{
                 },{
                     where: {
                         productId : req.body.productId,
-                        labId: req.body.receiverLabId
+                        labId: req.body.receiver_labId
                     }
                 }).then(()=>{
                     //Final result - UPDATED -
+                    console.log('TRANSFER SUCCESSFUL IN EXISTING LAB ROW  ')
+                    res.send({message:"Transfer Successful",transfer:true})
+
+                }).catch((err)=>{
+                    console.log('Cannot update -'+err)
+                })
+            }
+        }).catch((err_receiver)=>{
+            //Find ka catch
+            console.error('Cannot FIND LAB WITH THAT ID RECEIVER '+err_receiver)
+        })
+
+
+    }
+    else {
+        IssuedDatabase.IssueFaculty.findOne({
+            where: {
+                productId : req.body.productId,
+                facultyId: req.body.receiver_facultyId
+            }
+        }).then((result2)=>{
+            //If the result is found
+            if(result2 == undefined)
+            {
+                //create -
+                IssuedDatabase.IssueFaculty.create({
+                    qty: req.body.transferQty,
+                    productId: req.body.productId,
+                    facultyId: req.body.receiver_facultyId
+                }).then(()=>{
+                    console.log('RECEIVER CREATED NEW ROW OF FACULTY - SUCCESSFULLY')
+                    res.send({message:"Transfer Successful",transfer:true})
+                }).catch((err_r)=>{
+                    console.error('CANNOT ADD -' +err_r)
+                })
+            }
+            else
+            {
+                IssuedDatabase.IssueFaculty.update({
+                    qty : sequelize.literal(`qty + ${req.body.transferQty}`)
+                },{
+                    where: {
+                        productId : req.body.productId,
+                        facultyId: req.body.receiver_facultyId
+                    }
+                }).then(()=>{
+                    //Final result - UPDATED -
+                    console.log('TRANSFER SUCCESSFUL - EXISTING ROW FACULTY UPDATED')
                     res.send({message:"Transfer Successful",transfer:true})
                 }).catch((err)=>{
                     console.log('Cannot update -'+err)
@@ -149,115 +227,7 @@ route.post('/',(req,res)=>{
             //Find ka catch
             console.log(err_receiver)
         })
-            // IssuedDatabase.IssuedLab.upsert({
-            //     qty: sequelize.literal(`qty + ${req.body.transferQty}`),
-            //     productId : req.body.productId,
-            //     labId: req.body.receiverLabId
-            // },{
-            //     where: {
-            //         productId : req.body.productId,
-            //         labId: req.body.receiverLabId
-            //     }
-            // }).then((result)=>{
-            //     console.log('ROW CREATED OR UPDATED ')
-            //     res.send({message:"Transfer Successfull",transfer:true})
-            // })
-            //     .catch((err_add)=>{
-            //         console.error('Cannot Create Or Update Value '+err_add)
-            //         res.send({message:err_add,transfer:false})
-            //     })
-
-    }).catch((err)=>{
-        console.log('Failed To update Sender')
-        res.status(400).send({message:"Transfer Failed Due to Sender Update",transfer:false})
-    })
-    // IssuedDatabase.IssuedLab.findOne(
-    //     {
-    //         where : {
-    //             labId: req.body.senderLabId,
-    //             productId : req.body.productId
-    //         }
-    //     }
-    // ).then((result1)=>{
-    //     console.log(result1.qty)
-    //     //
-    //     let rem_qty = result1.qty -  req.body.transferQty;
-    //     IssuedDatabase.IssuedLab.update({
-    //         qty: rem_qty
-    //         },
-    //     {
-    //         where:{
-    //             labId: req.body.senderLabId,
-    //                 productId : req.body.productId
-    //         }
-    //     //Adding 1 more lab and the check -
-    //     }).then((result_update)=>{
-    //         console.log('Result has been updated in Sender Lab')
-    //
-    //     //    Lab 2 selected mein quantity increase or create the row
-    //         IssuedDatabase.IssuedLab.findOne(
-    //             {
-    //                 where : {
-    //                     labId: req.body.receiverLabId,
-    //                     productID : req.body.productId
-    //                 }
-    //             }
-    //         ).then((resultReceiver)=>
-    //         {   console.log(resultReceiver);
-    //             if(resultReceiver == undefined)
-    //             {   console.log('Receiver Row Does not Exist - ')
-    //                 //Empty insert the row
-    //                 IssuedDatabase.IssuedLab.create(
-    //                     {   qty: req.body.transferQty,
-    //                         labId : req.body.receiverLabId,
-    //                         productId: req.body.productId
-    //                     }
-    //                 ).then((result)=>   {
-    //
-    //                     console.log('New Row created and Transfered Successfully')
-    //                     res.send({message:"Transfer Successful",transfer:true})
-    //                 })
-    //
-    //
-    //             }
-    //             else
-    //             {   console.log('Receiver Row Exist ')
-    //                 let rem_qty = resultReceiver.qty + req.body.transferQty
-    //                 IssuedDatabase.IssuedLab.update({
-    //                   //runate value error
-    //                     qty: sequelize.literal(`qty + ${req.body.transferQty}`)
-    //                     }
-    //                 ,{
-    //                     where: {
-    //                         labId: req.body.receiverLabId,
-    //                         productID : req.body.productId
-    //                     }
-    //                 }).then((result_end)=> {   console.log('Updated the Row - ')
-    //
-    //                 //    Sending the Result- message
-    //                     res.send({message:"transfer successfull",transfer:true})
-    //                 })
-    //             }
-    //         }).catch((err1)=>{
-    //             console.log('Error '+err1)
-    //             res.send({message:"Transfer failed",transfer:false})
-    //         })
-    //
-    //
-    //
-    //
-    //
-    //     }).catch((err)=> {
-    //         console.error("Result cannot be updated in Sender Lab - "+err)})
-    //         res.status(404).send({message:"Cannot update Sender Lab",transfer:false})
-    // }).catch((err2)=>{
-    //     res.status(404).send({message:"Cannot Find Sender Lab",transfer:false})
-    //
-    //     console.error("Error in finding Sender Lap - "+err2)
-    // })
-
-
-
+    }
 })
 
 

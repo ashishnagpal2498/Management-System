@@ -49,6 +49,7 @@ function transferSuccessful(ev) {
     //Not working Right Now -
     ev.preventDefault();
     let senderId = $('input[name="senderLabId"]')
+    //SEND HERE -----
     let receiverId = $('input[name = "receiverLabId"]')
     let transferQty = $('input[name="transferQty"]')
     let productId = $('input[name="productId"]')
@@ -129,16 +130,17 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
 
 
     //Select - Created --------------------
-    let selected_transfer_val = $('#TransferId').val()
+    let selected_transfer = $('#TransferId')
+    let selected_transfer_val = selected_transfer.val()
     // console.log( selected_lab.children("option:selected").val())
-    let facultyOrLab = selected_transfer_val.attr('name').split('Id')[0];
+    let facultyOrLab = selected_transfer.attr('name').split('Id')[0];
 
 
         $.get(`http://localhost:2121/${facultyOrLab}/${selected_transfer_val}`,(data)=>{
             console.log(data)
             let table_content = $(`  <div class="row">
-        <div class="col-6 p-2">${facultyOrLab} Id <input name="receiver${facultyOrLab}Id" value=" ${data.id}" readonly ></div>
-        <div class="col-6 p-2">${facultyOrLab} name <input name="receiver${facultyOrLab}Name" value=" ${data.name}" readonly></div>
+        <div class="col-6 p-2">${facultyOrLab} Id <input name="receiver_${facultyOrLab}Id" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">${facultyOrLab} name <input name="receiver_${facultyOrLab}Name" value=" ${data.name}" readonly></div>
     </div> `)
             itemDiv_2.append(table_content);
 
