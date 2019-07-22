@@ -731,8 +731,15 @@ function show(ev) {
     list.empty()
     console.log(ev)
     //Request Going to that which option is clicked -
-    let formrequest = $(ev).attr('myval-div')
-    console.log(formrequest)
+    let formrequest;
+    if(typeof ev ==='string')
+    {
+        formrequest = ev;
+    }
+   else {
+        formrequest= $(ev).attr('myval-div')
+        console.log(formrequest)
+    }
 
     $.get(`http://localhost:2121/${formrequest}`,
         //Callback Function which Receives Data -
@@ -783,16 +790,25 @@ window.onclick = function(event) {
 $(()=>{
     //Prototype Classes -
     $.get('http://localhost:2121/login',(data)=>{
-
-        if(data!==undefined && data.user[0].username==='admin')
+        console.log('User Check')
+        if(data.user != undefined)
         {   //Admin login - Set the user Value-
-
-            adminLogin = true;
-            $('#add-btn')[0].classList.remove('display-btns')
-            $('#edit-btn')[0].classList.remove('display-btns')
-            $('#delete-btn')[0].classList.remove('display-btns')
-
+            if(data.user[0].username==='admin') {
+                adminLogin = true;
+                $('#add-btn')[0].classList.remove('display-btns')
+                $('#edit-btn')[0].classList.remove('display-btns')
+                $('#delete-btn')[0].classList.remove('display-btns')
+            }
+            let username_Div = $('#username')
+            username_Div.empty();
+            username_Div.append(data.user[0].username)
             console.log(data.user[0].name);
         }
+
     })
+    let urlSplitter = window.location.href.split('=')[1];
+    if(urlSplitter)
+    {
+        show(urlSplitter);
+    }
 })

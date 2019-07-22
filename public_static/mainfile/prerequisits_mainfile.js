@@ -82,7 +82,7 @@ function createElement (Obj,category) {
         let vendorItem = $(`
              <li id="vendor-id"> <b>VENDOR ID:</b>  ${Obj.id} </li>
                     <li  id="vendor-name"><b>NAME: ${Obj.name}</b></li>
-                    <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.company}</li>
+                    <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.companyname}</li>
                     <li id="vendor-contact-number"><b>Company NUMBER: ${Obj.companycontact}</b></li>
                     <li><b>Personal Contact : ${Obj.personalcontact}</b></li>
                     <li><b>EMAIL: ${Obj.companyemail}</b></li>
