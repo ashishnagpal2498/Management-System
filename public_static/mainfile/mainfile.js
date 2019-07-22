@@ -531,6 +531,17 @@ function funSelectedItem(el){
         }
 
     }
+    else if(category==='store')
+    {
+        $.get(`http://localhost:2121/issue/${id}`,(list_of_faculty_labs)=> {
+
+            detailDiv.append(createElement(list_of_faculty_labs.issuedItem.product,'product'))
+            detailDiv.append(`<div class="col-12"><h4>Remaining Quantity</h4> ${list_of_faculty_labs.remaining_qty}</div>`)
+        })
+
+
+
+    }
 }
 
 
@@ -578,6 +589,10 @@ function createLi (Obj,category){
                                  li.attr('cat-id',Obj.facultyorlabId)
                                 li.attr('product-id',Obj.productId)
                                      li[0].textContent = Obj.name;             
+                                    break;
+        case 'store' :         li[0].textContent = Obj.invoice_no + " " + Obj.name;
+                                 li.attr('category','store')
+                                break;
     }
 
 
@@ -607,8 +622,6 @@ function list_Fun(data,list,category) {
             console.log(item.id)
             let li = createLi(product_ob,'product');
             list_items.push(li)
-            console.log(li)
-            Product_list.push(product_ob);
         }
     }
     else if(category==='faculty')
@@ -656,10 +669,7 @@ function list_Fun(data,list,category) {
             addbtn[0].textContent = "Issue Product"
     }
     else if(category==='transfer')
-    {   console.log('Testing data of transfer')
-        console.log(data.labs)
-        console.log('------------------------------------>>>>>>>>>>>>>>>>>>>>>>')
-        console.log(data);
+    {
         if(data.labs!==null)
         for (item of data.labs)
         {
@@ -698,6 +708,14 @@ function list_Fun(data,list,category) {
                 list_items.push(li)
                 console.log(li)
             }
+        }
+    }
+    else if (category==='store')
+    {
+        for (item of data) {
+            let product_ob = new Product(item)
+            let li = createLi(product_ob,'store');
+            list_items.push(li)
         }
     }
     console.log(list_items)
