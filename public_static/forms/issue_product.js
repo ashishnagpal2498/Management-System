@@ -82,7 +82,7 @@ function displayDeptsLabs(previousIssuedData,cb) {
             let lab_details = $('#lab-details')
             let dept_details = $('#dept-details')
             let issued_labs = []
-            let issued_dept = []
+            let issued_faculty = []
             lab_details.empty()
             dept_details.empty()
             if(previousIssuedData.issuedItem.labs!==null) {
@@ -97,14 +97,14 @@ function displayDeptsLabs(previousIssuedData,cb) {
                 lab_details.append(issued_labs);
             }
 
-            if(previousIssuedData.issuedItem.department!==null) {
-                for (dept of list_ofdept_labs.department) {
+            if(previousIssuedData.issuedItem.faculty!==null) {
+                for (faculty of list_ofdept_labs.faculty) {
                     let issueItemDept = $(` <li>
-                <div class= "col-10">Faculty Id: ${dept.id}</div>
-                <div class="col-10">Faculty Name : ${dept.faculty.name}</div>
-                <div class="col-10">Quantity Issued: ${dept.qty}</div>
+                <div class= "col-10">Faculty Id: ${faculty.id}</div>
+                <div class="col-10">Faculty Name : ${faculty.faculty.name}</div>
+                <div class="col-10">Quantity Issued: ${faculty.qty}</div>
                 </li>`)
-                    issued_dept.push(issueItemDept)
+                    issued_faculty.push(issueItemDept)
                 }
                 dept_details.append(issued_dept)
             }

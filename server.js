@@ -18,7 +18,8 @@ const routes = {
     logout: require('./api/logout').route,
     issue: require('./api/mod_routes/issue').route,
     transfer: require('./api/mod_routes/transfer').route,
-    faculty : require('./api/faculty').route
+    faculty : require('./api/faculty').route,
+    return_val : require('./api/mod_routes/return').route
 }
 
 
@@ -49,6 +50,7 @@ app.use('/product',routes.product)
 app.use('/logout',routes.logout);
 app.use('/transfer',routes.transfer);
 app.use('/faculty',routes.faculty);
+app.use('/Return',routes.return_val);
 //All routes are check and request doesn't match any of the Route -
 app.use((req,res)=>{
     res.send({message:'Error, Cannot find path you are looking for'})

@@ -79,7 +79,7 @@ route.get('/:id',(req,res)=>{
 
             let issuedItem = {
                 labs : null,
-                department: null,
+                faculty: null,
                   product: null
             }
             let remaining_quantity;
@@ -113,7 +113,7 @@ route.get('/:id',(req,res)=>{
         else if(result[0]===undefined)
             {   console.log('Inside elseif 1')
                 //result 2 exits - That means Product is issued to Department Before -
-                    issuedItem.department = result2;
+                    issuedItem.faculty = result2;
                     issuedItem.product = result2[0].product
                     let issuedQty = 0;
                     for(let i=0;i<result2.length;i++)
@@ -142,7 +142,7 @@ route.get('/:id',(req,res)=>{
                 console.log('Inside else part of Req ')
                 issuedItem.product = result[0].product
                 issuedItem.labs = result
-                issuedItem.department = result2
+                issuedItem.faculty = result2
                 let issuedQty = 0;
                 for(let i=0;i<result.length;i++)
                 {

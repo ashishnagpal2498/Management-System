@@ -66,10 +66,12 @@ function Transfer(Obj,laborDept,product,deptOrLab) {
     this.id = Obj.id
     this.name =product.name + " " + product.manufacturer + " " + product.modelName + " " + laborDept.name;
     this.qty = Obj.qty
-    this.deptorlab = deptOrLab
+    this.facultyorlab = deptOrLab
     this.productId = Obj.productId
     //Either take the 1st value or the second value
-    this.deptorlabId = Obj.labId || Obj.departmentId
+    if(deptOrLab==='lab')
+    this.facultyorlabId = Obj.labId
+        else this.facultyorlabId = Obj.facultyId;
 }
 
 //Html elements used

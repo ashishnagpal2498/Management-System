@@ -10,6 +10,13 @@ route.get('/',(req,res)=>{
         .catch((err)=> console.error(err))
 })
 
+route.get('/:id',(req,res)=>{
+    Vendor.findOne({
+        where: {id:req.params.id}
+    }).then((result)=> res.send(result))
+        .catch((err)=>{console.error('Error In finding - VEndor '+err)})
+})
+
 route.post('/',(req,res)=>{
     Vendor.create({
         vdorid:req.body.vendorid,

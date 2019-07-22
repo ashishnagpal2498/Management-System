@@ -1,18 +1,18 @@
-function reviewmenufunc() {
+function reviewmenufunc(category) {
     //Displaying the popup menu
     let popup_menu = $('#popup')
     let popup_content = $('#popup-content')
     popup_content.empty()
     let pop_up_menu_heading = $(` <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
         <!--Display the content here-->
-        <h4> Transfer Review </h4>`)
+        <h4 class="review-heading"> ${category} Review </h4>`)
     popup_content.append(pop_up_menu_heading)
     popup_menu.css('display','block')
 
     //Display this which item was selected and
     let productId = localStorage.getItem('productId')
-    let transferableItemLd = localStorage.getItem('deptorlab')
-    let dept_or_lab = localStorage.getItem('sub_cat')
+    let transferableItemLd = localStorage.getItem('sub_cat_Id')
+    let faculty_or_lab = localStorage.getItem('sub_cat')
 
 
 
@@ -33,39 +33,119 @@ function reviewmenufunc() {
         popup_content.append(prod_details)
 
 
-
-        let outerform = reviewFormFunc(dept_or_lab,transferableItemLd);
-
-
-        popup_content.append(outerform);
+        if(category==='transfer') {
+            let outerform = reviewFormFunc(faculty_or_lab, transferableItemLd);
 
 
+            popup_content.append(outerform);
+
+        }
+        else if(category==='Return')
+        {
+            //
+            $.get(`http://localhost:2121/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
+                let table_content;
+                if(faculty_or_lab==='lab')
+                {
+                    table_content = $(`<div class="row"><div class="col-6 p-2">Lab Id <input name="LabId" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">Lab name <input name="LabName" value=" ${data.name}" readonly></div>
+    </div>`)
+                }
+                else
+                {
+                    table_content = $(`
+        <div class="row">
+        <div class="col-6 p-2">Faculty Id <input name="FacultyId" value=" ${data.id}" readonly ></div>
+        <div class="col-6 p-2">Faculty name <input name="FacultyName" value=" ${data.name}" readonly></div>
+    </div>
+       `)
+                }
+                let selected_qty = $('#selected-qty')
+                popup_content.append(`<div class="col-10">Selected Qty <input name="selected-qty" type="number" value="${selected_qty.val()}"></div>`)
+                popup_content.append(`<input name="productId" value="${productId}" style="display: none">
+                <input type="text" id="category" style="display: none" value="${faculty_or_lab}" name="category">`)
+                    popup_content.append(table_content)
+                popup_content.append(`<div class="col-3 btn btn-info" onclick="reviewReturnItem()">Submit</div>`)
+            })
+            
+            
+        }
     })
 
 
 
 }
+function reviewReturnItem() {
+    let category = $('#category')
+    let labId = $('input[name ="LabId"]')
+    let facultyId = $('input[name ="FacultyId"]')
+    let selectedQty = $('input[name="selected-qty"]')
+    let productId = $('input[name="productId"]')
+    $.post('http://localhost:2121/Return',
+        {
+            category:category.val(),
+            labId: labId.val(),
+            facultyId: facultyId.val(),
+            qty: selectedQty.val(),
+            productId:productId.val()
+        },(data)=>{
+            //popoff the menu
+            //refresh the return list
+            closepopup();
+            if(data.itemReturned)
+            {   let success_Div = $('#success-div-popup')
+                success_Div.empty();
+                //Refresh Values
+
+                $.get('http://localhost:2121/Return',(data)=>{
+                    let list = $('#list-items')
+                    list.empty();
+                    list_Fun(data,list,'Return');
+                })
+
+                success_Div.append(data.message)
+                // alert(data.message);
+                success_Div.css('display','block')
+                setTimeout(()=>{
+                    success_Div.css('display','none')
+                },3000)
+            }
+            else
+            {
+
+            }
+        })
+}
 function transferSuccessful(ev) {
     //Not working Right Now -
     ev.preventDefault();
-    let senderId = $('input[name="senderLabId"]')
+
+    let senderCategory = $('#senderCategory')
+    let receiverCategory = $('#receiverCategory')
+    let senderFacultyId = $('input[name="senderFacultyId"]')
+    let senderLabId = $('input[name="senderLabId"]')
     //SEND HERE -----
-    let receiverId = $('input[name = "receiverLabId"]')
+    let receiver_labId = $('input[name = "receiver_labId"]')
+    let receiver_facultyId = $('input[name = "receiver_facultyId"]')
     let transferQty = $('input[name="transferQty"]')
     let productId = $('input[name="productId"]')
 
     let transferForm = $('#transferForm')
 
     $.post('http://localhost:2121/transfer',{
-        senderLabId: senderId.val(),
-        receiverLabId:receiverId.val(),
+        senderCategory: senderCategory.val(),
+        receiverCategory: receiverCategory.val(),
+        senderFacultyId : senderFacultyId.val(),
+        senderLabId: senderLabId.val(),
+        receiver_labId: receiver_labId.val(),
+        receiver_facultyId: receiver_facultyId.val(),
         transferQty: transferQty.val(),
         productId: productId.val()
     },(data)=>{
         if(data.transfer)
         {
         //    Transfer Successfull
-            let trans_Succ = $('#transfer_Succ')
+            let trans_Succ = $('#success-div-popup')
             closepopup();
 
             //REFRESHING THE LIST -
@@ -77,10 +157,10 @@ function transferSuccessful(ev) {
 
 
 
-            trans_Succ.css('transform','translateY(200px)')
+            trans_Succ.css('display','block')
             window.scrollTo(0,0)
             setTimeout(()=>{
-                trans_Succ.css('transform','translateY(-200px)')
+                trans_Succ.css('display','none')
             },3000)
 
         }
@@ -123,7 +203,7 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
     </div>
        `)
         }
-        itemDiv_1.append(`<input type="text" style="display: none" value="${faculty_or_lab}" name="senderCategory">`)
+        itemDiv_1.append(`<input type="text" id="senderCategory" style="display: none" value="${faculty_or_lab}" name="senderCategory">`)
         itemDiv_1.append(table_content)
     })
 
@@ -155,7 +235,7 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
             let selected_qty = $('#selected-qty')
             outerform.append(`<div class="col-12 mt-2 mb-2"> <h6 align="center">Selected Quantity  <input name="transferQty" value=" ${selected_qty.val()}" readonly> </h6></div>
         <input value="${productId}" name="productId" style="display: none"> 
-        <input value="${facultyOrLab}" name="receiverCategory" type="text" style="display: none">    `)
+        <input value="${facultyOrLab}" name="receiverCategory" id="receiverCategory" type="text" style="display: none">    `)
             let transfer_btn = $(`<div class="col-12" align="center"> <input class = "btn btn-info" type="submit" value="Submit" ></div>`)
             outerform.append(transfer_btn)
         })
@@ -218,7 +298,7 @@ function showSelectOptions(val,total_qty)
     })
 }
 
-function createTransferObj(sub_cat,data,data2,total_Data) {
+function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     //Data2 is product data and data 1 is LabOrDepartment Data
     let detailDiv = $('#detailed-div')
     if(sub_cat==='lab') {
@@ -239,8 +319,9 @@ function createTransferObj(sub_cat,data,data2,total_Data) {
 
     // console.log(total_Data)
     //let labs_list ;
-    let options_div =$(`<div id="options-div"></div>`)
-    let select_Option = $(`<h4>Select Option</h4>
+    if(cat==='transfer') {
+        let options_div = $(`<div id="options-div"></div>`)
+        let select_Option = $(`<h4>Select Option</h4>
        <label>Faculty</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%;" type="radio" class=" " name="category" value="faculty" >
        <label>Lab</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%" type="radio" class="" name="category" value="lab" >
         `)
@@ -250,8 +331,24 @@ function createTransferObj(sub_cat,data,data2,total_Data) {
         detailDiv.append(select_Option);
         //Select Div is appended in the main center div
         detailDiv.append(options_div)
-       detailDiv.append('<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc()" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>')
+        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>`)
+    }
+    else if(cat==='Return')
+    {
+        let qty_list = []
+        //Quantity available - Select
+        for(i=1 ; i<=total_Data.qty;i++)
+        {
+            let item = $(`<option>${i} </option>`)
+            qty_list.push(item)
+        }
+        let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
+        qty_select.append(qty_list)
+        detailDiv.append(qty_select);
+        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">RETURN</button></div>`)
 
+
+    }
 }
 
 //Listing of selected Div - In the centre menu -
@@ -278,25 +375,15 @@ function funSelectedItem(el){
     //Need to request database everytime whenever the item is clicked
     //cannot store the Temp data on files as request coming from which path not decided
     if(category==='vendor') {
-        for (it of Vendors_List) {
-            console.log(it)
-            //List item is of type string hence Type Cas to number value
-            if (+list_item === it.id) {   //console.log('abc')
-                detailDiv.append(createElement(it,category))
-                break;
-            }
-        }
+        $.get(`http://localhost:2121/vendor/${id}`,(data)=>{
+            detailDiv.append(createElement(data,category))
+        })
     }
     else if(category==='product')
     {
-        for (it of Product_list) {
-            console.log(typeof it.id)
-            //List item is of type string hence Type Cas to number value
-            if (+list_item === it.id) {   //console.log('abc')
-                detailDiv.append(createElement(it,category))
-                break;
-            }
-        }
+        $.get(`http://localhost:2121/product/${id}`,(data)=>{
+            detailDiv.append(createElement(data,category))
+        })
     }
     else if(category==='faculty')
     {
@@ -306,25 +393,16 @@ function funSelectedItem(el){
     }
     else if(category==='department')
     {
-        for (it of Department_list) {
-            console.log(typeof it.id)
-            //List item is of type string hence Type Cas to number value
-            if (+list_item === it.id) {   //console.log('abc')
-                detailDiv.append(createElement(it,category))
-                break;
-            }
-        }
+        $.get(`http://localhost:2121/department/${id}`,(data)=>{
+            detailDiv.append(createElement(data,category))
+        });
+
     }
     else if(category==='lab')
     {
-        for (it of Labs_list) {
-            console.log(typeof it.id)
-            //List item is of type string hence Type Cas to number value
-            if (+list_item === it.id) {   //console.log('abc')
-                detailDiv.append(createElement(it,category))
-                break;
-            }
-        }
+        $.get(`http://localhost:2121/lab/${id}`,(data)=>{
+            detailDiv.append(createElement(data,category))
+        });
 
     }
     else if(category==='issue')
@@ -348,17 +426,19 @@ function funSelectedItem(el){
                 {
                     let issueItemLabs = $(`
                     <div class= "col-10">Lab Id: ${lab.labId}</div>
+                    <div class="col-10">Lab Name : ${lab.lab.name}</div>
                     <div class="col-10">Quantity Issued: ${lab.qty}</div>
                     `)
                     issued_labs.push(issueItemLabs)
                 }
             }
-            if(list_ofdept_labs.issuedItem.department!==null)
+            if(list_ofdept_labs.issuedItem.faculty!==null)
             {
-                for (dept of list_ofdept_labs.issuedItem.department) {
+                for (faculty of list_ofdept_labs.issuedItem.faculty) {
                     let issueItemDept = $(`
-                <div class= "col-10">Department Id: ${dept.id}</div>
-                <div class="col-10">Quantity Issued: ${dept.qty}</div>
+                <div class= "col-10">Department Id: ${faculty.id}</div>
+                <div class="col-10">Faculty Name: ${faculty.faculty.name}</div>
+                <div class="col-10">Quantity Issued: ${faculty.qty}</div>
                 `)
                     issued_dept.push(issueItemDept)
                 }
@@ -380,7 +460,7 @@ function funSelectedItem(el){
         let sub_cat_Id = $(el).attr("cat-id")
 
         //Setting the labOrDepartment ID to LOCAL STORAGE
-        localStorage.setItem('deptorlab',sub_cat_Id)
+        localStorage.setItem('sub_cat_Id',sub_cat_Id)
         
         //Subcat - Product Id
         let sub_Cat_ProductID = $(el).attr("product-id")
@@ -393,28 +473,9 @@ function funSelectedItem(el){
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
-               createTransferObj(sub_category,data.lab,data.product,data)
+               createTransferObj('transfer',sub_category,data.lab,data.product,data)
 
             })
-            //Request on lab and bring the data of that lab - and also the product Issued details
-            // $.get(`http://localhost:2121/${sub_category}/${sub_cat_Id}`,(data)=>{
-            //     //callback function of get
-            //     console.log('LETS SEE WHAT IS DATA   ')
-            //     console.log(data);
-            //     $.get(`http://localhost:2121/product/${sub_Cat_ProductID}`,(data2)=> {
-            //        //We need remaining quantity and so - 1 request issue wale par bhi jayegi -
-            //         //PROBLEM HERE CHECK - ID is not ID
-            //         console.log('LETS SEE WHAT IS DATA 2    ')
-            //         console.log(data2)
-            //         console.log('Object ID     ------'+id)
-            //         $.get(`http://localhost:2121/issue/${id}`,(data3)=>{
-            //             console.log("DATA 3 VALUE-------------")
-            //             console.log(data3)
-            //             //This can be reduced extra calls to - backend  -------
-            //             createTransferObj(sub_category,data,data2,data3.issuedItem.labs[0])
-            //         })
-            //     })
-            // })
         }
 
         //It will be faculty-----
@@ -424,7 +485,47 @@ function funSelectedItem(el){
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
-                createTransferObj(sub_category,data.faculty,data.product,data)
+                createTransferObj('transfer',sub_category,data.faculty,data.product,data)
+
+            })
+        }
+
+    }
+    else if(category==='Return')
+    {
+        let sub_category =  $(el).attr("sub-cat")
+        //search the element in the list
+        localStorage.setItem('sub_cat',sub_category)
+        //Sub cat Id will be given by -
+        let sub_cat_Id = $(el).attr("cat-id")
+
+        //Setting the labOrDepartment ID to LOCAL STORAGE
+        localStorage.setItem('sub_cat_Id',sub_cat_Id)
+
+        //Subcat - Product Id
+        let sub_Cat_ProductID = $(el).attr("product-id")
+
+        localStorage.setItem('productId',sub_Cat_ProductID)
+
+        if(sub_category==="lab")
+        {
+            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+                // MULTIPLE PARAMS -
+                console.log('INSIDE TRANSFER -----')
+                console.log(data);
+                createTransferObj('Return',sub_category,data.lab,data.product,data)
+
+            })
+        }
+
+        //It will be faculty-----
+        else
+        {
+            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+                // MULTIPLE PARAMS -
+                console.log('INSIDE TRANSFER -----')
+                console.log(data);
+                createTransferObj('Return',sub_category,data.faculty,data.product,data)
 
             })
         }
@@ -443,16 +544,16 @@ function createLi (Obj,category){
     console.log('CreateLi function '+ category)
 
     switch (category) {
-        case 'product' : li[0].textContent = Obj.invoice_no;
+        case 'product' : li[0].textContent = Obj.invoice_no + " " + Obj.name;
                          li.attr('category','product')
                             break;
 
         case 'vendor' :  li.attr('category','vendor')
-                         li[0].textContent = Obj.company;
+                         li[0].textContent = Obj.company + Obj.name;
                             break;
 
         case 'department' : li.attr('category','department')
-                             li[0].textContent = Obj.name;
+                             li[0].textContent = Obj.name + " " + Obj.block;
                               break;
         case 'lab' :    li.attr('category','lab')
                          li[0].textContent = Obj.name;
@@ -462,14 +563,21 @@ function createLi (Obj,category){
                         li.attr('productId',Obj.id);
                          break;
         case 'transfer' : li.attr('category','transfer')
-                            li.attr('sub-cat',Obj.deptorlab)
+                            li.attr('sub-cat',Obj.facultyorlab)
                          //FOR THE TIME BEING - LETS SAY _ ITS ONLY FOR LABS
-                         li.attr('cat-id',Obj.deptorlabId)
+                         li.attr('cat-id',Obj.facultyorlabId)
                         li.attr('product-id',Obj.productId)
                             li[0].textContent = Obj.name;
                             break;
         case 'faculty' : li.attr('category','faculty')
                          li[0].textContent = Obj.name;
+                            break;
+        case 'Return' :        li.attr('category','Return')
+                                li.attr('sub-cat',Obj.facultyorlab)
+                               //FOR THE TIME BEING - LETS SAY _ ITS ONLY FOR LABS
+                                 li.attr('cat-id',Obj.facultyorlabId)
+                                li.attr('product-id',Obj.productId)
+                                     li[0].textContent = Obj.name;             
     }
 
 
@@ -556,11 +664,8 @@ function list_Fun(data,list,category) {
         for (item of data.labs)
         {
             let object_Transfer = new Transfer(item,item.lab,item.product,"lab")
-            console.log(item.id)
             let li = createLi(object_Transfer,'transfer');
             list_items.push(li)
-            console.log(li)
-            // Transfer_list.push(object_Transfer);
         }
         if(data.department!==null)
         {
@@ -570,10 +675,30 @@ function list_Fun(data,list,category) {
                 let li = createLi(product_ob,'transfer');
                 list_items.push(li)
                 console.log(li)
-                // Transfer_list.push(product_ob);
             }
         }
 
+    }
+    else if(category==='Return')
+    {
+        //Same As Transfer Objects -
+        if(data.labs!==null)
+            for (item of data.labs)
+            {
+                let object_Transfer = new Transfer(item,item.lab,item.product,"lab")
+                let li = createLi(object_Transfer,'Return');
+                list_items.push(li)
+            }
+        if(data.department!==null)
+        {
+            for (item of data.department) {
+                let product_ob = new Transfer(item,item.faculty,item.product,"faculty")
+                console.log(item.id)
+                let li = createLi(product_ob,'Return');
+                list_items.push(li)
+                console.log(li)
+            }
+        }
     }
     console.log(list_items)
     list.append(...list_items)
