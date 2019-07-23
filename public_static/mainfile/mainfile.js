@@ -353,14 +353,17 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
 
 //Listing of selected Div - In the centre menu -
 //when a user clicks on the item - details to be displayed next to it -
-function funSelectedItem(el){
+function funSelectedItem(el,event){
     //Event-
     let CenterDivHeading = $('#center-div-heading')
     CenterDivHeading.empty();
     //This gives the 'this' value of the item selected that is - li in this case
     console.log(el)
     let list_item = $(el).attr('list-val')
-
+    
+    console.log('EVENT----------')
+    console.log(event)
+    console.log(event.parentElement);
     console.log('list item  ' + list_item)
     //Converted to string
     let id = +list_item;
@@ -548,7 +551,7 @@ function funSelectedItem(el){
 //Generic Function to create Li
 function createLi (Obj,category){
 
-    let li = $('<li onclick="funSelectedItem(this);"></li>')
+    let li = $('<li onclick="funSelectedItem(this,event);"></li>')
     // Global user Defined Attribute for all the list items -
     li.attr('list-val',`${Obj.id}`)
 
@@ -740,7 +743,7 @@ function show(ev) {
         formrequest= $(ev).attr('myval-div')
         console.log(formrequest)
     }
-
+    localStorage.setItem('form_request',formrequest)
     $.get(`http://localhost:2121/${formrequest}`,
         //Callback Function which Receives Data -
         (data)=>{

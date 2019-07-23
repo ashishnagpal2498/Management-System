@@ -2,7 +2,8 @@ const route = require('express').Router()
 const LoginDatabase = require('../../database/signUp_login')
 const path = require('path')
 const uid = require('uid')
-
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
 route.get('/',(req,res)=>{
     //If the user is already logged in -
     if(req.user)
@@ -13,23 +14,24 @@ route.get('/',(req,res)=>{
 })
 
 route.post('/',(req,res)=>{
-    let uniqueId = uid(10)
-    let uName = req.body.signupemail
-    uName = uName.split('@')[0]
+    // let uName = req.body.signupemail
     LoginDatabase.Login_username.create({
-        id: uniqueId,
-        username: uName,
+        email: req.body.signupemail,
+        username: req.body.signupusername,
         name: req.body.signupname,
         designation:req.body.designation,
         department: req.body.signupdept
-    }).then(()=>{
-        LoginDatabase.Passwords.create({
-            password:req.body.signuppass,
-            usernameId: uniqueId
-        }).then(()=> {console.log('User Added')
-            res.redirect('/login')})
-            .catch((err)=> console.error('Password'+err))
-    }).catch((err)=> console.error('Cannot add user' + err))
+    },{returning:true}).then((result)=>{
+        bcrypt.hash(req.body.signuppass,saltRounds,(err,hash)=>{
+            LoginDatabase.Passwords.create({
+                password:hash,
+                usernameId: result.id
+            }).then(()=> {console.log('User Added')
+               return res.send({userAdded:true,message: "User Added Successfully"})})
+                .catch((err)=> console.error('Password'+err))
+        })
+        }).catch((err)=> console.error('Cannot add user' + err))
+
 })
 
 

@@ -32,9 +32,9 @@ function signupvalidate() {
         document.mysignupform.signuppass.focus();
         return false;
     }
-    var signupemail = document.mysignupform.signupemail.value;
-    signupatpos = signupemail.indexOf("@");
-    signupdotpos = signupemail.lastIndexOf(".");
+    let signupemail = document.mysignupform.signupemail.value;
+    let signupatpos = signupemail.indexOf("@");
+    let signupdotpos = signupemail.lastIndexOf(".");
     if (signupatpos < 1 || (signupdotpos - signupatpos < 2))
     {
         //alert("Please enter correct email ID")
@@ -44,3 +44,34 @@ function signupvalidate() {
     }
     return true;
 }
+$(()=>{
+    let signUpForm = $('#signUpForm')
+    signUpForm.submit((ev)=>{
+        ev.preventDefault();
+        let username = $('#signupusername')
+        let email = $('#signupemail')
+        let password = $('#signuppass')
+        let designation = $('#designation')
+        let dept = $('#signupdept')
+        let name = $('#signupname')
+        let formCheck = signupvalidate();
+        if(formCheck) {
+            $.post('http://localhost:2121/signup',
+                {
+                    signupname: name.val(),
+                    signuppass: password.val(),
+                    signupdept: dept.val(),
+                    designation: designation.val(),
+                    signupemail: email.val(),
+                    signupusername: username.val()
+                },
+                (data) => {
+                    if(data.userAdded)
+                    {
+                        console.log(data.message)
+                        window.location = "http://localhost:2121/Login/login.html"
+                    }
+                })
+        }
+    })
+})

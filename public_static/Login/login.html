@@ -7,6 +7,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="login.js"></script>
     <title>Title</title>
     <style>
@@ -26,17 +27,22 @@
             </div>
             <div id="login-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
 
-                <form action="http://localhost:2121/login" method="post" name="myloginform" onsubmit="return(loginvalidate())";>
+                <form action="http://localhost:2121/login" method="post" name="myloginform" id="loginForm" >
+                   <div class="form-row">
+                       <div class="form-group col-md-12">
+                           <label style="font-weight: bold;color: red;display: none" id="invalid-message">Invalid Email/Password</label>
+                       </div>
+                   </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="email" style="font-weight: bold">Email address:</label>
-                            <input type="text" class="form-control" name="username" id="email">
+                            <label for="username" style="font-weight: bold">Email address:</label>
+                            <input type="text" class="form-control" name="username" id="username">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="pwd" style="font-weight: bold">Password:</label>
-                            <input type="password" class="form-control" name="password" id="pwd">
+                            <label for="password" style="font-weight: bold">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
                     </div>
                     <div class="form-row">
@@ -48,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-actions" style="text-align: center; margin-bottom: 20px" id="loginpagebtndiv">
-                        <button id="loginpagebtn" type="submit" class="btn btn-primary" style="width: 250px">Login</button>
+                        <button id="login-btn" type="submit" class="btn btn-primary"  style="width: 250px">Login</button>
                     </div>
 
                     <div class="form-actions" style="text-align: center" id="signuppagebtndiv">

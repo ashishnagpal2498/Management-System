@@ -7,6 +7,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="signup.js"></script>
     <title>Title</title>
     <style>
@@ -26,7 +27,7 @@
         </div>
         <div id="signup-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
 
-            <form action="/signup" method="post" name="mysignupform" onsubmit="return(signupvalidate())";>
+            <form action="/signup" method="post" name="mysignupform" id="signUpForm">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="signupname" style="font-weight: bold">Name</label>
@@ -37,6 +38,12 @@
                     <div class="form-group col-md-12">
                         <label for="signupemail" style="font-weight: bold">Email ID</label>
                         <input type="email" class="form-control" name="signupemail" id="signupemail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="signupemail" style="font-weight: bold">Username</label>
+                        <input type="text" class="form-control" name="signupusername" id="signupusername">
                     </div>
                 </div>
                 <div class="form-row">

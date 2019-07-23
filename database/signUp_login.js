@@ -11,8 +11,14 @@ const SignUp_login = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.pass
 const Login_username = SignUp_login.define( 'username',
     {
         id: {
-            type: dataTypes.STRING,
+            type: dataTypes.UUID,
+            defaultValue: dataTypes.UUIDV4,
             primaryKey:true,
+        },
+
+        email:{
+          type:dataTypes.STRING,
+          allowNull:false
         },
         username:{
             type: dataTypes.STRING,
@@ -33,8 +39,9 @@ const Login_username = SignUp_login.define( 'username',
 const Passwords = SignUp_login.define('password',
     {
     id:{
-        type:dataTypes.INTEGER,
-        autoIncrement:true,
+        type:dataTypes.UUID,
+        defaultValue: dataTypes.UUIDV4,
+        //autoIncrement:true,
         primaryKey: true
     },
     password : dataTypes.STRING

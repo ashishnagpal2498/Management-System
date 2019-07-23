@@ -10,10 +10,43 @@ route.get('/',(req,res)=>{
     return res.send({user:undefined,messgae: 'user Not found'})
 })
 
-route.post('/',passport.authenticate('local',{
-    successRedirect: '.',
-    failureRedirect:'/login'
-}))
+route.post('/',(req,res,next)=>{
+        console.log('POST REQ LOGIN')
+        console.log(req.body)
+        passport.authenticate('local',
+            {
+                username: req.body.username,
+                password: req.body.password
+            },
+            // {
+            // successRedirect: '.',
+            // failureRedirect:'/login'
+            // }
+            (err,user,info)=>{
+            console.log(user)
+                console.log('error value ')
+                console.log(err)
+                if(err)
+                {
+                    console.log('INSIDE ERROR ')
+                    //Query was Successfull but user has entered Wrong Details
+                  return  res.send({user:null,userFound:false})
+                }
+                if(!user)
+                {
+                    //user is false
+
+                    return  res.send({user:null,userFound:false})
+                }
+                else
+                {   console.log('INSIDE ELSE PART')
+                    req.logIn(user, function(err) {
+                    if (err) { return next(err); }
+                    return  res.send({user:user,userFound:true})
+                    });
+                }
+            })(req,res,next)
+})
 
 exports = module.exports = {
     route
