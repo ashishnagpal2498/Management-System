@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="main_file_ss.css">
     <script src="prerequisits_mainfile.js"></script>
     <script src="mainfile.js"></script>
+    <script src="mainFile_filter_Items.js"></script>
     <script>
         /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
@@ -60,7 +61,7 @@
 <div  class="container-fluid" id="main-screen-div">
    <!--Side menu Div -->
     <div class="row">
-       <div class="col-4 side-menu">
+       <div class="col-3 side-menu">
     <div class="row" id="side-menu-options">
         <!--<div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>-->
         <!--<div class="col-8"><span id="user-form-menu"></span> Form Menu</div>-->
@@ -105,7 +106,112 @@
         <!--</div>-->
     <!--Middle form-->
         <!--List of all items-->
-        <div class="col-3 ml-4 pb-3 pt-2 mb-5" id="center-form" >
+        <div class="col-2 ml-3 pt-2 pb-3 mb-5 filter-Menu">
+            <div class="row">
+                <div class="col-12"><h4>Filters</h4></div>
+                <div class="row ml-3 mr-3">
+                    <!--Size Filter-->
+                    <div class="col-12 filter-heading mt-3 mb-3">Category</div>
+                    <div class="col-12 row filter-options-own">
+                        <div class="col-12">
+                            <label class="checkbox-container"> Computer
+                                <input name="category" type="checkbox" value="computer" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Printer
+                                <input name="category" type="checkbox" value="printer" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> AA
+                                <input name="category" type="checkbox" value="6" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> BB
+                                <input name="category" type="checkbox" value="7" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!--Price Range-->
+                    <div class="col-12 filter-heading mt-3 mb-3">DATE</div>
+                    <div class="col-12 row filter-options-own">
+                        <div class="col-12">
+                            <label class="checkbox-container">2019
+                                <input name="date" type="checkbox"  id="price-filter" value="2019" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="checkbox-container"> 2018
+                                <input name="date" type="checkbox"  value="2018" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="checkbox-container"> 2017
+                                <input name="date" type="checkbox" value="2017"  class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="checkbox-container"> 2016
+                                <input name="date" type="checkbox" value="2016"   class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="checkbox-container"> 2015
+                                <input name="date" type="checkbox" value="2015" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="checkbox-container"> 2014
+                                <input name="date" type="checkbox" value="2014" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--Color - Filter-->
+                    <div class="col-12 filter-heading mt-3 mb-3">Color</div>
+                    <div class="col-12 row filter-options-own">
+                        <div class="col-12 filter-settings">
+                            <label class="checkbox-container"> Black
+                                <input name="price-filter" type="checkbox" value="Black" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Blue
+                                <input name="price-filter" type="checkbox" value="blue" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Green
+                                <input name="price-filter" type="checkbox" value="green" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Red
+                                <input name="price-filter" type="checkbox" value="red" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Yellow
+                                <input name="price-filter" type="checkbox" value="yellow" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> Pink
+                                <input name="price-filter" type="checkbox" value="pink" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container"> White
+                                <input name="price-filter" type="checkbox" value="white" class="checkbox-filter" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-3 w-100"><button class="btn btn-info" onclick="filterOptions()">Submit</button> </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 ml-3 pb-3 pt-2 mb-5" id="center-form" >
             <div class="row justify-content-center">
             <div class="col-12 pt-2 pb-4"> <span style="color: firebrick"><strong>SEARCH :</strong></span> <input type="text" class=""></div>
             <div class="col-12" id="list-of-all">
@@ -120,7 +226,7 @@
             </div>
         </div>
         <!--Actual -->
-        <div class="col-5 pr-3 pl-3 mb-5" id="center-item-display">
+        <div class="col-4 pr-3 pl-3 mb-5" id="center-item-display">
             <div class="container-fluid" id="main-form-item">
                 <div class="row justify-content-center">
                     <div class="col-12 pt-4 pb-4" >
@@ -166,6 +272,7 @@
 
         <!--</div>-->
         </div>
+
     </div>
 </div>
 <div class="pop-up" id="popup">

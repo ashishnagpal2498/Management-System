@@ -62,6 +62,7 @@ const Product = mgmtSystem.define(
         },
         pOrderNo:dataTypes.INTEGER,
         name: dataTypes.STRING,
+        category: dataTypes.STRING,
         qty: dataTypes.INTEGER,
         manufacturer: dataTypes.STRING,
         modelName: dataTypes.STRING,

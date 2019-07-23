@@ -23,6 +23,7 @@ route.post('/',(req,res)=>{
     Product.create({
         pOrderNo:req.body.pOrderNo,
         name:req.body.name,
+        category:req.body.category,
         qty: req.body.qty,
         manufacturer:req.body.manufacturer,
         modelName:req.body.modelName,

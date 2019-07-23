@@ -48,7 +48,7 @@
    /*position: absolute;*/
     /*left: 0;*/
     /*top: 0;*/
-    max-width: 300px;
+    max-width: 250px;
 
     padding: 0 20px 100px 20px;
     background-color: black;
@@ -75,7 +75,7 @@
 }
 /*Menu Toggle*/
 .slide-side-menu{
-    transform: translateX(-250px);
+    transform: translateX(-200px);
     position: relative;
 }
 .slide-menu-icons{
@@ -101,6 +101,12 @@
 
 /*End*/
 
+.filter-Menu{
+    margin-top: 40px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top: 3px solid black ;
+    box-shadow: 0 10px 10px 8px rgba(0,0,0,0.1);
+}
 /*Centre Form */
 #center-div{
 
@@ -114,7 +120,7 @@
 }
 
 #center-item-display{
-    margin-left: 50px;
+    margin-left: 30px;
     margin-top: 40px;
     box-shadow: 0 0 15px 18px rgba(0,0,0,0.1);
 
@@ -245,4 +251,92 @@
     font-size: 20px;
     text-transform: uppercase;
 
+}
+
+/*FILTER DIV OPTIONSS*/
+.filter-heading{
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+
+}
+.filter-options-own::-webkit-scrollbar{
+    width: 10px;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.2)  ;
+    border-radius: 10px;
+
+}
+.filter-options-own::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+.filter-options-own::-webkit-scrollbar-thumb{
+    background-color: black;
+    border-radius: 10px;
+}
+.filter-options-own{
+    height: 150px;
+    overflow-y: scroll;
+}
+
+/*Custom CheckMark*/
+
+/*Defining Container Settings*/
+.checkbox-container{
+    padding-left: 35px;
+    margin-bottom: 12px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+/*Hidding Default Checkbox*/
+.checkbox-container input{
+    height: 0;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+
+
+}
+/*CheckMark Settings*/
+.checkmark{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 3px;
+    left: 0;
+    background-color: #eee;
+
+}
+.checkbox-container:hover input ~ .checkmark{
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark {
+    background-color: black;
+}
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
