@@ -30,7 +30,7 @@ function Product(Obj) {
     this.years =Obj.warranty_year
     this.product_details= Obj.product_details
     this.approval=Obj.approval
-
+    this.category = Obj.category
 }
 
 let Department_list = [];
@@ -94,6 +94,8 @@ function createElement (Obj,category) {
         let productItem = $(`
           <li id="vendor-id"> <b>PRODUCT ID:</b>  ${Obj.id} </li>
                     <li  id="vendor-name"><b>NAME: </b> ${Obj.name} </li>
+                    <li  ><b>CATEGORY: </b> ${Obj.category} </li>
+
                     <li id="vendor-company-name"><b>TOTAL QUANTITY:</b>  ${Obj.qty}</li>
                     <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${Obj.invoice_no}</li>
                     <li><b>Manufacturer</b> ${Obj.manufacturer}</li>

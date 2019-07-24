@@ -47,12 +47,12 @@ function filterOptions(category)
                                 <input name="category" type="checkbox" value="printer" class="checkbox-filter" >
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkbox-container"> AA
-                                <input name="category" type="checkbox" value="6" class="checkbox-filter" >
+                            <label class="checkbox-container"> Keyboard
+                                <input name="category" type="checkbox" value="keyboard" class="checkbox-filter" >
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="checkbox-container"> BB
-                                <input name="category" type="checkbox" value="7" class="checkbox-filter" >
+                            <label class="checkbox-container"> Mouse
+                                <input name="category" type="checkbox" value="mouse" class="checkbox-filter" >
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -62,7 +62,7 @@ function filterOptions(category)
                     <div class="col-12 row filter-options-own">
                         <div class="col-12">
                             <label class="checkbox-container">2019
-                                <input name="date" type="checkbox"  id="price-filter" value="2019" class="checkbox-filter" >
+                                <input name="date" type="checkbox"  id="price-filter" value="2019-04-25" class="checkbox-filter" >
                                 <span class="checkmark"></span>
                             </label>
                         </div>

@@ -58,7 +58,6 @@ route.post('/filter',(req,res)=>{
                     category : {
                         [Op.or] : category
                     },
-                    invoice_date: date_
                 }
                 // name: {
                 //     [Op.or] : category

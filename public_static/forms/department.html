@@ -13,11 +13,6 @@
     <link href="../header_styling.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" id="department-form-container">
-    <div class="container-heading" id="department-item-heading">
-        <h3>DEPARTMENT DETAILS <i class="fas fa-user"></i></h3>
-    </div>
-</div>
 <!--HEADER ---  -->
 
 <div class="container-fluid">
@@ -126,7 +121,12 @@
         <!--FORM DIV-->
         <div class="col-9 ml-3 row" style="margin-top: 80px" >
             <!--FORM --->
-            <div class="department-form-container" id="department-form-container-id">
+            <div class="container" style="height: 20px" id="department-form-container">
+                <div class="container-heading" id="department-item-heading">
+                    <h3>DEPARTMENT DETAILS <i class="fas fa-user"></i></h3>
+                </div>
+            </div>
+            <div class="department-form-container" style="margin-top: -190px;margin-left: 120px" id="department-form-container-id">
                 <form action="/department" method="post" id="department-wise-form">
                     <div class="form-row">
                         <div class="form-group col-md-6">

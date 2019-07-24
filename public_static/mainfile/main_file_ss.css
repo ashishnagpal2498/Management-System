@@ -41,9 +41,11 @@ body{
     color: #9fcdff;
 }
 /*End*/
-
+#detailed-div{
+    padding-bottom: 20px;
+}
 #detailed-div li{
-    margin-bottom: 10px;
+    margin-bottom: 13px;
 }
 #detailed-div li b{
     margin-right: 10px;
@@ -254,7 +256,7 @@ body{
     width: 70%;
     height: 100px;
     background-color: #1c7430;
-    color: red;
+    color: black;
     margin: 15%;
     /*transform: translateY(-60px);*/
     display: none;

@@ -665,14 +665,15 @@ function list_Fun(data,list,category) {
             // console.log(li)
             // Issue_list.push(product_ob);
         }
-        $('#delete-btn')[0].classList.add('display-btns')
-         $('#edit-btn')[0].classList.add('display-btns')
+        // $('#delete-btn')[0].classList.add('display-btns')
+         // $('#edit-btn')[0].classList.add('display-btns')
         let addbtn = $('#add-btn')
             // editbtn.attr('href','../forms/issue.html')
             addbtn[0].textContent = "Issue Product"
     }
     else if(category==='transfer')
-    {
+    {   let addbtn = $('#add-btn')
+        addbtn.css('display','none')
         if(data.labs!==null)
         for (item of data.labs)
         {
@@ -693,7 +694,8 @@ function list_Fun(data,list,category) {
 
     }
     else if(category==='Return')
-    {
+    {   let addbtn = $('#add-btn')
+        addbtn.css('display','none')
         //Same As Transfer Objects -
         if(data.labs!==null)
             for (item of data.labs)
@@ -714,7 +716,8 @@ function list_Fun(data,list,category) {
         }
     }
     else if (category==='store')
-    {
+    {   let addbtn = $('#add-btn')
+        addbtn.css('display','none')
         for (item of data) {
             let product_ob = new Product(item)
             let li = createLi(product_ob,'store');
@@ -760,7 +763,10 @@ function show(ev) {
             Labs_list = [];
             Transfer_list =[];
             active_Tab = formrequest;
-            $('#add-btn').attr('href','../forms/'+formrequest+'.html')
+           let addbtn = $('#add-btn')
+                addbtn.attr('href','../forms/'+formrequest+'.html')
+            addbtn.css('display','block')
+            addbtn[0].textContent ="Add"
             //To display all the lists of Items when clicked Side menu Option
             list_Fun(data,list,formrequest);
 
