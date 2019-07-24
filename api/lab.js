@@ -2,7 +2,7 @@ const route = require('express').Router();
 //Database -
 const Department = require('../database/models').model.Depart;
 const Lab = require('../database/models').model.Labs;
-
+const {Op} = require('sequelize')
 
 route.get('/',(req,res)=>{
     Lab.findAll({
@@ -38,17 +38,36 @@ route.post('/',(req,res)=>{
         .catch((err)=> console.error(err))
 })
 
-route.post('/:depart',(req,res)=>{
-    let departmentname = req.params.depart;
-    Department.findAll({
+// route.post('/:depart',(req,res)=>{
+//     let departmentname = req.params.depart;
+//     Department.findAll({
+//         where:{
+//             dname:departmentname
+//         },
+//         include: [Lab]
+//     }).then((results)=>{ res.send(results.labname)})
+//         .catch((err)=> console.error(err))
+// })
+
+route.post('/filter',(req,res)=>{
+   console.log(req.body)
+    Lab.findAll({
         where:{
-            dname:departmentname
-        },
-        include: [Lab]
-    }).then((results)=>{ res.send(results.labname)})
+            [Op.and] :{
+                departmentId: {
+                    [Op.or] : req.body.departmentId
+                },
+                block: {
+                    [Op.or] : req.body.block
+                },
+                floor:{
+                    [Op.or] :req.body.floor
+                }
+            }
+        }
+    }).then((labs)=> {res.send(labs)})
         .catch((err)=> console.error(err))
 })
-
 
 exports.route=route;
 

@@ -230,6 +230,55 @@ route.post('/',(req,res)=>{
     }
 })
 
+route.post('/filter',(req,res)=>{
+    let issuedItems = {
+        labs:null,
+        department:null
+    }
+    console.log(req.body)
+    IssuedDatabase.IssuedLab.findAll({
+        where:{
+          labId: {
+              [sequelize.Op.or] : req.body.labId
+          }
+        },
+        include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
+    }).then((resultLabs)=>{
+        //    Getting all the Faculty which are issued computers -
+        IssuedDatabase.IssueFaculty.findAll({
+            where:{
+              facultyId:{
+                  [sequelize.Op.or] : req.body.facultyId
+              }
+            },
+            include: [{
+                    model: DeptorLabs.Faculty
+                }, {model:ProductModel.Product}]
+            }
+        )
+            .then((resultFaculty)=>{
+                if(resultLabs[0]!==undefined)
+                {
+                    issuedItems.labs = resultLabs
+                }
+                if(resultFaculty[0]!==undefined)
+                {
+                    issuedItems.department = resultFaculty
+                }
+                if(req.body.facultyId===undefined)
+                {
+                    issuedItems.department = []
+                }
+                if(req.body.labId===undefined)
+                {
+                    issuedItems.labs = []
+                }
+                res.send(issuedItems)
+            })
+            .catch((err)=>{console.log("err in Department"); console.error(err)})
+    }).catch((err2)=>{ console.log("err in labs"); console.error(err2)})
+})
+
 
 exports = module.exports = {
     route

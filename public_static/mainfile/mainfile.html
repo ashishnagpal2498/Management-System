@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="main_file_ss.css">
     <script src="prerequisits_mainfile.js"></script>
+
     <script src="mainfile.js"></script>
     <script src="mainFile_filter_Items.js"></script>
     <script>
@@ -36,10 +37,14 @@
 </head>
 <body>
 <div id="header-menu-container" class="container-fluid pt-2 pb-2">
-    <div class="row justify-content-between">
-        <div class="col-4" id="menu-btn" onclick="menuoptions()"><i class="fas fa-bars"></i></div>
-        <div class="col-4" id="heading-btn"><h5>COMPUTER MANAGEMENT SYSTEM</h5></div>
-        <div class="col-4 dropdown-menu-own"  align="right">
+    <div class="row justify-content-between p-2">
+        <div class="col-4 row" id="menu-btn">
+            <div class="col-4" onclick="menuoptions()">  <i class="fas fa-bars"></i> </div>
+            <a class="col-4" style="text-decoration: none;color: white;" href="http://localhost:2121/"><i class="fas fa-home"></i></a>
+        </div>
+        <div class="col-4" id="heading-btn"><h4 style="margin-left: 20px">MANAGEMENT SYSTEM</h4></div>
+        <div class="col-3"></div>
+        <div class="col-1 dropdown-menu-own" >
             <div class="dropbtn" onclick="myFunction()" ><i class="fas fa-user" > </i> <span id="username" > Username</span></div>
             <div class="dropdown-content" id="myDropdown" >
                 <a href="http://localhost:2121/myprofile.html">View Profile</a>
@@ -61,7 +66,7 @@
 <div  class="container-fluid" id="main-screen-div">
    <!--Side menu Div -->
     <div class="row">
-       <div class="col-3 side-menu">
+       <div class="col-3 side-menu" id="side-menu">
     <div class="row" id="side-menu-options">
         <!--<div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>-->
         <!--<div class="col-8"><span id="user-form-menu"></span> Form Menu</div>-->
@@ -106,8 +111,8 @@
         <!--</div>-->
     <!--Middle form-->
         <!--List of all items-->
-        <div class="col-2 ml-3 pt-2 pb-3 mb-5 filter-Menu">
-            <div class="row">
+        <div class="col-2 ml-3 pt-2 pb-3 mb-5 filter-Menu" id="filter-menu-div">
+            <div class="row" id="filter-row">
                 <div class="col-12"><h4>Filters</h4></div>
                 <div class="row ml-3 mr-3">
                     <!--Size Filter-->
@@ -254,8 +259,8 @@
                             <b>EMAIL:</b>
                         </li>
                     </ul>
-                    <a class="mt-3 col-4 btn btn-info display-btns" id="edit-btn" style="background-color: #1c7430" href="">Edit</a>
-                    <a class="mt-3 ml-2 col-4 btn btn-danger display-btns" id="delete-btn"  href="">Delete</a>
+                    <!--<a class="mt-3 col-4 btn btn-info display-btns" id="edit-btn" style="background-color: #1c7430" href="">Edit</a>-->
+                    <!--<a class="mt-3 ml-2 col-4 btn btn-danger display-btns" id="delete-btn"  href="">Delete</a>-->
 
                 </div>
             </div>

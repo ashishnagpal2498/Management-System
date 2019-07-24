@@ -316,6 +316,10 @@ route.post('/',(req,res)=>{
 
     }
 })
+
+route.post('/filter',(req,res)=>{
+
+})
 // route.post('/:id',(req,res)=>{
 //     //Need to return the product Details and the all the labs and department
 //     //To which this product is issued

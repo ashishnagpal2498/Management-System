@@ -9,51 +9,167 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="../Bootstrap/dist/css/bootstrap.css">
+    <link href="../mainfile/main_file_ss.css" rel="stylesheet">
+    <link href="../header_styling.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" id="department-form-container">
-    <div class="container-heading" id="department-item-heading">
-        <h3>FACULTY DETAILS <i class="fas fa-user"></i></h3>
+<!--HEADER ---  -->
+
+<div class="container-fluid">
+    <div class="row" id="header-row">
+        <div class="col-5 col-md-3 pt-2">LOGO and Name</div>
+        <div class="col-12 p-0 p-md-2  col-md-5 responsive-menu">
+            <div class="navbar" id="header-nav-bar">
+                <button class=" btn nav-item cross-button" onclick="closemenu()" ><i class="fas fa-times"></i></button>
+                <div class="nav-item"> <a href="/"> Home</a></div>
+                <div class="nav-item dropdown" >
+                    <a style="text-decoration: none;color: inherit"  href="http://localhost:2121/mainfile/mainfile.html?category=product" id="dropdownMenuLink">Products </a>
+                    <!--<div class="dropdown-menu item-menu dropdown-menu-right" style="background-color: white;color: black" aria-labelledby="dropdownMenuLink">-->
+                    <!--<div class="dropdown-item"><a href="">Computer</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">Printer</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">Keyboard</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">Mouse</a></div>-->
+                    <!--</div>-->
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="http://localhost:2121/mainfile/mainfile.html?category=department" id="DepartmentLink"> Departments</a>
+                    <!--<div class="dropdown-menu item-menu dropdown-menu-right" aria-labelledby="DepartmentLink">-->
+                    <!--<div class="dropdown-item">-->
+                    <!--<a href="">CSE </a>-->
+                    <!--</div>-->
+                    <!--<div class="dropdown-item"> <a href="">MECH</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">IT</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">CIVIL</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">EEE</a></div>-->
+                    <!--<div class="dropdown-item"> <a href="">ECE</a></div>-->
+                    <!--</div>-->
+                </div>
+                <div class="nav-item"> <a href="http://localhost:2121/mainfile/mainfile.html?category=vendor"> Vendor</a></div>
+                <div class="nav-item"> <a href=""> Faqs</a></div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4">
+            <div class="row pt-2">
+                <div class="col-9 col-md-6 nav-item">
+                    <!--<span id="search-header-btn">-->
+                    <!--<i class="fas fa-search"></i> </span><input placeholder="Search" id="nav-bar-input-box" type="text">-->
+                </div>
+                <script>
+                    function myFunction() {
+                        document.getElementById("myDropdown").classList.toggle("show");
+                    }
+                </script>
+                <div class="col-5 dropdown-menu-own" id="login-user">
+                    <div class="dropbtn" onclick="myFunction()" ><i class="fas fa-user" > </i> <span id="username" > Username</span></div>
+                    <div class="dropdown-content" id="myDropdown" >
+                        <a href="http://localhost:2121/myprofile.html">View Profile</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 pt-2"  onclick="openmenu()" id="responsive-menu-bar"><i class="fas fa-bars"></i></div>
     </div>
 </div>
-<div class="department-form-container" id="department-form-container-id">
-    <form action="/faculty" method="post" id="department-wise-form">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="fid">Faculty Id</label>
-                <input name="fid" type="text" class="form-control" id="fid">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="Name">NAME</label>
-                <input name="name" class="form-control" id="Name">
-            </div>
 
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="Designation">Designation</label>
-                <input name="designation" type="text" class="form-control" id="Designation">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="responsibility">Responsibility</label>
-                <input name="responsibility" type="text" class="form-control" id="responsibility">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="BlockNumber">BLOCK NUMBER</label>
-                <input name="block" type="number" class="form-control" id="BlockNumber">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="floor">Staffroom Floor</label>
-                <input name="floor" type="number" class="form-control" id="floor">
-            </div>
-        </div>
-        <div class="dept-btn">
-            <input type="submit" value="Submit" class="department-button-class">
-        </div>
 
-    </form>
+
+<!--END OF HEADER-->
+<style>
+    .side-menu a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div  class="container-fluid" id="main-screen-div">
+    <!--Side menu Div -->
+    <div class="row">
+        <div class="col-3 side-menu" id="side-menu">
+            <div class="row" id="side-menu-options">
+                <!--<div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>-->
+                <!--<div class="col-8"><span id="user-form-menu"></span> Form Menu</div>-->
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=vendor" > Vendor
+                    <i class="fa fa-user slide-menu-icons" title="vendor"></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=product">Product
+                    <i class="fa fa-shopping-bag slide-menu-icons" title="product" ></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=department">Department
+                    <i class="far fa-building slide-menu-icons" title="Department"></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=lab">Lab
+                    <i class="fas fa-desktop slide-menu-icons" title="Labs"></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=faculty">Faculty
+                    <i class="fas fa-address-card slide-menu-icons" title="Faculty"></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=issue">Issue
+                    <i class="fas fa-retweet slide-menu-icons" title="Issue"></i>
+                </a>
+                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=transfer">Transfer
+                    <i class="fas fa-exchange-alt slide-menu-icons" title="Transfer"></i>
+                </a>
+                <a class="col-12" href="http://localhost:2121/mainfile/mainfile.html?category=return">Return
+                    <i class="fas fa-sync-alt slide-menu-icons" title="Return"></i>
+                </a>
+                <a class="col-12" href="http://localhost:2121/mainfile/mainfile.html?category=store">Store
+                    <i class="fas fa-database slide-menu-icons" title="Store"></i>
+                </a>
+            </div>
+        </div>
+        <!--FORM DIV-->
+        <div class="col-9 ml-3 row" style="margin-top: 80px" >
+            <!--FORM --->
+            <div class="container" id="department-form-container">
+                <div class="container-heading" id="department-item-heading">
+                    <h3>FACULTY DETAILS <i class="fas fa-user"></i></h3>
+                </div>
+            </div>
+            <div class="department-form-container" id="department-form-container-id">
+                <form action="/faculty" method="post" id="department-wise-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="fid">Faculty Id</label>
+                            <input name="fid" type="text" class="form-control" id="fid">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Name">NAME</label>
+                            <input name="name" class="form-control" id="Name">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Designation">Designation</label>
+                            <input name="designation" type="text" class="form-control" id="Designation">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="responsibility">Responsibility</label>
+                            <input name="responsibility" type="text" class="form-control" id="responsibility">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="BlockNumber">BLOCK NUMBER</label>
+                            <input name="block" type="number" class="form-control" id="BlockNumber">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="floor">Staffroom Floor</label>
+                            <input name="floor" type="number" class="form-control" id="floor">
+                        </div>
+                    </div>
+                    <div class="dept-btn">
+                        <input type="submit" value="Submit" class="department-button-class">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
 </body>
 </html>

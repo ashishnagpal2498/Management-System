@@ -331,7 +331,7 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
         detailDiv.append(select_Option);
         //Select Div is appended in the main center div
         detailDiv.append(options_div)
-        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>`)
+        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-4 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>`)
     }
     else if(cat==='Return')
     {
@@ -743,7 +743,11 @@ function show(ev) {
         formrequest= $(ev).attr('myval-div')
         console.log(formrequest)
     }
+   //FILTER OPTIONS SHOW
+
     localStorage.setItem('form_request',formrequest)
+    console.log('CALLING  FILTER OPS')
+    filterOptions(formrequest);
     $.get(`http://localhost:2121/${formrequest}`,
         //Callback Function which Receives Data -
         (data)=>{
@@ -772,8 +776,17 @@ function menuoptions(){
 
     let smallmenu = $('#small-menu')[0]
     let fullscreendiv = $('#main-screen-div')[0]
-    fullscreendiv.classList.toggle('slide-side-menu')
+     fullscreendiv.classList.toggle('slide-side-menu')
     let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
+    let filterMenuDiv = document.getElementById('filter-menu-div')
+    let centerItemDisplay = document.getElementById('center-item-display')
+    // filterMenuDiv.classList.toggle('col-2')
+    // filterMenuDiv.classList.toggle('col-3')
+    centerItemDisplay.classList.toggle('col-4')
+    // centerItemDisplay.classList.toggle('col-5')
+    let sideMenu = document.getElementById('side-menu')
+     sideMenu.classList.toggle('col-3')
+     sideMenu.classList.toggle('col-2')
     console.log(slideMenuIcons);
     for(i of slideMenuIcons)
     {
@@ -786,6 +799,12 @@ window.onclick = function(event) {
     if (event.target === popup_menu ) {
         popup_menu.style.display = "none";
     }
+    // let login_user = $('#login-user')[0]
+    // let DropDown = $('#myDropdown')[0]
+    // if(event.target !== login_user)
+    // {
+    //     DropDown.classList.remove('show')
+    // }
 }
 
 
@@ -799,8 +818,8 @@ $(()=>{
             if(data.user[0].username==='admin') {
                 adminLogin = true;
                 $('#add-btn')[0].classList.remove('display-btns')
-                $('#edit-btn')[0].classList.remove('display-btns')
-                $('#delete-btn')[0].classList.remove('display-btns')
+                // $('#edit-btn')[0].classList.remove('display-btns')
+                // $('#delete-btn')[0].classList.remove('display-btns')
             }
             let username_Div = $('#username')
             username_Div.empty();
@@ -811,7 +830,8 @@ $(()=>{
     })
     let urlSplitter = window.location.href.split('=')[1];
     if(urlSplitter)
-    {
+    {   console.log("URL SPLITTER  ")
+        console.log(urlSplitter)
         show(urlSplitter);
     }
 })

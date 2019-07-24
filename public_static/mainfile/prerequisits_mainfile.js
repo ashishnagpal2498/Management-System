@@ -81,20 +81,20 @@ function createElement (Obj,category) {
     if (category === 'vendor') {
         let vendorItem = $(`
              <li id="vendor-id"> <b>VENDOR ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b></li>
+                    <li  id="vendor-name"><b>NAME:</b>  ${Obj.name}</li>
                     <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.companyname}</li>
-                    <li id="vendor-contact-number"><b>Company NUMBER: ${Obj.companycontact}</b></li>
-                    <li><b>Personal Contact : ${Obj.personalcontact}</b></li>
-                    <li><b>EMAIL: ${Obj.companyemail}</b></li>
-                        <li><b>Address: ${Obj.address}</b></li>`)
+                    <li id="vendor-contact-number"><b>COMPANY NUMBER: ${Obj.companycontact}</b></li>
+                    <li><b>Personal Contact :</b>${Obj.personalcontact}</li>
+                    <li><b>EMAIL: </b>${Obj.companyemail}</li>
+                        <li><b>Address: </b>${Obj.address}</li>`)
         return vendorItem;
     }
     else if(category==='product')
     {
         let productItem = $(`
           <li id="vendor-id"> <b>PRODUCT ID:</b>  ${Obj.id} </li>
-                    <li  id="vendor-name"><b>NAME: ${Obj.name}</b> </li>
-                    <li id="vendor-company-name"><b>QUANTITY:</b>  ${Obj.qty}</li>
+                    <li  id="vendor-name"><b>NAME: </b> ${Obj.name} </li>
+                    <li id="vendor-company-name"><b>TOTAL QUANTITY:</b>  ${Obj.qty}</li>
                     <li id="vendor-contact-number"><b>INNVOICE NUMBER:</b> ${Obj.invoice_no}</li>
                     <li><b>Manufacturer</b> ${Obj.manufacturer}</li>
                     <li><b>INNVOICE DATE</b> ${Obj.invoice_date.split('T')[0]}</li>
@@ -106,7 +106,7 @@ function createElement (Obj,category) {
     else if(category==='faculty')
     {
         return $(`<li id="faculty-id"> <b>Faculty ID:</b>  ${Obj.id} </li>
-                    <li  id="faculty-name"><b>NAME: ${Obj.name}</b> </li>
+                    <li  id="faculty-name"><b>NAME:</b> ${Obj.name} </li>
                     <li ><b>Designation</b> ${Obj.designation}</li>
                     <li><b>Responsibility</b> ${Obj.responsibility}</li>
                     <li><b>Block</b> ${Obj.block}</li>
@@ -128,7 +128,7 @@ function createElement (Obj,category) {
         let labItem = $(`
           <li id="vendor-id"> <b>Lab ID:</b>  ${Obj.id} </li>
                     <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
-                    <li id="vendor-company-name"><b>BLOCK</b>  ${Obj.block}</li>
+                    <li id=""><b>BLOCK</b>  ${Obj.block}</li>
                     <li><b>Technician: ${Obj.technician}</b></li>
                    <li id="hod"><b>Floor:</b> ${Obj.floor}</li>
             `)
@@ -147,16 +147,6 @@ function createElement (Obj,category) {
     }
     else if(category=== 'transfer')
     {
-        //TO BE COMPLETED AND TO BE USED LATER
-        //FOR NOW CREATETRANSFEROBJ used
 
-        // console.log('Transfer')
-        // console.log(Obj)
-        // let productItemIssue = $(`
-        //   <li id="vendor-id"> <b>Issue ID:</b>  ${Obj.id} </li>
-        //             <li  id="vendor-name"><b>NAME:</b> ${Obj.name} </li>
-        //             <li id="vendor-company-name"><b>Total quantity</b>  ${Obj.qty}</li>
-        //     `)
-        // return productItemIssue
     }
 }

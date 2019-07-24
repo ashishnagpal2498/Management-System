@@ -2,7 +2,7 @@ const route = require('express').Router();
 //Database -
 // const Vendor = require('../database/models2').model.Vendor;
 const Product = require('../database/models2').model.Product;
-
+const {Op} = require('sequelize')
 route.get('/',(req,res)=>{
     Product.findAll({
 
@@ -44,6 +44,47 @@ route.post('/',(req,res)=>{
         .catch((err)=> console.error(err));
 })
 
+route.post('/filter',(req,res)=>{
+    let category = req.body.category || "";
+    let date_ = req.body.date || "";
+    console.log(category)
+    console.log(date_);
+    console.log(typeof category)
+    console.log(typeof date_)
+    Product.findAll({
+        where:
+            {
+                [Op.or]:{
+                    category : {
+                        [Op.or] : category
+                    },
+                    invoice_date: date_
+                }
+                // name: {
+                //     [Op.or] : category
+                // }
+                // invoice_date :{
+                //     [Op.like]: { [Op.any]: date_ }
+                // }
+             // invoice_date : {
+             //     [Op.startsWith] : [{
+             //         [Op.or] : date
+             //     }]
+             //     // [Op.or]: [{
+             //     //     [Op.startsWith]: date
+             //     //     //     [{
+             //     //     // [Op.or] :    date
+             //     //     // }]
+             //     // }]
+             //
+             //     //[Op.startsWith] :{[Op.or]: date]}
+             // }
+            }
+    }).then((results)=>{
+        console.log(results)
+        res.send(results)
+    }).catch((err)=>{console.error('ERROR IN FILTER '+err)})
+})
 
 
 

@@ -1,4 +1,7 @@
 /*Header Div settings*/
+body{
+    overflow-x: hidden;
+}
 #header-menu-container{
     background-color: black;
     color: #dddddd;
@@ -39,6 +42,12 @@
 }
 /*End*/
 
+#detailed-div li{
+    margin-bottom: 10px;
+}
+#detailed-div li b{
+    margin-right: 10px;
+}
 
 /*Side Menu Settings*/
 #main-screen-div{
@@ -75,7 +84,7 @@
 }
 /*Menu Toggle*/
 .slide-side-menu{
-    transform: translateX(-200px);
+    transform: translateX(-170px);
     position: relative;
 }
 .slide-menu-icons{
@@ -106,6 +115,7 @@
     border: 1px solid rgba(0,0,0,0.2);
     border-top: 3px solid black ;
     box-shadow: 0 10px 10px 8px rgba(0,0,0,0.1);
+    transition: all 0.4s;
 }
 /*Centre Form */
 #center-div{
@@ -154,10 +164,10 @@
     background-color: black;
     color: white;
     font-size: 18px;
-    width: 25%;
+    width: 100%;
     border: none;
     cursor: pointer;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .dropbtn:focus {
@@ -177,8 +187,8 @@
     display: none;
     position: absolute;
     background-color: black;
-    right: 0;
-    top: 10%;
+    left: 0;
+    top: 100%;
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -192,7 +202,7 @@
     display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown-content a:hover {color: black;background-color: #ddd;}
 
 .show {display: block;}
 
@@ -241,14 +251,15 @@
 .transfer_Succ{
     position: fixed;
     top: 0;
-    width: 60%;
+    width: 70%;
     height: 100px;
     background-color: #1c7430;
-    color: black;
-    margin: 8%;
+    color: red;
+    margin: 15%;
     /*transform: translateY(-60px);*/
-   display: none;
-    font-size: 20px;
+    display: none;
+    padding: 20px;
+    font-size: 30px;
     text-transform: uppercase;
 
 }
@@ -339,4 +350,14 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.filter-content-setts{
+    height: 200px;
+    text-align: center;
+    font-size: 25px;
+    padding: 20px;
+
+    background-color: #eeeeee;
+    color: black;
 }
