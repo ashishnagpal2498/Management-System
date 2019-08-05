@@ -359,15 +359,28 @@ function funSelectedItem(el,event){
     CenterDivHeading.empty();
     //This gives the 'this' value of the item selected that is - li in this case
     console.log(el)
-    let list_item = $(el).attr('list-val')
+    let category;
+    let list_item;
+    let id ;
+    if(el!==null)
+    {   list_item  = $(el).attr('list-val');
+        category = $(el).attr('category')
+        id = +list_item;
+    }
+    else
+    {   list_item = null;
+        category = localStorage.getItem('form_request')
+        id = null;
+    }
+
     
     console.log('EVENT----------')
     console.log(event)
     console.log(event.parentElement);
     console.log('list item  ' + list_item)
     //Converted to string
-    let id = +list_item;
-    let category = $(el).attr('category')
+
+
     console.log(category)
     let detailDiv = $('#detailed-div')
     detailDiv.empty()
@@ -395,11 +408,15 @@ function funSelectedItem(el,event){
         })
     }
     else if(category==='department')
-    {
-        $.get(`http://localhost:2121/department/${id}`,(data)=>{
-            detailDiv.append(createElement(data,category))
+    {   if(id===null)
+        {
+            detailDiv.append(createElement({},'department'))
+        }
+        else {
+        $.get(`http://localhost:2121/department/${id}`, (data) => {
+            detailDiv.append(createElement(data, category))
         });
-
+    }
     }
     else if(category==='lab')
     {
@@ -558,7 +575,7 @@ function createLi (Obj,category){
     console.log('CreateLi function '+ category)
 
     switch (category) {
-        case 'product' : li[0].textContent = Obj.invoice_no + " " + Obj.name;
+        case 'product' : li[0].textContent = Obj.invoice_no + " " + Obj.name ;
                          li.attr('category','product')
                             break;
 

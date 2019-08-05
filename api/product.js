@@ -57,14 +57,20 @@ route.post('/filter',(req,res)=>{
                 [Op.or]:{
                     category : {
                         [Op.or] : category
-                    },
+                    }
+                    ,
+                    invoice_date: {
+                        [Op.like]: {[Op.any]: date_}
+                    }
+                    // invoice_date : {
+                    //     [Op.startsWith] : [{
+                    //         [Op.or] : date_
+                    //     }]
                 }
                 // name: {
                 //     [Op.or] : category
                 // }
-                // invoice_date :{
-                //     [Op.like]: { [Op.any]: date_ }
-                // }
+
              // invoice_date : {
              //     [Op.startsWith] : [{
              //         [Op.or] : date
