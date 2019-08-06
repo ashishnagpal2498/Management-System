@@ -1,6 +1,7 @@
 const express = require('express')
     , app = express()
     , path = require('path')
+const {PORT} = require('./config')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -58,6 +59,6 @@ app.use((req,res)=>{
     res.send({message:'Error, Cannot find path you are looking for'})
 })
 
-app.listen(2121,()=>{
-    console.log('Server has Started At http://localhost:2121');
+app.listen(PORT,()=>{
+    console.log('Server has Started At http://localhost:'+PORT);
 })

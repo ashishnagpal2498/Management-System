@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const dbconfig = require('../databaseconfig').DB
+const dbconfig = require('../config')
 
 const databaseModel1 = require('./models').model;
 const databaseModel2 = require('./models2').model
@@ -8,13 +8,7 @@ const databaseModel2 = require('./models2').model
 //Datatypes -
 const dataTypes = Sequelize.DataTypes
 
-const mgmtSystem = new Sequelize(dbconfig.database,
-    dbconfig.user,
-    dbconfig.password,
-    {   host:dbconfig.host,
-        dialect:dbconfig.dialect
-    }
-)
+const mgmtSystem = new Sequelize(dbconfig.database_URI)
 
 //Issue database - which will keep the record of which Product is issued to Whom or which LAB-
 const IssueFaculty = mgmtSystem.define(

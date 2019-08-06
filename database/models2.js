@@ -1,15 +1,10 @@
 const Sequelize = require('sequelize')
-const dbconfig = require('../databaseconfig').DB
+const dbconfig = require('../config')
 
 //Datatypes -
 const dataTypes = Sequelize.DataTypes
 
-const mgmtSystem = new Sequelize(dbconfig.database,
-    dbconfig.user,
-    dbconfig.password,
-    {   host:dbconfig.host,
-        dialect:dbconfig.dialect
-    }
+const mgmtSystem = new Sequelize(dbconfig.database_URI
 )
 
 

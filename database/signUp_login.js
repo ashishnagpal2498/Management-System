@@ -1,13 +1,9 @@
 const Sequelize = require('sequelize')
 const dataTypes = Sequelize.DataTypes;
-const dbConfig = require('../databaseconfig').DB
+const dbConfig = require('../config')
 
 
-const SignUp_login = new Sequelize(dbConfig.database,dbConfig.user,dbConfig.password,
-    {
-        host: dbConfig.host,
-        dialect:dbConfig.dialect
-    })
+const SignUp_login = new Sequelize(dbConfig.database_URI)
 const Login_username = SignUp_login.define( 'username',
     {
         id: {

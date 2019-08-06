@@ -1,3 +1,4 @@
 /.idea
 databaseconfig.json
 /node_modules
+config.js

@@ -1,0 +1,7 @@
+{
+  "name" : "Labster Management Systems",
+  "repository" : "https://github.com/ashishnagpal2498/Management-System.git",
+  "addons" : [
+    "heroku-postgresql:hobby-dev"
+  ]
+}

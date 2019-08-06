@@ -2,16 +2,11 @@ const Sequelize = require('sequelize')
 //For using datatypes -
 const dataTypes = Sequelize.DataTypes;
 //Require the configrtion file
-const dbconfig = require('../databaseconfig').DB
+const dbconfig = require('../config')
 
 
 //Creation of database -
-const mgmtSystem = new Sequelize(dbconfig.database,
-        dbconfig.user,
-        dbconfig.password,
-        {   host:dbconfig.host,
-           dialect:dbconfig.dialect
-        }
+const mgmtSystem = new Sequelize(dbconfig.database_URI
         )
 //Tables - Using class object-
 const Depart = mgmtSystem.define(
