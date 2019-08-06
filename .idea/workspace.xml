@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d10adf7-a908-4f30-8b05-9cf279856adc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/model_issue.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/model_issue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/models.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/models2.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/models2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/signUp_login.js" beforeDir="false" afterPath="$PROJECT_DIR$/database/signUp_login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +89,7 @@
       <workItem from="1561389319006" duration="3259000" />
       <workItem from="1561654965550" duration="591000" />
       <workItem from="1563386591467" duration="122725000" />
-      <workItem from="1565037972635" duration="7144000" />
+      <workItem from="1565037972635" duration="7631000" />
     </task>
     <servers />
   </component>
