@@ -4,6 +4,7 @@
     "database": "msystem",
     "user" : "managementAdmin",
     "password": "password",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "database_URI" : "mysql://managementAdmin:password@localhost:3306/msystem"
   }
 }
