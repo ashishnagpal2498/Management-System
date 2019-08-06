@@ -67,7 +67,7 @@ body{
     overflow-x: hidden;
 }
 .side-menu .col-12{
-    padding: 20px;
+    padding: 10px;
     margin: 0;
     cursor: pointer;
     font-size: 20px;
@@ -86,7 +86,7 @@ body{
 }
 /*Menu Toggle*/
 .slide-side-menu{
-    transform: translateX(-170px);
+    transform: translateX(-190px);
     position: relative;
 }
 .slide-menu-icons{

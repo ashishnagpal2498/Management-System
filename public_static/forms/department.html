@@ -59,9 +59,20 @@
                     function myFunction() {
                         document.getElementById("myDropdown").classList.toggle("show");
                     }
+                    $.get('http://localhost:2121/login',(data)=>{
+                        console.log('User Check')
+                        if(data.user != undefined)
+                        {
+                            let username_Div = $('#username')
+                            username_Div.empty();
+                            username_Div.append(data.user[0].username)
+                            console.log(data.user[0].name);
+                        }
+                    })
+
                 </script>
                 <div class="col-5 dropdown-menu-own" id="login-user">
-                    <div class="dropbtn" onclick="myFunction()" ><i class="fas fa-user" > </i> <span id="username" > Username</span></div>
+                    <div class="dropbtn" onclick="myFunction()" ><i class="fas fa-user" > </i> <span id="username" >Username</span></div>
                     <div class="dropdown-content" id="myDropdown" >
                         <a href="http://localhost:2121/myprofile.html">View Profile</a>
                         <a href="/logout">Logout</a>
@@ -131,11 +142,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="DeptNumber">DEPT NUMBER</label>
-                            <input name="dno" type="number" class="form-control" id="DeptNumber">
+                            <input name="dno" type="number" class="form-control" required id="DeptNumber">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="DeptName">DEPT NAME</label>
-                            <select name="name" class="form-control" id="DeptName">
+                            <select name="name" class="form-control" required id="DeptName">
                                 <option>CSE</option>
                                 <option>IT</option>
                                 <option>ECE</option>
@@ -149,11 +160,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="BlockNumber">BLOCK NUMBER</label>
-                            <input name="block" type="number" class="form-control" id="BlockNumber">
+                            <input name="block" type="number" required class="form-control" id="BlockNumber">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="HODName">HOD NAME</label>
-                            <input name="hod" type="text" class="form-control" id="HODName">
+                            <input name="hod" type="text" required class="form-control" id="HODName">
                         </div>
                     </div>
                     <div class="dept-btn">
@@ -165,7 +176,36 @@
         </div>
     </div>
 </div>
-
+<div class="pop-up" id="popup">
+    <div class="popup-content" id="popup-content">
+        <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
+        <!--Display the content here-->
+        <h4> Successfully Added </h4>
+    </div>
+</div>
+<script>
+    let departmentForm = $('#department-wise-form')
+    departmentForm.submit((ev)=>{
+        ev.preventDefault();
+        console.log('Prevented Default')
+        let obj = {
+           hod: $('#HODName').val(),
+           block: $('#BlockNumber').val(),
+           name : $('#DeptName').val(),
+           dno : $('#DeptNumber').val()
+        }
+        $.post('http://localhost:2121/department',obj,(data)=>{
+            if(data.added)
+            {
+                //SHOW THE MESSAGE POPUP -
+            }
+            else
+            {
+                //SHOW POPUP OF REJECTION -
+            }
+        })
+    })
+</script>
 
 </body>
 </html>

@@ -782,8 +782,8 @@ function show(ev) {
             active_Tab = formrequest;
            let addbtn = $('#add-btn')
                 addbtn.attr('href','../forms/'+formrequest+'.html')
-            addbtn.css('display','block')
-            addbtn[0].textContent ="Add"
+            // addbtn.css('display','block')
+            // addbtn[0].textContent ="Add"
             //To display all the lists of Items when clicked Side menu Option
             list_Fun(data,list,formrequest);
 
@@ -802,15 +802,15 @@ function menuoptions(){
      fullscreendiv.classList.toggle('slide-side-menu')
     let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
     let filterMenuDiv = document.getElementById('filter-menu-div')
-    let centerItemDisplay = document.getElementById('center-item-display')
-    // filterMenuDiv.classList.toggle('col-2')
-    // filterMenuDiv.classList.toggle('col-3')
-    centerItemDisplay.classList.toggle('col-4')
+    // let centerItemDisplay = document.getElementById('center-item-display')
+    // // filterMenuDiv.classList.toggle('col-2')
+    // // filterMenuDiv.classList.toggle('col-3')
+    // centerItemDisplay.classList.toggle('col-4')
     // centerItemDisplay.classList.toggle('col-5')
-    let sideMenu = document.getElementById('side-menu')
-     sideMenu.classList.toggle('col-3')
-     sideMenu.classList.toggle('col-2')
-    console.log(slideMenuIcons);
+     let sideMenu = document.getElementById('side-menu')
+    //  sideMenu.classList.toggle('col-3')
+    //  sideMenu.classList.toggle('col-2')
+    // console.log(slideMenuIcons);
     for(i of slideMenuIcons)
     {
         i.classList.toggle('slide-menu-icons-display')
@@ -840,6 +840,7 @@ $(()=>{
         {   //Admin login - Set the user Value-
             if(data.user[0].username==='admin') {
                 adminLogin = true;
+
                 $('#add-btn')[0].classList.remove('display-btns')
                 // $('#edit-btn')[0].classList.remove('display-btns')
                 // $('#delete-btn')[0].classList.remove('display-btns')

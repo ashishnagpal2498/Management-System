@@ -3,106 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1d10adf7-a908-4f30-8b05-9cf279856adc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uid.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/assert.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/async_hooks.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/base.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/buffer.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/child_process.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/cluster.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/console.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/constants.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/crypto.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/dgram.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/dns.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/domain.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/events.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/fs.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/globals.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/http.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/http2.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/https.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/inspector.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/module.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/net.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/os.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/path.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/perf_hooks.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/process.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/punycode.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/querystring.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/readline.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/repl.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/stream.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/string_decoder.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/timers.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/tls.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/trace_events.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/ts3.2/globals.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/ts3.2/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/ts3.2/util.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/tty.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/url.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/util.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/v8.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/vm.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/worker_threads.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/node/zlib.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/accepts/HISTORY.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/accepts/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/accepts/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/accepts/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/accepts/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/.jshintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/implementation.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/implementation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/loader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/optional.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register-shim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/bluebird.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/bluebird.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/es6-promise.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/es6-promise.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/lie.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/lie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/native-promise-only.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/native-promise-only.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/pinkie.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/pinkie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/promise.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/promise.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/q.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/q.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/rsvp.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/rsvp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/vow.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/vow.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/when.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/any-promise/register/when.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array-flatten/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array-flatten/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array-flatten/array-flatten.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array-flatten/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/forms/department.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/department.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +27,7 @@
   </component>
   <component name="ProjectId" id="1P1O7ZUk6DB4ODYuXdQgw65UnNb" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -135,6 +40,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -189,7 +95,7 @@
       <workItem from="1561389319006" duration="3259000" />
       <workItem from="1561654965550" duration="591000" />
       <workItem from="1563386591467" duration="122725000" />
-      <workItem from="1565037972635" duration="11324000" />
+      <workItem from="1565037972635" duration="16466000" />
     </task>
     <servers />
   </component>
