@@ -4,6 +4,7 @@
   "description": "This project is about managing systems",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
@@ -33,7 +34,7 @@
     "uid": "0.0.2"
   },
   "engines": {
-    "node": ">=8.0",
+    "node": "=8.0",
     "npm": ">=5.4"
   }
 }
