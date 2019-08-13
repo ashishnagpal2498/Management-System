@@ -341,12 +341,67 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     }
 }
 
+//ISSUE REPORT- PRODUCT
+function issueReport(productId) {
+    let popup_menu = $('#popup')
+    let popup_content = $('#popup-content')
+    popup_content.empty()
+    let pop_up_menu_heading = $(` <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
+        <!--Display the content here-->
+        <h4 class="review-heading"> ISSUE REPORT </h4>`)
+    popup_content.append(pop_up_menu_heading)
+    popup_menu.css('display','block')
+
+    $.get(`http://localhost:2121/issue/${productId}`,(list_ofdept_labs)=>{
+    //        GETTING DESIRED OBJECT -
+
+        let issued_labs = []
+        let issued_dept = []
+
+        let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
+        let DeptHeading = $('<h4 style="margin: 10px" align="center">Faculty</h4>')
+        if(list_ofdept_labs.issuedItem.labs!==null)
+        {   for(lab of list_ofdept_labs.issuedItem.labs)
+        {
+            let issueItemLabs = $(`
+                    <div class= "col-10">Lab Id: ${lab.labId}</div>
+                    <div class="col-10">Lab Name : ${lab.lab.name}</div>
+                    <div class="col-10">Quantity Issued: ${lab.qty}</div>
+                    `)
+            issued_labs.push(issueItemLabs)
+        }
+        }
+        if(list_ofdept_labs.issuedItem.faculty!==null)
+        {
+            for (faculty of list_ofdept_labs.issuedItem.faculty) {
+                let issueItemDept = $(`
+                <div class= "col-10">Department Id: ${faculty.id}</div>
+                <div class="col-10">Faculty Name: ${faculty.faculty.name}</div>
+                <div class="col-10">Quantity Issued: ${faculty.qty}</div>
+                `)
+                issued_dept.push(issueItemDept)
+            }
+        }
+        popup_content.append(labsHeading)
+        popup_content.append(issued_labs)
+        popup_content.append(DeptHeading)
+        popup_content.append(issued_dept)
+
+
+
+    })
+
+
+}
+
+
 //Listing of selected Div - In the centre menu -
 //when a user clicks on the item - details to be displayed next to it -
 function funSelectedItem(el,event){
     //Event-
     let CenterDivHeading = $('#center-div-heading')
     CenterDivHeading.empty();
+
     //This gives the 'this' value of the item selected that is - li in this case
     console.log(el)
     let category;
@@ -416,8 +471,7 @@ function funSelectedItem(el,event){
 
     }
     else if(category==='issue')
-    {   let issued_labs = []
-        let issued_dept = []
+    {
         console.log('Issue category--------------------->>')
         console.log(id)
         //Append the EDIT BUTTON -
@@ -429,37 +483,13 @@ function funSelectedItem(el,event){
         $.get(`http://localhost:2121/issue/${productId}`,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.issuedItem.product
             let issueItemProduct = createElement(product_Details_Val,'product')
-            let labsHeading = $('<h4 style="margin: 10px" align="center">Labs</h4>')
-            let DeptHeading = $('<h4 style="margin: 10px" align="center">Faculty</h4>')
-             if(list_ofdept_labs.issuedItem.labs!==null)
-            {   for(lab of list_ofdept_labs.issuedItem.labs)
-                {
-                    let issueItemLabs = $(`
-                    <div class= "col-10">Lab Id: ${lab.labId}</div>
-                    <div class="col-10">Lab Name : ${lab.lab.name}</div>
-                    <div class="col-10">Quantity Issued: ${lab.qty}</div>
-                    `)
-                    issued_labs.push(issueItemLabs)
-                }
-            }
-            if(list_ofdept_labs.issuedItem.faculty!==null)
-            {
-                for (faculty of list_ofdept_labs.issuedItem.faculty) {
-                    let issueItemDept = $(`
-                <div class= "col-10">Department Id: ${faculty.id}</div>
-                <div class="col-10">Faculty Name: ${faculty.faculty.name}</div>
-                <div class="col-10">Quantity Issued: ${faculty.qty}</div>
-                `)
-                    issued_dept.push(issueItemDept)
-                }
-            }
+
+
             detailDiv.append(issueItemProduct)
-            detailDiv.append(labsHeading)
-            detailDiv.append(issued_labs)
-            detailDiv.append(DeptHeading)
-            detailDiv.append(issued_dept)
-         //Product Id is there- set on localstorage
-         localStorage.setItem('id',product_Details_Val.id)
+            detailDiv.append(`<div class= "col-5 btn btn-info" onclick="issueReport('${productId}')">Product Report</div>`)
+            //Product Id is there- set on localstorage
+
+            localStorage.setItem('id',product_Details_Val.id)
         })
     }
     else if (category==='transfer')

@@ -145,7 +145,7 @@ body{
     overflow-y: scroll;
     margin: auto 0;
     list-style-type: none ;
-    min-height: 400px;
+    min-height: 350px;
 }
 #list-items li{
     z-index: 1;

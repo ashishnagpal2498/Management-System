@@ -12,6 +12,12 @@
     <script src="vendorform.js"></script>
     <link href="../mainfile/main_file_ss.css" rel="stylesheet">
     <link href="../header_styling.css" rel="stylesheet">
+    <script src="forms_common_scripts.js"></script>
+<style>
+    .form-group{
+          margin-bottom: 0;
+      }
+</style>
 </head>
 <body>
 <!--HEADER ---  -->
@@ -25,12 +31,6 @@
                 <div class="nav-item"> <a href="/"> Home</a></div>
                 <div class="nav-item dropdown" >
                     <a style="text-decoration: none;color: inherit"  href="http://localhost:2121/mainfile/mainfile.html?category=product" id="dropdownMenuLink">Products </a>
-                    <!--<div class="dropdown-menu item-menu dropdown-menu-right" style="background-color: white;color: black" aria-labelledby="dropdownMenuLink">-->
-                    <!--<div class="dropdown-item"><a href="">Computer</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Printer</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Keyboard</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Mouse</a></div>-->
-                    <!--</div>-->
                 </div>
                 <div class="nav-item dropdown">
                     <a href="http://localhost:2121/mainfile/mainfile.html?category=department" id="DepartmentLink"> Departments</a>
@@ -75,7 +75,6 @@
 </div>
 
 
-
 <!--END OF HEADER-->
 <style>
     .side-menu a{
@@ -83,7 +82,7 @@
         color: white;
     }
 </style>
-<div  class="container-fluid" id="main-screen-div">
+<div  class="container-fluid" id="main-screen-div" style="padding-top:70px ">
     <!--Side menu Div -->
     <div class="row">
         <div class="col-3 side-menu" id="side-menu">
@@ -120,7 +119,7 @@
             </div>
         </div>
         <!--FORM DIV-->
-        <div class="col-9 ml-3 row" style="margin-top: 80px" >
+        <div class="col-9 ml-3 row" >
             <!--FORM --->
             <div class="container" id="vendor-item-form-container">
                 <div class="container-heading" id="vendor-item-heading">
