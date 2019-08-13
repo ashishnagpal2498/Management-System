@@ -264,15 +264,15 @@ function showSelectOptions(val,total_qty)
         let item = $(`<option>${i} </option>`)
         qty_list.push(item)
     }
-    let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
+    let qty_select = $('<select class="col-4 ml-2 mr-1 p-2" id="selected-qty" name= "qty"></select>')
     qty_select.append(qty_list)
-    let select_div = $('<div class="col-12"></div>')
+    let select_div = $('<div class="col-12 row justify-content-center"></div>')
     $.get(`http://localhost:2121/${category}`,function (data) {
         console.log(data);
 
         //deparmentElement(data,category)
 
-        select_div.append(`<h6>Select ${category}</h6>`)
+        select_div.append(`<h6 style="display: inline-block;width: 40%">Select ${category}</h6>`)
         let labs_list_Li = [];
         for(i of data)
         {   console.log(i)
@@ -280,7 +280,7 @@ function showSelectOptions(val,total_qty)
             labs_list_Li.push(item)
         }
         //Creating A Select - having name as LabId
-        let labs_select = $('<select class="col-8 p-2" id="TransferId" name="labId"></select>')
+        let labs_select = $('<select class="col-4 ml-2 mr-2 p-2" id="TransferId" name="labId"></select>')
         labs_select.append(labs_list_Li)
 
         if(category==='lab')
@@ -291,8 +291,9 @@ function showSelectOptions(val,total_qty)
         {
             labs_select.attr('name','facultyId')
         }
+        select_div.append(`<h6 style="display: inline-block;width: 40%">Select Quantity</h6>`)
         select_div.append(labs_select)
-        select_div.append(`<h6>Select Quantity</h6>`)
+
         select_div.append(qty_select);
         OptionsDiv.append(select_div);
     })
@@ -312,7 +313,6 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
         let FacultyItem = createElement(data, "faculty")
         detailDiv.append(FacultyItem)
         detailDiv.append(` <li id="qty-issued"><b>Quantity Issued: </b>${total_Data.qty}</li>`)
-
     }
     let productItem = createElement(data2,"product")
     detailDiv.append(productItem)
@@ -320,18 +320,8 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     // console.log(total_Data)
     //let labs_list ;
     if(cat==='transfer') {
-        let options_div = $(`<div id="options-div"></div>`)
-        let select_Option = $(`<h4>Select Option</h4>
-       <label>Faculty</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%;" type="radio" class=" " name="category" value="faculty" >
-       <label>Lab</label> <input onchange="showSelectOptions(this,${total_Data.qty})" style="width: 10%" type="radio" class="" name="category" value="lab" >
-        `)
-
-
-        // let select_div = $(`<div class = col-10></div>`)
-        detailDiv.append(select_Option);
-        //Select Div is appended in the main center div
-        detailDiv.append(options_div)
-        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-4 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">TRANSFER</button></div>`)
+    let transferBtn = $(`<a href="http://localhost:2121/forms/transfer.html" class = "col-3 btn btn-info">Transfer</a>`)
+        detailDiv.append(transferBtn)
     }
     else if(cat==='Return')
     {
@@ -473,7 +463,8 @@ function funSelectedItem(el,event){
         })
     }
     else if (category==='transfer')
-    {   let sub_category =  $(el).attr("sub-cat")
+    {
+        let sub_category =  $(el).attr("sub-cat")
         //search the element in the list
         localStorage.setItem('sub_cat',sub_category)
         //Sub cat Id will be given by -
@@ -562,6 +553,9 @@ function funSelectedItem(el,event){
 
 
     }
+    //END OF RIGHT SIDE CLICKED LI- LIST VALUE -
+
+
 }
 
 
@@ -573,6 +567,16 @@ function createLi (Obj,category){
     li.attr('list-val',`${Obj.id}`)
 
     console.log('CreateLi function '+ category)
+
+    //MAKING RIGHT MAIN DETAILED DIV AS EMPTY
+    let detailDiv = $('#detailed-div')
+    detailDiv.empty()
+    //console.log(detailDiv)
+    let CenterDivHeading = $('#center-div-heading')
+    CenterDivHeading.empty();
+    CenterDivHeading.append(category+'  Details')
+
+    //
 
     switch (category) {
         case 'product' : li[0].textContent = Obj.invoice_no + " " + Obj.name ;

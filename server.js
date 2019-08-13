@@ -7,7 +7,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const passport = require('./api/passport/passport').passport
 const session = require('express-session')
-const models = require('./database/model_index')
+//const models = require('./database/model_index')
 
 const routes = {
     login :require('./api/login/login').route,

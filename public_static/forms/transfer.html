@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Faculty Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="department.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+    <title>Transfer</title>
+    <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
+    <script src="../Bootstrap/dist/js/bootstrap.js"></script>
+    <link href="../Bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Bootstrap/dist/css/bootstrap.css">
     <link href="../mainfile/main_file_ss.css" rel="stylesheet">
     <link href="../header_styling.css" rel="stylesheet">
+    <script src="../mainfile/prerequisits_mainfile.js"></script>
+    <script src="../mainfile/mainfile.js"></script>
+    <script src="transfer.js"></script>
+
+<style>
+   ul#detailed-div{
+        list-style-type: none;
+    }
+    ul#detailed-div  li{
+        display: inline-block;
+        width: 40%;
+        padding: 2px;
+        font-size: 13px;
+        margin: 2px;
+    }
+</style>
 </head>
 <body>
 <!--HEADER ---  -->
@@ -24,25 +38,9 @@
                 <div class="nav-item"> <a href="/"> Home</a></div>
                 <div class="nav-item dropdown" >
                     <a style="text-decoration: none;color: inherit"  href="http://localhost:2121/mainfile/mainfile.html?category=product" id="dropdownMenuLink">Products </a>
-                    <!--<div class="dropdown-menu item-menu dropdown-menu-right" style="background-color: white;color: black" aria-labelledby="dropdownMenuLink">-->
-                    <!--<div class="dropdown-item"><a href="">Computer</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Printer</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Keyboard</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">Mouse</a></div>-->
-                    <!--</div>-->
                 </div>
                 <div class="nav-item dropdown">
                     <a href="http://localhost:2121/mainfile/mainfile.html?category=department" id="DepartmentLink"> Departments</a>
-                    <!--<div class="dropdown-menu item-menu dropdown-menu-right" aria-labelledby="DepartmentLink">-->
-                    <!--<div class="dropdown-item">-->
-                    <!--<a href="">CSE </a>-->
-                    <!--</div>-->
-                    <!--<div class="dropdown-item"> <a href="">MECH</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">IT</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">CIVIL</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">EEE</a></div>-->
-                    <!--<div class="dropdown-item"> <a href="">ECE</a></div>-->
-                    <!--</div>-->
                 </div>
                 <div class="nav-item"> <a href="http://localhost:2121/mainfile/mainfile.html?category=vendor"> Vendor</a></div>
                 <div class="nav-item"> <a href=""> Faqs</a></div>
@@ -52,8 +50,6 @@
         <div class="col-6 col-md-4">
             <div class="row pt-2">
                 <div class="col-9 col-md-6 nav-item">
-                    <!--<span id="search-header-btn">-->
-                    <!--<i class="fas fa-search"></i> </span><input placeholder="Search" id="nav-bar-input-box" type="text">-->
                 </div>
                 <script>
                     function myFunction() {
@@ -87,9 +83,7 @@
     <div class="row">
         <div class="col-3 side-menu" id="side-menu">
             <div class="row" id="side-menu-options">
-                <!--<div class="col-12" id="imageusername"><i  class="fa fa-user-circle"></i> Img and Username</div>-->
-                <!--<div class="col-8"><span id="user-form-menu"></span> Form Menu</div>-->
-                <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=vendor" > Vendor
+               <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=vendor" > Vendor
                     <i class="fa fa-user slide-menu-icons" title="vendor"></i>
                 </a>
                 <a class="col-12 side-menu-fields" href="http://localhost:2121/mainfile/mainfile.html?category=product">Product
@@ -118,58 +112,33 @@
                 </a>
             </div>
         </div>
+
         <!--FORM DIV-->
         <div class="col-9 ml-3 row" style="margin-top: 80px" >
             <!--FORM --->
             <div class="container" id="department-form-container">
                 <div class="container-heading" id="department-item-heading">
-                    <h3>FACULTY DETAILS <i class="fas fa-user"></i></h3>
+                    <h3>TRANSFER DETAILS <i class="fas fa-user"></i></h3>
                 </div>
-            </div>
-            <div class="department-form-container" style="margin-top: -190px;margin-left: 120px"  id="department-form-container-id">
-                <form action="/faculty" method="post" id="department-wise-form">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="fid">Faculty Id</label>
-                            <input name="fid" type="text" required class="form-control" id="fid">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="Name">NAME</label>
-                            <input name="name" class="form-control" required id="Name">
-                        </div>
 
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="Designation">Designation</label>
-                            <input name="designation" type="text" class="form-control" required id="Designation">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="responsibility">Responsibility</label>
-                            <input name="responsibility" type="text" class="form-control" required id="responsibility">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="BlockNumber">BLOCK NUMBER</label>
-                            <input name="block" type="number" class="form-control" required id="BlockNumber">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="floor">Staffroom Floor</label>
-                            <input name="floor" type="number" class="form-control" required id="floor">
-                        </div>
-                    </div>
-                    <div class="dept-btn">
-                        <input type="submit" value="Submit" class="department-button-class">
-                    </div>
+                <div class="row">
+                    <div class="col-12 pl-4" >
+                        <ul id="detailed-div">
 
-                </form>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
+<div class="pop-up" id="popup">
+    <div class="popup-content" id="popup-content">
+        <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
+        <!--Display the content here-->
+        <h4> Transfer Review </h4>
+    </div>
+</div>
+<div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful</div>
 </body>
 </html>

@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1d10adf7-a908-4f30-8b05-9cf279856adc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/forms/department.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/department.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/forms/faculty.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/faculty.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/forms/issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/issue.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +95,7 @@
       <workItem from="1561389319006" duration="3259000" />
       <workItem from="1561654965550" duration="591000" />
       <workItem from="1563386591467" duration="122725000" />
-      <workItem from="1565037972635" duration="16466000" />
+      <workItem from="1565037972635" duration="28436000" />
     </task>
     <servers />
   </component>
