@@ -83,7 +83,7 @@ function createElement (Obj,category) {
              <li id="vendor-id"> <b>VENDOR ID:</b>  ${Obj.id} </li>
                     <li  id="vendor-name"><b>NAME:</b>  ${Obj.name}</li>
                     <li id="vendor-company-name"><b>COMPANY NAME:</b>  ${Obj.companyname}</li>
-                    <li id="vendor-contact-number"><b>COMPANY NUMBER: ${Obj.companycontact}</b></li>
+                    <li id="vendor-contact-number"><b>COMPANY NUMBER:</b> ${Obj.companycontact}</li>
                     <li><b>Personal Contact :</b>${Obj.personalcontact}</li>
                     <li><b>EMAIL: </b>${Obj.companyemail}</li>
                         <li><b>Address: </b>${Obj.address}</li>`)

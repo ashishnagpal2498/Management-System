@@ -1,6 +1,7 @@
 /*Header Div settings*/
 body{
     overflow-x: hidden;
+
 }
 #header-menu-container{
     background-color: black;
@@ -42,18 +43,26 @@ body{
 }
 /*End*/
 #detailed-div{
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    font-size: 14px;
 }
 #detailed-div li{
-    margin-bottom: 13px;
+    margin-bottom: 5px;
 }
 #detailed-div li b{
-    margin-right: 10px;
+text-transform: uppercase;
+
+}
+#detailed-div .btn{
+    margin-left: 80px;
+    background-color: mediumseagreen;
 }
 
 /*Side Menu Settings*/
 #main-screen-div{
     transition: all 0.4s;
+    max-height: 100%;
+
 }
 .side-menu{
    /*position: absolute;*/
@@ -230,11 +239,12 @@ body{
     color: black;
     background-color: white;
     border-radius: 10px;
-    margin: 8% auto;
-    width: 85%;
+    margin: 6% auto;
+    width: 91%;
     height: auto;
+    max-height: 100%;
     padding: 20px;
-
+    overflow-y: scroll ;
 }
 .review-heading{
     text-transform: capitalize;
@@ -253,20 +263,25 @@ body{
 .transfer_Succ{
     position: fixed;
     top: 0;
-    width: 70%;
+    width: 100%;
     height: 100px;
-    background-color: #1c7430;
+    background-color: rgba(123, 239, 178, 0.88);
     color: black;
-    margin: 15%;
+    margin: 15% auto;
     /*transform: translateY(-60px);*/
     display: none;
-    padding: 20px;
-    font-size: 30px;
+    padding: 25px;
+    font-size: 31px;
     text-transform: uppercase;
 
 }
 
 /*FILTER DIV OPTIONSS*/
+.filter-Menu{
+    max-height: 530px;
+    overflow-y: scroll;
+
+}
 .filter-heading{
     font-weight: bold;
     font-size: 18px;

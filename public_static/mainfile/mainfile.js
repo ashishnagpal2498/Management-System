@@ -149,16 +149,16 @@ function transferSuccessful(ev) {
             closepopup();
 
             //REFRESHING THE LIST -
-            $.get('http://localhost:2121/transfer',(data)=>{
-                let list = $('#list-items')
-                list.empty();
-                list_Fun(data,list,'transfer');
-            })
+            // $.get('http://localhost:2121/transfer',(data)=>{
+            //     let list = $('#list-items')
+            //     list.empty();
+            //     list_Fun(data,list,'transfer');
+            // })
 
 
 
             trans_Succ.css('display','block')
-            window.scrollTo(0,0)
+            //window.scrollTo(0,0)
             setTimeout(()=>{
                 trans_Succ.css('display','none')
             },3000)
@@ -320,7 +320,7 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     // console.log(total_Data)
     //let labs_list ;
     if(cat==='transfer') {
-    let transferBtn = $(`<a href="http://localhost:2121/forms/transfer.html" class = "col-3 btn btn-info">Transfer</a>`)
+    let transferBtn = $(`<a class="mt-1 col-6 btn btn-info" style="color: white;" href="http://localhost:2121/forms/transfer.html">Transfer</a>`)
         detailDiv.append(transferBtn)
     }
     else if(cat==='Return')
@@ -486,7 +486,7 @@ function funSelectedItem(el,event){
 
 
             detailDiv.append(issueItemProduct)
-            detailDiv.append(`<div class= "col-5 btn btn-info" onclick="issueReport('${productId}')">Product Report</div>`)
+            detailDiv.append(`<div class="mt-1 col-7 btn btn-info" onclick="issueReport('${productId}')" style="color: white;">Product Report</div>`)
             //Product Id is there- set on localstorage
 
             localStorage.setItem('id',product_Details_Val.id)
@@ -658,7 +658,13 @@ function createLi (Obj,category){
 //Function call onclick from the Side Menu - $ request
 function list_Fun(data,list,category) {
     let list_items =[]
+
     //If the category is Vendor - List all the Vendors , Inside - left center Div
+    let addbtn = $('#add-btn')
+    if(adminLogin) {
+        addbtn.css('display', 'block')
+        addbtn[0].textContent = "ADD"
+    }
     if(category==='vendor')
     {
         for (item of data) {
@@ -716,14 +722,10 @@ function list_Fun(data,list,category) {
             // console.log(li)
             // Issue_list.push(product_ob);
         }
-        // $('#delete-btn')[0].classList.add('display-btns')
-         // $('#edit-btn')[0].classList.add('display-btns')
-        let addbtn = $('#add-btn')
-            // editbtn.attr('href','../forms/issue.html')
             addbtn[0].textContent = "Issue Product"
     }
     else if(category==='transfer')
-    {   let addbtn = $('#add-btn')
+    {
         addbtn.css('display','none')
         if(data.labs!==null)
         for (item of data.labs)
@@ -745,8 +747,7 @@ function list_Fun(data,list,category) {
 
     }
     else if(category==='Return')
-    {   let addbtn = $('#add-btn')
-        addbtn.css('display','none')
+    {   addbtn.css('display','none')
         //Same As Transfer Objects -
         if(data.labs!==null)
             for (item of data.labs)
@@ -767,8 +768,7 @@ function list_Fun(data,list,category) {
         }
     }
     else if (category==='store')
-    {   let addbtn = $('#add-btn')
-        addbtn.css('display','none')
+    {   addbtn.css('display','none')
         for (item of data) {
             let product_ob = new Product(item)
             let li = createLi(product_ob,'store');
@@ -835,16 +835,7 @@ function menuoptions(){
     let fullscreendiv = $('#main-screen-div')[0]
      fullscreendiv.classList.toggle('slide-side-menu')
     let slideMenuIcons = document.getElementsByClassName('slide-menu-icons')
-    let filterMenuDiv = document.getElementById('filter-menu-div')
-    // let centerItemDisplay = document.getElementById('center-item-display')
-    // // filterMenuDiv.classList.toggle('col-2')
-    // // filterMenuDiv.classList.toggle('col-3')
-    // centerItemDisplay.classList.toggle('col-4')
-    // centerItemDisplay.classList.toggle('col-5')
      let sideMenu = document.getElementById('side-menu')
-    //  sideMenu.classList.toggle('col-3')
-    //  sideMenu.classList.toggle('col-2')
-    // console.log(slideMenuIcons);
     for(i of slideMenuIcons)
     {
         i.classList.toggle('slide-menu-icons-display')
