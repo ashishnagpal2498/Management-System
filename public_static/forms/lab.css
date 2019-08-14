@@ -31,15 +31,15 @@ body{
 }
 
 
-#departmentlab-form input{
+#departmentlab-form input,select{
     width: 100%;
     margin-bottom: 20px;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid transparent;
     border-radius: 3px;
 }
 
-#departmentlab-form input:focus{
+#departmentlab-form input,select:focus{
     outline: none;
     border: none;
 }
