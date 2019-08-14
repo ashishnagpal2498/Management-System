@@ -19,7 +19,7 @@ function reviewmenufunc(category) {
     console.log('ProductId - '+productId)
 
     popup_content.append(`<div class="col-6" > Product ID : <input value=" ${productId}" readonly> </div>`)
-    $.get(`http://localhost:2121/product/${productId}`,(data)=>{
+    $.get(`/product/${productId}`,(data)=>{
         console.log('Productsssssss')
         console.log(data)
         //    Display data of product here
@@ -43,7 +43,7 @@ function reviewmenufunc(category) {
         else if(category==='Return')
         {
             //
-            $.get(`http://localhost:2121/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
+            $.get(`/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
                 let table_content;
                 if(faculty_or_lab==='lab')
                 {
@@ -81,7 +81,7 @@ function reviewReturnItem() {
     let facultyId = $('input[name ="FacultyId"]')
     let selectedQty = $('input[name="selected-qty"]')
     let productId = $('input[name="productId"]')
-    $.post('http://localhost:2121/Return',
+    $.post('/Return',
         {
             category:category.val(),
             labId: labId.val(),
@@ -97,7 +97,7 @@ function reviewReturnItem() {
                 success_Div.empty();
                 //Refresh Values
 
-                $.get('http://localhost:2121/Return',(data)=>{
+                $.get('/Return',(data)=>{
                     let list = $('#list-items')
                     list.empty();
                     list_Fun(data,list,'Return');
@@ -132,7 +132,7 @@ function transferSuccessful(ev) {
 
     let transferForm = $('#transferForm')
 
-    $.post('http://localhost:2121/transfer',{
+    $.post('/transfer',{
         senderCategory: senderCategory.val(),
         receiverCategory: receiverCategory.val(),
         senderFacultyId : senderFacultyId.val(),
@@ -149,7 +149,7 @@ function transferSuccessful(ev) {
             closepopup();
 
             //REFRESHING THE LIST -
-            // $.get('http://localhost:2121/transfer',(data)=>{
+            // $.get('/transfer',(data)=>{
             //     let list = $('#list-items')
             //     list.empty();
             //     list_Fun(data,list,'transfer');
@@ -193,7 +193,7 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
                             <div class="col-6 pl-3 pb-2" id = "item-receive"><h5>Receiver</h5></div> `)
 
 
-    $.get(`http://localhost:2121/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
+    $.get(`/${faculty_or_lab}/${transferableItemLd}`,(data)=>{
         let table_content;
         if(faculty_or_lab==='lab')
         {
@@ -226,7 +226,7 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
     let facultyOrLab = selected_transfer.attr('name').split('Id')[0];
 
 
-        $.get(`http://localhost:2121/${facultyOrLab}/${selected_transfer_val}`,(data)=>{
+        $.get(`/${facultyOrLab}/${selected_transfer_val}`,(data)=>{
             console.log(data)
             let table_content = $(`  <div class="row">
         <div class="col-6 p-2">${facultyOrLab} Id <input name="receiver_${facultyOrLab}Id" value=" ${data.id}" readonly ></div>
@@ -282,7 +282,7 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     // console.log(total_Data)
     //let labs_list ;
     if(cat==='transfer') {
-    let transferBtn = $(`<a class="mt-1 col-6 btn btn-info" id="transfer-btn" style="color: white;" href="http://localhost:2121/forms/transfer.html">Transfer</a>`)
+    let transferBtn = $(`<a class="mt-1 col-6 btn btn-info" id="transfer-btn" style="color: white;" href="/forms/transfer.html">Transfer</a>`)
         detailDiv.append(transferBtn)
     }
     else if(cat==='Return')
@@ -314,7 +314,7 @@ function issueReport(productId) {
     popup_content.append(pop_up_menu_heading)
     popup_menu.css('display','block')
 
-    $.get(`http://localhost:2121/issue/${productId}`,(list_ofdept_labs)=>{
+    $.get(`/issue/${productId}`,(list_ofdept_labs)=>{
     //        GETTING DESIRED OBJECT -
 
         let issued_labs = []
@@ -398,19 +398,19 @@ function funSelectedItem(el,event){
     //Need to request database everytime whenever the item is clicked
     //cannot store the Temp data on files as request coming from which path not decided
     if(category==='vendor') {
-        $.get(`http://localhost:2121/vendor/${id}`,(data)=>{
+        $.get(`/vendor/${id}`,(data)=>{
             detailDiv.append(createElement(data,category))
         })
     }
     else if(category==='product')
     {
-        $.get(`http://localhost:2121/product/${id}`,(data)=>{
+        $.get(`/product/${id}`,(data)=>{
             detailDiv.append(createElement(data,category))
         })
     }
     else if(category==='faculty')
     {
-        $.get(`http://localhost:2121/faculty/${id}`,(data)=>{
+        $.get(`/faculty/${id}`,(data)=>{
             detailDiv.append(createElement(data,category))
         })
     }
@@ -420,14 +420,14 @@ function funSelectedItem(el,event){
             detailDiv.append(createElement({},'department'))
         }
         else {
-        $.get(`http://localhost:2121/department/${id}`, (data) => {
+        $.get(`/department/${id}`, (data) => {
             detailDiv.append(createElement(data, category))
         });
     }
     }
     else if(category==='lab')
     {
-        $.get(`http://localhost:2121/lab/${id}`,(data)=>{
+        $.get(`/lab/${id}`,(data)=>{
             detailDiv.append(createElement(data,category))
         });
 
@@ -440,9 +440,8 @@ function funSelectedItem(el,event){
 
        //id and Product Id are same in this case -
         let productId = +($(el).attr('productId'));
-        // let editbtn = $('#edit-btn')
-        // editbtn.attr('href',`../forms/issue.html?productId=${productId}`)
-        $.get(`http://localhost:2121/issue/${productId}`,(list_ofdept_labs)=>{
+
+        $.get(`/issue/${productId}`,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.issuedItem.product
             let issueItemProduct = createElement(product_Details_Val,'product')
 
@@ -472,7 +471,7 @@ function funSelectedItem(el,event){
 
         if(sub_category==="lab")
         {
-            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+            $.get(`/transfer/${id};${sub_category}`,(data)=>{
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
@@ -484,7 +483,7 @@ function funSelectedItem(el,event){
         //It will be faculty-----
         else
         {
-            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+            $.get(`/transfer/${id};${sub_category}`,(data)=>{
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
@@ -512,7 +511,7 @@ function funSelectedItem(el,event){
 
         if(sub_category==="lab")
         {
-            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+            $.get(`/transfer/${id};${sub_category}`,(data)=>{
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
@@ -524,7 +523,7 @@ function funSelectedItem(el,event){
         //It will be faculty-----
         else
         {
-            $.get(`http://localhost:2121/transfer/${id};${sub_category}`,(data)=>{
+            $.get(`/transfer/${id};${sub_category}`,(data)=>{
                 // MULTIPLE PARAMS -
                 console.log('INSIDE TRANSFER -----')
                 console.log(data);
@@ -536,7 +535,7 @@ function funSelectedItem(el,event){
     }
     else if(category==='store')
     {
-        $.get(`http://localhost:2121/issue/${id}`,(list_of_faculty_labs)=> {
+        $.get(`/issue/${id}`,(list_of_faculty_labs)=> {
 
             detailDiv.append(createElement(list_of_faculty_labs.issuedItem.product,'product'))
             detailDiv.append(`<div class="col-12"><h4>Remaining Quantity</h4> ${list_of_faculty_labs.remaining_qty}</div>`)
@@ -764,7 +763,7 @@ function show(ev) {
     localStorage.setItem('form_request',formrequest)
     console.log('CALLING  FILTER OPS')
     filterOptions(formrequest);
-    $.get(`http://localhost:2121/${formrequest}`,
+    $.get(`/${formrequest}`,
         //Callback Function which Receives Data -
         (data)=>{
         console.log('FORM REQ --------->>>>>>>>>.')
@@ -821,7 +820,7 @@ window.onclick = function(event) {
 
 $(()=>{
     //Prototype Classes -
-    $.get('http://localhost:2121/login',(data)=>{
+    $.get('/login',(data)=>{
         console.log('User Check')
         if(data.user != undefined)
         {   //Admin login - Set the user Value-

@@ -5,13 +5,13 @@ function mainpage(category) {
     // alert(category)
     console.log('Logged in value inside Mainpage')
     console.log(LoggedIn)
-    $.get('http://localhost:2121/login',(data)=>{
+    $.get('/login',(data)=>{
     //    If the user is logged in then
         if(data.user)
         {   console.log(data)
-        return    window.location = `http://localhost:2121/mainfile/mainfile.html?category=${category}`
+        return    window.location = `./mainfile/mainfile.html?category=${category}`
         }
-        return window.location = `http://localhost:2121/Login/login.html?category=${category}`
+        return window.location = `./Login/login.html?category=${category}`
     })
 }
 

@@ -60,7 +60,7 @@ $(function () {
     let designation = $('#designation')
     let phone = $('#phone')
 
-    $.get('http://localhost:2121/login',(data)=>{
+    $.get('/login',(data)=>{
         console.log(data)
         userid.attr('value',data.user[0].id);
         name.attr('value',data.user[0].name);
