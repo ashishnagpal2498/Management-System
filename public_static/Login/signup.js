@@ -71,6 +71,10 @@ $(()=>{
                         console.log(data.message)
                         window.location = "./login.html"
                     }
+                    else
+                    {
+                        window.location = "./signup.html"
+                    }
                 })
         }
     })
