@@ -62,10 +62,16 @@ $(function () {
 
     $.get('/login',(data)=>{
         console.log(data)
-        userid.attr('value',data.user[0].id);
-        name.attr('value',data.user[0].name);
-        username.attr('value',data.user[0].username)
-        designation.attr('value',data.user[0].designation)
+        if(data.user) {
+            userid.attr('value', data.user[0].id);
+            name.attr('value', data.user[0].name);
+            username.attr('value', data.user[0].username)
+            designation.attr('value', data.user[0].designation)
+        }
+        else
+        {
+            window.location = './Login/login.html'
+        }
     })
 
     // let myprofileid = $('#myprofileid')

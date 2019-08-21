@@ -56,7 +56,7 @@ $(()=>{
         let name = $('#signupname')
         let formCheck = signupvalidate();
         if(formCheck) {
-            $.post('http://localhost:2121/signup',
+            $.post('/signup',
                 {
                     signupname: name.val(),
                     signuppass: password.val(),
@@ -69,7 +69,7 @@ $(()=>{
                     if(data.userAdded)
                     {
                         console.log(data.message)
-                        window.location = "http://localhost:2121/Login/login.html"
+                        window.location = "./login.html"
                     }
                 })
         }

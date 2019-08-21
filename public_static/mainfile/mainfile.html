@@ -13,6 +13,7 @@
 
     <script src="mainfile.js"></script>
     <script src="mainFile_filter_Items.js"></script>
+    <link href="../loading_screen.css" rel="stylesheet">
     <script>
         /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
@@ -33,9 +34,17 @@
         //         }
         //     }
         // }
+        $(()=>{
+           setTimeout(()=>{
+               $('.preload').addClass('complete')
+           },1000)
+        })
     </script>
 </head>
 <body>
+<div class="preload">
+    <div class="loader"></div>
+</div>
 <div id="header-menu-container" class="container-fluid pt-2 pb-2">
     <div class="row justify-content-between p-2">
         <div class="col-4 row" id="menu-btn">

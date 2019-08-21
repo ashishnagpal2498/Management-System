@@ -43,7 +43,7 @@ $(()=>{
         if(frontEndCheck)
         {   console.log('Inside If')
             //if it comes out to be true - then the data is ready to send to backend
-            $.post('http://localhost:2121/login',
+            $.post('/login',
                 {
                     username: username.val(),
                     password: password.val()
@@ -55,11 +55,11 @@ $(()=>{
                         //userExist -
                         if(UrlSplitter)
                         {
-                            window.location = `http://localhost:2121/mainfile/mainfile.html?category=${UrlSplitter}`
+                            window.location = `../mainfile/mainfile.html?category=${UrlSplitter}`
                         }
                         else
                         {
-                            window.location = "http://localhost:2121/myprofile.html"
+                            window.location = "../myprofile.html"
                         }
                     }
                     else

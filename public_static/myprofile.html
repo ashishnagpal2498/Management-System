@@ -8,62 +8,89 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="myprofile.js"></script>
+
+    <link href="mainfile/main_file_ss.css" rel="stylesheet">
+    <link href="header_styling.css" rel="stylesheet">
+    <script src="forms/forms_common_scripts.js"></script>
 </head>
-<body background="Login/loginbackground.jpg" style="background-size: cover" >
-<div class="container mt-5 p-4 myprofile-container" style="background: white">
+<body background="./Login/loginbackground.jpg" style="background-size: cover">
+
+<style>
+    .side-menu a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<div  class="container-fluid" id="main-screen-div" style="padding-top: 80px">
+    <!--Side menu Div -->
     <div class="row">
-        <h1 id="myprofile-myprofile" style="margin: auto;text-decoration: underline; font-weight: bolder; color: darkred; border-bottom-color: darkred">PROFILE</h1>
-    </div>
-    <br>
-    <br>
-    <div class="row mt-3 mb-4 myprofile-row justify-content-center" id="myprofileid">
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-12">
+        <div class="col-3 side-menu" id="side-menu">
+            <div class="row" id="side-menu-options">
+
+            </div>
+        </div>
+        <!--FORM DIV-->
+        <div class="col-9 ml-3 row" style="background: white">
+            <div class=" col-12 row">
+                <h1 id="myprofile-myprofile" style="margin: auto;text-decoration: underline; font-weight: bolder; color: darkred; border-bottom-color: darkred">PROFILE</h1>
+            </div>
+            <br>
+            <br>
+            <div class=" col-12 row mt-3 mb-4 myprofile-row justify-content-center" id="myprofileid">
+                <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-4">
-                            <p style="font-weight: bold">User ID: </p>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="id" class="form-control" value="" readonly type="text">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p style="font-weight: bold">Name: </p>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="name" class="form-control" value="" readonly type="text">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p style="font-weight: bold">Username: </p>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="username" readonly class="form-control" value="" type="text">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p style="font-weight: bold">Phone: </p>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="phone" class="form-control" readonly value="" type="number">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p style="font-weight: bold">Designation: </p>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="designation" class="form-control" readonly type="text">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p style="font-weight: bold">User ID: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="id" class="form-control" value="" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p style="font-weight: bold">Name: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="name" class="form-control" value="" readonly type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p style="font-weight: bold">Username: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="username" readonly class="form-control" value="" type="text">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p style="font-weight: bold">Phone: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="phone" class="form-control" readonly value="" type="number">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p style="font-weight: bold">Designation: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="designation" class="form-control" readonly type="text">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
+</div>
+<div class="container mt-5 p-4 myprofile-container" >
+
 
 </div>
 

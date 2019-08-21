@@ -821,9 +821,10 @@ window.onclick = function(event) {
 
 $(()=>{
     //Prototype Classes -
+
     $.get('/login',(data)=>{
         console.log('User Check')
-        if(data.user != undefined)
+        if(data.user !== false)
         {   //Admin login - Set the user Value-
             if(data.user[0].username==='admin') {
                 adminLogin = true;
@@ -836,6 +837,12 @@ $(()=>{
             username_Div.empty();
             username_Div.append(data.user[0].username)
             console.log(data.user[0].name);
+        }
+        else
+        {   setTimeout(()=>{
+            window.location = "../Login/login.html"
+        },500)
+
         }
 
     })

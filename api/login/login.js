@@ -7,7 +7,7 @@ route.get('/',(req,res)=>{
     {
         return res.send({user:req.user})
     }
-    return res.send({user:undefined,messgae: 'user Not found'})
+    return res.send({user:false,message: 'user Not found'})
 })
 
 route.post('/',(req,res,next)=>{
