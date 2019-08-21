@@ -19,19 +19,19 @@ route.get('/:id',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Vendor.create({
-        vdorid:req.body.vendorid,
+        vdorid:req.body.vendorId,
         name:req.body.name,
         accountNo:req.body.accountNo,
         companyname: req.body.companyname,
         companycontact:req.body.companycontact,
         personalcontact:req.body.personalcontact,
         companyemail: req.body.companyemail,
-        address:[req.body.add,req.body.postal,req.body.state,req.body.country]
+        address:[req.body.Vaddress,req.body.postal,req.body.state,req.body.country]
     })
         .then((result)=> {
             console.log(result)
             //  res.send({message:"vendor has been added"})
-        res.redirect('.')
+        res.send({added:true})
         }).catch((err)=> console.error(err))
 })
 

@@ -39,7 +39,8 @@ route.post('/',(req,res)=>{
     })
         .then((result)=>{
             console.log(result)
-            res.redirect('.')
+            // res.redirect('.')
+            res.send({added:true})
         })
         .catch((err)=> console.error(err));
 })

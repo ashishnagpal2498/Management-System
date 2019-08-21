@@ -74,8 +74,98 @@ function sideMenuOptions()
     sideMenu.append(menuOptions);
 
 }
+function formObjects(category) {
+    let obj;
+    if(category==='vendor')
+    {
+        obj = {
+            vendorId: $('#vendorId').val(),
+            companyname: $('#companyname').val(),
+            accountNo:$('#accountNo').val(),
+            name: $('#name').val(),
+            companyemail: $('#companyemail').val(),
+            personalcontact: $('#personalcontact').val(),
+            companycontact: $('#companycontact').val(),
+            Vaddress: $('#Vaddress').val(),
+            postal: $('#vendorPostalCode').val(),
+            state: $('#vendorState').val(),
+            country: $('#vendorCountry').val(),
+        }
+
+    }
+    else if(category==='product')
+    {
+        obj = {
+            pOrderNo: $('#pOrderNo').val(),
+            name: $('#name').val(),
+            category: $('#category').val(),
+            vendorId : $('#vendorId').val(),
+            manufacturer : $('#manufacturer').val(),
+            modelName : $('#modelName').val(),
+            invoice_date: $('invoice_date').val(),
+            invoice_no: $('#invoice_no').val(),
+            warranty_year: $('#warranty_year').val(),
+            qty: $('#qty').val(),
+            price : $('#price').val(),
+            product_details: $('#product_details').val()
+        }
+    }
+    else if(category==='department')
+    {
+        obj = {
+            hod: $('#HODName').val(),
+            block: $('#BlockNumber').val(),
+            name : $('#DeptName').val(),
+            dno : $('#DeptNumber').val()
+        }
+    }
+    else if(category==='lab')
+    {
+
+    }
+    else if(category==='faculty')
+    return obj;
+}
+function formSubmitResult(category,ptr)
+{   //let submitForm = $('#'+`${category}`+'-form')
+    // let departmentForm = $('#department-wise-form')
+    //alert('form submit');
+    ptr.preventDefault();
+        console.log('Prevented Default')
+        let obj = formObjects(category);
+        $.post(`/${category}`,obj,(data)=>{
+            let popup = $('#popup')
+            let successFullDiv = $('#success-div-popup')
+            let redirect_Message = $('#redirect-message')
+            let popupMessage = $('#popup-message')
+            if(data.added)
+            {
+                //SHOW THE MESSAGE POPUP -
+                redirect_Message.css('display','block')
+                successFullDiv.empty();
+                successFullDiv.append('Successfully Added')
+                successFullDiv.css('display','block');
+                setTimeout(()=>{
+                    window.location = "../mainfile/mainfile.html"
+                },3000)
+            }
+            else
+            {
+                //SHOW POPUP OF REJECTION -
+                redirect_Message.css('display','none')
+                successFullDiv.empty();
+                successFullDiv.append('Not Added');
+                successFullDiv.css('display','block')
+                setTimeout(()=>{
+                    // window.location = "../mainfile/mainfile.html"
+                    successFullDiv.css('display','none')
+                },2000)
+
+            }
+        })
+}
 $(()=>{
-    $.get('http://localhost:2121/login',(data)=>{
+    $.get('/login',(data)=>{
         console.log('User Check')
         if(data.user != undefined)
         {   //Admin login - Set the user Value-

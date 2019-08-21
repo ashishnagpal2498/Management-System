@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dept Form</title>
-    <link rel="stylesheet" href="department.css">
+<!--    <link rel="stylesheet" href="department.css">-->
     <link rel="stylesheet" href="../Bootstrap/dist/css/bootstrap.css">
     <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="../Bootstrap/dist/js/bootstrap.js"></script>
@@ -11,6 +11,7 @@
     <link href="../mainfile/main_file_ss.css" rel="stylesheet">
     <link href="../header_styling.css" rel="stylesheet">
     <script src="./forms_common_scripts.js"></script>
+    <link href="form_common_stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <!--HEADER ---  -->
@@ -35,13 +36,13 @@
         <!--FORM DIV-->
         <div class="col-9 ml-3 row">
             <!--FORM --->
-            <div class="container" id="department-form-container">
-                <div class="container-heading" id="department-item-heading">
+            <div class="container myform-whole-container" id="department-form-container">
+                <div class="container-heading " id="department-item-heading">
                     <h3>DEPARTMENT DETAILS <i class="fas fa-user"></i></h3>
                 </div>
             </div>
-            <div class="department-form-container" style="margin-top: -190px;margin-left: 120px" id="department-form-container-id">
-                <form action="/department" method="post" id="department-wise-form">
+            <div class="myform-inner-container" style="margin-top: -190px;margin-left: 120px" id="department-form-container-id">
+                <form action="/department" method="post" id="department-form" onsubmit="formSubmitResult('product',event)">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="DeptNumber">DEPT NUMBER</label>
@@ -70,8 +71,8 @@
                             <input name="hod" type="text" required class="form-control" id="HODName">
                         </div>
                     </div>
-                    <div class="dept-btn">
-                        <input type="submit" value="Submit" class="department-button-class">
+                    <div class="dept-btn mybtn-setts">
+                        <input type="submit" value="Submit" class="btn btn-class">
                     </div>
 
                 </form>
@@ -79,35 +80,46 @@
         </div>
     </div>
 </div>
-<div class="pop-up" id="popup">
-    <div class="popup-content" id="popup-content">
-        <div class="col-12 close-btn" onclick="closepopup()" id="close-btn" align="right"><i class="fa fa-times"></i> </div>
-        <!--Display the content here-->
-        <h4> Successfully Added </h4>
-    </div>
+<div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful
+    <p id="redirect-message">You will be redirected in 3 secs</p>
 </div>
 <script>
-    let departmentForm = $('#department-wise-form')
-    departmentForm.submit((ev)=>{
-        ev.preventDefault();
-        console.log('Prevented Default')
-        let obj = {
-           hod: $('#HODName').val(),
-           block: $('#BlockNumber').val(),
-           name : $('#DeptName').val(),
-           dno : $('#DeptNumber').val()
-        }
-        $.post('http://localhost:2121/department',obj,(data)=>{
-            if(data.added)
-            {
-                //SHOW THE MESSAGE POPUP -
-            }
-            else
-            {
-                //SHOW POPUP OF REJECTION -
-            }
-        })
-    })
+    // let departmentForm = $('#department-form')
+    // departmentForm.submit((ev)=>{
+    //     ev.preventDefault();
+    //     console.log('Prevented Default')
+    //     let obj = {
+    //        hod: $('#HODName').val(),
+    //        block: $('#BlockNumber').val(),
+    //        name : $('#DeptName').val(),
+    //        dno : $('#DeptNumber').val()
+    //     }
+    //     $.post('/department',obj,(data)=>{
+    //         let popup = $('#popup')
+    //         let redirect_Message = $('#redirect-message')
+    //         let popupMessage = $('#popup-message')
+    //         if(data.added)
+    //         {
+    //             //SHOW THE MESSAGE POPUP -
+    //             redirect_Message.css('display','block')
+    //             popupMessage.empty();
+    //             popupMessage.append('Successfully Added')
+    //             popup.css('display','block');
+    //             setTimeout(()=>{
+    //                 window.location = "../mainfile/mainfile.html"
+    //             },3000)
+    //         }
+    //         else
+    //         {
+    //             //SHOW POPUP OF REJECTION -
+    //             redirect_Message.css('display','none')
+    //             popupMessage.empty();
+    //             popupMessage.append('Not Added');
+    //
+    //             popup.css('display','block')
+    //         }
+    //     })
+    // })
 </script>
 
 </body>

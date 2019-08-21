@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="form1.css">
     <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.bundle.min.js"></script>
+   <script src="../Bootstrap/dist/js/bootstrap.js"></script>
+    <link href="../Bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="../mainfile/main_file_ss.css" rel="stylesheet">
     <link href="../header_styling.css" rel="stylesheet">
     <script src="forms_common_scripts.js"></script>
+    <link href="form_common_stylesheet.css" rel="stylesheet">
+    <style>
+        .form-group{
+            margin-bottom: 0;
+        }
+        .myform-whole-container{
+            margin-top: -10px;
+        }
+        .myform-inner-container{
+            margin-top: -15px;
+        }
+        .myform-inner-container input,select,label{
+            margin-bottom: 1px;
+        }
+    </style>
 </head>
 <body>
 <!--HEADER ---  -->
@@ -37,25 +50,25 @@
         <!--FORM DIV-->
         <div class="col-9 ml-3 row" >
                         <!--FORM --->
-            <div class="col-12">
+            <div class="col-12 myform-whole-container">
                 <div class="container-heading" id="purchase-item-heading">
                     <h3>PURCHASE ORDER ITEM <i class="fas fa-desktop"></i></h3>
                 </div>
 
-                <div class="form-container">
-                    <form action="/product" method="post" id="purchase-item-form" onsubmit="alert('Product Added - Successfully')">
+                <div class="myform-inner-container">
+                    <form action="/product" method="post" onsubmit="formSubmitResult('product',event)" id="product-form">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="PONumber">P/O NUMBER</label>
-                                <input  name="pOrderNo" type="number" class="form-control" id="PONumber" placeholder="123">
+                                <label for="pOrderNo">P/O NUMBER</label>
+                                <input  name="pOrderNo" type="number" class="form-control" required id="pOrderNo" placeholder="Product Order Number">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="PONumber">Name</label>
-                                <input  name="name" type="text" class="form-control" id="name" placeholder="123">
+                                <label for="name">Name</label>
+                                <input  name="name" type="text" class="form-control" required id="name" placeholder="Product Name">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="itemName">ITEM NAME</label>
-                                <select name="category" class="form-control"  id="itemName">
+                                <label for="category">ITEM NAME</label>
+                                <select name="category" class="form-control"  required id="category">
                                     <option>computer</option>
                                     <option>printer</option>
                                     <option>mouse</option>
@@ -65,50 +78,50 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="VendorId">Vendor</label>
-                                <select name="vendorId" type="text" class="form-control" id="VendorId">
+                                <label for="vendorId">Vendor</label>
+                                <select name="vendorId" type="text" required class="form-control" id="vendorId">
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Manufacturer">MANUFACTURER</label>
-                                <input name="manufacturer" type="text" class="form-control" id="Manufacturer" placeholder="ACER">
+                                <label for="manufacturer">MANUFACTURER</label>
+                                <input name="manufacturer" type="text" required class="form-control" id="manufacturer" placeholder="ACER">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="ModelName">MODEL NAME</label>
-                                <input name="modelName" type="text" class="form-control" id="ModelName" placeholder="AC1">
+                                <label for="modelName">MODEL NAME</label>
+                                <input name="modelName" type="text" required class="form-control" id="modelName" placeholder="AC1">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="InvoiceDetail">INVOICE DATE</label>
-                                <input name="invoice_date" type="date" class="form-control" id="InvoiceDetail" >
+                                <label for="invoice_date">INVOICE DATE</label>
+                                <input name="invoice_date" type="date" required class="form-control" id="invoice_date" >
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="InvoiceNumber">INVOICE NUMBER</label>
-                                <input name="invoice_no" type="number" class="form-control" id="InvoiceNumber" >
+                                <label for="invoice_no">INVOICE NUMBER</label>
+                                <input name="invoice_no" type="number" required class="form-control" id="invoice_no" >
                             </div>
 
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="WarrantyPeriod">WARRANTY PERIOD</label>
-                                <input name="warranty_year" class="form-control" type="number" id="WarrantyPeriod">
+                                <label for="warranty_year">WARRANTY PERIOD</label>
+                                <input name="warranty_year" required class="form-control" type="number" id="warranty_year">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Quantity">QUANTITY</label>
-                                <input type="number" name="qty" class="form-control" id="Quantity" >
+                                <label for="qty">QUANTITY</label>
+                                <input type="number" name="qty" required class="form-control" id="qty" >
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="UnitPrice">UNIT PRICE</label>
-                                <input name="price" type="number" class="form-control" id="UnitPrice" >
+                                <label for="price">UNIT PRICE</label>
+                                <input name="price" type="number" required class="form-control" id="price" >
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Description">DESCRIPTION</label>
-                            <textarea name="product_details" class="form-control" rows="5" id="Description"></textarea>
+                            <label for="product_details">DESCRIPTION</label>
+                            <textarea name="product_details" required class="form-control" rows="3" id="product_details"></textarea>
                         </div>
-                        <div class="submit-button">
-                            <button type="submit" class="btn">SUBMIT</button>
+                        <div class="mybtn-setts">
+                            <button type="submit" class="btn btn-class">SUBMIT</button>
                         </div>
 
                     </form>
@@ -118,12 +131,14 @@
         </div>
     </div>
 </div>
-
+<div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful
+    <p id="redirect-message">You will be redirected in 3 secs</p>
+</div>
 
 <script>
-    let vendorSelect = $('#VendorId')
+    let vendorSelect = $('#vendorId')
     vendorSelect.empty();
-    $.get('http://localhost:2121/vendor',(data)=>{
+    $.get('/vendor',(data)=>{
         //All the Vendors -
         let vendor_list = [];
         for(i of data)
@@ -133,6 +148,7 @@
         }
         vendorSelect.append(vendor_list);
     })
+
 </script>
 </body>
 </html>

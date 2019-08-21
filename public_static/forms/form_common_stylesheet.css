@@ -3,32 +3,27 @@ body{
     margin: 0;
     box-sizing: border-box;
 }
-
 .container-heading{
     text-align: center;
     margin: 20px;
 }
-
-h3{
+.container-heading h3{
     font-weight: bold;
-}
-
-.container{
-    margin-bottom: 20px;
-}
-
-#purchase-item-heading h3{
     color: midnightblue;
     font-size: 2em;
 }
-
-.form-container{
+.myform-whole-container{
+    margin-bottom: 20px;
+}
+.myform-inner-container{
     background-color: lightgray;
     padding: 5px 20px 15px 20px;
     box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+    margin-right: 30px;
+    margin-left: 30px;
+    border: 1px solid red;
 }
-
-#purchase-item-form input{
+.myform-whole-container input,select{
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
@@ -36,34 +31,30 @@ h3{
     border-radius: 3px;
 }
 
-#purchase-item-form input:focus{
-    outline: none;
-    border: none;
-}
-
-.form-container{
-    border: #BD2130;
-}
-
-#purchase-item-form .btn {
-    background-color: midnightblue;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-
-#purchase-item-form .btn:hover {
-    opacity:1;
-    background-color: darkblue;
-    color: white;
-}
-
-#purchase-item-form label{
+.myform-whole-container label{
     color: #5D92B1 ;
     font-weight: bold;
 }
 
+.myform-whole-container input:focus,select:focus{
+    outline: none;
+    border: none;
+}
+.myform-inner-container{
+
+}
+.btn-class{
+    background-color: midnightblue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+.mybtn-setts{
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.transfer_Succ{
+    height: 200px;
+    padding: 20px;
+}

@@ -12,6 +12,7 @@
     <link href="../mainfile/main_file_ss.css" rel="stylesheet">
     <link href="../header_styling.css" rel="stylesheet">
     <script src="forms_common_scripts.js"></script>
+    <link href="form_common_stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <!--HEADER ---  -->
@@ -35,13 +36,13 @@
         <!--FORM DIV-->
         <div class="col-9 ml-3 row" >
             <!--FORM --->
-            <div class="container" id="department-form-container">
+            <div class="container myform-whole-container" id="department-form-container">
                 <div class="container-heading" id="department-item-heading">
                     <h3>FACULTY DETAILS <i class="fas fa-user"></i></h3>
                 </div>
             </div>
-            <div class="department-form-container" style="margin-top: -60px;margin-left: 120px"  id="department-form-container-id">
-                <form action="/faculty" method="post" id="department-wise-form">
+            <div class="myform-inner-container" style="margin-top: -60px;margin-left: 120px"  id="department-form-container-id">
+                <form action="/faculty" method="post" onsubmit="alert('Faculty Form Submitted')" id="department-wise-form">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="fid">Faculty Id</label>
@@ -65,16 +66,16 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="BlockNumber">BLOCK NUMBER</label>
-                            <input name="block" type="number" class="form-control" required id="BlockNumber">
+                            <label for="block">BLOCK NUMBER</label>
+                            <input name="block" type="number" class="form-control" required id="block">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="floor">Staffroom Floor</label>
                             <input name="floor" type="number" class="form-control" required id="floor">
                         </div>
                     </div>
-                    <div class="dept-btn">
-                        <input type="submit" value="Submit" class="department-button-class">
+                    <div class="mybtn-setts">
+                        <input type="submit" value="Submit" class="btn-class">
                     </div>
 
                 </form>
@@ -82,7 +83,9 @@
         </div>
     </div>
 </div>
-
+<div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful
+    <p id="redirect-message">You will be redirected in 3 secs</p>
+</div>
 
 
 </body>

@@ -29,8 +29,11 @@ route.post('/',(req,res)=>{
         block:req.body.block,
 
     }).then((results)=> {   //console.log(results)
-        res.redirect('.')})
-        .catch((err)=> console.error(err))
+            res.send({added:true})
+    })
+        .catch((err)=> {console.error(err)
+        res.send({added:false})
+        })
 })
 
 
