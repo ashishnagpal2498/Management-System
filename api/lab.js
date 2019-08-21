@@ -26,7 +26,7 @@ route.get('/:id',(req,res)=>{
 
 route.post('/',(req,res)=>{
     Lab.create({
-        labno:req.body.labno,
+        labno:req.body.labNo,
         name: req.body.name,
         technician: req.body.technician,
         block:req.body.block,
@@ -34,7 +34,7 @@ route.post('/',(req,res)=>{
         //Foreign Key -
         departmentId :req.body.departmentId
     }).then((results)=> {   //console.log(results)
-        res.redirect('.')})
+        res.send({added:true})})
         .catch((err)=> console.error(err))
 })
 

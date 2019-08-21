@@ -155,6 +155,7 @@ text-transform: uppercase;
     margin: auto 0;
     list-style-type: none ;
     min-height: 350px;
+    max-height: 420px;
 }
 #list-items li{
     z-index: 1;

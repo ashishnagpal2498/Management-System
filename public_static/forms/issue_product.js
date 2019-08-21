@@ -1,25 +1,39 @@
 function showproducts() {
     //Show all the Unissued Products in select Options
+    let UrlSplitter = window.location.href.split('?')[1]
     let showunissuedoptions = $('#product-list')
+    if(UrlSplitter)
+    {
+        let productId = UrlSplitter.split('=')[1];
+        $.get(`/product/${productId}`,(data)=>{
+            showunissuedoptions.empty();
+            let ocreated = $(`<option name = "productId" value = ${productId} ></option>`)
+            ocreated[0].textContent = data.name + data.modelName
+            showunissuedoptions.append(ocreated)
 
-    console.log('Show Products')
+            displayPDetails(productId)
+        })
+
+    }
     //This shows all the products which are unissued
-    $.get('http://localhost:2121/issue/unissued',(data)=>{
-        //Append - name Wise - Id
-        showunissuedoptions.empty();
-        let options_list = []
-        //console.log(data)
-        for(op of data)
-        {   //console.log(op.pid)
-            let ocreated = $(`<option name = "productId" value = ${op.id} ></option>`)
-            ocreated[0].innerText = op.name+op.modelName;
-            options_list.push(ocreated)
-        }
-        //console.log(options_list)
-        showunissuedoptions.append(options_list);
-        let selectVal = showunissuedoptions.val();
-        displayPDetails(selectVal);
-    })
+    else
+    {
+        $.get('/issue/unissued', (data) => {
+            //Append - name Wise - Id
+            showunissuedoptions.empty();
+            let options_list = []
+            //console.log(data)
+            for (op of data) {   //console.log(op.pid)
+                let ocreated = $(`<option name = "productId" value = ${op.id} ></option>`)
+                ocreated[0].innerText = op.name + op.modelName;
+                options_list.push(ocreated)
+            }
+            //console.log(options_list)
+            showunissuedoptions.append(options_list);
+            let selectVal = showunissuedoptions.val();
+            displayPDetails(selectVal);
+        })
+    }
 }
 function displayPDetails(elementID) {
     console.log(elementID)
@@ -35,7 +49,7 @@ function displayPDetails(elementID) {
     //Finding Product From Product ID
     let ProductQuantity ;
     productIdElement.attr('value',proDuctID)
-    $.get(`http://localhost:2121/product/${proDuctID}`,(data)=>{
+    $.get(`/product/${proDuctID}`,(data)=>{
         console.log(data);
         productIdElement.empty()
         product_name.empty();
@@ -49,7 +63,7 @@ function displayPDetails(elementID) {
     //********************************************
 
     //Remaining Quantity and Previously Issued Product Details
-    $.get(`http://localhost:2121/issue/${proDuctID}`,(data)=>{
+    $.get(`/issue/${proDuctID}`,(data)=>{
         remQuantity.empty();
         console.log(data);
         // console.log(remQuantity)

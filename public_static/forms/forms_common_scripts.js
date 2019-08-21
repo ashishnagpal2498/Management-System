@@ -102,7 +102,7 @@ function formObjects(category) {
             vendorId : $('#vendorId').val(),
             manufacturer : $('#manufacturer').val(),
             modelName : $('#modelName').val(),
-            invoice_date: $('invoice_date').val(),
+            invoice_date: $('#invoice_date').val(),
             invoice_no: $('#invoice_no').val(),
             warranty_year: $('#warranty_year').val(),
             qty: $('#qty').val(),
@@ -121,9 +121,26 @@ function formObjects(category) {
     }
     else if(category==='lab')
     {
-
+        obj = {
+            name: $('#name').val(),
+            floor : $('#floor').val(),
+            block: $('#block').val(),
+            labNo : $('#labNo').val(),
+            departmentId: $('#departmentId').val(),
+            technician: $('#technician').val()
+        }
     }
     else if(category==='faculty')
+    {
+        obj = {
+            fid: $('#fid').val(),
+            name: $('#name').val(),
+            floor : $('#floor').val(),
+            block: $('#block').val(),
+            responsibility: $('#responsibility').val(),
+            designation: $('#designation').val()
+        }
+    }
     return obj;
 }
 function formSubmitResult(category,ptr)
@@ -134,7 +151,7 @@ function formSubmitResult(category,ptr)
         console.log('Prevented Default')
         let obj = formObjects(category);
         $.post(`/${category}`,obj,(data)=>{
-            let popup = $('#popup')
+           // let popup = $('#popup')
             let successFullDiv = $('#success-div-popup')
             let redirect_Message = $('#redirect-message')
             let popupMessage = $('#popup-message')
@@ -146,7 +163,7 @@ function formSubmitResult(category,ptr)
                 successFullDiv.append('Successfully Added')
                 successFullDiv.css('display','block');
                 setTimeout(()=>{
-                    window.location = "../mainfile/mainfile.html"
+                    window.location = `../mainfile/mainfile.html?category=${category}`
                 },3000)
             }
             else

@@ -3,17 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1d10adf7-a908-4f30-8b05-9cf279856adc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/department.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/department.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/forms/department.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/department.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/faculty.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/faculty.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/lab.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/lab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/faculty.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/faculty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/forms/form1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/forms/form_common_stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/form_common_stylesheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/forms_common_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/forms_common_scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/issue.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/issue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/forms/issue_product.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/issue_product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/lab.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/lab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/forms/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/transfer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/forms/vendor.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/vendor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/main_file_ss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +106,7 @@
       <workItem from="1561654965550" duration="591000" />
       <workItem from="1563386591467" duration="122725000" />
       <workItem from="1565037972635" duration="48730000" />
-      <workItem from="1566408914578" duration="5116000" />
+      <workItem from="1566408914578" duration="11004000" />
     </task>
     <servers />
   </component>

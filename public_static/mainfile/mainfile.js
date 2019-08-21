@@ -440,7 +440,8 @@ function funSelectedItem(el,event){
 
        //id and Product Id are same in this case -
         let productId = +($(el).attr('productId'));
-
+        let addBtn = $('#add-btn')
+        addBtn.attr('href',`../forms/issue.html?productId=${productId}`)
         $.get(`/issue/${productId}`,(list_ofdept_labs)=>{
              let product_Details_Val = list_ofdept_labs.issuedItem.product
             let issueItemProduct = createElement(product_Details_Val,'product')

@@ -42,22 +42,22 @@
                 </div>
             </div>
             <div class="myform-inner-container" style="margin-top: -60px;margin-left: 120px"  id="department-form-container-id">
-                <form action="/faculty" method="post" onsubmit="alert('Faculty Form Submitted')" id="department-wise-form">
+                <form action="/faculty" method="post" onsubmit="formSubmitResult('faculty',event)" id="department-wise-form">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="fid">Faculty Id</label>
                             <input name="fid" type="text" required class="form-control" id="fid">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="Name">NAME</label>
-                            <input name="name" class="form-control" required id="Name">
+                            <label for="name">NAME</label>
+                            <input name="name" class="form-control" required id="name">
                         </div>
 
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="Designation">Designation</label>
-                            <input name="designation" type="text" class="form-control" required id="Designation">
+                            <label for="designation">Designation</label>
+                            <input name="designation" type="text" class="form-control" required id="designation">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="responsibility">Responsibility</label>
@@ -84,7 +84,7 @@
     </div>
 </div>
 <div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful
-    <p id="redirect-message">You will be redirected in 3 secs</p>
+    <div id="redirect-message" align="center">You will be redirected in 3 secs</div>
 </div>
 
 

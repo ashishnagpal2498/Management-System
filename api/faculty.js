@@ -29,7 +29,7 @@ route.post('/',(req,res)=>{
         floor: req.body.floor
     }).then(()=>{
         console.log('Created - Faculty  ' )
-        res.redirect('.')
+        res.send({added:true})
     }).catch((err)=> console.error('Error In creating Faculty '+err))
 })
 
