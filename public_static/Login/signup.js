@@ -72,7 +72,7 @@ $(()=>{
                         window.location = "./login.html"
                     }
                     else
-                    {
+                    {   alert(data.message);
                         window.location = "./signup.html"
                     }
                 })

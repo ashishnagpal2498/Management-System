@@ -22,15 +22,26 @@ route.post('/',(req,res)=>{
         designation:req.body.designation,
         department: req.body.signupdept
     },{returning:true}).then((result)=>{
-        bcrypt.hash(req.body.signuppass,saltRounds,(err,hash)=>{
-            LoginDatabase.Passwords.create({
-                password:hash,
-                usernameId: result.id
-            }).then(()=> {console.log('User Added')
-               return res.send({userAdded:true,message: "User Added Successfully"})})
-                .catch((err)=> console.error('Password'+err))
+        bcrypt.hash(req.body.signuppass,saltRounds)
+            .then((hash)=>{
+                LoginDatabase.Passwords.create({
+                    password:hash,
+                    usernameId: result.id
+                }).then(()=> {
+                    console.log('User Added')
+                    return res.send({userAdded:true,message: "User Added Successfully"})
+                }).catch((err)=>
+                {console.error('Password'+err)
+                    if (err)
+                        return res.send({userAdded:false,message:"user cannot be added"})
+                })
+            }).catch((err3)=>{
+                console.error('Error In Bcrypt'+err3);
         })
-        }).catch((err)=> console.error('Cannot add user' + err))
+        }).catch((err2)=> {
+            console.error('Cannot add user' + err2)
+        if(err2) return res.send({userAdded:false,message:"Error , cannot be added"})
+        })
 
 })
 
