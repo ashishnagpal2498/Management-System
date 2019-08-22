@@ -25,10 +25,10 @@ $(function () {
         if(data.user){
             LoggedIn = data.user
             let name = data.user[0].name;
-           let userIcon = $('#login-user')
-            userIcon.empty();
-           userIcon[0].innerText = `Hey , ${name} `
-            console.log(name);
+           let username = $('#username')
+            username.empty();
+           username.append(`${name}`)
+            // console.log(name);
         }
     })
     console.log('Logged In value after')

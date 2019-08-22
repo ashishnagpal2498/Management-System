@@ -282,22 +282,38 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     // console.log(total_Data)
     //let labs_list ;
     if(cat==='transfer') {
+     // $.get('/login',(data)=>{
+     //     if(data.user.designation==='Can Append')
+     //     {
+     //
+     //     }
+     // })
     let transferBtn = $(`<a class="mt-1 col-6 btn btn-info" id="transfer-btn" style="color: white;" href="/forms/transfer.html">Transfer</a>`)
         detailDiv.append(transferBtn)
     }
     else if(cat==='Return')
     {
-        let qty_list = []
-        //Quantity available - Select
-        for(i=1 ; i<=total_Data.qty;i++)
-        {
-            let item = $(`<option>${i} </option>`)
-            qty_list.push(item)
-        }
-        let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
-        qty_select.append(qty_list)
-        detailDiv.append(qty_select);
-        detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">RETURN</button></div>`)
+        $.get('/login',(data)=>{
+            if(data.user.email==='admin@admin.com'||data.user.name==='admin')
+            {
+                let qty_list = []
+                //Quantity available - Select
+                for(i=1 ; i<=total_Data.qty;i++)
+                {
+                    let item = $(`<option>${i} </option>`)
+                    qty_list.push(item)
+                }
+                let qty_select = $('<select class="col-8 p-2" id="selected-qty" name= "qty"></select>')
+                qty_select.append(qty_list)
+                detailDiv.append(qty_select);
+                detailDiv.append(`<div class="row justify-content-center"> <button class= "mt-3 mb-3 pt-1 pb-1 col-3 btn btn-info" onclick="reviewmenufunc('${cat}')" style= "background-color:rgba(57,139,52,0.76);font-size: 20px;font-weight: bold; margin: 0 auto">RETURN</button></div>`)
+
+            }
+            else {
+                detailDiv.append(`<div class="row justify-content-center"> <div class= "mt-3 mb-3 pt-1 pb-1 col-10" style= "background-color:font-size: 20px;font-weight: bold; margin: 0 auto">YOU DOES NOT HAVE RETURN RIGHTS</div></div>`)
+
+            }
+        })
 
 
     }

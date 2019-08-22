@@ -21,24 +21,27 @@ route.post('/',(req,res)=>{
         name: req.body.signupname,
         designation:req.body.designation,
         department: req.body.signupdept
-    },{returning:true}).then((result)=>{
-        bcrypt.hash(req.body.signuppass,saltRounds)
-            .then((hash)=>{
-                LoginDatabase.Passwords.create({
-                    password:hash,
-                    usernameId: result.id
-                }).then(()=> {
-                    console.log('User Added')
-                    return res.send({userAdded:true,message: "User Added Successfully"})
-                }).catch((err)=>
-                {console.error('Password'+err)
-                    if (err)
-                        return res.send({userAdded:false,message:"user cannot be added"})
-                })
-            }).catch((err3)=>{
+    },{returning:true})
+        .then(function(result){
+            bcrypt.hash(req.body.signuppass,saltRounds)
+                .then(function(hash){
+                    LoginDatabase.Passwords.create({
+                        password:hash,
+                        usernameId: result.id
+                        })
+                        .then(function ()
+                        {   console.log('User Added')
+                            return res.send({userAdded:true,message: "User Added Successfully"})
+                        }).catch(function(err)
+                            {console.error('Password'+err)
+                            if (err)
+                            return res.send({userAdded:false,message:"user cannot be added"})
+                            })
+            }).catch(function(err3){
                 console.error('Error In Bcrypt'+err3);
-        })
-        }).catch((err2)=> {
+                if(err3) return res.send({userAdded:false,message:"Error in Bcrypt"})
+                })
+        }).catch(function (err2) {
             console.error('Cannot add user' + err2)
         if(err2) return res.send({userAdded:false,message:"Error , cannot be added"})
         })
