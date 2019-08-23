@@ -120,7 +120,7 @@ function displayDeptsLabs(previousIssuedData,cb) {
                 </li>`)
                     issued_faculty.push(issueItemDept)
                 }
-                dept_details.append(issued_dept)
+                dept_details.append(issued_faculty)
             }
 
 

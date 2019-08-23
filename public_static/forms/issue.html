@@ -71,7 +71,7 @@
             </div>
             <div class="myform-inner-container" id="department-form-container-id">
 
-                <form action="/issue" method="post" id="department-wise-form">
+                <form action="/issue" method="post" id="department-wise-form" onsubmit="formSubmitResult('issue',event)">
                     <div class="form-row mt-1 pt-2 pb-2">
                         <h4 align="center" style="width: 100%">Select Product</h4>
                         <div class="col-12 row justify-content-center mt-1 mb-1">
@@ -140,7 +140,9 @@
         </div>
     </div>
 </div>
-
+<div id="success-div-popup" class="transfer_Succ" align="center" >Transfer Successful
+    <p id="redirect-message">You will be redirected in 3 secs</p>
+</div>
 
 </body>
 </html>

@@ -201,6 +201,8 @@ route.post('/',(req,res)=>{
     let actual_rem_qty = +(req.body.remaining_qty) - +(req.body.qty);
     // console.log("ACTUAL REMAINING QUANTITY -----")
     console.log(actual_rem_qty);
+    console.log(req.body.category)
+    console.log(req.body)
     if(req.body.category==='faculty')
     {
         //1st check that if the Product is previously issued to the Faculty or not -
@@ -225,10 +227,11 @@ route.post('/',(req,res)=>{
                     //issued in product to 1
 
                    checkProduct(actual_rem_qty,req.body.productId,()=>{
-                       res.redirect('.')
+                      res.send({added:true,message:"Product Issued Successfully"})
                     })
                 }).catch((err)=>{
                     console.log('Product cannot be issued TO FACULTY NEW ROW');
+                    if(err) res.send({added:false,message:"Product Cannot be Added"})
                     console.error(err);
                 })
             }
@@ -248,7 +251,8 @@ route.post('/',(req,res)=>{
                     //issued in product to 1
 
                     checkProduct(actual_rem_qty,req.body.productId,()=>{
-                        res.redirect('.')
+                        // res.redirect('.')
+                        res.send({added:true,message:"Product Issued Successfully"})
                     })
 
                 }).catch((err)=>{
@@ -278,7 +282,9 @@ route.post('/',(req,res)=>{
                     console.log('Product Issued in LAB NEW ROW Successfully with qty - '+ req.body.qty)
 
                     checkProduct(actual_rem_qty,req.body.productId,()=>{
-                        res.redirect('.')
+                        // res.redirect('.')
+                        console.log('here 2 ka 1')
+                        res.send({added:true,message:"Product Issued Successfully"})
                     })
 
                 }).catch((err)=>{
@@ -302,7 +308,9 @@ route.post('/',(req,res)=>{
                     console.log('Product Issued in PREVIOUS  LAB  Successfully with qty - '+ req.body.qty)
 
                     checkProduct(actual_rem_qty,req.body.productId,()=>{
-                        res.redirect('.')
+                        // res.redirect('.')
+                        console.log('here 2 ka 2')
+                       res.send({added:true,message:"Product Issued Successfully"})
                     })
 
                 }).catch((err)=>{

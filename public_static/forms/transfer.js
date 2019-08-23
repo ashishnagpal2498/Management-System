@@ -18,7 +18,7 @@ function showSelectOptions(val,total_qty)
     let qty_select = $('<select class="col-4 ml-2 mr-1 p-2" id="selected-qty" name= "qty"></select>')
     qty_select.append(qty_list)
     let select_div = $('<div class="col-12 row justify-content-center"></div>')
-    $.get(`http://localhost:2121/${category}`,function (data) {
+    $.get(`/${category}`,function (data) {
         console.log(data);
 
         //deparmentElement(data,category)
@@ -79,7 +79,7 @@ $(()=>{
     let sub_Cat_ProductID =   localStorage.getItem('productId')
     if(sub_category==="lab")
     {
-        $.get(`http://localhost:2121/transfer/${sub_cat_Id};${sub_category}`,(data)=>{
+        $.get(`/transfer/${sub_cat_Id};${sub_category}`,(data)=>{
             // MULTIPLE PARAMS -
             console.log('INSIDE TRANSFER -----')
             console.log(data);
@@ -95,7 +95,7 @@ $(()=>{
     //It will be faculty-----
     else
     {
-        $.get(`http://localhost:2121/transfer/${sub_cat_Id};${sub_category}`,(data)=>{
+        $.get(`/transfer/${sub_cat_Id};${sub_category}`,(data)=>{
             // MULTIPLE PARAMS -
             console.log('INSIDE TRANSFER -----')
             console.log(data);

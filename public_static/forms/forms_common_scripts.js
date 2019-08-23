@@ -141,6 +141,30 @@ function formObjects(category) {
             designation: $('#designation').val()
         }
     }
+    else if(category==='issue')
+    {   let deptOrLab = $('#departmentorlab')
+        let checkLabOrFaculty = $('input[name="category"]');
+        let category_val;
+        if(checkLabOrFaculty[0].checked)
+        {
+            category_val = 'faculty'
+        }
+        else
+        {
+            category_val = 'lab'
+        }
+        console.log(category_val);
+        obj = {
+            productId: $('#product-id').val(),
+            quantity: $('#quantity').val(),
+            remaining_qty: $('#rem-quantity').val(),
+            category: category_val,
+            id: $('#facultyorlab').val(),
+            qty:$('#qty').val(),
+            labId: deptOrLab.val(),
+            facultyId: deptOrLab.val()
+        }
+    }
     return obj;
 }
 function formSubmitResult(category,ptr)
@@ -161,6 +185,7 @@ function formSubmitResult(category,ptr)
                 redirect_Message.css('display','block')
                 successFullDiv.empty();
                 successFullDiv.append('Successfully Added')
+                successFullDiv.append(`<p id="redirect-message">You will be redirected in 3 secs</p>`)
                 successFullDiv.css('display','block');
                 setTimeout(()=>{
                     window.location = `../mainfile/mainfile.html?category=${category}`
