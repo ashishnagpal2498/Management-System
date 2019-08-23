@@ -1,12 +1,7 @@
 //This file is defined for classes and HTML objects Used by the main js file
 // Objectes created of classes and HTML used to append into it
 
-let adminLogin = false;
-let active_Tab = undefined;
 
-let Transfer_list = []
-
-let Vendors_List = []
 //Class Vendor
 function Vendor(Obj){
     this.id=Obj.id;
@@ -17,7 +12,6 @@ function Vendor(Obj){
     this.address= Obj.address
     this.contact = Obj.personalcontact;
 }
-let Product_list = []
 //Class Products
 function Product(Obj) {
     this.id = Obj.id
@@ -33,7 +27,6 @@ function Product(Obj) {
     this.category = Obj.category
 }
 
-let Department_list = [];
 function Department(Obj)
 {   this.sub_cat = "department"
     this.id = Obj.id
@@ -42,10 +35,6 @@ function Department(Obj)
     this.block= Obj.block
 }
 
-
-
-
-let Labs_list =[]
 function Lab(Obj) {
     this.sub_cat = "lab"
     this.id = Obj.id
@@ -55,7 +44,6 @@ function Lab(Obj) {
     this.floor = Obj.floor
 }
 
-let Issue_list = []
 function Issue(Obj) {
     this.id = Obj.id
     this.qty = Obj.qty

@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1d10adf7-a908-4f30-8b05-9cf279856adc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/mod_routes/return.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/mod_routes/return.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/forms/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/forms/transfer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public_static/loading_screen.css" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/loading_screen.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/mainfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_static/mainfile/prerequisits_mainfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public_static/mainfile/prerequisits_mainfile.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +97,7 @@
       <workItem from="1561654965550" duration="591000" />
       <workItem from="1563386591467" duration="122725000" />
       <workItem from="1565037972635" duration="48730000" />
-      <workItem from="1566408914578" duration="45633000" />
+      <workItem from="1566408914578" duration="47490000" />
     </task>
     <servers />
   </component>

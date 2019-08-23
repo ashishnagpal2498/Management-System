@@ -35,10 +35,7 @@ function reviewmenufunc(category) {
 
         if(category==='transfer') {
             let outerform = reviewFormFunc(faculty_or_lab, transferableItemLd);
-
-
             popup_content.append(outerform);
-
         }
         else if(category==='Return')
         {
@@ -48,17 +45,14 @@ function reviewmenufunc(category) {
                 if(faculty_or_lab==='lab')
                 {
                     table_content = $(`<div class="row"><div class="col-6 p-2">Lab Id <input name="LabId" value=" ${data.id}" readonly ></div>
-        <div class="col-6 p-2">Lab name <input name="LabName" value=" ${data.name}" readonly></div>
-    </div>`)
+                                <div class="col-6 p-2">Lab name <input name="LabName" value=" ${data.name}" readonly></div></div>`)
                 }
                 else
                 {
                     table_content = $(`
-        <div class="row">
-        <div class="col-6 p-2">Faculty Id <input name="FacultyId" value=" ${data.id}" readonly ></div>
-        <div class="col-6 p-2">Faculty name <input name="FacultyName" value=" ${data.name}" readonly></div>
-    </div>
-       `)
+                        <div class="row"><div class="col-6 p-2">Faculty Id <input name="FacultyId" value=" ${data.id}" readonly ></div>
+                        <div class="col-6 p-2">Faculty name <input name="FacultyName" value=" ${data.name}" readonly></div>
+                        </div>`)
                 }
                 let selected_qty = $('#selected-qty')
                 popup_content.append(`<div class="col-10">Selected Qty <input name="selected-qty" type="number" value="${selected_qty.val()}"></div>`)
@@ -67,8 +61,6 @@ function reviewmenufunc(category) {
                     popup_content.append(table_content)
                 popup_content.append(`<div class="col-3 btn btn-info" onclick="reviewReturnItem()">Submit</div>`)
             })
-            
-            
         }
     })
 
@@ -147,23 +139,7 @@ function transferSuccessful(ev) {
         //    Transfer Successfull
             let trans_Succ = $('#success-div-popup')
             closepopup();
-
-            //REFRESHING THE LIST -
-            // $.get('/transfer',(data)=>{
-            //     let list = $('#list-items')
-            //     list.empty();
-            //     list_Fun(data,list,'transfer');
-            // })
-            //REDIRECT MESSAGE -
-            // let redirect_time_span = $('#redirect-time')
-            // let i =3;
-            // let redirect_count = setInterval(()=>{
-            //
-            //         redirect_time_span.append(i);
-            //     i--;
-            // })
             trans_Succ.css('display','block')
-            //window.scrollTo(0,0)
             setTimeout(()=>{
                 trans_Succ.css('display','none')
                 // if(i>0)
@@ -216,9 +192,6 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
         itemDiv_1.append(`<input type="text" id="senderCategory" style="display: none" value="${faculty_or_lab}" name="senderCategory">`)
         itemDiv_1.append(table_content)
     })
-
-
-
     //Select - Created --------------------
     let selected_transfer = $('#TransferId')
     let selected_transfer_val = selected_transfer.val()
@@ -233,7 +206,6 @@ function reviewFormFunc(faculty_or_lab,transferableItemLd) {
         <div class="col-6 p-2">${facultyOrLab} name <input name="receiver_${facultyOrLab}Name" value=" ${data.name}" readonly></div>
     </div> `)
             itemDiv_2.append(table_content);
-
 
             //Append both the tables into the form
 
@@ -313,7 +285,7 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
 
             }
             else {
-                detailDiv.append(`<div class="row justify-content-center"> <div class= "mt-3 mb-3 pt-1 pb-1 col-10" style= "background-color:font-size: 20px;font-weight: bold; margin: 0 auto">YOU DOES NOT HAVE RETURN RIGHTS</div></div>`)
+                detailDiv.append(`<div class="row justify-content-center"> <div class= "mt-3 mb-3 pt-1 pb-1 col-10" style= "background-color:font-size: 20px;font-weight: bold; margin: 0 auto">YOU DO NOT HAVE RETURN RIGHTS</div></div>`)
 
             }
         })
@@ -642,10 +614,16 @@ function list_Fun(data,list,category) {
 
     //If the category is Vendor - List all the Vendors , Inside - left center Div
     let addbtn = $('#add-btn')
-    if(adminLogin) {
-        addbtn.css('display', 'block')
-        addbtn[0].textContent = "ADD"
-    }
+    $.get('/login',(data)=>{
+        if(data.user[0].email==='admin@admin.com'||data.user[0].name==="admin"||data.user[0].username==="admin")
+        {
+                addbtn.css('display', 'block')
+                addbtn[0].textContent = "ADD"
+        }
+    })
+    // if(adminLogin) {
+
+    // }
     if(category==='vendor')
     {
         for (item of data) {
@@ -653,7 +631,6 @@ function list_Fun(data,list,category) {
             console.log(item.comapnyname)
             let li = createLi(vendor,'vendor');
             list_items.push(li)
-            Vendors_List.push(vendor);
         }
     }
     else if(category==='product')
@@ -680,7 +657,6 @@ function list_Fun(data,list,category) {
             let li = createLi(product_ob,'department');
             list_items.push(li)
             console.log(li)
-            Department_list.push(product_ob);
         }
     }
     else if(category==='lab')
@@ -690,7 +666,6 @@ function list_Fun(data,list,category) {
         let li = createLi(product_ob,'lab');
         list_items.push(li)
         console.log(li)
-        Labs_list.push(product_ob);
         }
 
     }
@@ -703,7 +678,10 @@ function list_Fun(data,list,category) {
             // console.log(li)
             // Issue_list.push(product_ob);
         }
-            addbtn[0].textContent = "Issue Product"
+            setTimeout(()=>{
+                addbtn[0].textContent = "Issue Product"
+            },100)
+
     }
     else if(category==='transfer')
     {
@@ -781,28 +759,17 @@ function show(ev) {
    //FILTER OPTIONS SHOW
 
     localStorage.setItem('form_request',formrequest)
-    console.log('CALLING  FILTER OPS')
     filterOptions(formrequest);
     $.get(`/${formrequest}`,
         //Callback Function which Receives Data -
         (data)=>{
-        console.log('FORM REQ --------->>>>>>>>>.')
             console.log(data)
             let centerDivHeading = $('#center-div-heading')
             centerDivHeading.empty();
             centerDivHeading.append(formrequest+'  Details')
             $('#detailed-div').empty();
-            Product_list = [];
-            Vendors_List =[]
-            Department_list = []
-            Labs_list = [];
-            Transfer_list =[];
-
-            active_Tab = formrequest;
            let addbtn = $('#add-btn')
                 addbtn.attr('href','../forms/'+formrequest+'.html')
-            // addbtn.css('display','block')
-            // addbtn[0].textContent ="Add"
             //To display all the lists of Items when clicked Side menu Option
             list_Fun(data,list,formrequest);
 
@@ -834,7 +801,11 @@ window.onclick = function(event) {
     }
     // let login_user = $('#login-user')[0]
     // let DropDown = $('#myDropdown')[0]
-    // if(event.target !== login_user)
+    // if(event.target === login_user)
+    // {
+    //     DropDown.classList.add('show')
+    // }
+    // else
     // {
     //     DropDown.classList.remove('show')
     // }
@@ -850,11 +821,8 @@ $(()=>{
         if(data.user !== false)
         {   //Admin login - Set the user Value-
             if(data.user[0].username==='admin') {
-                adminLogin = true;
 
                 $('#add-btn')[0].classList.remove('display-btns')
-                // $('#edit-btn')[0].classList.remove('display-btns')
-                // $('#delete-btn')[0].classList.remove('display-btns')
             }
             let username_Div = $('#username')
             username_Div.empty();
