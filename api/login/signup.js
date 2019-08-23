@@ -8,9 +8,9 @@ route.get('/',(req,res)=>{
     //If the user is already logged in -
     if(req.user)
     {
-      return  res.send({message:'Logged In'})
+      return  res.send({user:req.user,message:'Logged In'})
     }
-    return res.sendFile(path.join(__dirname,'../../public_static/signup.html'))
+    return res.send({user:false})
 })
 
 route.post('/',(req,res)=>{
@@ -35,15 +35,15 @@ route.post('/',(req,res)=>{
                         }).catch(function(err)
                             {console.error('Password'+err)
                             if (err)
-                            return res.send({userAdded:false,message:"user cannot be added"})
+                            return res.send({userAdded:false,message:"User cannot be added , Error in passwords table"})
                             })
             }).catch(function(err3){
                 console.error('Error In Bcrypt'+err3);
-                if(err3) return res.send({userAdded:false,message:"Error in Bcrypt"})
+                if(err3) return res.send({userAdded:false,message:"Error in Bcrypt , Catch "})
                 })
         }).catch(function (err2) {
             console.error('Cannot add user' + err2)
-        if(err2) return res.send({userAdded:false,message:"Error , cannot be added"})
+        if(err2) return res.send({userAdded:false,message:"Error ,User cannot be added , Outer function"})
         })
 
 })
