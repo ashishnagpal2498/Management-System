@@ -1,24 +1,23 @@
 const route = require('express').Router();
 //Database -
-const Vendor = require('../database/models2').model.Vendor;
-//const Product = require('../database/models2').model.Product;
+const Database_Vendor = require('../database/model_index').Vendor;
 
 route.get('/',(req,res)=>{
-    Vendor.findAll({
+    Database_Vendor.findAll({
 
     }).then((vendors)=> res.send(vendors))
         .catch((err)=> console.error(err))
 })
 
 route.get('/:id',(req,res)=>{
-    Vendor.findOne({
+    Database_Vendor.findOne({
         where: {id:req.params.id}
     }).then((result)=> res.send(result))
         .catch((err)=>{console.error('Error In finding - VEndor '+err)})
 })
 
 route.post('/',(req,res)=>{
-    Vendor.create({
+    Database_Vendor.create({
         vdorid:req.body.vendorId,
         name:req.body.name,
         accountNo:req.body.accountNo,

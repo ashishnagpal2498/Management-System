@@ -785,12 +785,16 @@ function show(ev) {
         (data)=>{
         console.log('FORM REQ --------->>>>>>>>>.')
             console.log(data)
-
+            let centerDivHeading = $('#center-div-heading')
+            centerDivHeading.empty();
+            centerDivHeading.append(formrequest+'  Details')
+            $('#detailed-div').empty();
             Product_list = [];
             Vendors_List =[]
             Department_list = []
             Labs_list = [];
             Transfer_list =[];
+
             active_Tab = formrequest;
            let addbtn = $('#add-btn')
                 addbtn.attr('href','../forms/'+formrequest+'.html')

@@ -1,7 +1,8 @@
 const route = require('express').Router()
-const IssuedDatabase = require('../../database/model_issue').model
-const DeptorLabs = require('../../database/models').model
-const ProductModel = require('../../database/models2').model
+// const Database = require('../../database/model_issue').model
+// const Database = require('../../database/models').model
+// const Database = require('../../database/models2').model
+const Database = require('../../database/model_index')
 const sequelize = require('sequelize')
 route.get('/',(req,res)=>{
 //    Show all the items which are issued to be transfered -
@@ -9,14 +10,14 @@ route.get('/',(req,res)=>{
         labs:null,
         department:null
     }
-    IssuedDatabase.IssuedLab.findAll({
-        include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
+    Database.IssuedLab.findAll({
+        include: [{model: Database.Product},{model:Database.Labs}]
     }).then((resultLabs)=>{
     //    Getting all the Faculty which are issued computers -
-        IssuedDatabase.IssueFaculty.findAll({
+        Database.IssueFaculty.findAll({
                 include: [{
-                    model: DeptorLabs.Faculty
-                }, {model:ProductModel.Product}]
+                    model: Database.Faculty
+                }, {model:Database.Product}]
             }
         )
             .then((resultFaculty)=>{
@@ -44,24 +45,24 @@ route.get('/:id;:deptOrlab',(req,res)=>{
     if(req.params.deptOrlab==='lab')
     {
         // Call the issue Lab Database -
-        IssuedDatabase.IssuedLab.findOne(
+        Database.IssuedLab.findOne(
             {
             where: {
                 id: req.params.id
             }
-            ,include: [{model:DeptorLabs.Labs},{model:ProductModel.Product}]
+            ,include: [{model:Database.Labs},{model:Database.Product}]
         })
             .then((result)=>{ res.send(result)})
             .catch((err)=> console.error('Error In finding Issued Product at Transfer '+err))
     }
     //Faculty -
     else {
-        IssuedDatabase.IssueFaculty.findOne(
+        Database.IssueFaculty.findOne(
             {
                 where: {
                     id: req.params.id
                 }
-                ,include: [{model:DeptorLabs.Faculty},{model:ProductModel.Product}]
+                ,include: [{model:Database.Faculty},{model:Database.Product}]
             })
             .then((result)=>{ res.send(result)})
             .catch((err)=> console.error('Error In finding Issued Product at Transfer '+err))
@@ -77,7 +78,7 @@ route.post('/',(req,res)=>{
     if(req.body.senderCategory==='lab')
     {
     //Workin here - SENDER IS FROM THE LAB
-        IssuedDatabase.IssuedLab.update({
+        Database.IssuedLab.update({
                 qty: sequelize.literal(`qty - ${req.body.transferQty}`)
             },
             {
@@ -87,7 +88,7 @@ route.post('/',(req,res)=>{
                 },
             }).then(()=> {
             console.log('Senders Result------------------>>')
-            IssuedDatabase.IssuedLab.destroy({
+            Database.IssuedLab.destroy({
                 where: {
                     qty: 0,
                     labId: req.body.senderLabId,
@@ -107,7 +108,7 @@ route.post('/',(req,res)=>{
     else
     {
         //SENDER- FACULTY -
-        IssuedDatabase.IssueFaculty.update({
+        Database.IssueFaculty.update({
                 qty: sequelize.literal(`qty - ${req.body.transferQty}`)
             },
             {
@@ -117,7 +118,7 @@ route.post('/',(req,res)=>{
                 },
             }).then((senderResult)=> {
             console.log('Senders Result------------------>>')
-            IssuedDatabase.IssueFaculty.destroy({
+            Database.IssueFaculty.destroy({
                 where: {
                     qty: 0,
                     facultyId: req.body.senderFacultyId,
@@ -136,7 +137,7 @@ route.post('/',(req,res)=>{
     if(req.body.receiverCategory==='lab')
     {
         //-----> To be transfered To lab -
-        IssuedDatabase.IssuedLab.findOne({
+        Database.IssuedLab.findOne({
             where: {
                 productId : req.body.productId,
                 labId: req.body.receiver_labId
@@ -146,7 +147,7 @@ route.post('/',(req,res)=>{
             if(result2 == undefined)
             {
                 //create -
-                IssuedDatabase.IssuedLab.create({
+                Database.IssuedLab.create({
                     qty: req.body.transferQty,
                     productId: req.body.productId,
                     labId: req.body.receiver_labId
@@ -161,7 +162,7 @@ route.post('/',(req,res)=>{
             }
             else
             {
-                IssuedDatabase.IssuedLab.update({
+                Database.IssuedLab.update({
                     qty : sequelize.literal(`qty + ${req.body.transferQty}`)
                 },{
                     where: {
@@ -185,7 +186,7 @@ route.post('/',(req,res)=>{
 
     }
     else {
-        IssuedDatabase.IssueFaculty.findOne({
+        Database.IssueFaculty.findOne({
             where: {
                 productId : req.body.productId,
                 facultyId: req.body.receiver_facultyId
@@ -195,7 +196,7 @@ route.post('/',(req,res)=>{
             if(result2 == undefined)
             {
                 //create -
-                IssuedDatabase.IssueFaculty.create({
+                Database.IssueFaculty.create({
                     qty: req.body.transferQty,
                     productId: req.body.productId,
                     facultyId: req.body.receiver_facultyId
@@ -208,7 +209,7 @@ route.post('/',(req,res)=>{
             }
             else
             {
-                IssuedDatabase.IssueFaculty.update({
+                Database.IssueFaculty.update({
                     qty : sequelize.literal(`qty + ${req.body.transferQty}`)
                 },{
                     where: {
@@ -236,24 +237,24 @@ route.post('/filter',(req,res)=>{
         department:null
     }
     console.log(req.body)
-    IssuedDatabase.IssuedLab.findAll({
+    Database.IssuedLab.findAll({
         where:{
           labId: {
               [sequelize.Op.or] : req.body.labId
           }
         },
-        include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
+        include: [{model: Database.Product},{model:Database.Labs}]
     }).then((resultLabs)=>{
         //    Getting all the Faculty which are issued computers -
-        IssuedDatabase.IssueFaculty.findAll({
+        Database.IssueFaculty.findAll({
             where:{
               facultyId:{
                   [sequelize.Op.or] : req.body.facultyId
               }
             },
             include: [{
-                    model: DeptorLabs.Faculty
-                }, {model:ProductModel.Product}]
+                    model: Database.Faculty
+                }, {model:Database.Product}]
             }
         )
             .then((resultFaculty)=>{

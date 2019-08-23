@@ -1,7 +1,7 @@
 const route = require('express').Router();
 //Database -
 // const Vendor = require('../database/models2').model.Vendor;
-const Product = require('../database/models2').model.Product;
+const Product = require('../database/model_index').Product;
 const {Op} = require('sequelize')
 route.get('/',(req,res)=>{
     Product.findAll({

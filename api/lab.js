@@ -1,31 +1,30 @@
 const route = require('express').Router();
 //Database -
-const Department = require('../database/models').model.Depart;
-const Lab = require('../database/models').model.Labs;
+const Database_Lab = require('../database/model_index').Labs;
 const {Op} = require('sequelize')
 
 route.get('/',(req,res)=>{
-    Lab.findAll({
+    Database_Lab.findAll({
 
     }).then((labs)=> res.send(labs))
         .catch((err)=> console.error(err))
 })
 
 route.get('/:id',(req,res)=>{
-    Lab.findOne(
+    Database_Lab.findOne(
         {
             where: {
                 id: req.params.id
             }
         }
     ).then((result)=>{
-        //Lab to be send requested by transfer menu for now
+        //Database_Lab to be send requested by transfer menu for now
         res.send(result)
     }).catch(err => console.error(err))
 })
 
 route.post('/',(req,res)=>{
-    Lab.create({
+    Database_Lab.create({
         labno:req.body.labNo,
         name: req.body.name,
         technician: req.body.technician,
@@ -44,14 +43,14 @@ route.post('/',(req,res)=>{
 //         where:{
 //             dname:departmentname
 //         },
-//         include: [Lab]
+//         include: [Database_Lab]
 //     }).then((results)=>{ res.send(results.labname)})
 //         .catch((err)=> console.error(err))
 // })
 
 route.post('/filter',(req,res)=>{
    console.log(req.body)
-    Lab.findAll({
+    Database_Lab.findAll({
         where:{
             [Op.and] :{
                 departmentId: {

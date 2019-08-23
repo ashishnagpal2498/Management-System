@@ -1,28 +1,28 @@
 const route = require('express').Router();
 //Database -
-const Department = require('../database/models').model.Depart;
-
+// const Database = require('../database/models').model.Depart;
+const Database = require('../database/model_index').Depart
 route.get('/',(req,res)=>{
-    Department.findAll({
+    Database.findAll({
 
     }).then((departs)=> res.send(departs))
         .catch((err)=> console.error(err))
 })
 
 route.get('/:id',(req,res)=>{
-    Department.findOne({
+    Database.findOne({
         where: {
             id: req.params.id
         }
     }).then((result)=>{
         res.send(result)
     }).catch((err)=>{
-        console.error('Department Not Found  '+err);
+        console.error('Database Not Found  '+err);
     })
 })
 
 route.post('/',(req,res)=>{
-    Department.create({
+    Database.create({
         dno:req.body.dno,
         name: req.body.name,
         hod: req.body.hod,

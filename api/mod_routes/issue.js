@@ -1,21 +1,22 @@
 const express = require('express')
 const route = express.Router();
-const databaseProduct = require('../../database/models2').model;
-const IssueDatabase = require('../../database/model_issue').model;
-const DatabaseLabs = require('../../database/models').model;
+// const Database = require('../../database/models2').model;
+// const Database = require('../../database/model_issue').model;
+// const Database = require('../../database/models').model;
+const Database = require('../../database/model_index')
 const sequelize = require('sequelize')
 
 route.get('/',(req,res)=>{
 //    Show all the Products listed -
     //Changes - hERE
-    // IssueDatabase.IssuedLab.ffaculty
+    // Database.IssuedLab.ffaculty
     //     .then((result)=>{
-    //         IssueDatabase.IssueFaculty.findAll((result2)=>{
+    //         Database.IssueFaculty.findAll((result2)=>{
     //             res.send(result+result2)
     //         }).catch((err)=>{console.error('Error in finding Issue depts'+err)})
     //     }).catch((err2)=> console.error('Error in finding Issue Labs'+err2))
     //    Issue Basically shows all the list of products and Previously Issued
-    databaseProduct.Product.findAll({
+    Database.Product.findAll({
             where: {
 
             }
@@ -28,7 +29,7 @@ route.get('/',(req,res)=>{
 
 route.get('/unissued',(req,res)=>{
     //    Show all the Products which are not issued yet -
-    databaseProduct.Product.findAll({
+    Database.Product.findAll({
         where: {
             issued: false
         }
@@ -44,31 +45,31 @@ route.get('/unissued',(req,res)=>{
 //The post request used to find the Remaining quantity of the Product - Selected -'
 route.get('/:id',(req,res)=>{
     //Need to return the product Details and the remaining quantity of the Product
-    // databaseProduct.Product.findOne({
+    // Database.Product.findOne({
     //     where: {
     //         id: req.params.id
     //     }
     // }).then((result)=>{
     //
     // })
-    IssueDatabase.IssuedLab.findAll({
+    Database.IssuedLab.findAll({
         where: {
             productId : req.params.id
         },
         include: [{
-            model: databaseProduct.Product
-        },{model: DatabaseLabs.Labs}]
+            model: Database.Product
+        },{model: Database.Labs}]
     }).then((result)=>{
         //console.log(result.product)
         //If the result is empty then - there is no issued in lab previously -
 
-        IssueDatabase.IssueFaculty.findAll({
+        Database.IssueFaculty.findAll({
             where:{
                productId: req.params.id
             },
             include:[{
-                model:databaseProduct.Product
-            },{model:DatabaseLabs.Faculty}]
+                model:Database.Product
+            },{model:Database.Faculty}]
         }).then((result2)=>{
             //Both the results are Configured - Return the remaining Quanty of the product
             console.log('Results Of 1st Query - ')
@@ -95,7 +96,7 @@ route.get('/:id',(req,res)=>{
             {
                 //Here see that [] ka product nhi aayega - so -
                 //send that product only -
-                databaseProduct.Product.findOne({
+                Database.Product.findOne({
                     where:{
                         id: req.params.id
                     }
@@ -170,7 +171,7 @@ route.get('/:id',(req,res)=>{
 
 function updateProduct(id,cb)
 {
-    databaseProduct.Product.update({
+    Database.Product.update({
         issued : true},
         {
         where:{
@@ -203,7 +204,7 @@ route.post('/',(req,res)=>{
     if(req.body.category==='faculty')
     {
         //1st check that if the Product is previously issued to the Faculty or not -
-        IssueDatabase.IssueFaculty.findOne({
+        Database.IssueFaculty.findOne({
             where: {
                 facultyId:req.body.facultyId,
                 productId: req.body.productId
@@ -213,7 +214,7 @@ route.post('/',(req,res)=>{
             if(result == undefined)
             {
                 //Create
-                IssueDatabase.IssueFaculty.create({
+                Database.IssueFaculty.create({
                     qty: req.body.qty,
                     //    Addition of Foreign Key
                     facultyId:req.body.facultyId,
@@ -233,7 +234,7 @@ route.post('/',(req,res)=>{
             }
             else
             {
-                IssueDatabase.IssueFaculty.update({
+                Database.IssueFaculty.update({
                     qty: sequelize.literal(`qty + ${req.body.qty}`)
                     //    Addition of Foreign Key
                 },{
@@ -259,7 +260,7 @@ route.post('/',(req,res)=>{
     }
     else if(req.body.category==='lab')
     {
-        IssueDatabase.IssuedLab.findOne({
+        Database.IssuedLab.findOne({
             where:{
                 labId:req.body.labId,
                 productId: req.body.productId
@@ -268,7 +269,7 @@ route.post('/',(req,res)=>{
 
             if(result == undefined)
             {
-                IssueDatabase.IssuedLab.create({
+                Database.IssuedLab.create({
                     qty: req.body.qty,
                     // productPid: req.body.id,
                     labId:req.body.labId,
@@ -288,7 +289,7 @@ route.post('/',(req,res)=>{
             }
             else
             {
-                IssueDatabase.IssuedLab.update({
+                Database.IssuedLab.update({
                     qty: sequelize.literal(`qty + ${req.body.qty}`),
                     // productPid: req.body.id,
 
@@ -323,16 +324,16 @@ route.post('/filter',(req,res)=>{
 // route.post('/:id',(req,res)=>{
 //     //Need to return the product Details and the all the labs and department
 //     //To which this product is issued
-//     IssueDatabase.IssuedLab.findAll({
+//     Database.IssuedLab.findAll({
 //         where: {
 //             productId : req.params.id
 //         },
 //         include: [{
-//             model: databaseProduct.Product
+//             model: Database.Product
 //         }]
 //     }).then((results)=>{
 //         //console.log(results[0].product)
-//         IssueDatabase.IssueFaculty.findAll({
+//         Database.IssueFaculty.findAll({
 //             where:{
 //                 productId: req.params.id
 //             },

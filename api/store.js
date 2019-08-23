@@ -1,14 +1,13 @@
 const express = require('express')
 const route = express.Router();
-const databaseProduct = require('../database/models2').model;
-const IssueDatabase = require('../database/model_issue').model;
-const DatabaseLabs = require('../database/models').model;
-const sequelize = require('sequelize')
+const Database = require('../database/model_index');
+
+
 
 
 route.get('/',(req,res)=>{
     //    Show all the Products which are not issued yet -
-    databaseProduct.Product.findAll({
+    Database.Product.findAll({
         where: {
             issued: false
         }

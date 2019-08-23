@@ -106,7 +106,7 @@ function filterOptions(category)
     else if (category==='transfer')
     {   console.log('INSIDE TRANSFER _ FILTER FILE')
         let mainRow = $(`<div class="row ml-3 mr-3"></div>`)
-         $.get('http://localhost:2121/lab',(labs)=>{
+         $.get('/lab',(labs)=>{
              let RowHeading = $(`  <div class="col-12 filter-heading mt-3 mb-3">Labs</div>`)
              let labs_list = []
              for(i of labs)
@@ -120,7 +120,7 @@ function filterOptions(category)
              mainRow.append(RowHeading)
              mainRow.append(FinalDivLabs)
              //    FACULTY -
-             $.get('http://localhost:2121/faculty',(data)=>{
+             $.get('/faculty',(data)=>{
                  let facultyList = []
                  for(i of data)
                  {
@@ -142,7 +142,7 @@ function filterOptions(category)
     {
         let mainRow = $(`<div class="row ml-3 mr-3"></div>`)
         let rHeading = $(`  <div class="col-12 filter-heading mt-3 mb-3">Block</div>`)
-        $.get('http://localhost:2121/department',(depts)=>{
+        $.get('/department',(depts)=>{
             console.log(depts)
             let dept_list = []
             for(i of depts)
@@ -257,7 +257,7 @@ function filterlist(formRequest)
     console.log(dateList)
     console.log('DEPARTMENT LIST ')
     console.log(departmentList)
-    $.post(`http://localhost:2121/${formRequest}/filter`,
+    $.post(`/${formRequest}/filter`,
         {
             category: categoryList,
             date: dateList,

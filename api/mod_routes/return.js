@@ -1,7 +1,8 @@
 const route = require('express').Router()
-const IssuedDatabase = require('../../database/model_issue').model
-const DeptorLabs = require('../../database/models').model
-const ProductModel = require('../../database/models2').model
+// const Database = require('../../database/model_issue').model
+// const Database = require('../../database/models').model
+// const Database = require('../../database/models2').model
+const Database = require('../../database/model_index')
 const sequelize = require('sequelize')
 
 route.get('/',(req,res)=>{
@@ -10,14 +11,14 @@ route.get('/',(req,res)=>{
         labs:null,
         department:null
     }
-    IssuedDatabase.IssuedLab.findAll({
-        include: [{model: ProductModel.Product},{model:DeptorLabs.Labs}]
+    Database.IssuedLab.findAll({
+        include: [{model: Database.Product},{model:Database.Labs}]
     }).then((resultLabs)=>{
         //    Getting all the Faculty which are issued computers -
-        IssuedDatabase.IssueFaculty.findAll({
+        Database.IssueFaculty.findAll({
                 include: [{
-                    model: DeptorLabs.Faculty
-                }, {model:ProductModel.Product}]
+                    model: Database.Faculty
+                }, {model:Database.Product}]
             }
         )
             .then((resultFaculty)=>{
@@ -37,7 +38,7 @@ route.get('/',(req,res)=>{
 
 function check_Product(productId,cb)
 {
-    ProductModel.Product.update({
+    Database.Product.update({
         issued: false
     },{
         where:{
@@ -57,7 +58,7 @@ route.post('/',(req,res)=>{
     //Product - issued - True - false -
     if(req.body.category==='lab')
     {
-        IssuedDatabase.IssuedLab.update({
+        Database.IssuedLab.update({
             qty: sequelize.literal(`qty - ${req.body.qty}`)
         },{
             where:{
@@ -65,7 +66,7 @@ route.post('/',(req,res)=>{
                 labId:req.body.labId
             }
         }).then(()=>{
-            IssuedDatabase.IssuedLab.destroy({
+            Database.IssuedLab.destroy({
                 where: {
                     qty: 0,
                     productId:req.body.productId,
@@ -82,7 +83,7 @@ route.post('/',(req,res)=>{
     }
     else if(category==='faculty')
     {
-        IssuedDatabase.IssueFaculty.update({
+        Database.IssueFaculty.update({
             qty: sequelize.literal(`qty - ${req.body.qty}`)
         },{
             where:{
@@ -90,7 +91,7 @@ route.post('/',(req,res)=>{
                 facultyId:req.body.facultyId
             }
         }).then(()=>{
-            IssuedDatabase.IssueFaculty.destroy({
+            Database.IssueFaculty.destroy({
                 where: {
                     qty: 0,
                     productId:req.body.productId,

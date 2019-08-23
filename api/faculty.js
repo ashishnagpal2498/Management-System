@@ -1,16 +1,17 @@
 const route = require('express').Router();
 //Database -
-const DatabaseFaculty = require('../database/models').model;
+// const Database = require('../database/models').model;
+const Database = require('../database/model_index')
 
 route.get('/',(req,res)=>{
-    DatabaseFaculty.Faculty.findAll({})
+    Database.Faculty.findAll({})
         .then((results)=>{
             res.send(results)
         }).catch((err)=>console.error('Error in Finding Faculty '+err))
 })
 
 route.get('/:id',(req,res)=>{
-    DatabaseFaculty.Faculty.findOne({
+    Database.Faculty.findOne({
         where: {
             id: req.params.id
         }
@@ -20,7 +21,7 @@ route.get('/:id',(req,res)=>{
 })
 
 route.post('/',(req,res)=>{
-    DatabaseFaculty.Faculty.create({
+    Database.Faculty.create({
         fid: req.body.fid,
         name : req.body.name,
         designation: req.body.designation,

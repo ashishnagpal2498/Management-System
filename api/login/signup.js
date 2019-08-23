@@ -1,7 +1,5 @@
 const route = require('express').Router()
-const LoginDatabase = require('../../database/signUp_login')
-const path = require('path')
-const uid = require('uid')
+const LoginDatabase = require('../../database/model_index')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 route.get('/',(req,res)=>{

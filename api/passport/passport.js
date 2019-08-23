@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStratergy = require('passport-local').Strategy
-const databaselogin = require('../../database/signUp_login')
+// const Database = require('../../database/signUp_login')
+const Database = require('../../database/model_index')
 const sequelize = require('sequelize')
 const bcrypt = require('bcrypt')
 //Serialize -
@@ -12,7 +13,7 @@ passport.serializeUser(function (user,done) {
 
 //deseialize -
 passport.deserializeUser(function (userID,done) {
-    databaselogin.Login_username.findAll(
+    Database.Login_username.findAll(
         {
             where: {id: userID}
         }
@@ -32,7 +33,7 @@ passport.use(new LocalStratergy({
     console.log('LOCAL STRATERGY')
     // username = username.split('@')[0];
     console.log(username)
-    databaselogin.Login_username.findOne({
+    Database.Login_username.findOne({
         where: {
           [sequelize.Op.or]  : [{username: username}, {email: username}]
         }
@@ -44,7 +45,7 @@ passport.use(new LocalStratergy({
                 return done(null,false,{message:"Invalid Username"})
             }
 
-        databaselogin.Passwords.findOne({
+        Database.Passwords.findOne({
             where:{usernameId:result.id}
         }).then((result2)=>{
             console.log("password Table ---")
