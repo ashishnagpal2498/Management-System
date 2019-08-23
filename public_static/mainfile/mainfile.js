@@ -617,8 +617,10 @@ function list_Fun(data,list,category) {
     $.get('/login',(data)=>{
         if(data.user[0].email==='admin@admin.com'||data.user[0].name==="admin"||data.user[0].username==="admin")
         {
-                addbtn.css('display', 'block')
+            if(category!=='transfer'&&category!=='Return'&&category!=='store')
+            {   addbtn.css('display', 'block')
                 addbtn[0].textContent = "ADD"
+            }
         }
     })
     // if(adminLogin) {
@@ -680,7 +682,7 @@ function list_Fun(data,list,category) {
         }
             setTimeout(()=>{
                 addbtn[0].textContent = "Issue Product"
-            },100)
+            },1500)
 
     }
     else if(category==='transfer')
