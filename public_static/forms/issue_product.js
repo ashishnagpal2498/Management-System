@@ -161,7 +161,7 @@ function showSelectOptions(val)
     console.log(val)
     let category = $(val).attr('value')
     console.log(category)
-    $.get(`http://localhost:2121/${category}`,function (data) {
+    $.get(`/${category}`,function (data) {
         console.log(data);
         deparmentElement(data,category)
     })
