@@ -12,9 +12,34 @@
     <link href="mainfile/main_file_ss.css" rel="stylesheet">
     <link href="header_styling.css" rel="stylesheet">
     <script src="forms/forms_common_scripts.js"></script>
+    <script>
+        $(()=>{
+            // $('body').css('height','100%');
+            $('.mycover').addClass('complete')
+        })
+    </script>
+    <style>
+        .mycover{
+            z-index: 100;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            transition: 1s;
+            top: 0;
+            left: 0;
+        }
+        .mycover.complete{
+            height: 0;
+            /*visibility: hidden;*/
+            /*opacity: 0;*/
+            /*pointer-events: none;*/
+        }
+    </style>
 </head>
-<body background="./Login/loginbackground.jpg" style="background-size: cover">
+<body background="./Login/loginbackground.jpg" style="height: 0;transition: 2s;background-size: cover">
 
+<div class="mycover"></div>
 <style>
     .side-menu a{
         text-decoration: none;
