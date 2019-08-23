@@ -48,10 +48,13 @@
 .loader:before{
     content: '';
     top: 0;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 20px;
+    width: auto;
+    /*height: 20px;*/
+    transition: 1s;
     background-color: #fff;
     animation: animateBg 1s linear infinite;
 }
@@ -88,7 +91,7 @@
         height: 0;
     }
     25%{
-        height: 0;
+        height: 10px;
     }
     50%
     {

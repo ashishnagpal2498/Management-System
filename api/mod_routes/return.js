@@ -56,6 +56,7 @@ route.post('/',(req,res)=>{
     // Issued Item - qty decrease
     //Check if the qty becomes 0 then - delete that
     //Product - issued - True - false -
+    console.log(req.body)
     if(req.body.category==='lab')
     {
         Database.IssuedLab.update({
@@ -76,12 +77,12 @@ route.post('/',(req,res)=>{
                 //Check for product
                 check_Product(req.body.productId,()=>{
                     console.log('Item Returned To store - LAB ')
-                    res.send({message:"Item Successfully Returned LABS",itemReturned:true})
+                    res.send({message:"Item Successfully Returned from LAB to store",itemReturned:true})
                 })
             }).catch((err3)=>console.error('Error In destroying -  '+err3))
         }).catch((err_up)=>console.error('Error In Update - '+err_up))
     }
-    else if(category==='faculty')
+    else if(req.body.category==='faculty')
     {
         Database.IssueFaculty.update({
             qty: sequelize.literal(`qty - ${req.body.qty}`)
@@ -101,7 +102,7 @@ route.post('/',(req,res)=>{
                 //Check for product
                 check_Product(req.body.productId,()=>{
                     console.log('Item Returned To store - FACULTY')
-                    res.send({message:"Item Successfully Returned - FACULTY",itemReturned:true})
+                    res.send({message:"Item Successfully Returned from FACULTY to store",itemReturned:true})
                 })
             }).catch((err3)=>console.error('Error In destroying -  '+err3))
         }).catch((err_up)=>console.error('Error In Update - '+err_up))

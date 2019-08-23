@@ -108,7 +108,7 @@ function reviewReturnItem() {
                 success_Div.css('display','block')
                 setTimeout(()=>{
                     success_Div.css('display','none')
-                },3000)
+                },2300)
             }
             else
             {
@@ -294,8 +294,11 @@ function createTransferObj(cat,sub_cat,data,data2,total_Data) {
     else if(cat==='Return')
     {
         $.get('/login',(data)=>{
-            if(data.user.email==='admin@admin.com'||data.user.name==='admin')
+            console.log('USER _ IN RETURN')
+            console.log(data.user)
+            if(data.user[0].email==='admin@admin.com'||data.user[0].name==='admin')
             {
+                
                 let qty_list = []
                 //Quantity available - Select
                 for(i=1 ; i<=total_Data.qty;i++)
