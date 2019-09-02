@@ -1,6 +1,14 @@
 body{
     overflow-x: hidden;
 }
+.main-heading-settings{
+    padding: 20px 0 0 0;
+    text-transform: uppercase;
+    font-size: 25px;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+    font-family: "Monotype Corsiva",sans-serif;
+    letter-spacing: 1.3px;
+}
 #header-row{
     padding: 10px 0;
     font-size: 18px;
@@ -100,6 +108,29 @@ body{
     animation-duration: 2s ;
     animation-iteration-count: 1;
     transform: translate(0,-300px);
+}
+.header-carousel-slide3 h1,p#three{
+    color: black;
+    animation-name: rotating-text;
+    animation-duration:2s ;
+    animation-iteration-count: 1;
+    opacity: 1;
+    transform: rotate(0deg) translate(0,-290px);
+    transition: opacity 2s;
+}
+@keyframes rotating-text {
+    0%{
+        transform: rotate(-180deg) translate(-500px,-290px);
+        opacity: 0;
+    }
+    50%{
+        transform: rotate(-90deg) translate(-230px,-290px);
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(0) translate(0,-290px);
+    }
 }
 .nav-item a{
     text-decoration: none;

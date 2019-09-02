@@ -814,12 +814,14 @@ window.onclick = function(event) {
 }
 
 
-
-$(()=>{
-    //Prototype Classes -
-
+function checkLogin(){
     $.get('/login',(data)=>{
         console.log('User Check')
+        // if(window.location.href.split('/')[1]==='')
+        // {   console.log('LOCATION')
+        //     window.location = "/"
+        //     return;
+        // }
         if(data.user !== false)
         {   //Admin login - Set the user Value-
             if(data.user[0].username==='admin') {
@@ -839,6 +841,12 @@ $(()=>{
         }
 
     })
+}
+
+$(()=>{
+    //Prototype Classes -
+
+    checkLogin();
     let urlSplitter = window.location.href.split('=')[1];
     if(urlSplitter)
     {   console.log("URL SPLITTER  ")
