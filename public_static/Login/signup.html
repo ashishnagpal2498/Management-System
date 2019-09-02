@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <link href="../Images/favicon_labotron.ico" rel="shortcut icon">
+    <!--Minimum Scale an dmaximum Scale -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <title>Labotron</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
     <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
@@ -9,7 +12,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="../Bootstrap/dist/js/jquery-3.2.1.js"></script>
     <script src="signup.js"></script>
-    <title>Title</title>
     <style>
         .form-control:focus {
             border-color: black;
@@ -20,12 +22,16 @@
 <body background="./loginbackground.jpg" style="background-size: cover">
 
 <div class="container" id="signup-page-container">
-    <h1 id="signup-page-heading" style="text-align: center; color: white; margin-top: 70px; font-weight: bolder; text-decoration: underline; font-size: 3em;">CREATE ACCOUNT</h1>
+    <div id="" align="center" style="margin-top: 30px" >
+        <a href="/" style="display: inline-block;width: 50px"> <img src="../Images/labotron_logo.png" alt="logo" width="100%"></a>
+        <div style="text-align: center; color: white; padding-top: 2px;font-weight: bolder; text-decoration: underline; font-size: 3em;">Labotron</div>
+    </div>
+    <h1 id="signup-page-heading" style="text-align: center;margin-top: 10px;font-weight: bold; font-size: 2em;">Create New Account</h1>
     <div class="row" id="signup-page-row">
         <div class="col-md-4">
 
         </div>
-        <div id="signup-page-form" class="col-md-4 mt-5 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
+        <div id="signup-page-form" class="col-md-4 mt-1 mb-5 p-4" style="background: white;  box-shadow: 0 0 15px 18px rgba(0,0,0,0.1); border-radius: 20px 10px ">
 
             <form action="/signup" method="post" name="mysignupform" id="signUpForm">
                 <div class="form-row">

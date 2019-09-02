@@ -1,7 +1,15 @@
 function headerObj() {
     return (`<div class="container-fluid">
     <div class="row" id="header-row">
-        <div class="col-5 col-md-3 pt-2">LOGO and Name</div>
+        <div class="col-5 col-md-3 pt-1">
+        <div class="row justify-content-lg-start justify-content-center">
+                <div class="col-3 pr-0" style="transform: rotate(10deg)">
+                    <img src="../Images/labotron_logo.png" width="90%">
+                </div>
+                <div class="col-6 pl-0 main-heading-settings">
+                    Labotron</div>
+            </div>
+</div>
         <div class="col-12 p-0 p-md-2  col-md-5 responsive-menu">
             <div class="navbar" id="header-nav-bar">
                 <button class=" btn nav-item cross-button" onclick="closemenu()" ><i class="fas fa-times"></i></button>
@@ -207,6 +215,11 @@ function formSubmitResult(category,ptr)
         })
 }
 $(()=>{
+    let headTag = $('head');
+    headTag.append(`  <link href="../Images/favicon_labotron.ico" rel="shortcut icon">
+    <!--Minimum Scale an dmaximum Scale -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <title>Labotron</title>`)
     $.get('/login',(data)=>{
         console.log('User Check')
         if(data.user != undefined)
