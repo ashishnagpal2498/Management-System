@@ -824,6 +824,9 @@ function checkLogin(){
         // }
         if(data.user !== false)
         {   //Admin login - Set the user Value-
+            setTimeout(()=>{
+                $('.preload').addClass('complete')
+            },1500)
             if(data.user[0].username==='admin') {
 
                 $('#add-btn')[0].classList.remove('display-btns')
